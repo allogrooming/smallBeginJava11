@@ -5,5 +5,5 @@ import java.util.List;
 import com.project.smallbeginjava11.DTO.Category;
 
 public interface CategoryService {
-    public List<Category> getAllCategory();
+    List<Category> getAllCategory();
 }
