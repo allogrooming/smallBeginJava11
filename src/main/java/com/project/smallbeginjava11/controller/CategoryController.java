@@ -16,10 +16,10 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/getAllCategory")
-    public String getAllCategory(Model model){
+    public List<Category> getAllCategory(Model model){
         List<Category> category = categoryService.getAllCategory();
         model.addAttribute("category", category);
-        return "categoryTest";
+        return category;
     }
 
     @GetMapping("/hello")
