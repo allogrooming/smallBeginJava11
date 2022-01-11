@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -22,8 +23,20 @@ public class CategoryController {
         return category;
     }
 
-    @GetMapping("/hello")
-    public String test(){
-        return "test";
+  /*  @GetMapping("/index")
+    public ModelAndView categoryIndex(){
+        List<Category> category = categoryService.getAllCategory();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("categoryTest");
+        modelAndView.addObject("category", category);
+        return modelAndView;
+    }*/
+
+    @GetMapping("/index")
+    public ModelAndView categoryIndex(){
+        List<Category> category = categoryService.getAllCategory();
+        ModelAndView modelAndView = new ModelAndView("categoryTest");
+        modelAndView.addObject("category", category);
+        return modelAndView;
     }
 }
