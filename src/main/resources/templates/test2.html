@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Small Begin</title>
+<script type="text/javascript" src="/function/common.js"></script>
+<script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+<script>
+
+    $(function(){
+
+        $("#click").click(function(){
+            alert(1);
+            readData("?");
+            readForm("#iniForm", "/readForm");
+        });
+
+    })
+
+</script>
+</head>
+<body>
+<form method="post" id="iniForm">
+        <span><select name="ob" id="obSelect" size="1">
+            <option value=th:text="${fromDB}">th:text="${fromDB}"</option>
+            <option value=th:text="${fromDB}">th:text="${fromDB}"</option>
+        </select> 을/를 이루기 위해</span> <br>
+  <input type="text" id="ini" name="ini"> <br>
+  <input type="date" id="startDate" name="startDate"
+         min="2018-01-01" max="2018-12-31">
+  <input type="date" id="endDate" name="endDate"
+         min="2018-01-01" max="2018-12-31">
+  //minimum, maximum date 설정해야함(JS) <br>
+  <input type="button" id="click" value="click">
+<!--<input type="button" value="click" onclick="ajaxTest()">-->
+</form>
+<p id="result">???</p>
+
+
+<script>
+
+</script>
+</body>
+
+</html>
+
