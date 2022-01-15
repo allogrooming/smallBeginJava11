@@ -7,8 +7,8 @@ function readForm(formId, url){
       $.ajax({
              url : url,
              type : "post",
-             dataType :"json",
-             data : (formId).serialize(),
+             dataType :"text",
+             data : $(formId).serialize(),
              success : function(result){
                  console.log(result);
              },
