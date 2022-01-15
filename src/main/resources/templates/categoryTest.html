@@ -6,8 +6,7 @@
 </head>
 <body>
     <div class="container">
-        <nav class="navbar">
-
+        <nav class="navbar" includeHTML="navbar.html">
         </nav>
         <section class="sidebar">
 
@@ -23,11 +22,9 @@
                     </select> 을/를 이루기 위해
                 </span> <br>
                 <input type="text" id="ini" name="ini"> <br>
-                <input type="date" id="startDate" name="startDate"
-                       min="2018-01-01" max="2018-12-31">
-                <input type="date" id="endDate" name="endDate"
-                       min="2018-01-01" max="2018-12-31">
-                //minimum, maximum date 설정해야함(JS) <br>
+                <input type="date" id="startDate" name="startDate">
+                <input type="date" id="endDate" name="endDate">
+
                 <select name="duration" id="duration" size="1">
                     <option>매달</option>
                     <option>매주</option>
@@ -39,15 +36,21 @@
                     <option>셋째</option>
                     <option>마지막</option>
                 </select> &nbsp; <span>주</span>
-                <select name="day" id="day">
-                    <option>일</option>
-                    <option>월</option>
-                    <option>화</option>
-                    <option>수</option>
-                    <option>목</option>
-                    <option>금</option>
-                    <option>토</option>
-                </select> &nbsp; <span>요일</span>
+                <input type="checkbox" id="mon" name="mon" value="월">
+                <label for="mon">월</label> &nbsp;
+                <input type="checkbox" id="tue" name="tue" value="화">
+                <label for="tue">화</label> &nbsp;&nbsp;
+                <input type="checkbox" id="wed" name="wed" value="수">
+                <label for="wed">수</label> &nbsp;&nbsp;
+                <input type="checkbox" id="thu" name="thu" value="목">
+                <label for="thu">목</label> &nbsp;&nbsp;
+                <input type="checkbox" id="fri" name="fri" value="금">
+                <label for="fri">금</label> &nbsp;&nbsp;
+                <input type="checkbox" id="sat" name="sat" value="토">
+                <label for="sat">토</label> &nbsp;&nbsp;
+                <input type="checkbox" id="sun" name="sun" value="일">
+                <label for="sun">일</label> &nbsp;&nbsp;
+                <span>요일</span>
                 <br> <span>OR</span>
                 <br>
                 <input type="text" id="date" name="date" size="5">
@@ -60,4 +63,64 @@
 
     </div>
 </body>
+
+<script th:inline="javascript">
+    function formDate(){
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth()+1;
+        let day = today.getDate();
+
+        month = month >= 10 ? month : '0' + month;
+        day = day >= 10 ? day : '0' + day;
+
+        var todayDate = year + "-" + month + "-" + day;
+        todayDate = todayDate.toString();
+
+        document.getElementById("startDate").setAttribute("min", todayDate);
+        document.getElementById("startDate").setAttribute("value", todayDate);
+
+        var oneYearLater = today.setFullYear(today.getFullYear()+1);
+        oneYearLater = year + "-" + month + "-" + day;
+        document.getElementById("endDate").setAttribute("max", oneYearLater);
+        document.getElementById("endDate").setAttribute("value", oneYearLater);
+    }
+
+    function duration(){
+
+    }
+
+    function includeHTML() {
+        var z, i, elmnt, file, xhttp;
+
+        z = document.getElementsByTagName("*");
+
+        for (i = 0; i < z.length; i++) {
+            elmnt = z[i];
+
+            file = elmnt.getAttribute("includeHTML");
+
+            if (file) {console.log("if file");
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        console.log("readyState = 4");
+                        if (this.status == 200) {elmnt.innerHTML = this.responseText;
+                        console.log("this.responseText");}
+                        if (this.status == 404) {elmnt.innerHTML = "Page not found.";
+                        console.log("page not found");}
+                    }
+                }
+                console.log("xhttp.open");
+                xhttp.open("GET", file, true);
+                console.log("navbar.html open?");
+                xhttp.send();
+                return;
+            }
+        }
+    }
+
+    formDate();
+    includeHTML();
+</script>
 </html>
