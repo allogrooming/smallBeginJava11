@@ -1,12 +1,11 @@
 package com.project.smallbeginjava11.controller;
 
 
+import com.project.smallbeginjava11.DTO.Category;
 import com.project.smallbeginjava11.service.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.spring5.processor.SpringUErrorsTagProcessor;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,9 @@ public class TestController {
 
     @GetMapping("/test")
     public ModelAndView test(ModelAndView modelAndView){
-        modelAndView.setViewName("test2");
+        modelAndView.setViewName("ini");
+        List<Category> category = categoryService.getAllCategory();
+        modelAndView.addObject("category", category);
         return modelAndView;
     }
 
