@@ -48,31 +48,36 @@
             <option>매주</option>
             <option>매일</option>
         </select> &nbsp; &nbsp;
-        <select name="week" id="week" size="1">
-            <option>첫째</option>
-            <option>둘째</option>
-            <option>셋째</option>
-            <option>마지막</option>
-        </select> &nbsp; <span>주</span>
-        <input type="checkbox" id="mon" name="mon" value="월">
-        <label for="mon">월</label> &nbsp;
-        <input type="checkbox" id="tue" name="tue" value="화">
-        <label for="tue">화</label> &nbsp;&nbsp;
-        <input type="checkbox" id="wed" name="wed" value="수">
-        <label for="wed">수</label> &nbsp;&nbsp;
-        <input type="checkbox" id="thu" name="thu" value="목">
-        <label for="thu">목</label> &nbsp;&nbsp;
-        <input type="checkbox" id="fri" name="fri" value="금">
-        <label for="fri">금</label> &nbsp;&nbsp;
-        <input type="checkbox" id="sat" name="sat" value="토">
-        <label for="sat">토</label> &nbsp;&nbsp;
-        <input type="checkbox" id="sun" name="sun" value="일">
-        <label for="sun">일</label> &nbsp;&nbsp;
-        <span>요일</span>
-        <br> <span>OR</span>
+        <div id="week">
+            <select name="week" id="week-pick" size="1">
+                <option>첫째</option>
+                <option>둘째</option>
+                <option>셋째</option>
+                <option>마지막</option>
+            </select> &nbsp; <span id="week2">주</span>
+        </div>
+        <div id="day-pick" name="day-pick">
+            <input type="checkbox" id="mon" name="day-pick" value="월">
+            <label for="mon">월</label> &nbsp;
+            <input type="checkbox" id="tue" name="day-pick" value="화">
+            <label for="tue">화</label> &nbsp;&nbsp;
+            <input type="checkbox" id="wed" name="day-pick" value="수">
+            <label for="wed">수</label> &nbsp;&nbsp;
+            <input type="checkbox" id="thu" name="day-pick" value="목">
+            <label for="thu">목</label> &nbsp;&nbsp;
+            <input type="checkbox" id="fri" name="day-pick" value="금">
+            <label for="fri">금</label> &nbsp;&nbsp;
+            <input type="checkbox" id="sat" name="day-pick" value="토">
+            <label for="sat">토</label> &nbsp;&nbsp;
+            <input type="checkbox" id="sun" name="day-pick" value="일">
+            <label for="sun">일</label> &nbsp;&nbsp;
+            <span>요일</span>
+        </div>
+        <br> <span id="or" name="or">OR</span>
         <br>
         <input type="text" id="date" name="date" size="5">
-        <span>일 마다 반복 할 것이다.</span>
+        <span id="form-toggle">일 &nbsp;</span>
+        <span>마다 반복 할 것이다.</span>
       <input type="button" id="click" value="click">
     <!--<input type="button" value="click" onclick="ajaxTest()">-->
     </form>
@@ -82,6 +87,7 @@
 <!-- 폼 관련 !-->
 <script src="/js/iniForm.js"></script>
 <script>
+
     datePicker();
 
     $(function(){
@@ -90,6 +96,19 @@
             duration();
         })
 
+        $("#duration").change(function (){
+            var duration = $(this).val();
+            if(duration == "매달"){
+
+            }else if(duration == "매주"){
+                everyWeek();
+                $("day-pick").click(function(){
+
+                })
+            }else if(duration == "매일"){
+                everyday();
+            }
+        })
 
     })
 </script>
