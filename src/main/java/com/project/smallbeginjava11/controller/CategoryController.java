@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 import java.util.List;
 
@@ -40,10 +39,10 @@ public class CategoryController {
         modelAndView.addObject("category", category);
         return modelAndView;
     }
-
+/*
     @GetMapping("/navbar.html")
     public ModelAndView navbar(){
         ModelAndView modelAndView = new ModelAndView("navbar");
         return modelAndView;
-    }
+    }*/
 }
