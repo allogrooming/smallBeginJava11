@@ -7,8 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.String.valueOf;
 
 
 @RestController
@@ -25,17 +28,25 @@ public class TestController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/readForm", produces="text/html;charset=UTF-8")
-    @ResponseBody
-    @PostMapping
-    public String test2(@RequestParam Map<String, String> param){
+    @RequestMapping(value="/readForm")
+    public @ResponseBody Map<String,Object> test2(@RequestParam Map<String, String> param){
+        System.out.println("????");
         for (String key : param.keySet()) {
             System.out.println(key + " : " + param.get(key));
+
         }
 
-        return "success";
+        Map<String, Object> map = new HashMap<>();
+        map.put("key", "success?");
+
+        return map;
     }
 
+    @GetMapping("/iniTest")
+    public ModelAndView intTest(ModelAndView modelAndView){
+        modelAndView.setViewName("iniTest");
+        return modelAndView;
+    }
 
     @RequestMapping(value="/ajaxTest", produces = "text/html;charset=UTF-8")
     public String ajaxTest(){

@@ -13,16 +13,25 @@
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 
-<script type="text/javascript">
+<script type="text/javascript"></script>
+<script>
+$(function(){
 
-    $(function(){
+   function submitForm(){
+        readForm("/readForm", "#iniForm", readFormCallBack)
+   };
 
-        $("#click").click(function(){
-            readData("?");
-            readForm("#iniForm", "/readForm");
-        });
+   function readFormCallBack(data){
+        alert(data.key);
+   };
 
-    })
+
+  $("#click").click(function(){
+        submitForm();
+  });
+
+
+})
 
 </script>
 </head>
@@ -55,7 +64,7 @@
                 <option>셋째</option>
                 <option>마지막</option>
             </select> &nbsp; <span id="week2">주</span>
-        </div>D
+        </div>
         <div id="day-pick" name="day-pick">
             <input type="checkbox" id="mon" name="day" value="월">
             <label for="mon">월</label> &nbsp;
@@ -81,7 +90,6 @@
       <input type="button" id="click" value="click">
     <!--<input type="button" value="click" onclick="ajaxTest()">-->
     </form>
-    <p id="result">???</p>
 </body>
 
 <!-- 폼 관련 !-->
