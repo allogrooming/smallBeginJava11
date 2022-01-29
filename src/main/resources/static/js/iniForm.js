@@ -28,13 +28,12 @@ function duration(){
     yyyy *= 1;
     yyyy += 1;
     mm = selected.slice(5,7);
-    mm *= 1;
     dd = selected.slice(-2);
 
     maxDate = yyyy + "-" + mm + "-" + dd;
 
     yyyy -= 1;
-    mm += 1;
+
     minDate = yyyy + "-" + mm + "-" + dd;
 
     document.getElementById("endDate").setAttribute("max", maxDate);
@@ -50,8 +49,7 @@ function everyday(){
 
 function everyWeek(){
     // 보이게 하기(코드 정리해야됨
-    document.getElementById("week2").style.display = "block";
-    document.getElementById("day-pick").style.display = "block";
+    showElements();
 
     // 안보이게 할 것
     document.getElementById("week").style.display = "none";
@@ -62,9 +60,23 @@ function everyWeek(){
 
 function dayPicker(){
     let i;
-
     alert("'매일'을 체크해주세요");
     for(i=0; i<7; i++){
         document.getElementsByName("day")[i].checked = false;
     }
+}
+
+function showElements(){
+    document.getElementById("week2").style.display = "block";
+    document.getElementById("day-pick").style.display = "block";
+    document.getElementById("week").style.display = "block";
+    document.getElementById("or").style.display = "block";
+    document.getElementById("date").style.display = "block";
+    document.getElementById("form-toggle").style.display = "block";
+
+}
+
+function everyMonth(){
+    showElements();
+
 }
