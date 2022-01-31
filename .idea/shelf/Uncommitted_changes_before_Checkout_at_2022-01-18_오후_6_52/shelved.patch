@@ -1,0 +1,14 @@
+Index: src/main/java/com/project/smallbeginjava11/config/Configuration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package config;\r\n\r\nimport org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;\r\nimport org.springframework.web.servlet.config.annotation.WebMvcConfigurer;\r\n\r\n\r\n@org.springframework.context.annotation.Configuration\r\npublic class Configuration implements WebMvcConfigurer {\r\n\r\n    @Override\r\n    public void addResourceHandlers(final ResourceHandlerRegistry registry){\r\n        registry.addResourceHandler(\"/**\")\r\n                .addResourceLocations(\"classpath:/templates/\", \"classpath:/static/\")\r\n                .setCachePeriod(20);\r\n\r\n    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/com/project/smallbeginjava11/config/Configuration.java b/src/main/java/com/project/smallbeginjava11/config/Configuration.java
+--- a/src/main/java/com/project/smallbeginjava11/config/Configuration.java	
++++ b/src/main/java/com/project/smallbeginjava11/config/Configuration.java	
+@@ -1,4 +1,4 @@
+-package config;
++package com.project.smallbeginjava11.config;
+ 
+ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
