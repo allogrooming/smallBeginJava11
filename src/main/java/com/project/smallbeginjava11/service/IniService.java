@@ -1,9 +1,12 @@
 package com.project.smallbeginjava11.service;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.project.smallbeginjava11.DTO.Initiative;
 
 public interface IniService {
-    List<Initiative> insertIni();
+    void insertIni(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate) throws ParseException;
 }

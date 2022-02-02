@@ -16,13 +16,13 @@ function datePicker(){
 
     today = year + "-" + month + "-" + date;
 
-    document.getElementById("startDate").setAttribute("min", today);
-    document.getElementById("startDate").setAttribute("value", today);
+    document.getElementById("iniStartDate").setAttribute("min", today);
+    document.getElementById("iniStartDate").setAttribute("value", today);
 }
 
 function duration(){
     let selected, minDate, maxDate, yyyy, mm, dd;
-    selected = document.getElementById("startDate").value;
+    selected = document.getElementById("iniStartDate").value;
 
     yyyy = selected.slice(0,4);
     yyyy *= 1;
@@ -36,9 +36,11 @@ function duration(){
 
     minDate = yyyy + "-" + mm + "-" + dd;
 
-    document.getElementById("endDate").setAttribute("max", maxDate);
-    document.getElementById("endDate").setAttribute("min", minDate);
-    document.getElementById("endDate").setAttribute("value", maxDate);
+    console.log(minDate);
+
+    document.getElementById("iniEndDate").setAttribute("max", maxDate);
+    document.getElementById("iniEndDate").setAttribute("min", minDate);
+    document.getElementById("iniEndDate").setAttribute("value", maxDate);
 }
 
 function everyday(){
