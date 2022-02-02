@@ -50,11 +50,13 @@
         </select> &nbsp; &nbsp;
         <div id="week">
             <select name="week" id="week-pick" size="1">
+                <option></option>
                 <option>첫째</option>
                 <option>둘째</option>
                 <option>셋째</option>
+                <option>넷째</option>
                 <option>마지막</option>
-            </select> &nbsp; <span id="week2">주</span>
+            </select><span id="week2">주</span>
         </div>
         <div id="day-pick" name="day-pick">
             <input type="checkbox" id="mon" name="day" value="월">
@@ -98,19 +100,29 @@
 
         $("#duration").change(function (){
             var duration = $(this).val();
+
             if(duration == "매달"){
+                showElements();
 
             }else if(duration == "매주"){
                 everyWeek();
+
                 $("#day-pick").click(function(){
                     var checked = $('input[name="day"]:checked').length;
                     if(checked == 7){
                         dayPicker();
                     }
                 })
+
             }else if(duration == "매일"){
                 everyday();
             }
+        })
+
+        $("click").click(function(){
+            console.log("click");
+            readForm("iniForm","/readForm");
+            console.log("readForm 종료");
         })
 
     })
