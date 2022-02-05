@@ -7,7 +7,7 @@
 
     <insert id="insertIni" parameterType="Initiative">
         INSERT INTO initiative values(
-            100, #{obCode}, 100, 100, #{iniPeriod}, #{iniCount}, null, #{iniContent}, null, #{iniStartDate}, #{iniEndDate}, 100);
+            110, #{obCode}, 110, 110, #{iniPeriod}, #{iniCount}, null, #{iniContent}, null, #{iniStartDate}, #{iniEndDate}, 110, 110);
     </insert>
 
 </mapper>

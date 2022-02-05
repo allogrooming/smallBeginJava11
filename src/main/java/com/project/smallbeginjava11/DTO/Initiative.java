@@ -33,8 +33,4 @@ public class Initiative {
         this.iniStartDate = iniStartDate;
         this.iniEndDate = iniEndDate;
     }
-
-    public void getIniData(){
-        System.out.println("DTO iniContent " + iniContent);
-    }
 }

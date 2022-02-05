@@ -8,9 +8,10 @@ function readForm(formId, url){
              url : url,
              type : "post",
              dataType :"text",
-             data : $(formId).serialize(),
+             data : $(formId).serializeArray(),
              success : function(result){
                  console.log(result);
+                 console.log(this.data);
              },
              error : function(err){
                  console.log(err+"에러발생");

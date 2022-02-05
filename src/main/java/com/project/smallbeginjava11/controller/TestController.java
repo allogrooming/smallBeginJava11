@@ -33,8 +33,17 @@ public class TestController {
     @ResponseBody
     @PostMapping
     public String test2(@RequestParam Map<String, String> param) throws ParseException {
-/*        for (String key : param.keySet()) {
-            System.out.println(key + " : " + param.get(key) + " & " + param.get(key).getClass().getName());
+        for (String key : param.keySet()) {
+            System.out.println(key + " : " + param.get(key));
+        }
+
+        System.out.println("param : " + param);
+
+        int len = param.size();
+        System.out.println("size of parameter : "+len);
+/*
+        for(int i=0; i<len; i++){
+            System.out.println(param[i]);
         }*/
 
         // Ob 코드
@@ -42,6 +51,7 @@ public class TestController {
         int obCode = Integer.parseInt(obCodeString);
 
         //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456
+        String dateListCodeString = param.get("day");
 
         // 달 주 일(iniPeriod)
         String iniPeriodString = param.get("iniPeriod");
