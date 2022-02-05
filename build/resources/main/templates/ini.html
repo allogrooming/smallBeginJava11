@@ -18,7 +18,6 @@
     $(function(){
 
         $("#click").click(function(){
-            readData("?");
             readForm("#iniForm", "/readForm");
         });
 
@@ -39,9 +38,9 @@
                 </option>
             </select> 을/를 이루기 위해
         </span> <br>
-        <input type="text" id="ini" name="ini"> <br>
-        <input type="date" id="startDate" name="startDate">
-        <input type="date" id="endDate" name="endDate">
+        <input type="text" id="ini" name="iniContent"> <br>
+        <input type="date" id="startDate" name="iniStartDate">
+        <input type="date" id="endDate" name="iniEndDate">
 
         <select name="duration" id="duration" size="1">
             <option>매달</option>
@@ -55,7 +54,7 @@
                 <option>셋째</option>
                 <option>마지막</option>
             </select> &nbsp; <span id="week2">주</span>
-        </div>D
+        </div>
         <div id="day-pick" name="day-pick">
             <input type="checkbox" id="mon" name="day" value="월">
             <label for="mon">월</label> &nbsp;
@@ -78,7 +77,7 @@
         <input type="text" id="date" name="date" size="5">
         <span id="form-toggle">일 마다&nbsp;</span>
         <span>반복 할 것이다.</span>
-      <input type="button" id="click" value="click">
+      <button type="button" id="click" value="click"/>
     <!--<input type="button" value="click" onclick="ajaxTest()">-->
     </form>
     <p id="result">???</p>
