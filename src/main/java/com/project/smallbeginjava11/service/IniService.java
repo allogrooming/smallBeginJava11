@@ -9,4 +9,6 @@ import com.project.smallbeginjava11.DTO.Initiative;
 
 public interface IniService {
     void insertIni(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate) throws ParseException;
+
+    void insertIni2(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate) throws ParseException;
 }

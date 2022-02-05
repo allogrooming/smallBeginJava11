@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IniMapper {
     void insertIni(Initiative initiative);
+    void insertIni2(Initiative initiative);
 }

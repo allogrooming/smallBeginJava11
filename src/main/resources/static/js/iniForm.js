@@ -16,13 +16,13 @@ function datePicker(){
 
     today = year + "-" + month + "-" + date;
 
-    document.getElementById("iniStartDate").setAttribute("min", today);
-    document.getElementById("iniStartDate").setAttribute("value", today);
+    document.getElementById("startDate").setAttribute("min", today);
+    document.getElementById("startDate").setAttribute("value", today);
 }
 
 function duration(){
     let selected, minDate, maxDate, yyyy, mm, dd;
-    selected = document.getElementById("iniStartDate").value;
+    selected = document.getElementById("startDate").value;
 
     yyyy = selected.slice(0,4);
     yyyy *= 1;

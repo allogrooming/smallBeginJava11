@@ -29,23 +29,28 @@ public class TestController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/readForm", produces="text/html;charset=UTF-8")
+    @RequestMapping(value="/readForm", method = {RequestMethod.POST})
     @ResponseBody
-    @PostMapping
-    public String test2(@RequestParam Map<String, String> param) throws ParseException {
-/*        for (String key : param.keySet()) {
-            System.out.println(key + " : " + param.get(key) + " & " + param.get(key).getClass().getName());
-        }*/
+    public String test2(@RequestParam Map<String, Object> param) throws ParseException {
+       System.out.println("???");
 
+       for (String key : param.keySet()) {
+            System.out.println(key + " : " + param.get(key) + " & " + param.get(key).getClass().getName());
+        }
+
+       System.out.println("!!!!");
         // Ob 코드
-        String obCodeString = param.get("obCode");
-        int obCode = Integer.parseInt(obCodeString);
+        /*String obCodeString = param.get("obCode");
+        int obCode = Integer.parseInt(obCodeString);*/
+        int obCode = 0;
 
         //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456
 
         // 달 주 일(iniPeriod)
-        String iniPeriodString = param.get("iniPeriod");
-        int iniPeriod = Integer.parseInt(iniPeriodString);
+        /*String iniPeriodString = param.get("iniPeriod");
+        int iniPeriod = Integer.parseInt(iniPeriodString);*/
+        int iniPeriod = 0;
+
 
         // 한 주마다 몇 번씩 진행할 것인지(iniCount)
         int iniCount = 0;
@@ -56,17 +61,17 @@ public class TestController {
         // iniOrder
 
         // ini 내용(iniContent)
-        String iniContent = param.get("iniContent");
+        String iniContent = String.valueOf(param.get("iniContent"));
 
         // iniMonthDate
 
         // 시작일(iniStartDate)
-        String iniStartDateString = param.get("iniStartDate");
+        String iniStartDateString = String.valueOf(param.get("iniStartDate"));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
         Date iniStartDate = sdf.parse(iniStartDateString);
 
         // 종료일(iniEndDate)
-        String iniEndDateString = param.get("iniEndDate");
+        String iniEndDateString = String.valueOf(param.get("iniEndDate"));
         Date iniEndDate = sdf.parse(iniEndDateString);
 
         // 전체 기간(iniDuration)
@@ -77,7 +82,7 @@ public class TestController {
 
         // 전체 기간 동안 가능한 횟수(iniPossibleCount)
 
-        //iniService.insertIni(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);
+        iniService.insertIni2(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);
 
         return "success";
     }

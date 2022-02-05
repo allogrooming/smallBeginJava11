@@ -17,7 +17,7 @@ function readData(url, elementId, callback) {
 };
 
 
-function readForm(url, formId, callback){
+function readForm(formId, url, callback){
 
       $.ajax({
              url : url,
