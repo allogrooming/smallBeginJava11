@@ -15,6 +15,7 @@ function readForm(formId, url){
              },
              error : function(err){
                  console.log(err+"에러발생");
+                 console.log(this.data);
              }
       });
 
