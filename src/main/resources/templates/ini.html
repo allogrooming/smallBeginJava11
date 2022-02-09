@@ -30,7 +30,7 @@
 <body>
     <div id="container">
         <!-- nav bar !-->
-        <div id="navbar" th:replace="/fragment/navbar.html :: fragment-nav"></div>
+        <div id="navbar" class="navbar" th:replace="/fragment/navbar.html :: fragment-nav"></div>
         <div id="formCss">
             <form method="post" id="iniForm">
                <span class="form">
@@ -61,33 +61,33 @@
                 </span>
                 <div id="day-pick" name="day-pick" class="form">
                     <input type="checkbox" id="mon" name="day" value="월">
-                    <label for="mon">월</label> &nbsp;
+                    <label for="mon" class="dayLabel"><span>월</span></label> &nbsp;
                     <input type="checkbox" id="tue" name="day" value="화">
-                    <label for="tue">화</label> &nbsp;&nbsp;
+                    <label for="tue" class="dayLabel"><span>화</span></label> &nbsp;&nbsp;
                     <input type="checkbox" id="wed" name="day" value="수">
-                    <label for="wed">수</label> &nbsp;&nbsp;
+                    <label for="wed" class="dayLabel"><span>수</span></label> &nbsp;&nbsp;
                     <input type="checkbox" id="thu" name="day" value="목">
-                    <label for="thu">목</label> &nbsp;&nbsp;
+                    <label for="thu" class="dayLabel"><span>목</span></label> &nbsp;&nbsp;
                     <input type="checkbox" id="fri" name="day" value="금">
-                    <label for="fri">금</label> &nbsp;&nbsp;
+                    <label for="fri" class="dayLabel"><span>금</span></label> &nbsp;&nbsp;
                     <input type="checkbox" id="sat" name="day" value="토">
-                    <label for="sat">토</label> &nbsp;&nbsp;
+                    <label for="sat" class="dayLabel"><span>토</span></label> &nbsp;&nbsp;
                     <input type="checkbox" id="sun" name="day" value="일">
-                    <label for="sun">일</label> &nbsp;&nbsp;
+                    <label for="sun" class="dayLabel"><span>일</span></label> &nbsp;&nbsp;
                     <span>요일</span>
                 </div>
-                <span id="or" name="or" class="form">OR</span>
+<!--                <span id="or" name="or" class="form">OR</span>
                 <input type="text" id="date" name="date" size="5" class="form">
                 <span id="form-toggle" class="form">일 마다&nbsp;</span>
                 <span class="form">반복 할 것이다.</span><br>
                 <input type="button" id="click" value="click" class="buttons">
-                <input type="button" id="add" value="목표 추가" class="buttons">
+                <input type="button" id="add" value="목표 추가" class="buttons">-->
             <!--<input type="button" value="click" onclick="ajaxTest()">-->
             </form>
         </div>
-        <div id="otherContents">
+<!--        <div id="otherContents">
             <p id="result">???</p>
-        </div>
+        </div>-->
     </div>
 </body>
 
