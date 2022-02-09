@@ -2,6 +2,9 @@
 *{
     font-family: 'Noto Sans KR', sans-serif;
 }
+#container{
+    margin-bottom: 45px;
+}
 #formCss, #otherContents{
     width: 700px;
     margin: 20px auto;
