@@ -20,7 +20,7 @@ public class IniServiceImpl implements IniService{
     private final IniMapper iniMapper;
 
     @Override
-    public void insertIni(Map<String, Object> params) throws ParseException {
+    public void insertIni(Map<String, String> params) throws ParseException {
 
         // DTO에 파라미터 값들 넣어주고 DTO를 Mapper로 넘겨주어 insert 실행
         //Initiative initiative = new Initiative(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);

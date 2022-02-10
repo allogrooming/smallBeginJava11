@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface IniMapper {
-    void insertIni(Map<String, Object> params);
+    void insertIni(Map<String, String> params);
 }

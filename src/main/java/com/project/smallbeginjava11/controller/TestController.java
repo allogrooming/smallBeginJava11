@@ -4,6 +4,7 @@ package com.project.smallbeginjava11.controller;
 import com.project.smallbeginjava11.DTO.*;
 import com.project.smallbeginjava11.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,14 +33,24 @@ public class TestController {
         return modelAndView;
     }
 
+    @Transactional
     @RequestMapping(value="/readForm", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
-    public String test2(@RequestParam Map<String, Object> params) throws ParseException {
+    public String test2(@RequestParam Map<String, String> params) throws ParseException {
 
         for (String key : params.keySet()) {
             System.out.println(key + " : " + params.get(key) + " & " + params.get(key).getClass().getName());
       }
+
+        // 달 주 일(iniPeriod)
+        int iniPeriod = Integer.parseInt(params.get("iniPeriod"));
+
+        //매주라면 date_list 생성
+        if (iniPeriod == 1){
+
+        }
+
 
         /*// Ob 코드
         String obCodeString = param.get("obCode");

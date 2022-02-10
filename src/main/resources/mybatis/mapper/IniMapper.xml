@@ -28,7 +28,7 @@
                 (select IFNULL(MAX(b.ob_code), 0) + 1 FROM objective b),
                 (select IFNULL(MAX(c.date_list_code), 0) + 1 FROM date_list c),
                 4,
-                1,
+                #{iniPeriod},
                 NULL,
                 0,
                 #{iniContent},

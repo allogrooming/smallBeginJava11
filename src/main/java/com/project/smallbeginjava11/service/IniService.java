@@ -8,5 +8,5 @@ import java.util.Map;
 import com.project.smallbeginjava11.DTO.Initiative;
 
 public interface IniService {
-    void insertIni(Map<String, Object> params) throws ParseException;
+    void insertIni(Map<String, String> params) throws ParseException;
 }
