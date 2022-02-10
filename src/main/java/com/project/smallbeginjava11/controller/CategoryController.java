@@ -39,10 +39,22 @@ public class CategoryController {
         modelAndView.addObject("category", category);
         return modelAndView;
     }
-/*
-    @GetMapping("/navbar.html")
-    public ModelAndView navbar(){
-        ModelAndView modelAndView = new ModelAndView("navbar");
+
+    @GetMapping("/login")
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;
-    }*/
+    }
+
+    @GetMapping("/joinus")
+    public ModelAndView signin(){
+        ModelAndView modelAndView = new ModelAndView("joinUs");
+        return modelAndView;
+    }
+
+    @GetMapping("/home")
+    public ModelAndView home(){
+        ModelAndView modelAndView = new ModelAndView("home");
+        return modelAndView;
+    }
 }

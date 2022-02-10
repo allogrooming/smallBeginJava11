@@ -87,7 +87,7 @@ public class TestController {
 
         // 전체 기간 동안 가능한 횟수(iniPossibleCount)
 
-        //iniService.insertIni(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);
+        iniService.insertIni(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate, iniDuration);
 
         return "success";
     }

@@ -7,7 +7,7 @@
 
     <insert id="insertIni" parameterType="Initiative">
         INSERT INTO initiative values(
-            (SELECT (MAX(ini_code)+1) FROM initiative), #{obCode}, 110, 110, #{iniPeriod},
+            (SELECT (MAX(ini_code)+1) FROM initiative), #{obCode}, 110, #{iniDuration}, #{iniPeriod},
             #{iniCount}, null, #{iniContent}, null, #{iniStartDate}, #{iniEndDate}, 110, 110);
     </insert>
 
