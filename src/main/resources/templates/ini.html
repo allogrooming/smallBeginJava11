@@ -24,7 +24,7 @@
         <div id="formCss">
             <form method="post" id="iniForm">
                <span class="form">
-                    <select name="obCode" id="obCode" size="1">
+                    <select name="obCode" id="categoryCode" size="1">
                         <option th:each="category: ${category}"
                                 th:value="${category.categoryCode}" th:utext="${category.categoryName}">
                         </option>
