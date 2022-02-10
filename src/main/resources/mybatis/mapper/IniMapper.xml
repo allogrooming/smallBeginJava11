@@ -36,7 +36,8 @@
                 DATE(NOW()),
                 DATE_ADD(DATE(NOW()), interval 28 DAY),
                 12,
-                NULL);
+                NULL,
+                0);
     </insert>
 
     <select id="selectIniCodeAndDateListCode" parameterType="hashMap" resultType="Initiative">
