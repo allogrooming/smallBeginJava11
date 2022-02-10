@@ -24,9 +24,9 @@
                 ini_week_order
                 )
             values(
-                (SELECT IFNULL(MAX(a.ini_code), 0) + 1 FROM initiative a),
-                #{obCode},
-                (select IFNULL(MAX(b.date_list_code), 0) + 1 FROM date_list b),
+                (select IFNULL(MAX(a.ini_code), 0) + 1 FROM initiative a),
+                (select IFNULL(MAX(b.ob_code), 0) + 1 FROM objective b),
+                (select IFNULL(MAX(c.date_list_code), 0) + 1 FROM date_list c),
                 4,
                 1,
                 NULL,

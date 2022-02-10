@@ -35,12 +35,13 @@ public class TestController {
     @RequestMapping(value="/readForm", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
-    public String test2(@RequestParam Map<String, String> param) throws ParseException {
-/*        for (String key : param.keySet()) {
-            System.out.println(key + " : " + param.get(key) + " & " + param.get(key).getClass().getName());
-        }*/
+    public String test2(@RequestParam Map<String, Object> params) throws ParseException {
 
-        // Ob 코드
+        for (String key : params.keySet()) {
+            System.out.println(key + " : " + params.get(key) + " & " + params.get(key).getClass().getName());
+      }
+
+        /*// Ob 코드
         String obCodeString = param.get("obCode");
         int obCode = Integer.parseInt(obCodeString);
 
@@ -70,17 +71,17 @@ public class TestController {
 
         // 종료일(iniEndDate)
         String iniEndDateString = param.get("iniEndDate");
-        Date iniEndDate = sdf.parse(iniEndDateString);
+        Date iniEndDate = sdf.parse(iniEndDateString);*/
 
-        // 전체 기간(iniDuration)
+     /*   // 전체 기간(iniDuration)
         long iniDurationLong = (iniEndDate.getTime() - iniStartDate.getTime()) / (24*60*60*1000);
         System.out.println("long 타입으로 iniDuration(전체기간) "+iniDurationLong);
         int iniDuration = Long.valueOf(iniDurationLong).intValue();
         System.out.println("int 타입으로 iniDuration "+iniDuration);
-
+*/
         // 전체 기간 동안 가능한 횟수(iniPossibleCount)
 
-        //iniService.insertIni(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);
+        iniService.insertIni(params);
 
         return "success";
     }
