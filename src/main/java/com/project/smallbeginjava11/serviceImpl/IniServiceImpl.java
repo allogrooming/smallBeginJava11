@@ -20,12 +20,12 @@ public class IniServiceImpl implements IniService{
     private final IniMapper iniMapper;
 
     @Override
-    public void insertIni(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate) throws ParseException {
+    public void insertIni(Map<String, Object> params) throws ParseException {
 
         // DTO에 파라미터 값들 넣어주고 DTO를 Mapper로 넘겨주어 insert 실행
-        Initiative initiative = new Initiative(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);
+        //Initiative initiative = new Initiative(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);
         System.out.println("ServiceImpl - DTO");
-        initiative.getIniData();
-        iniMapper.insertIni(initiative);
+        //initiative.getIniData();
+        iniMapper.insertIni(params);
     }
 }

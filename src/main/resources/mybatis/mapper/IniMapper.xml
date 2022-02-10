@@ -5,9 +5,39 @@
 
 <mapper namespace="com.project.smallbeginjava11.mapper.IniMapper">
 
-    <insert id="insertIni" parameterType="Initiative">
-        INSERT INTO initiative values(
-            100, #{obCode}, 100, 100, #{iniPeriod}, #{iniCount}, null, #{iniContent}, null, #{iniStartDate}, #{iniEndDate}, 100);
+    <insert id="insertIni" parameterType="hashMap">
+        INSERT
+            into
+                initiative(
+                ini_code,
+                ob_code,
+                date_list_code,
+                ini_duration,
+                ini_period,
+                ini_count,
+                ini_order,
+                ini_content,
+                ini_month_date,
+                ini_start_date,
+                ini_end_date,
+                ini_possible_count,
+                ini_week_order
+                )
+            values(
+                (SELECT IFNULL(MAX(a.ini_code), 0) + 1 FROM initiative a),
+                #{obCode},
+                (select IFNULL(MAX(b.date_list_code), 0) + 1 FROM date_list b),
+                4,
+                1,
+                NULL,
+                0,
+                #{iniContent},
+                NULL,
+                DATE(NOW()),
+                DATE_ADD(DATE(NOW()), interval 28 DAY),
+                12,
+                NULL);
+
     </insert>
 
 </mapper>

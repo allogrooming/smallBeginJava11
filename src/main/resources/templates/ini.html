@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="eur-ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Small Begin</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Small Begin</title>
 
 <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
@@ -12,18 +13,6 @@
 <script th:src="@{/js/navbar.js}"></script>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-
-<script type="text/javascript">
-
-    $(function(){
-
-        $("#click").click(function(){
-            readData("?");
-            readForm("#iniForm", "/readForm");
-        });
-
-    })
-
 </script>
 </head>
 <body>
@@ -126,6 +115,16 @@
         })
 
     })
+
+     $(function(){
+
+        $("#click").click(function(){
+            readForm("#iniForm", "/readForm");
+        });
+
+    })
+
+
 </script>
 
 </html>
