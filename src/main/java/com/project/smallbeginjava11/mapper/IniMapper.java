@@ -12,4 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IniMapper {
     void insertIni(Map<String, String> params);
+    Initiative selectIniCodeAndDateListCode(Map<String, String> map);
+
 }
