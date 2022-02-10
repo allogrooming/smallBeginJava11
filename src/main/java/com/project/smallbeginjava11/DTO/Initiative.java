@@ -25,12 +25,13 @@ public class Initiative {
     private Date iniEndDate;
     private int iniPossibleCount; // 전체 기간 동안 가능한 횟수
 
-    public Initiative(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate) {
+    public Initiative(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate, int iniDuration) {
         this.obCode = obCode;
         this.iniPeriod = iniPeriod;
         this.iniCount = iniCount;
         this.iniContent = iniContent;
         this.iniStartDate = iniStartDate;
         this.iniEndDate = iniEndDate;
+        this.iniDuration = iniDuration;
     }
 }
