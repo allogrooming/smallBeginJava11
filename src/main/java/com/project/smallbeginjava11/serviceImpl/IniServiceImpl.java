@@ -2,6 +2,7 @@ package com.project.smallbeginjava11.serviceImpl;
 
 import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.mapper.CategoryMapper;
+import com.project.smallbeginjava11.mapper.DateListMapper;
 import com.project.smallbeginjava11.mapper.IniMapper;
 import com.project.smallbeginjava11.service.IniService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.Map;
 public class IniServiceImpl implements IniService{
 
     private final IniMapper iniMapper;
+    private final DateListMapper dateListMapper;
 
     @Override
     public void insertIni(Map<String, String> params) throws ParseException {
@@ -27,5 +29,10 @@ public class IniServiceImpl implements IniService{
         System.out.println("ServiceImpl - DTO");
         //initiative.getIniData();
         iniMapper.insertIni(params);
+    }
+
+    @Override
+    public String dateListTest(Map<String, String> params) throws ParseException{
+        return dateListMapper.dateListTest(params);
     }
 }

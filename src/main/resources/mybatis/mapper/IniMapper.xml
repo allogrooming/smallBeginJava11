@@ -26,21 +26,27 @@
             VALUES(
                 (select IFNULL(MAX(a.ini_code), 0) + 1 FROM initiative a),
                 #{obCode},
-                (select IFNULL(MAX(b.date_list_code), 0) + 1 FROM date_list b),
-                4,
+                (SELECT day_code from temp
+                 where mon = IFNULL(#{mon}, 0) AND
+                     tue = IFNULL(#{tue}, 0) AND
+                     wed = IFNULL(#{wed}, 0) AND
+                     thu = IFNULL(#{thu}, 0) AND
+                     fri = IFNULL(#{fri}, 0) AND
+                     sat = IFNULL(#{sat}, 0) AND
+                     sun = IFNULL(#{sun}, 0)),
+                5,
                 #{iniPeriod},
                 NULL,
                 0,
                 #{iniContent},
                 NULL,
-                DATE(NOW()),
-                DATE_ADD(DATE(NOW()), interval 28 DAY),
+                #{iniStartDate},
+                #{iniEndDate},
                 12,
-                NULL,
-                0);
+                NULL);
     </insert>
 
-    <select id="selectIniCodeAndDateListCode" parameterType="hashMap" resultType="Initiative">
+ <!--   <select id="selectIniCodeAndDateListCode" parameterType="hashMap" resultType="Initiative">
         SELECT
             ob_code,
             ini_code,
@@ -49,6 +55,6 @@
             initiative
         WHERE
             ob_code = #{obCode};
-    </select>
+    </select>-->
 
 </mapper>
