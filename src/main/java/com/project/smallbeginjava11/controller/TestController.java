@@ -32,39 +32,22 @@ public class TestController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/readForm", method = RequestMethod.POST, produces="html/text; charset=UTF-8")
+    @RequestMapping(value="/readForm", produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String test2(@RequestParam Map<String, Object> params) throws ParseException {
-
-        for (String key : params.keySet()) {
-            try {
-                //String deKey = URLDecoder.decode(key, "UTF-8");
-                System.out.println(URLDecoder.decode(key, "UTF-8") + " : " + URLDecoder.decode(params.get(key).toString(), "UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
-
-        /*for (String key : param.keySet()) {
-            try {
-                String enKey = URLEncoder.encode(key, "UTF-8");
-                String deKey = URLDecoder.decode(enKey, "UTF-8");
-                String enValue = URLEncoder.encode(param.get(deKey), "UTF-8");
-                String deValue = URLDecoder.decode(enValue, "UTF-8");
-                System.out.println(deKey + " : " + deValue + " & " + deValue.getClass().getName());
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-
+    @PostMapping
+    public String test2(@RequestParam Map<String, String> param) throws ParseException {
+/*        for (String key : param.keySet()) {
+            System.out.println(key + " : " + param.get(key) + " & " + param.get(key).getClass().getName());
         }*/
+
         // Ob 코드
-       /* String obCodeString = params.get("obCode").toString();
+        String obCodeString = param.get("obCode");
         int obCode = Integer.parseInt(obCodeString);
 
         //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456
 
         // 달 주 일(iniPeriod)
-        String iniPeriodString = params.get("iniPeriod").toString();
+        String iniPeriodString = param.get("iniPeriod");
         int iniPeriod = Integer.parseInt(iniPeriodString);
 
         // 한 주마다 몇 번씩 진행할 것인지(iniCount)
@@ -76,28 +59,28 @@ public class TestController {
         // iniOrder
 
         // ini 내용(iniContent)
-        String iniContent = params.get("iniContent").toString();
+        String iniContent = param.get("iniContent");
 
         // iniMonthDate
 
         // 시작일(iniStartDate)
-        String iniStartDateString = params.get("iniStartDate").toString();
+        String iniStartDateString = param.get("iniStartDate");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
         Date iniStartDate = sdf.parse(iniStartDateString);
 
         // 종료일(iniEndDate)
-        String iniEndDateString = params.get("iniEndDate").toString();
+        String iniEndDateString = param.get("iniEndDate");
         Date iniEndDate = sdf.parse(iniEndDateString);
 
         // 전체 기간(iniDuration)
         long iniDurationLong = (iniEndDate.getTime() - iniStartDate.getTime()) / (24*60*60*1000);
         System.out.println("long 타입으로 iniDuration(전체기간) "+iniDurationLong);
         int iniDuration = Long.valueOf(iniDurationLong).intValue();
-        System.out.println("int 타입으로 iniDuration "+iniDuration);*/
+        System.out.println("int 타입으로 iniDuration "+iniDuration);
 
         // 전체 기간 동안 가능한 횟수(iniPossibleCount)
 
-        iniService.insertIni(params);
+        //iniService.insertIni(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);
 
         return "success";
     }

@@ -8,71 +8,78 @@
 <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 
-<!-- navbar 관련 !-->
-<link th:href="@{/css/navbar.css}" rel="stylesheet" />
-<script th:src="@{/js/navbar.js}"></script>
+<!-- navbar 및 전체 css 관련 !-->
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{/css/footer.css}" rel="stylesheet" />
+    <script th:src="@{/js/navbar.js}"></script>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 </script>
 </head>
 <body>
+    <div id="container">
+        <!-- nav bar !-->
+        <div th:replace="/fragment/navbar.html :: fragment-nav"></div>
+        <div id="formCss">
+            <form method="post" id="iniForm">
+               <span class="form">
+                    <select name="obCode" id="obCode" size="1">
+                        <option th:each="category: ${category}"
+                                th:value="${category.categoryCode}" th:utext="${category.categoryName}">
+                        </option>
+                    </select> 을/를 이루기 위해
+                </span> <br>
+                <input type="text" id="ini" name="ini" class="form" size="70" placeholder="목표를 적어주세요"> <br>
+                <input type="date" id="iniStartDate" name="iniStartDate" class="form">
+                <input type="date" id="iniEndDate" name="iniEndDate" class="form"><br>
 
-    <!-- nav bar !-->
-    <div th:replace="/fragment/navbar.html :: fragment-nav"></div>
-
-    <form method="post" id="iniForm">
-       <span>
-            <select name="obCode" id="obCode" size="1">
-                <option th:each="category: ${category}"
-                        th:value="${category.categoryCode}" th:utext="${category.categoryName}">
-                </option>
-            </select> 을/를 이루기 위해
-        </span> <br>
-        <input type="text" id="iniContent" name="iniContent"> <br>
-        <input type="date" id="iniStartDate" name="iniStartDate">
-        <input type="date" id="iniEndDate" name="iniEndDate">
-
-        <select name="iniPeriod" id="iniPeriod" size="1">
-            <option value="0">매달</option>
-            <option value="1">매주</option>
-            <option value="2">매일</option>
-        </select> &nbsp; &nbsp;
-        <div id="week">
-            <select name="week" id="week-pick" size="1">
-                <option value=""></option>
-                <option value="1">첫째</option>
-                <option value="2">둘째</option>
-                <option value="3">셋째</option>
-                <option value="4">넷째</option>
-                <option value="5">마지막</option>
-            </select><span id="week2">주</span>
+                <select name="iniPeriod" id="iniPeriod" size="1" class="form">
+                    <option value="0">매달</option>
+                    <option value="1">매주</option>
+                    <option value="2">매일</option>
+                </select>
+                <span id="week" class="form">
+                    <select name="week" id="week-pick" size="1">
+                        <option value=""></option>
+                        <option value="1">첫째</option>
+                        <option value="2">둘째</option>
+                        <option value="3">셋째</option>
+                        <option value="4">넷째</option>
+                        <option value="5">마지막</option>
+                    </select><span id="week2" class="form">주</span>
+                </span>
+                <div id="day-pick" name="day-pick" class="form">
+                    <input type="checkbox" id="mon" name="day" value="0">
+                    <label for="mon" class="dayLabel"><span>월</span></label> &nbsp;
+                    <input type="checkbox" id="tue" name="day" value="1">
+                    <label for="tue" class="dayLabel"><span>화</span></label> &nbsp;&nbsp;
+                    <input type="checkbox" id="wed" name="day" value="2">
+                    <label for="wed" class="dayLabel"><span>수</span></label> &nbsp;&nbsp;
+                    <input type="checkbox" id="thu" name="day" value="3">
+                    <label for="thu" class="dayLabel"><span>목</span></label> &nbsp;&nbsp;
+                    <input type="checkbox" id="fri" name="day" value="4">
+                    <label for="fri" class="dayLabel"><span>금</span></label> &nbsp;&nbsp;
+                    <input type="checkbox" id="sat" name="day" value="5">
+                    <label for="sat" class="dayLabel"><span>토</span></label> &nbsp;&nbsp;
+                    <input type="checkbox" id="sun" name="day" value="6">
+                    <label for="sun" class="dayLabel"><span>일</span></label> &nbsp;&nbsp;
+                    <span>요일</span>
+                </div>
+                <span id="or" name="or" class="form">OR</span>
+                <input type="text" id="date" name="date" size="5" class="form">
+                <span id="form-toggle" class="form">일 마다&nbsp;</span>
+                <span class="form">반복 할 것이다.</span><br>
+                <input type="button" id="click" value="click" class="buttons">
+                <input type="button" id="add" value="목표 추가" class="buttons">
+<!--            <input type="button" value="click" onclick="ajaxTest()">-->
+            </form>
         </div>
-        <div id="day-pick" name="day-pick">
-            <input type="checkbox" id="mon" name="day" value="0">
-            <label for="mon">월</label> &nbsp;
-            <input type="checkbox" id="tue" name="day" value="1">
-            <label for="tue">화</label> &nbsp;&nbsp;
-            <input type="checkbox" id="wed" name="day" value="2">
-            <label for="wed">수</label> &nbsp;&nbsp;
-            <input type="checkbox" id="thu" name="day" value="3">
-            <label for="thu">목</label> &nbsp;&nbsp;
-            <input type="checkbox" id="fri" name="day" value="4">
-            <label for="fri">금</label> &nbsp;&nbsp;
-            <input type="checkbox" id="sat" name="day" value="5">
-            <label for="sat">토</label> &nbsp;&nbsp;
-            <input type="checkbox" id="sun" name="day" value="6">
-            <label for="sun">일</label> &nbsp;&nbsp;
-            <span>요일</span>
+        <div id="otherContents">
+            <p id="result">???</p>
         </div>
-        <br> <span id="or" name="or">OR</span>
-        <br>
-        <input type="text" id="date" name="date" size="5">
-        <span id="form-toggle">일 마다&nbsp;</span>
-        <span>반복 할 것이다.</span>
-      <input type="button" id="click" value="click">
-    <!--<input type="button" value="click" onclick="ajaxTest()">-->
-    </form>
-    <p id="result">???</p>
+    </div>
+    <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 </body>
 
 <!-- 폼 관련 !-->
@@ -106,12 +113,6 @@
             }else if(duration == "2"){
                 everyday();
             }
-        })
-
-        $("click").click(function(){
-            console.log("click");
-            readForm("iniForm","/readForm");
-            console.log("readForm 종료");
         })
 
     })
