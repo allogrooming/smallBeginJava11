@@ -4,5 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.smallbeginjava11.mapper.DateListMapper">
-
+    <insert id="insertDateList" parameterType="hashMap">
+        INSERT
+            INTO
+                date_list(
+                date_list_code,
+                ini_code,
+                mon,
+                tue,
+                wed,
+                thu,
+                fri,
+                sat,
+                sun
+                )
+            VALUES(
+                #{dateListCode},
+                #{iniCode},
+                IFNULL(#{mon}, 0),
+                IFNULL(#{tue}, 0),
+                IFNULL(#{wed}, 0),
+                IFNULL(#{thu}, 0),
+                IFNULL(#{fri}, 0),
+                IFNULL(#{sat}, 0),
+                IFNULL(#{sun}, 0));
+    </insert>
 </mapper>

@@ -43,14 +43,10 @@ public class TestController {
             System.out.println(key + " : " + params.get(key) + " & " + params.get(key).getClass().getName());
       }
 
+        params.put("obCode", String.valueOf(1));
+
         // 달 주 일(iniPeriod)
-        int iniPeriod = Integer.parseInt(params.get("iniPeriod"));
-
-        //매주라면 date_list 생성
-        if (iniPeriod == 1){
-
-        }
-
+        //int iniPeriod = Integer.parseInt(params.get("iniPeriod"));
 
         /*// Ob 코드
         String obCodeString = param.get("obCode");
