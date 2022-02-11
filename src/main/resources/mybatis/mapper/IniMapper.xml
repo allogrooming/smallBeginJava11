@@ -33,9 +33,9 @@
                 0,
                 #{iniContent},
                 NULL,
-                DATE(NOW()),
-                DATE_ADD(DATE(NOW()), interval 28 DAY),
-                12,
+                #{iniStartDate},
+                #{iniEndDate},
+                #{iniPossibleCount},
                 NULL);
     </insert>
 
