@@ -41,7 +41,6 @@
 
     <select id="selectRecentDateListCodeAndIniCode" parameterType="hashMap" resultType="hashMap">
         SELECT
-            max(ini_code) as iniCode,
             max(date_list_code) as dateListCode
         FROM
             initiative

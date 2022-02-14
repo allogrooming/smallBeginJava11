@@ -9,7 +9,6 @@
             INTO
                 date_list(
                 date_list_code,
-                ini_code,
                 mon,
                 tue,
                 wed,
@@ -20,7 +19,6 @@
                 )
             VALUES(
                 #{dateListCode},
-                #{iniCode},
                 IFNULL(#{mon}, 0),
                 IFNULL(#{tue}, 0),
                 IFNULL(#{wed}, 0),
