@@ -45,16 +45,21 @@ public class TestController {
 
         params.put("dateListCode", dateListCode);*/
 
-        for (String key : params.keySet()) {
-            System.out.println(key + " : " + params.get(key));
-        }
-
         // 달 주 일(iniPeriod)
         int iniPeriod = Integer.parseInt(params.get("iniPeriod"));
 
-        //매주라면 date_list 생성
-        if (iniPeriod == 1){
-
+        //매일을 선택했을 경우
+        if (iniPeriod == 2){
+            params.put("mon", "1");
+            params.put("tue", "1");
+            params.put("wed", "1");
+            params.put("thu", "1");
+            params.put("fri", "1");
+            params.put("sat", "1");
+            params.put("sun", "1");
+            for (String key : params.keySet()) {
+                System.out.println(key + " : " + params.get(key));
+            }
         }
 
         //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456

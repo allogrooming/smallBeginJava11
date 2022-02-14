@@ -34,7 +34,7 @@
                      fri = IFNULL(#{fri}, 0) AND
                      sat = IFNULL(#{sat}, 0) AND
                      sun = IFNULL(#{sun}, 0)),
-                5,
+                #{iniDuration},
                 #{iniPeriod},
                 NULL,
                 0,
