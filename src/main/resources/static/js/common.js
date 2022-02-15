@@ -49,9 +49,8 @@ function ajaxTest(){
 
 
 function leapYear(date){
-
     let year = new Date(date).getFullYear();
-    result = false;
+    var result = false;
     if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
         result = true;
     }
@@ -66,14 +65,10 @@ function lastDay(date){
    var lastDay = lastDayList[month];
 
    //2월인지 체크
-   if (month == 1){
-        //윤년체크
-        if (leapYear(date)){
-            lastDay = 29;
-        }
+   if (month == 1 && (leapYear(date))){
+        lastDay = 29;
    }
    return lastDay;
-
 }
 
 function showDate(date){
