@@ -12,7 +12,6 @@ import lombok.Setter;
 public class DateList {
 
     private int dateListCode;
-    private int iniCode;
     private int mon;
     private int tue;
     private int wed;
