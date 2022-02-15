@@ -12,6 +12,7 @@
     <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/navbar.css}" rel="stylesheet" />
     <link th:href="@{/css/footer.css}" rel="stylesheet" />
+    <link th:href="@{/css/dateSelect.css}" rel="stylesheet" />
     <script th:src="@{/js/navbar.js}"></script>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
@@ -67,7 +68,13 @@
                     <span>요일</span>
                 </div>
                 <span id="or" name="or" class="form">OR</span>
-                <input type="text" id="date" name="date" size="5" class="form">
+                <div class="form">
+                    <div class="date-select">
+                        <input type="text" id="date" name="date" size="5">
+                        <div class="date-select-content" id="date-select-content">
+                        </div>
+                    </div>
+                </div>
                 <span id="form-toggle" class="form">일 마다&nbsp;</span>
                 <span class="form">반복 할 것이다.</span><br>
                 <input type="button" id="click" value="click" class="buttons">
@@ -87,6 +94,12 @@
 <script>
 
     datePicker();
+    leapYear($("#iniStartDate").val());
+    lastDay($("#iniStartDate").val());
+    showDate($("#iniStartDate").val());
+    console.log(showDate($("#iniStartDate").val()));
+    $("#date-select-content").append(showDate($("#iniStartDate").val()));
+
 
     $(function(){
 
@@ -99,6 +112,7 @@
 
             if(duration == "0"){
                 showElements();
+
 
             }else if(duration == "1"){
                 everyWeek();
