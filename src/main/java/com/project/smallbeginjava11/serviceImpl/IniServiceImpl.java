@@ -31,8 +31,4 @@ public class IniServiceImpl implements IniService{
         iniMapper.insertIni(params);
     }
 
-    @Override
-    public String dateListTest(Map<String, String> params) throws ParseException{
-        return dateListMapper.dateListTest(params);
-    }
 }

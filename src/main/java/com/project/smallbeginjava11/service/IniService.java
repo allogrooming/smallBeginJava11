@@ -9,5 +9,5 @@ import com.project.smallbeginjava11.DTO.Initiative;
 
 public interface IniService {
     void insertIni(Map<String, String> params) throws ParseException;
-    String dateListTest(Map<String, String> params) throws  ParseException;
+
 }

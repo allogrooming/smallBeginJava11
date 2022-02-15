@@ -5,15 +5,5 @@
 
 <mapper namespace="com.project.smallbeginjava11.mapper.DateListMapper">
 
-<!--    <select id="dateListTest" parameterType="hashMap" resultType="String">
-        SELECT day_code from temp
-        where mon = IFNULL(#{mon}, 0) AND
-              tue = IFNULL(#{tue}, 0) AND
-              wed = IFNULL(#{wed}, 0) AND
-              thu = IFNULL(#{thu}, 0) AND
-              fri = IFNULL(#{fri}, 0) AND
-              sat = IFNULL(#{sat}, 0) AND
-              sun = IFNULL(#{sun}, 0);
-    </select>-->
 
 </mapper>

@@ -39,64 +39,6 @@ public class TestController {
     @PostMapping
     public String test2(@RequestParam Map<String, String> params) throws ParseException {
 
-/*        String dateListCode = iniService.dateListTest(params);
-        System.out.println("dateList 결과");
-        System.out.println(dateListCode);
-
-        params.put("dateListCode", dateListCode);*/
-
-        // 달 주 일(iniPeriod)
-        int iniPeriod = Integer.parseInt(params.get("iniPeriod"));
-
-        //매일을 선택했을 경우
-        if (iniPeriod == 2){
-            params.put("mon", "1");
-            params.put("tue", "1");
-            params.put("wed", "1");
-            params.put("thu", "1");
-            params.put("fri", "1");
-            params.put("sat", "1");
-            params.put("sun", "1");
-            for (String key : params.keySet()) {
-                System.out.println(key + " : " + params.get(key));
-            }
-        }
-
-        //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456
-
-        // 달 주 일(iniPeriod)
-        String iniPeriodString = params.get("iniPeriod");
-        //int iniPeriod = Integer.parseInt(iniPeriodString);
-
-        // 한 주마다 몇 번씩 진행할 것인지(iniCount)
-        int iniCount = 0;
-        if(iniPeriod == 2){
-            iniCount = 7;
-        }
-
-        // iniOrder
-
-        // iniMonthDate
-
-        // 시작일(iniStartDate)
-        String iniStartDateString = params.get("iniStartDate");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-        Date iniStartDate = sdf.parse(iniStartDateString);
-
-        // 종료일(iniEndDate)
-        String iniEndDateString = params.get("iniEndDate");
-        Date iniEndDate = sdf.parse(iniEndDateString);
-
-        // 전체 기간(iniDuration)
-        long iniDurationLong = (iniEndDate.getTime() - iniStartDate.getTime()) / (24*60*60*1000);
-        System.out.println("long 타입으로 iniDuration(전체기간) "+iniDurationLong);
-        int iniDuration = Long.valueOf(iniDurationLong).intValue();
-        System.out.println("int 타입으로 iniDuration "+iniDuration);
-
-        // 전체 기간 동안 가능한 횟수(iniPossibleCount)
-        System.out.println("insertIni");
-        iniService.insertIni(params);
-
         return "success";
     }
 
