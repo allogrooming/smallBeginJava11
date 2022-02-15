@@ -8,5 +8,6 @@ import java.util.Map;
 import com.project.smallbeginjava11.DTO.Initiative;
 
 public interface IniService {
-    void insertIni(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate, int iniDuration) throws ParseException;
+    void insertIni(Map<String, String> params) throws ParseException;
+    String dateListTest(Map<String, String> params) throws  ParseException;
 }

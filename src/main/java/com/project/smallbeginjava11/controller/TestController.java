@@ -4,9 +4,13 @@ package com.project.smallbeginjava11.controller;
 import com.project.smallbeginjava11.DTO.*;
 import com.project.smallbeginjava11.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,33 +33,40 @@ public class TestController {
         return modelAndView;
     }
 
+    @Transactional
     @RequestMapping(value="/readForm", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
-    public String test2(@RequestParam Map<String, String> param) throws ParseException {
-        for (String key : param.keySet()) {
-            System.out.println(key + " : " + param.get(key));
-        }
+    public String test2(@RequestParam Map<String, String> params) throws ParseException {
 
-        System.out.println("param : " + param);
+/*        String dateListCode = iniService.dateListTest(params);
+        System.out.println("dateList 결과");
+        System.out.println(dateListCode);
 
-        int len = param.size();
-        System.out.println("size of parameter : "+len);
-/*
-        for(int i=0; i<len; i++){
-            System.out.println(param[i]);
-        }*/
-
-        // Ob 코드
-        String obCodeString = param.get("obCode");
-        int obCode = Integer.parseInt(obCodeString);
-
-        //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456
-        String dateListCodeString = param.get("day");
+        params.put("dateListCode", dateListCode);*/
 
         // 달 주 일(iniPeriod)
-        String iniPeriodString = param.get("iniPeriod");
-        int iniPeriod = Integer.parseInt(iniPeriodString);
+        int iniPeriod = Integer.parseInt(params.get("iniPeriod"));
+
+        //매일을 선택했을 경우
+        if (iniPeriod == 2){
+            params.put("mon", "1");
+            params.put("tue", "1");
+            params.put("wed", "1");
+            params.put("thu", "1");
+            params.put("fri", "1");
+            params.put("sat", "1");
+            params.put("sun", "1");
+            for (String key : params.keySet()) {
+                System.out.println(key + " : " + params.get(key));
+            }
+        }
+
+        //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456
+
+        // 달 주 일(iniPeriod)
+        String iniPeriodString = params.get("iniPeriod");
+        //int iniPeriod = Integer.parseInt(iniPeriodString);
 
         // 한 주마다 몇 번씩 진행할 것인지(iniCount)
         int iniCount = 0;
@@ -65,18 +76,15 @@ public class TestController {
 
         // iniOrder
 
-        // ini 내용(iniContent)
-        String iniContent = param.get("iniContent");
-
         // iniMonthDate
 
         // 시작일(iniStartDate)
-        String iniStartDateString = param.get("iniStartDate");
+        String iniStartDateString = params.get("iniStartDate");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
         Date iniStartDate = sdf.parse(iniStartDateString);
 
         // 종료일(iniEndDate)
-        String iniEndDateString = param.get("iniEndDate");
+        String iniEndDateString = params.get("iniEndDate");
         Date iniEndDate = sdf.parse(iniEndDateString);
 
         // 전체 기간(iniDuration)
@@ -86,8 +94,8 @@ public class TestController {
         System.out.println("int 타입으로 iniDuration "+iniDuration);
 
         // 전체 기간 동안 가능한 횟수(iniPossibleCount)
-
-        iniService.insertIni(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate, iniDuration);
+        System.out.println("insertIni");
+        iniService.insertIni(params);
 
         return "success";
     }

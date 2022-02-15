@@ -5,10 +5,56 @@
 
 <mapper namespace="com.project.smallbeginjava11.mapper.IniMapper">
 
-    <insert id="insertIni" parameterType="Initiative">
-        INSERT INTO initiative values(
-            (SELECT (MAX(ini_code)+1) FROM initiative), #{obCode}, 110, #{iniDuration}, #{iniPeriod},
-            #{iniCount}, null, #{iniContent}, null, #{iniStartDate}, #{iniEndDate}, 110, 110);
+    <insert id="insertIni" parameterType="hashMap">
+        INSERT
+            INTO
+                initiative(
+                ini_code,
+                ob_code,
+                date_list_code,
+                ini_duration,
+                ini_period,
+                ini_count,
+                ini_order,
+                ini_content,
+                ini_month_date,
+                ini_start_date,
+                ini_end_date,
+                ini_possible_count,
+                ini_week_order
+                )
+            VALUES(
+                (select IFNULL(MAX(a.ini_code), 0) + 1 FROM initiative a),
+                #{obCode},
+                (SELECT day_code from temp
+                 where mon = IFNULL(#{mon}, 0) AND
+                     tue = IFNULL(#{tue}, 0) AND
+                     wed = IFNULL(#{wed}, 0) AND
+                     thu = IFNULL(#{thu}, 0) AND
+                     fri = IFNULL(#{fri}, 0) AND
+                     sat = IFNULL(#{sat}, 0) AND
+                     sun = IFNULL(#{sun}, 0)),
+                #{iniDuration},
+                #{iniPeriod},
+                NULL,
+                0,
+                #{iniContent},
+                NULL,
+                #{iniStartDate},
+                #{iniEndDate},
+                12,
+                NULL);
     </insert>
+
+ <!--   <select id="selectIniCodeAndDateListCode" parameterType="hashMap" resultType="Initiative">
+        SELECT
+            ob_code,
+            ini_code,
+            date_list_code
+        FROM
+            initiative
+        WHERE
+            ob_code = #{obCode};
+    </select>-->
 
 </mapper>

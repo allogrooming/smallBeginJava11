@@ -2,6 +2,7 @@ package com.project.smallbeginjava11.serviceImpl;
 
 import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.mapper.CategoryMapper;
+import com.project.smallbeginjava11.mapper.DateListMapper;
 import com.project.smallbeginjava11.mapper.IniMapper;
 import com.project.smallbeginjava11.service.IniService;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +19,20 @@ import java.util.Map;
 public class IniServiceImpl implements IniService{
 
     private final IniMapper iniMapper;
+    private final DateListMapper dateListMapper;
 
     @Override
-    public void insertIni(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate, int iniDuration) throws ParseException {
+    public void insertIni(Map<String, String> params) throws ParseException {
 
         // DTO에 파라미터 값들 넣어주고 DTO를 Mapper로 넘겨주어 insert 실행
-        Initiative initiative = new Initiative(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate, iniDuration);
+        //Initiative initiative = new Initiative(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);
         System.out.println("ServiceImpl - DTO");
-        iniMapper.insertIni(initiative);
+        //initiative.getIniData();
+        iniMapper.insertIni(params);
+    }
+
+    @Override
+    public String dateListTest(Map<String, String> params) throws ParseException{
+        return dateListMapper.dateListTest(params);
     }
 }

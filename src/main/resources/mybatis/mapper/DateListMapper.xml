@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.smallbeginjava11.mapper.DateListMapper">
+
+<!--    <select id="dateListTest" parameterType="hashMap" resultType="String">
+        SELECT day_code from temp
+        where mon = IFNULL(#{mon}, 0) AND
+              tue = IFNULL(#{tue}, 0) AND
+              wed = IFNULL(#{wed}, 0) AND
+              thu = IFNULL(#{thu}, 0) AND
+              fri = IFNULL(#{fri}, 0) AND
+              sat = IFNULL(#{sat}, 0) AND
+              sun = IFNULL(#{sun}, 0);
+    </select>-->
+
+</mapper>
