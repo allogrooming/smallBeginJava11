@@ -19,8 +19,8 @@ function readForm(formId, url){
              dataType : "text",
              data : formData1,
              success : function(result){
-                 console.log(result);
-                 console.log(this.data);
+                 //console.log(result);
+                //console.log(this.data);
              },
              error : function(err){
                  console.log(err+"에러발생");

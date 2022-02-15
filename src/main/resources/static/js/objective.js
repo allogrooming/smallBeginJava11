@@ -62,12 +62,12 @@ function divHide(){
         })
 
         $('#krbtn3').click(function(){
-            alert("목표값은 최대 3개까지 작성 가능합니다")
+            alert("목표값은 최대 3개까지 작성 가능합니다");
         })
 
         //ajax
         $('#obClick').click(function(){
-            readForm('#obForm',)
+            readForm('#obForm','/readOBForm');
         })
     })
 })(jQuery)
