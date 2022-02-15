@@ -9,4 +9,8 @@
         SELECT * FROM category;
     </select>
 
+    <select id="selectCategory" resultType="Category" parameterType="String">
+        SELECT * FROM category where category_code = #{code};
+    </select>
+
 </mapper>

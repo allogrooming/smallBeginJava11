@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -37,15 +39,30 @@ public class CategoryController {
         List<Category> category = categoryService.getAllCategory();
         ModelAndView modelAndView = new ModelAndView("category");
         modelAndView.addObject("category", category);
+        System.out.println(category);
         return modelAndView;
     }
 
-    @PostMapping("/objective")
+/*    @PostMapping("/objective")
     public ModelAndView objectivePage(String categoryCode){
         String code = categoryCode;
-
+        System.out.println("Controller : code parameter "+code);
+        List<Category> code4Ob = categoryService.selectCategory(code);
+        System.out.println("Controller"+code4Ob);
         ModelAndView modelAndView = new ModelAndView("objective");
-        modelAndView.addObject("categoryCode", code);
+        modelAndView.addObject("category", code4Ob);
+        return modelAndView;
+    }*/
+
+    @RequestMapping("/objective")
+    public ModelAndView objectivePage(HttpServletRequest request){
+        String code = request.getParameter("code");
+        System.out.println("Controller : code parameter "+code);
+
+        Category code4Ob = categoryService.selectCategory(code);
+        System.out.println("Controller"+code4Ob);
+        ModelAndView modelAndView = new ModelAndView("objective");
+        modelAndView.addObject("category", code4Ob);
         return modelAndView;
     }
 

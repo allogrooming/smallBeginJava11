@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="eur-ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="eur-ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -22,109 +22,25 @@
     <!-- nav bar !-->
     <div th:replace="/fragment/navbar.html :: fragment-nav"></div>
     <div id="formCss">
-        <form method="post" id="iniForm">
-               <span class="form">
-                    <select name="obCode" id="categoryCode" size="1">
-                        <option th:each="category: ${category}"
-                                th:value="${category.categoryCode}" th:utext="${category.categoryName}">
-                        </option>
-                    </select> 을/를 이루기 위해
-                </span> <br>
-            <input type="text" id="ini" name="iniContent" class="form" size="70" placeholder="목표를 적어주세요"> <br>
-            <input type="date" id="iniStartDate" name="iniStartDate" class="form">
-            <input type="date" id="iniEndDate" name="iniEndDate" class="form"><br>
+        <form method="post" id="obForm">
+            <span th:value="${category.categoryCode}" th:text="${category.categoryName}"
+            name="categoryCode" id="categoryCode"></span>
+            &nbsp; &nbsp;<span>기간을 정하고 목표와 측정 가능한 성과를 입력하세요</span> <br>
+            <input type="date" id="obStartDate" name="obStartDate" class="form">
+            <input type="date" id="obEndDate" name="obEndDate" class="form"> <br>
+            <input type="text" id="obContent" name="obContent" class="form" placeholder="목표를 적어주세요">
 
-            <select name="iniPeriod" id="iniPeriod" size="1" class="form">
-                <option value="0">매달</option>
-                <option value="1">매주</option>
-                <option value="2">매일</option>
-            </select>
-            <span id="week" class="form">
-                    <select name="week" id="week-pick" size="1">
-                        <option value=""></option>
-                        <option value="1">첫째</option>
-                        <option value="2">둘째</option>
-                        <option value="3">셋째</option>
-                        <option value="4">넷째</option>
-                        <option value="5">마지막</option>
-                    </select><span id="week2" class="form">주</span>
-                </span>
-            <div id="day-pick" name="day-pick" class="form">
-                <input type="checkbox" id="mon" name="mon" value="1">
-                <label for="mon" class="dayLabel"><span>월</span></label> &nbsp;
-                <input type="checkbox" id="tue" name="tue" value="1">
-                <label for="tue" class="dayLabel"><span>화</span></label> &nbsp;&nbsp;
-                <input type="checkbox" id="wed" name="wed" value="1">
-                <label for="wed" class="dayLabel"><span>수</span></label> &nbsp;&nbsp;
-                <input type="checkbox" id="thu" name="thu" value="1">
-                <label for="thu" class="dayLabel"><span>목</span></label> &nbsp;&nbsp;
-                <input type="checkbox" id="fri" name="fri" value="1">
-                <label for="fri" class="dayLabel"><span>금</span></label> &nbsp;&nbsp;
-                <input type="checkbox" id="sat" name="sat" value="1">
-                <label for="sat" class="dayLabel"><span>토</span></label> &nbsp;&nbsp;
-                <input type="checkbox" id="sun" name="sun" value="1">
-                <label for="sun" class="dayLabel"><span>일</span></label> &nbsp;&nbsp;
-                <span>요일</span>
-            </div>
-            <span id="or" name="or" class="form">OR</span>
-            <input type="text" id="date" name="date" size="5" class="form">
-            <span id="form-toggle" class="form">일 마다&nbsp;</span>
-            <span class="form">반복 할 것이다.</span><br>
-            <input type="button" id="click" value="click" class="buttons">
-            <input type="button" id="add" value="목표 추가" class="buttons">
-            <!--            <input type="button" value="click" onclick="ajaxTest()">-->
+            <h4>측정값</h4>
+            <input type="text" id="keyResult" placeholder="목표 측정 값을 적어주세요">
+            <br>
+            <input type="button" id="click" value="+ 할 일 정하기" class="buttons">
         </form>
-    </div>
-    <div id="otherContents">
-        <p id="result">???</p>
     </div>
 </div>
 <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 </body>
 
-<!-- 폼 관련 !-->
-<script src="/js/iniForm.js"></script>
 <script>
-
-    datePicker();
-
-    $(function(){
-
-        $("#iniStartDate").change(function(){
-            duration();
-        })
-
-        $("#iniPeriod").change(function (){
-            var duration = $(this).val();
-
-            if(duration == "0"){
-                showElements();
-
-            }else if(duration == "1"){
-                everyWeek();
-
-                $("#day-pick").click(function(){
-                    var checked = $('input[name="day"]:checked').length;
-                    if(checked == 7){
-                        dayPicker();
-                    }
-                })
-
-            }else if(duration == "2"){
-                everyday();
-            }
-        })
-
-    })
-
-    $(function(){
-
-        $("#click").click(function(){
-            readForm("#iniForm", "/readForm");
-        });
-
-    })
-
 
 </script>
 

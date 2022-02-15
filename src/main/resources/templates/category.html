@@ -31,9 +31,11 @@
   <h2>이루고 싶은 목표의 카테고리를 선택해주세요</h2>
 
   <table id="categoryTable">
-    <tr th:each="category: ${category}">
-      <td th:value="${category.categoryCode}" th:utext="${category.categoryName}"
-          th:id="${category.categoryName}" class="categorySelect"></td>
+    <tr>
+      <td  th:each="category: ${category}" class="categoryCode">
+        <a th:href="@{/objective(code = ${category.categoryCode})}"
+           th:utext="${category.categoryName}">
+      </td>
     </tr>
   </table>
 </div>
@@ -41,14 +43,28 @@
 </body>
 
 <script>
-  $(function(){
-    $(".categorySelect").click(function(){
-      var categoryCode = $(this).val();
+
+/*    $.ajax({
+      url : "/objective/{code}",
+      type : "post",
+      dataType :"text",
+      success : function(result){
+        console.log("SUCCESS")
+      },
+      error : function(err){
+        console.log("ERROR");
+      }
+    });*/
+
+  /*$(function(){
+    $('input[name="categoryList"]').change(function(){
+      var categoryCode = $('input[name="categoryList"]:checked').val();
+      alert("categoryCode check : "+categoryCode);*/
 
       //location.href 링크로 파라미터 보내기? Or 안보이는 폼 만들기?
 
       // hidden 처리된 폼으로 카테고리 코드 전달
-      var f = document.createElement('form');
+    /*  var f = document.createElement('form');
       var obj;
       obj = document.createElement('input');
       obj.setAttribute('type', 'hidden');
@@ -60,9 +76,9 @@
       f.setAttribute('action', '/objective');
       document.body.appendChild(f);
       f.submit();
-      console.log(categoryCode);
-    })
-  })
+      alert(categoryCode);*/
+/*    })
+  })*/
 </script>
 </html>
 
