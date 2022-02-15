@@ -94,11 +94,16 @@
 <script>
 
     datePicker();
-    leapYear($("#iniStartDate").val());
+    console.log(leapYear($("#iniStartDate").val()));
     lastDay($("#iniStartDate").val());
     showDate($("#iniStartDate").val());
-    console.log(showDate($("#iniStartDate").val()));
-    $("#date-select-content").append(showDate($("#iniStartDate").val()));
+    $("#date-select-content").html(showDate($("#iniStartDate").val()));
+
+    $("#iniStartDate").change(function(){
+       $("#date-select-content").html(showDate($("#iniStartDate").val()));
+    });
+
+
 
 
     $(function(){
