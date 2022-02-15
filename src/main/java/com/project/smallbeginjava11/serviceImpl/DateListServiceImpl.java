@@ -17,6 +17,6 @@ public class DateListServiceImpl implements DateListService {
     @Override
     public void updateDateList(Map<String, String> map){
         dateListMapper.insertDateList(map);
-    };
+    }
 
 }

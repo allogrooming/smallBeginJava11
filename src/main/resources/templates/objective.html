@@ -13,9 +13,12 @@
     <link th:href="@{/css/navbar.css}" rel="stylesheet" />
     <link th:href="@{/css/footer.css}" rel="stylesheet" />
     <script th:src="@{/js/navbar.js}"></script>
+    <script th:src="@{/js/objective.js}"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
 
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-    </script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
 </head>
 <body>
 <div id="container">
@@ -31,18 +34,25 @@
             <input type="text" id="obContent" name="obContent" class="form" placeholder="목표를 적어주세요">
 
             <h4>측정값</h4>
-            <input type="text" id="keyResult" placeholder="목표 측정 값을 적어주세요">
+            <span>목표 측정 값을 최대 3개 적어주세요</span>
+            <div id="krAdd">
+                <input type="text" class="keyResult" placeholder="목표값을 입력하면 + 버튼이 생성됩니다">
+                &nbsp;<span class="material-icons-outlined" id="krbtn1">add</span><br>
+            </div>
+            <div id="krAdd2">
+                <input type="text" class="keyResult" placeholder="목표값을 입력하면 + 버튼이 생성됩니다">
+                &nbsp;<span class="material-icons-outlined" id="krbtn2">add</span><br>
+            </div>
+            <div id="krAdd3">
+                <input type="text" class="keyResult" placeholder="목표값을 입력하면 + 버튼이 생성됩니다">
+                &nbsp;<span class="material-icons-outlined" id="krbtn3">add</span><br>
+            </div>
             <br>
-            <input type="button" id="click" value="+ 할 일 정하기" class="buttons">
+            <input type="button" id="obClick" value="+ 할 일 정하기" class="buttons">
         </form>
     </div>
 </div>
 <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 </body>
-
-<script>
-
-</script>
-
 </html>
 
