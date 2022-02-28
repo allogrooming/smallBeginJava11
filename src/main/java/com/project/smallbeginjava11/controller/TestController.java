@@ -40,6 +40,7 @@ public class TestController {
     @PostMapping
     public String test2(@RequestParam Map<String, String> params) throws ParseException {
 
+        System.out.println("안녕");
         for (String key : params.keySet()) {
             System.out.println(key + " : " + params.get(key) + " & " + params.get(key).getClass().getName());
       }

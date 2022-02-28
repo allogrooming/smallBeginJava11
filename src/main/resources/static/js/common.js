@@ -6,10 +6,10 @@ function readForm(formId, url){
 
       //var formData = $(formId).serialize().replace(/%/g,'%25');
       //var formData = $("form").serialize();
-      var formData1 = $(formId).serialize().replace(/%/g,'%25');
-      var formData2 = encodeURIComponent($("form").serialize());
-      console.log(formData1);
-      console.log(formData2);
+      //var formData1 = $(formId).serialize().replace(/%/g,'%25');
+      //var formData2 = encodeURIComponent($("form").serialize());
+      //console.log(formData1);
+      //console.log(formData2);
 
 
       $.ajax({
@@ -17,7 +17,7 @@ function readForm(formId, url){
              type : "post",
              contentType: 'application/x-www-form-urlencoded; charset=utf-8',
              dataType : "text",
-             data : formData1,
+             data : $(formId).serialize(),
              success : function(result){
                  console.log(result);
                  console.log(this.data);
