@@ -4,14 +4,6 @@ function readData(data){
 
 function readForm(formId, url){
 
-      //var formData = $(formId).serialize().replace(/%/g,'%25');
-      //var formData = $("form").serialize();
-      //var formData1 = $(formId).serialize().replace(/%/g,'%25');
-      //var formData2 = encodeURIComponent($("form").serialize());
-      //console.log(formData1);
-      //console.log(formData2);
-
-
       $.ajax({
              url : url,
              type : "post",
