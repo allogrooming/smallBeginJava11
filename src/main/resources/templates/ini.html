@@ -7,6 +7,7 @@
 
 <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/dateSelect.js"></script>
 
 <!-- navbar 및 전체 css 관련 !-->
     <link th:href="@{/css/common.css}" rel="stylesheet" />
@@ -14,8 +15,11 @@
     <link th:href="@{/css/footer.css}" rel="stylesheet" />
     <link th:href="@{/css/dateSelect.css}" rel="stylesheet" />
     <script th:src="@{/js/navbar.js}"></script>
+<!-- bootstrap !-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 </script>
 </head>
 <body>
@@ -100,29 +104,27 @@
     $("#date-select-content").html(showDate($("#iniStartDate").val()));
 
     $("#iniStartDate").change(function(){
+       console.log("1");
        $("#date-select-content").html(showDate($("#iniStartDate").val()));
+       console.log("2");
+       duration();
     });
 
-    var dateListStr = "";
     $("#date-select-content table tbody tr th div").click(function(){
-        var dataDateSelected = $(this).attr("data-date-selected");
-        if (dataDateSelected == undefined || dataDateSelected == "false"){
-            $(this).attr("data-date-selected", "true");
-            $(this).css({"background-color" : "#4169E1", "color" : "#FFFAF0"});
-            dateListStr += this.innerText + "<br>";
-            $(".date-select-list").html(dateListStr);
-        } else if ($(this).attr("data-date-selected") == "true"){
-            $(this).css({"background-color" : "transparent", "color" : "black"});
-            $(this).attr("data-date-selected", "false");
-        }
+        //selectDate($(this))
+        console.log("드롭다운 클릭");
+        console.log("$('#iniEndDate').val() : " + $("#iniEndDate").val())
+        possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), $(this));
     });
 
 
     $(function(){
+<!--
 
         $("#iniStartDate").change(function(){
-            duration();
+
         })
+-->
 
         $("#iniPeriod").change(function (){
             var duration = $(this).val();
