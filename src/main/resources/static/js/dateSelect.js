@@ -27,9 +27,6 @@ function showDate(date){
         if(i % 7 == 0){
             text += "</tr><tr>";
         }
-        if(i == last){
-           text += "<th><div class='day end'>" + i + "</div></th>";
-        }
     }
     text += "<th colspan='2'><div class='day' id='everyEnd'>말일</div><th></tr></table>";
     return text;
