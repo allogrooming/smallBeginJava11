@@ -21,10 +21,12 @@ function showDate(date){
     for (var i = 1; i <= last; i++){
         text += "<th><div class='day'>" + i + "</div></th>";
         if(i % 7 == 0){
-            text += "</tr>";
+            text += "</tr><tr>";
         }
+
     }
-    text += "<div class='day'>말일</div></table>";
+    text += "<th colspan='2'><div class='day' id='lastDay'>말일</div><th></tr></table>";
+    console.log(text)
     return text;
 }
 
@@ -64,7 +66,7 @@ function possibleDayCount(startDate, endDate, dateListArray){
     var startMonth = start.getMonth();
     var endMonth = end.getMonth();
     var monthBetween = Math.abs(startMonth - endMonth) + 1;
-    console.log(monthBetween)
+/*
 
     var count = 0;
     for (let i = 0; i < monthBetween; i++) {
@@ -73,9 +75,10 @@ function possibleDayCount(startDate, endDate, dateListArray){
             var lastDayInMonth = lastDay(start.setMonth(monthInt));
             console.log("lastDayInMonth : " + lastDayInMonth)
                 if(j == lastDayInMonth){
-                    alert(j + "일을 선택하셨습니다. 달의 말일을 선택하고 싶으시다면 '말일' 옵션을 이용해주세요.");
+
                 }
         }
     }
+*/
 
 }
