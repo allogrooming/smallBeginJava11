@@ -12,11 +12,52 @@
     <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/navbar.css}" rel="stylesheet" />
     <link th:href="@{/css/footer.css}" rel="stylesheet" />
-    <link th:href="@{/css/dateSelect.css}" rel="stylesheet" />
     <script th:src="@{/js/navbar.js}"></script>
 
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-</script>
+    <!-- 폼 관련 !-->
+    <script src="/js/iniForm.js"></script>
+    <script>
+
+        datePicker();
+
+        $(function(){
+
+            $("#iniStartDate").change(function(){
+                duration();
+            })
+
+            $("#iniPeriod").change(function (){
+                var duration = $(this).val();
+
+                if(duration == "0"){
+                    showElements();
+
+                }else if(duration == "1"){
+                    everyWeek();
+
+                    $("#day-pick").click(function(){
+                        var checked = $('input[name="day"]:checked').length;
+                        if(checked == 7){
+                            dayPicker();
+                        }
+                    })
+
+                }else if(duration == "2"){
+                    everyday();
+                }
+            })
+
+        })
+
+        $(function(){
+
+            $("#click").click(function(){
+                readForm("#iniForm", "/readForm");
+            });
+
+        })
+    </script>
+
 </head>
 <body>
     <div id="container">
@@ -68,13 +109,7 @@
                     <span>요일</span>
                 </div>
                 <span id="or" name="or" class="form">OR</span>
-                <div class="form">
-                    <div class="date-select">
-                        <input type="text" id="date" name="date" size="5">
-                        <div class="date-select-content" id="date-select-content">
-                        </div>
-                    </div>
-                </div>
+                <input type="text" id="date" name="date" size="5" class="form">
                 <span id="form-toggle" class="form">일 마다&nbsp;</span>
                 <span class="form">반복 할 것이다.</span><br>
                 <input type="button" id="click" value="click" class="buttons">
@@ -88,66 +123,6 @@
     </div>
     <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 </body>
-
-<!-- 폼 관련 !-->
-<script src="/js/iniForm.js"></script>
-<script>
-
-    datePicker();
-    console.log(leapYear($("#iniStartDate").val()));
-    console.log(lastDay($("#iniStartDate").val()));
-
-
-    showDate($("#iniStartDate").val());
-    $("#date-select-content").html(showDate($("#iniStartDate").val()));
-
-    $("#iniStartDate").change(function(){
-       $("#date-select-content").html(showDate($("#iniStartDate").val()));
-    });
-
-
-
-
-    $(function(){
-
-        $("#iniStartDate").change(function(){
-            duration();
-        })
-
-        $("#iniPeriod").change(function (){
-            var duration = $(this).val();
-
-            if(duration == "0"){
-                showElements();
-
-
-            }else if(duration == "1"){
-                everyWeek();
-
-                $("#day-pick").click(function(){
-                    var checked = $('input[name="day"]:checked').length;
-                    if(checked == 7){
-                        dayPicker();
-                    }
-                })
-
-            }else if(duration == "2"){
-                everyday();
-            }
-        })
-
-    })
-
-     $(function(){
-
-        $("#click").click(function(){
-            readForm("#iniForm", "/readForm");
-        });
-
-    })
-
-
-</script>
 
 </html>
 

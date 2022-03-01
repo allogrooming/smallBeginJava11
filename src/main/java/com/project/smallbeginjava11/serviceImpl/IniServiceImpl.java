@@ -7,7 +7,6 @@ import com.project.smallbeginjava11.service.DateListService;
 import com.project.smallbeginjava11.service.IniService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,13 +27,6 @@ public class IniServiceImpl implements IniService{
         System.out.println("ServiceImpl - DTO");
         //initiative.getIniData();
         iniMapper.insertIni(params);
-
-        if (Integer.parseInt(params.get("iniPeriod")) == 1){
-            Map<String, String> map= getRecentDateListCode(params);
-            params.put("dateListCode", String.valueOf(map.get("dateListCode")));
-            params.put("iniCode", String.valueOf(map.get("iniCode")));
-            dateListService.updateDateList(params);
-        }
     }
 
     @Override

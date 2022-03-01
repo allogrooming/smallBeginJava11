@@ -39,9 +39,11 @@
                 NULL);
     </insert>
 
-    <select id="selectRecentDateListCodeAndIniCode" parameterType="hashMap" resultType="hashMap">
+    <select id="selectIniCodeAndDateListCode" parameterType="hashMap" resultType="Initiative">
         SELECT
-            max(date_list_code) as dateListCode
+            ob_code,
+            ini_code,
+            date_list_code
         FROM
             initiative
         WHERE
