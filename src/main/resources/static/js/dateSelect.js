@@ -50,13 +50,14 @@ function selectDate(element){
 
     $(".date-select-list").html(dateListStr);
     return dateListArray;
+
 }
 
-//TODO: duration function 과의 연관관계 확인
-function possibleDayCount(startDate, endDate, element){
+// TODO: duration function 과의 연관관계 확인
+function possibleDayCount(startDate, endDate, dateListArray){
      var start = new Date(startDate);
      var end = new Date(endDate);
-     var dateListArray = selectDate(element);
+     var dateListArray = dateListArray;
 
     console.log(dateListArray);
     var startMonth = start.getMonth();
@@ -66,11 +67,11 @@ function possibleDayCount(startDate, endDate, element){
 
     var count = 0;
     for (let i = 0; i < monthBetween; i++) {
-        console.log("for문안");
+        //console.log("for문안");
         var monthInt = startMonth + i;
         for (j of dateListArray){
             var lastDayInMonth = lastDay(start.setMonth(monthInt));
-            console.log("j : " + j);
+            //console.log("j : " + j);
             console.log("lastDayInMonth : " + lastDayInMonth)
                 if(j == lastDayInMonth){
                     alert(j + "일을 선택하셨습니다. 달의 말일을 선택하고 싶으시다면 '말일' 옵션을 이용해주세요.");

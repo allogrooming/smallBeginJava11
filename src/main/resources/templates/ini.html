@@ -111,10 +111,10 @@
     });
 
     $("#date-select-content table tbody tr th div").click(function(){
-        //selectDate($(this))
+        var dateListArray = selectDate($(this))
         console.log("드롭다운 클릭");
         console.log("$('#iniEndDate').val() : " + $("#iniEndDate").val())
-        possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), $(this));
+        possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), dateListArray);
     });
 
 
