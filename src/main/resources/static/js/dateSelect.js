@@ -23,10 +23,11 @@ function showDate(date){
         if(i % 7 == 0){
             text += "</tr><tr>";
         }
-
+        if(i == last){
+           text += "<th><div class='day end'>" + i + "</div></th>";
+        }
     }
-    text += "<th colspan='2'><div class='day' id='lastDay'>말일</div><th></tr></table>";
-    console.log(text)
+    text += "<th colspan='2'><div class='day' id='everyEnd'>말일</div><th></tr></table>";
     return text;
 }
 
@@ -36,27 +37,25 @@ function selectDate(element){
     if (dataDateSelected == undefined || dataDateSelected == "false"){
         $(element).attr("data-date-selected", "true");
         $(element).css({"background-color" : "#4169E1", "color" : "#FFFAF0"});
+        if($(element).hasClass("day end")){
+            alert($(element).text() + "일을 선택하셨습니다. 매달 말일을 선택하고 싶으시다면 '말일' 옵션을 사용해주세요.");
+        }
     } else if ($(element).attr("data-date-selected") == "true"){
         $(element).css({"background-color" : "transparent", "color" : "black"});
         $(element).attr("data-date-selected", "false");
     }
 
-    var dateListStr = "";
     var dateListArray = [];
     $(".day").each(function(index, item) {
         if($(item).attr("data-date-selected") == "true"){
             dateListArray.push($(item).text())
-            dateListStr += $(item).text()
         }
     });
 
-    $(".date-select-list").html(dateListStr);
     return dateListArray;
-
 }
 
 
-// TODO: duration function 과의 연관관계 확인
 function possibleDayCount(startDate, endDate, dateListArray){
      var start = new Date(startDate);
      var end = new Date(endDate);
