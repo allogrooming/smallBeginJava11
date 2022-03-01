@@ -53,6 +53,7 @@ function selectDate(element){
 
 }
 
+
 // TODO: duration function 과의 연관관계 확인
 function possibleDayCount(startDate, endDate, dateListArray){
      var start = new Date(startDate);
