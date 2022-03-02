@@ -13,10 +13,65 @@ function lastDay(date){
    return lastDay;
 }
 
-function showDate(date){
+function lastDaySelector(startDate, endDate){
+    var start = new Date(startDate);
+    var end = new Date(endDate);
+    var startMonth = start.getMonth();
+    var startTemp = new Date(startDate);
+    var lastDayList = [];
 
-    var date = new Date(date);
-    var last = lastDay(date);
+    for (let i = 0; i < 12; i++) {
+        console.log("startMonth : " + startMonth);
+        var total = startMonth + i;
+        console.log(typeof total)
+        console.log("total before : " + total);
+        if(total > 12){
+            total = total - 12;
+        }
+        console.log("total after : " + total);
+        var lastDayInMonth = lastDay(startTemp.setMonth(total));
+        console.log("startTemp : " + startTemp.toString());
+        console.log("end.toString() : " + end.toString());
+        console.log("startTemp.getFullYear(): " + startTemp.getFullYear());
+        console.log("end.getFullYear() : " +  end.getFullYear());
+        console.log("startTemp.getMonth(): " + startTemp.getMonth());
+        console.log("end.getMonth() : " +  end.getMonth());
+        console.log(startTemp.getFullYear() == end.getFullYear());
+        console.log(startTemp.getMonth() == end.getMonth());
+        if (startTemp.getFullYear() == end.getFullYear() && startTemp.getMonth() == end.getMonth()){
+            console.log("BREAK!!!");
+            break;
+        }
+        lastDayList.push(lastDayInMonth);
+    }
+
+    if (end.getDate() != lastDay(end)){
+        lastDayList.pop();
+    }
+    console.log("lastDayList: " + lastDayList)
+    return lastDayList;
+}
+
+function minLastDay(startDate, endDate) {
+    var lastDayList = lastDaySelector(startDate, endDate);
+    var minDate = lastDay(startDate);
+    console.log(lastDayList);
+    if (lastDayList.length){
+        for (i of lastDayList) {
+            //console.log("i : " + i);
+            minDate = Math.min(minDate, i)
+            //console.log("minDate : " + minDate)
+        }
+    }
+    return minDate;
+}
+
+function showDate(startDate, endDate){
+    var lastDayList = lastDaySelector(startDate, endDate);
+    var last = minLastDay(startDate, endDate);
+    //console.log("last : " + last);
+    //console.log("lastDayList : " + lastDayList);
+
     var text = "<table><tr>";
     for (var i = 1; i <= last; i++){
         if(i == last){

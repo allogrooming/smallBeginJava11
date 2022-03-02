@@ -99,11 +99,15 @@ $(function(){
 
     datePicker();
 
-    $("#date-select-content").html(showDate($("#iniStartDate").val()));
+    $("#date-select-content").html(showDate($("#iniStartDate").val(), $("#iniEndDate").val()));
 
     $("#iniStartDate").on("change", function(){
         duration();
-        $("#date-select-content").html(showDate($("#iniStartDate").val()));
+        $("#date-select-content").html(showDate($("#iniStartDate").val(), $("#iniEndDate").val()));
+    });
+
+    $("#iniEndDate").on("change", function(){
+        $("#date-select-content").html(showDate($("#iniStartDate").val(), $("#iniEndDate").val()));
     });
 
     $(".date-select-content").on("click", ".day", function(){
