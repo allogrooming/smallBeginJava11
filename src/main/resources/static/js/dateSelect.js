@@ -1,6 +1,5 @@
 ﻿
 function lastDay(date){
-
    var date = new Date(date);
    var month = new Date(date).getMonth();
    var lastDayList = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -21,46 +20,28 @@ function lastDaySelector(startDate, endDate){
     var lastDayList = [];
 
     for (let i = 0; i < 12; i++) {
-        console.log("startMonth : " + startMonth);
         var total = startMonth + i;
-        console.log(typeof total)
-        console.log("total before : " + total);
-        if(total > 12){
-            total = total - 12;
-        }
-        console.log("total after : " + total);
+        if(total > 12) total -= 12;
+
         var lastDayInMonth = lastDay(startTemp.setMonth(total));
-        console.log("startTemp : " + startTemp.toString());
-        console.log("end.toString() : " + end.toString());
-        console.log("startTemp.getFullYear(): " + startTemp.getFullYear());
-        console.log("end.getFullYear() : " +  end.getFullYear());
-        console.log("startTemp.getMonth(): " + startTemp.getMonth());
-        console.log("end.getMonth() : " +  end.getMonth());
-        console.log(startTemp.getFullYear() == end.getFullYear());
-        console.log(startTemp.getMonth() == end.getMonth());
+        lastDayList.push(lastDayInMonth);
         if (startTemp.getFullYear() == end.getFullYear() && startTemp.getMonth() == end.getMonth()){
-            console.log("BREAK!!!");
             break;
         }
-        lastDayList.push(lastDayInMonth);
     }
-
     if (end.getDate() != lastDay(end)){
         lastDayList.pop();
     }
-    console.log("lastDayList: " + lastDayList)
     return lastDayList;
 }
+
 
 function minLastDay(startDate, endDate) {
     var lastDayList = lastDaySelector(startDate, endDate);
     var minDate = lastDay(startDate);
-    console.log(lastDayList);
     if (lastDayList.length){
         for (i of lastDayList) {
-            //console.log("i : " + i);
             minDate = Math.min(minDate, i)
-            //console.log("minDate : " + minDate)
         }
     }
     return minDate;
@@ -69,38 +50,72 @@ function minLastDay(startDate, endDate) {
 function showDate(startDate, endDate){
     var lastDayList = lastDaySelector(startDate, endDate);
     var last = minLastDay(startDate, endDate);
-    //console.log("last : " + last);
-    //console.log("lastDayList : " + lastDayList);
-
     var text = "<table><tr>";
-    for (var i = 1; i <= last; i++){
+
+    for (let i = 1; i <= last; i++){
         if(i == last){
-            text += "<th><div class='day end'>" + i + "</div></th>";
+            text += "<th><div " + "id='" + i + "' class='day end' >" + i + "</div></th>";
             break;
         }
-        text += "<th><div class='day'>" + i + "</div></th>";
+        text += "<th><div " + "id='" + i + "' class='day'>" + i + "</div></th>";
         if(i % 7 == 0){
-            text += "</tr><tr>";
+            text += "</tr>";
         }
     }
-    text += "<th colspan='2'><div class='day' id='everyEnd'>말일</div><th></tr></table>";
+    text += "<tr><th colspan='7'><div class='day' id='everyEnd'>말일</div><th></tr></table>";
     return text;
 }
 
+function showDateLessMonth(startDate, endDate){
+    var start = new Date(startDate);
+    var end = new Date(endDate);
+    var startLastDay = lastDay(startDate);
+    var duration = (end - start) / (1000 * 60 * 60 * 24)
+
+    //선택한 기간이 한 달을 넘을 경우 : return
+    if (duration > startLastDay) return;
+
+    //넘지 않을 경우
+    var startDate = start.getDate();
+    var endDate = end.getDate();
+    if (startDate < endDate){
+        for (let i = 1; i < startDate; i++){
+            console.log(i)
+            $("#" + i).css({"color" : "white"});
+            $("#" + i).attr({"class" : "disabled"});
+        }
+        console.log("----------------");
+        for (let i = endDate; i > startDate + duration; i--){
+            console.log(i);
+            $("#" + i).css({"color" : "white"});
+            $("#" + i).attr({"class" : "disabled"});
+        }
+    }else if (startDate > endDate){
+        console.log("================");
+        for (let i = startDate; i > endDate; i--){
+            console.log(i)
+            $("#" + i).css({"color" : "white"});
+            $("#" + i).attr({"class" : "disabled"});
+        }
+    }
+
+}
+
+
 // TODO  날짜 클릭과 실행 가능 횟수 나열
 // TODO alert창 customize 논의
-// TODO element 정리
-function selectDate(element){
-    var dataDateSelected = $(element).attr("data-date-selected");
+function selectDate(elementParam){
+    var element = $(elementParam);
+    var dataDateSelected = element.attr("data-date-selected");
     if (dataDateSelected == undefined || dataDateSelected == "false"){
-        $(element).attr("data-date-selected", "true");
-        $(element).css({"background-color" : "#4169E1", "color" : "#FFFAF0"});
-        if($(element).hasClass("day end")){
-            alert($(element).text() + "일을 선택하셨습니다. 매달 말일을 선택하고 싶으시다면 '말일' 옵션을 사용해주세요.");
+        element.attr("data-date-selected", "true");
+        element.css({"background-color" : "#4169E1", "color" : "#FFFAF0"});
+        if(element.hasClass("day end")){
+            alert(element.text() + "일을 선택하셨습니다. 매달 말일을 선택하고 싶으시다면 '말일' 옵션을 사용해주세요.");
         }
-    } else if ($(element).attr("data-date-selected") == "true"){
-        $(element).css({"background-color" : "transparent", "color" : "black"});
-        $(element).attr("data-date-selected", "false");
+    } else if (element.attr("data-date-selected") == "true"){
+        element.css({"background-color" : "transparent", "color" : "black"});
+        element.attr("data-date-selected", "false");
     }
 
     var dateListArray = [];
@@ -109,33 +124,30 @@ function selectDate(element){
             dateListArray.push($(item).text())
         }
     });
-
     return dateListArray;
 }
 
 
 function possibleDayCount(startDate, endDate, dateListArray){
-     var start = new Date(startDate);
-     var end = new Date(endDate);
-     var dateListArray = dateListArray;
-
-    console.log(dateListArray);
+    var start = new Date(startDate);
+    var end = new Date(endDate);
     var startMonth = start.getMonth();
     var endMonth = end.getMonth();
-    var monthBetween = Math.abs(startMonth - endMonth) + 1;
-/*
+    var dateList = dateListArray;
 
-    var count = 0;
-    for (let i = 0; i < monthBetween; i++) {
-        var monthInt = startMonth + i;
-        for (j of dateListArray){
-            var lastDayInMonth = lastDay(start.setMonth(monthInt));
-            console.log("lastDayInMonth : " + lastDayInMonth)
-                if(j == lastDayInMonth){
-
-                }
-        }
+    if(end.getFullYear() > start.getFullYear()){
+        var yearsBetween = end.getFullYear() - start.getFullYear();
+        endMonth = endMonth + (12 * yearsBetween);
     }
-*/
+
+    var monthsBetween = endMonth - startMonth;
+    var count = 0;
+
+    //initiative 시작하는 달의 실행가능횟수
+
+
+
+
+    //return lastDayList;
 
 }

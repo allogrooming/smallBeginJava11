@@ -104,10 +104,12 @@ $(function(){
     $("#iniStartDate").on("change", function(){
         duration();
         $("#date-select-content").html(showDate($("#iniStartDate").val(), $("#iniEndDate").val()));
+        showDateLessMonth($("#iniStartDate").val(), $("#iniEndDate").val());
     });
 
     $("#iniEndDate").on("change", function(){
         $("#date-select-content").html(showDate($("#iniStartDate").val(), $("#iniEndDate").val()));
+        showDateLessMonth($("#iniStartDate").val(), $("#iniEndDate").val());
     });
 
     $(".date-select-content").on("click", ".day", function(){
