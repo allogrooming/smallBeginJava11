@@ -11,20 +11,11 @@ function readForm(formId, url){
              dataType : "text",
              data : $(formId).serialize(),
              success : function(result){
-                 console.log(result);
+                 console.log("success");
              },
              error : function(err){
-                 console.log(err+"에러발생");
+                 console.log("error");
              }
       });
 
-}
-
-function leapYear(date){
-    let year = new Date(date).getFullYear();
-    var result = false;
-    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
-        result = true;
-    }
-    return result;
 }

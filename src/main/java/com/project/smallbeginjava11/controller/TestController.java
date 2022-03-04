@@ -42,7 +42,7 @@ public class TestController {
 
         for (String key : params.keySet()) {
             System.out.println(key + " : " + params.get(key) + " & " + params.get(key).getClass().getName());
-        }
+      }
 
 
         // Ob 코드
@@ -85,8 +85,14 @@ public class TestController {
                 int total = iniService.getDayOfWeek(iniStartDate, iniEndDate, iniDuration,params);
                 params.put("iniPossibleCount", String.valueOf(total));
                 break;
+            //매달 주 마다 반복할
+            case 2:
 
         }
+
+
+
+
 
         //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456
 
@@ -105,9 +111,21 @@ public class TestController {
 
         // iniMonthDate
 
+
+
+
+
         iniService.insertIni(params);
 
         return "success";
     }
+
+
+    @RequestMapping(value="/ajaxTest", produces = "text/html;charset=UTF-8")
+    public String ajaxTest(){
+        System.out.println(categoryService.getAllCategory());
+        return categoryService.getAllCategory().toString();
+    }
+
 
 }

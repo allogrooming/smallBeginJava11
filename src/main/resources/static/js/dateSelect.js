@@ -98,7 +98,8 @@ function showDateLessMonth(startDate, endDate){
             $("#" + i).attr({"class" : "disabled"});
         }
     }
-
+    $("#everyDay").css({"color" : "white"});
+    $("#everyDay").attr({"class" : "disabled"});
 }
 
 
@@ -139,13 +140,11 @@ function possibleDayCount(startDate, endDate, dateListArray){
         var yearsBetween = end.getFullYear() - start.getFullYear();
         endMonth = endMonth + (12 * yearsBetween);
     }
-
     var monthsBetween = endMonth - startMonth;
     var count = 0;
-
     //initiative 시작하는 달의 실행가능횟수
 
-
+    console.log(dateList);
 
 
     //return lastDayList;
