@@ -101,4 +101,10 @@ public class CategoryController {
         ModelAndView modelAndView = new ModelAndView("home");
         return modelAndView;
     }
+
+    @GetMapping("/calendar")
+    public ModelAndView calendar(){
+        ModelAndView modelAndView = new ModelAndView("calendar");
+        return modelAndView;
+    }
 }

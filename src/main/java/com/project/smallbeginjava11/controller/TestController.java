@@ -40,8 +40,9 @@ public class TestController {
     @PostMapping
     public String test2(@RequestParam Map<String, String> params) throws ParseException {
 
+        System.out.println("안녕");
         for (String key : params.keySet()) {
-            System.out.println(key + " : " + params.get(key) + " & " + params.get(key).getClass().getName());
+            System.out.println(key + " : " + params.get(key));
       }
 
 
@@ -75,9 +76,10 @@ public class TestController {
 
 
         // 전체 기간 동안 가능한 횟수(iniPossibleCount)
+        // TODO : 매달 - 0, 매주 - 1, 매일 - 2 라서 case 수정
         switch (iniPeriod) {
             //매일이라면 : iniPeriod가 0이라면
-            case 0:
+            case 2:
                 params.put("iniPossibleCount", String.valueOf(iniDuration));
                 break;
             //매주라면 : iniPeriod가 1이라면
@@ -88,13 +90,7 @@ public class TestController {
 
         }
 
-
-
-
-
         //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456
-
-
 
         // 한 주마다 몇 번씩 진행할 것인지(iniCount)
         //int iniCount = 0;
@@ -124,6 +120,5 @@ public class TestController {
         System.out.println(categoryService.getAllCategory());
         return categoryService.getAllCategory().toString();
     }
-
 
 }
