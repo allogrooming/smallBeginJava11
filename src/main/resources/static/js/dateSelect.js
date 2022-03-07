@@ -1,5 +1,4 @@
-﻿
-function lastDay(date){
+﻿function lastDay(date){
    var date = new Date(date);
    var month = new Date(date).getMonth();
    var lastDayList = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -11,6 +10,17 @@ function lastDay(date){
    }
    return lastDay;
 }
+
+
+function leapYear(date){
+    let year = new Date(date).getFullYear();
+    var result = false;
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0){
+        result = true;
+    }
+    return result;
+}
+
 
 function lastDaySelector(startDate, endDate){
     var start = new Date(startDate);
@@ -47,6 +57,7 @@ function minLastDay(startDate, endDate) {
     return minDate;
 }
 
+
 function showDate(startDate, endDate){
     var lastDayList = lastDaySelector(startDate, endDate);
     var last = minLastDay(startDate, endDate);
@@ -65,6 +76,7 @@ function showDate(startDate, endDate){
     text += "<tr><th colspan='7'><div class='day' id='everyEnd'>말일</div><th></tr></table>";
     return text;
 }
+
 
 function showDateLessMonth(startDate, endDate){
     var start = new Date(startDate);
@@ -140,13 +152,30 @@ function possibleDayCount(startDate, endDate, dateListArray){
         var yearsBetween = end.getFullYear() - start.getFullYear();
         endMonth = endMonth + (12 * yearsBetween);
     }
+
+    var possibleDateList = [];
     var monthsBetween = endMonth - startMonth;
     var count = 0;
-    //initiative 시작하는 달의 실행가능횟수
+    for (date of dateList) {
+        for (let i = startMonth + 1; i <= startMonth + monthsBetween + 1; i++) {
+        console.log("i : " + i);
+        console.log("date : " + date);
+            // 만약 첫 번째 달에 선택한 날짜가 없다면
+            if (startMonth + 1 == i && start.getDate() > date) {
+                console.log("startDateContinue");
+                continue;
+            // 만약 마지막 달에 선택한 날짜가 없다면
+            } else if (endMonth + 1 == i && end.getDate() < date){
+                console.log("endDateContinue");
+                continue;
+            } else {
+                var possibleDay = i + "월 " + date + "일";
+                possibleDateList.push(possibleDay);
+            }
+        }
+    }
 
-    console.log(dateList);
-
-
-    //return lastDayList;
+    console.log(possibleDateList);
+    console.log(possibleDateList.length);
 
 }

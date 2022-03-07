@@ -114,7 +114,7 @@ $(function(){
     });
 
     $(".date-select-content").on("click", ".day", function(){
-        var dateListArray = selectDate($(this))
+        var dateListArray = selectDate($(this));
         possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), dateListArray);
     });
 

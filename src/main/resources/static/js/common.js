@@ -19,3 +19,12 @@ function readForm(formId, url){
       });
 
 }
+
+function sendDateList(startDate, endDate){
+
+
+
+
+
+
+}
