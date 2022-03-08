@@ -145,37 +145,49 @@ function possibleDayCount(startDate, endDate, dateListArray){
     var start = new Date(startDate);
     var end = new Date(endDate);
     var startMonth = start.getMonth();
+    var startYear = start.getFullYear();
     var endMonth = end.getMonth();
     var dateList = dateListArray;
 
-    if(end.getFullYear() > start.getFullYear()){
-        var yearsBetween = end.getFullYear() - start.getFullYear();
+    if(end.getFullYear() > startYear){
+        var yearsBetween = end.getFullYear() - startYear;
         endMonth = endMonth + (12 * yearsBetween);
     }
 
     var possibleDateList = [];
     var monthsBetween = endMonth - startMonth;
-    var count = 0;
     for (date of dateList) {
+        startYear = start.getFullYear();
         for (let i = startMonth + 1; i <= startMonth + monthsBetween + 1; i++) {
-        console.log("i : " + i);
-        console.log("date : " + date);
+        var month = i;
+        startMonth = start.getMonth();
+        //console.log("i : " + i);
+        //console.log("date : " + date);
             // 만약 첫 번째 달에 선택한 날짜가 없다면
             if (startMonth + 1 == i && start.getDate() > date) {
                 console.log("startDateContinue");
                 continue;
             // 만약 마지막 달에 선택한 날짜가 없다면
             } else if (endMonth + 1 == i && end.getDate() < date){
-                console.log("endDateContinue");
+                //console.log("endDateContinue");
                 continue;
             } else {
-                var possibleDay = i + "월 " + date + "일";
+                // 년도가 바뀔 때마다
+                if (i > 12) {
+                    //console.log("parseInt(i / 12) : " + parseInt(i / 12));
+                    month -= 12 * parseInt(i / 12);
+                    //console.log("month : " + month);
+                    // 1월에
+                    if (i % 12 == 1) startYear += parseInt(i / 12);
+                }
+                possibleDay = startYear + "-";
+                possibleDay += month.toString().length < 2? "0" + month : month;
+                possibleDay += "-";
+                possibleDay += date.length < 2? "0" + date :  date;
                 possibleDateList.push(possibleDay);
             }
         }
     }
-
     console.log(possibleDateList);
     console.log(possibleDateList.length);
-
 }
