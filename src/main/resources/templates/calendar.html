@@ -14,6 +14,7 @@
     <link th:href="@{/css/calendar.css}" rel="stylesheet" />
     <script th:src="@{/js/navbar.js}"></script>
     <script th:src="@{/js/calendar.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
 </head>
 <body>
 <div id="container">
@@ -30,8 +31,10 @@
                 <div class="todo-wrap">
                     <div class="todo-title">Todo List</div>
                     <div class="input-wrap">
-                        <input type="text" placeholder="please write here!!" id="input-box" class="input-box">
-                        <button type="button" id="input-data" class="input-data">INPUT</button>
+                        <form method="post" id="toDoList">
+                            <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="toDoList">
+                            <button type="button" id="input-data" class="input-data">INPUT</button>
+                        </form>
                         <div id="input-list" class="input-list"></div>
                     </div>
                 </div>
@@ -84,7 +87,13 @@
     $("#next").click(function(){
         next();
     })
-    prev();
+
+    $("#input-data").click(function(){
+        readForm("toDoList", "/toDoList");
+        addTodoList();
+        //readFormTodo("toDoList", "/toDoList");
+        console.log("input btn is clicked + ajax");
+    })
 </script>
 </html>
 

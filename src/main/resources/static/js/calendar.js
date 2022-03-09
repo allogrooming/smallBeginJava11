@@ -1,4 +1,4 @@
-var currentTitle = document.getElementById('current-year-month');
+let currentTitle = document.getElementById('current-year-month');
 /*var calendarBody = document.getElementById('calendar-body');*/
 var today = new Date();
 var first = new Date(today.getFullYear(), today.getMonth(),1);
@@ -8,6 +8,17 @@ var leapYear=[31,29,31,30,31,30,31,31,30,31,30,31];
 var notLeapYear=[31,28,31,30,31,30,31,31,30,31,30,31];
 var pageFirst = first;
 var pageYear;
+
+let inputBox = document.getElementById('input-box');
+var inputDate = document.getElementById('input-data');
+var inputList = document.getElementById('input-list');
+var delText = 'X';
+//inputDate.addEventListener('click',addTodoList);
+var dataCnt = 1;
+var keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
+let todoList = [];
+todoList[keyValue] = [];
+
 if(first.getFullYear() % 4 === 0){
     pageYear = leapYear;
 }else{
@@ -27,7 +38,8 @@ function showCalendar(){
             }else{
                 var $td = document.createElement('td');
                 $td.textContent = cnt;
-                $td.setAttribute('id', cnt);
+                var CNT = cnt.toString();
+                $td.setAttribute('id', CNT);
                 $tr.appendChild($td);
                 cnt++;
             }
@@ -48,7 +60,7 @@ function removeCalendar(){
 }
 
 function prev(){
-    //inputBox.value = ""; //input-list >> input-wrap으로 변경
+    inputBox.value = ""; //input-list >> input-wrap으로 변경
     const $divs = document.querySelectorAll('#input-list > div');
     console.log("$divs");
     console.log($divs);
@@ -78,13 +90,13 @@ function prev(){
     showCalendar();
     showMain();
     clickedDate1 = document.getElementById(today.getDate());
-    clickedDate1.classList.add('active');
+    //clickedDate1.classList.add('active');
     clickStart();
     reshowingList();
 }
 
 function next(){
-    //inputBox.value = "";
+    inputBox.value = "";
     const $divs = document.querySelectorAll('#input-list > div');
     $divs.forEach(function(e){
         e.remove();
@@ -111,7 +123,7 @@ function next(){
     showCalendar();
     showMain();
     clickedDate1 = document.getElementById(today.getDate());
-    clickedDate1.classList.add('active');
+    //clickedDate1.classList.add('active');
     clickStart();
     reshowingList();
 }
@@ -171,31 +183,30 @@ function reshowingList(){
     }
 
 }
-var inputBox = document.getElementById('input-box');
-var inputDate = document.getElementById('input-data');
-var inputList = document.getElementById('input-list');
-var delText = 'X';
-//inputDate.addEventListener('click',addTodoList);
-var dataCnt = 1;
-var keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-let todoList = [];
-todoList[keyValue] = [];
+
 function addTodoList(){
     var $div = document.createElement('div');
-    $div.textContent = '-' + inputBox.value;
+    var temp = document.getElementById('input-box');
+    $div.textContent = '-' + temp.value;
     var $btn = document.createElement('button');
     $btn.setAttribute('type', 'button');
     $btn.setAttribute('id', 'del-ata');
     $btn.setAttribute('id', dataCnt+keyValue);
     $btn.setAttribute('class', "del-data");
     $btn.textContent = delText;
-    inputList.appendChild($div);
-    inputList.appendChild($btn);
-    todoList[keyValue].push(inputBox.value);
+    console.log("$div at addTodoList : ", $div);
+    console.log("$btn at addTodoList : ", $btn);
+    console.log("input-list : ", inputList);
+    var inputList2 = document.getElementById('input-list');
+    inputList2.appendChild($div);
+    inputList2.appendChild($btn);
+    //inputList.appendChild($div);
+    //inputList.appendChild($btn);
+    todoList[keyValue].push(temp.value);
     dataCnt++;
-    inputBox.value = '';
-    $div.addEventListener('click',checkList);
-    $btn.addEventListener('click',deleteTodo);
+    temp.value = '';
+    //$div.addEventListener('click',checkList);
+    //$btn.addEventListener('click',deleteTodo);
     function deleteTodo(){
         $div.remove();
         $btn.remove();
@@ -213,7 +224,7 @@ function showMain(){
     mainDate.innerHTML = today.getDate().toString();
 }
 var clickedDate1 = document.getElementById(today.getDate());
-clickedDate1.classList.add('active');
+//clickedDate1.classList.add('active');
 var prevBtn = document.getElementById('prev');
 var nextBtn = document.getElementById('next');
 prevBtn.addEventListener('click',prev);
