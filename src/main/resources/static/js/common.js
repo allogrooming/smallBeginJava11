@@ -11,20 +11,31 @@ function readForm(formId, url){
              dataType : "text",
              data : $(formId).serialize(),
              success : function(result){
-                 console.log("success");
+                 console.log("readForm success");
              },
              error : function(err){
-                 console.log("error");
+                 console.log("readForm error");
              }
       });
 
 }
 
-function sendDateList(startDate, endDate){
+function sendDateList(startDate, endDate, dateList, url){
 
-
-
-
-
+    $.ajax({
+         url : url,
+         type : "post",
+         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+         dataType : "text",
+         data : {
+                "dateList" : dateList
+                },
+         success : function(result){
+             console.log("success");
+         },
+         error : function(err){
+             console.log("error");
+         }
+    });
 
 }

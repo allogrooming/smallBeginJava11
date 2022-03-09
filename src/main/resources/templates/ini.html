@@ -118,6 +118,12 @@ $(function(){
         possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), dateListArray);
     });
 
+    $("#click").on("click", function(){
+        //readForm("#iniForm", "/readForm");
+        var dateListArray = selectDate($(this));
+        var possibleDateList = possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), dateListArray);
+        sendDateList($("#iniStartDate").val(), $("#iniEndDate").val(), possibleDateList, "/receiveDateList")
+    });
 
 
     $("#iniPeriod").change(function(){
@@ -141,9 +147,6 @@ $(function(){
         }
     });
 
-    $("#click").click(function(){
-        readForm("#iniForm", "/readForm");
-    });
 
 });
 

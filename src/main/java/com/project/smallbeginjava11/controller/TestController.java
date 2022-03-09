@@ -121,10 +121,11 @@ public class TestController {
     }
 
 
-    @RequestMapping(value="/ajaxTest", produces = "text/html;charset=UTF-8")
-    public String ajaxTest(){
-        System.out.println(categoryService.getAllCategory());
-        return categoryService.getAllCategory().toString();
+    @RequestMapping(value="/receiveDateList", produces = "text/html;charset=UTF-8")
+    @PostMapping
+    public String getDateList(@RequestParam(value = "dateList[]") List<String> dateList){
+        dateList.forEach(x -> System.out.println(x));
+        return "test";
     }
 
 

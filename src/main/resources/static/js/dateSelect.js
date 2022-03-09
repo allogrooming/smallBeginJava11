@@ -161,22 +161,16 @@ function possibleDayCount(startDate, endDate, dateListArray){
         for (let i = startMonth + 1; i <= startMonth + monthsBetween + 1; i++) {
         var month = i;
         startMonth = start.getMonth();
-        //console.log("i : " + i);
-        //console.log("date : " + date);
             // 만약 첫 번째 달에 선택한 날짜가 없다면
             if (startMonth + 1 == i && start.getDate() > date) {
-                console.log("startDateContinue");
                 continue;
             // 만약 마지막 달에 선택한 날짜가 없다면
             } else if (endMonth + 1 == i && end.getDate() < date){
-                //console.log("endDateContinue");
                 continue;
             } else {
                 // 년도가 바뀔 때마다
                 if (i > 12) {
-                    //console.log("parseInt(i / 12) : " + parseInt(i / 12));
                     month -= 12 * parseInt(i / 12);
-                    //console.log("month : " + month);
                     // 1월에
                     if (i % 12 == 1) startYear += parseInt(i / 12);
                 }
@@ -190,4 +184,5 @@ function possibleDayCount(startDate, endDate, dateListArray){
     }
     console.log(possibleDateList);
     console.log(possibleDateList.length);
+    return possibleDateList;
 }
