@@ -82,7 +82,7 @@ function showDateLessMonth(startDate, endDate){
     var start = new Date(startDate);
     var end = new Date(endDate);
     var startLastDay = lastDay(startDate);
-    var duration = (end - start) / (1000 * 60 * 60 * 24)
+    var duration = (end - start) / (1000 * 60 * 60 * 24);
 
     //선택한 기간이 한 달을 넘을 경우 : return
     if (duration > startLastDay) return;
@@ -177,6 +177,8 @@ function possibleDayCount(startDate, endDate, dateListArray){
                 possibleDay = startYear + "-";
                 possibleDay += month.toString().length < 2? "0" + month : month;
                 possibleDay += "-";
+                // "말일" 옵션을 선택했을 경우
+                if(date == "말일") date = lastDay(possibleDay + "01");
                 possibleDay += date.length < 2? "0" + date :  date;
                 possibleDateList.push(possibleDay);
             }

@@ -31,10 +31,10 @@ function sendDateList(startDate, endDate, dateList, url){
                 "dateList" : dateList
                 },
          success : function(result){
-             console.log("success");
+             console.log("sendDateList success");
          },
          error : function(err){
-             console.log("error");
+             console.log("sendDateList error");
          }
     });
 
