@@ -179,7 +179,12 @@ function possibleDayCount(startDate, endDate, dateListArray){
                 possibleDay += "-";
                 // "말일" 옵션을 선택했을 경우
                 if(date == "말일") date = lastDay(possibleDay + "01");
+                lastDay(possibleDay + "01")
+                console.log("possibleDay : " + possibleDay);
+                console.log("lastDay(possibleDay + '01') : " + lastDay(possibleDay + "01"));
                 possibleDay += date.length < 2? "0" + date :  date;
+                console.log(date);
+                console.log(possibleDay);
                 possibleDateList.push(possibleDay);
             }
         }

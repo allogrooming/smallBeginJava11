@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.smallbeginjava11.mapper.MonthListMapper">
+    <insert id="insertMonthList" parameterType="MonthList">
+        INSERT
+            INTO
+                date_list(
+                date_list_code,
+                mon,
+                tue,
+                wed,
+                thu,
+                fri,
+                sat,
+                sun
+                )
+            VALUES(
+                #{dateListCode},
+                IFNULL(#{mon}, 0),
+                IFNULL(#{tue}, 0),
+                IFNULL(#{wed}, 0),
+                IFNULL(#{thu}, 0),
+                IFNULL(#{fri}, 0),
+                IFNULL(#{sat}, 0),
+                IFNULL(#{sun}, 0));
+    </insert>
+</mapper>

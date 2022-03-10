@@ -3,6 +3,7 @@ package com.project.smallbeginjava11.serviceImpl;
 import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.mapper.CategoryMapper;
 import com.project.smallbeginjava11.mapper.IniMapper;
+import com.project.smallbeginjava11.mapper.MonthListMapper;
 import com.project.smallbeginjava11.service.DateListService;
 import com.project.smallbeginjava11.service.IniService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.*;
 public class IniServiceImpl implements IniService{
 
     private final IniMapper iniMapper;
+    private final MonthListMapper monthListMapper;
     private final DateListService dateListService;
 
     @Override
@@ -79,6 +81,13 @@ public class IniServiceImpl implements IniService{
         //System.out.println(days);
 
         return total;
+    }
+
+    // 날짜를 직접 지정해서 선택할 경우, 해당 날짜를 데이터베이스에 insert
+    @Override
+    public List<String> getDateList(List<String> list) {
+        //monthListMapper.insertMonthList(list);
+        return list;
     }
 
 }

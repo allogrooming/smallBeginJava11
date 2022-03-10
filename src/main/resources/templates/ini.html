@@ -40,9 +40,9 @@
                 <input type="date" id="iniEndDate" name="iniEndDate" class="form"><br>
 
                 <select name="iniPeriod" id="iniPeriod" size="1" class="form">
-                    <option value="0">매달</option>
+                    <option value="2">매달</option>
                     <option value="1">매주</option>
-                    <option value="2">매일</option>
+                    <option value="0">매일</option>
                 </select>
                 <span id="week" class="form">
                     <select name="week" id="week-pick" size="1">
@@ -120,8 +120,7 @@ $(function(){
 
     $("#click").on("click", function(){
         //readForm("#iniForm", "/readForm");
-        var dateListArray = selectDate($(this));
-        var possibleDateList = possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), dateListArray);
+        var possibleDateList =
         sendDateList($("#iniStartDate").val(), $("#iniEndDate").val(), possibleDateList, "/receiveDateList")
     });
 

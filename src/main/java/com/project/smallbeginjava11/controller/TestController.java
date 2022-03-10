@@ -25,6 +25,7 @@ public class TestController {
 
     private final CategoryService categoryService;
     private final IniService iniService;
+    private static List<String> monthDateList;
 
     @GetMapping("/test")
     public ModelAndView test(ModelAndView modelAndView){
@@ -85,9 +86,11 @@ public class TestController {
                 int total = iniService.getDayOfWeek(iniStartDate, iniEndDate, iniDuration,params);
                 params.put("iniPossibleCount", String.valueOf(total));
                 break;
-            //매달 주 마다 반복할
+            //매달 날짜를 직접 선택해서 입력할 경우
             case 2:
+                params.put("iniPossibleCount", String.valueOf(monthDateList.size()));
 
+                //int total = iniService.getDateList()
         }
 
 
@@ -123,10 +126,15 @@ public class TestController {
 
     @RequestMapping(value="/receiveDateList", produces = "text/html;charset=UTF-8")
     @PostMapping
-    public String getDateList(@RequestParam(value = "dateList[]") List<String> dateList){
+    public String receiveDateList(@RequestParam(value = "dateList[]") List<String> dateList){
         dateList.forEach(x -> System.out.println(x));
-        return "test";
+        monthDateList = dateList;
+        //iniService.getDateList(dateList);
+        return "getDateList success";
     }
 
+    public List<String> getDateList(List<String> dateList){
+        return iniService.getDateList(dateList);
+    }
 
 }
