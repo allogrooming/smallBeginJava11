@@ -60,12 +60,13 @@ function removeCalendar(){
 }
 
 function prev(){
-    inputBox.value = ""; //input-list >> input-wrap으로 변경
+    let preBox = document.getElementById('input-box').value;
+    preBox.value = '';
     const $divs = document.querySelectorAll('#input-list > div');
-    console.log("$divs");
-    console.log($divs);
+/*    console.log("$divs");
+    console.log($divs);*/
     $divs.forEach(function(e){
-        e.remove();
+        e.remove(); //
     });
     const $btns = document.querySelectorAll('#input-list > button');
     $btns.forEach(function(e1){
@@ -96,7 +97,8 @@ function prev(){
 }
 
 function next(){
-    inputBox.value = "";
+    let nextBox = document.getElementById('input-box').value;
+    nextBox.value = '';
     const $divs = document.querySelectorAll('#input-list > div');
     $divs.forEach(function(e){
         e.remove();
@@ -117,21 +119,43 @@ function next(){
         pageFirst = new Date(first.getFullYear(), first.getMonth()+1, 1);
         first = pageFirst;
     }
-    today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-    currentTitle.innerHTML = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'+ first.getFullYear();
+    today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
+    currentTitle = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'+ first.getFullYear();
     removeCalendar();
     showCalendar();
     showMain();
-    clickedDate1 = document.getElementById(today.getDate());
+    clickedDate1 = document.getElementById('selected-date-show');
+    let selectedDate = showMain();
     //clickedDate1.classList.add('active');
     clickStart();
-    reshowingList();
+    reshowingList(selectedDate);
 }
 
-function reshowingList(){
+function reshowingList(selectedDate){
+    console.log("selectedDate - reshowingList");
+    console.log(selectedDate);
+    $.ajax({
+        url : 'todoList',
+        type : "post",
+        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+        dataType : "text",
+        data : {selectedDate : selectedDate},
+        success : function(result){
+            console.log(result);
+            console.log(this.data);
+        },
+        error : function(err){
+            console.log(err+"에러발생");
+            console.log(this.data);
+        }
+    });
+}
+
+/*function reshowingList(){
     keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
+    let reshowList = document.getElementById('input-list').value;
     if(todoList[keyValue] === undefined){
-        inputList.textContent = '';
+        reshowList.remove();
         todoList[keyValue] = [];
         const $divs = document.querySelectorAll('#input-list > div');
         $divs.forEach(function(e){
@@ -142,7 +166,7 @@ function reshowingList(){
             e1.remove();
         });
     }else if(todoList[keyValue].length ===0){
-        inputList.textContent = "";
+        reshowList.remove();
         const $divs = document.querySelectorAll('#input-list > div');
         $divs.forEach(function(e){
             e.remove();
@@ -182,7 +206,7 @@ function reshowingList(){
         }
     }
 
-}
+}*/
 
 function addTodoList(){
     var $div = document.createElement('div');
@@ -220,15 +244,26 @@ function checkList(e){
 function showMain(){
     const mainDay = document.getElementById('main-day');
     const mainDate = document.getElementById('main-date');
+    const selectedDate = document.getElementById('selected-date');
+    const selectedDateShow = document.getElementById('selected-date-show');
+    let returnDate;
+    if(today.getMonth()+1 < 10){
+        returnDate = today.getFullYear() + "-0" + (today.getMonth()+1) + "-" + today.getDate();
+    }else{
+        returnDate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
+    }
     mainDay.innerHTML = dayList[today.getDay()];
     mainDate.innerHTML = today.getDate().toString();
+    selectedDate.innerHTML = returnDate;
+    selectedDateShow.innerHTML = today.getDate();
+    return returnDate;
 }
 var clickedDate1 = document.getElementById(today.getDate());
 //clickedDate1.classList.add('active');
-var prevBtn = document.getElementById('prev');
-var nextBtn = document.getElementById('next');
-prevBtn.addEventListener('click',prev);
-nextBtn.addEventListener('click',next);
+//var prevBtn = document.getElementById('prev');
+//var nextBtn = document.getElementById('next');
+//prevBtn.addEventListener('click',prev);
+//nextBtn.addEventListener('click',next);
 var tdGroup = [];
 function clickStart(){
     for(let i = 1; i <= pageYear[first.getMonth()]; i++){

@@ -63,6 +63,8 @@ public class TestController {
         // 시작일(iniStartDate)
         String iniStartDateString = params.get("iniStartDate");
         Date iniStartDate = sdf.parse(iniStartDateString);
+        System.out.println("iniStartDate");
+        System.out.println(iniStartDate);
 
         // 종료일(iniEndDate)
         String iniEndDateString = params.get("iniEndDate");

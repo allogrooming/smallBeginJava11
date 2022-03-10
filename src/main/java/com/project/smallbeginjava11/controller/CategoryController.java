@@ -102,22 +102,4 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @GetMapping("/calendar")
-    public ModelAndView calendar(){
-        ModelAndView modelAndView = new ModelAndView("calendar");
-        return modelAndView;
-    }
-
-    @Transactional
-    @RequestMapping(value="/toDoList", produces="text/html;charset=UTF-8")
-    @ResponseBody
-    @PostMapping
-    public String toDoList(@RequestParam Map<String, String> param){
-
-        System.out.println("calendar todoList");
-        System.out.println(param);
-
-        return "success";
-    }
-
 }
