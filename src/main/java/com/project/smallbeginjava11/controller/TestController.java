@@ -89,7 +89,6 @@ public class TestController {
             //매달 날짜를 직접 선택해서 입력할 경우
             case 2:
                 params.put("iniPossibleCount", String.valueOf(monthDateList.size()));
-
                 //int total = iniService.getDateList()
         }
 

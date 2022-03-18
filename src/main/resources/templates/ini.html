@@ -115,13 +115,16 @@ $(function(){
 
     $(".date-select-content").on("click", ".day", function(){
         var dateListArray = selectDate($(this));
+        //var possibleDateList = possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), dateListArray);
         possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), dateListArray);
+        //sendDateList($("#iniStartDate").val(), $("#iniEndDate").val(), possibleDateList, "/receiveDateList")
     });
 
     $("#click").on("click", function(){
         //readForm("#iniForm", "/readForm");
-        var possibleDateList =
-        sendDateList($("#iniStartDate").val(), $("#iniEndDate").val(), possibleDateList, "/receiveDateList")
+        var possibleDateList = possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), dateListArray);
+
+        //sendDateList($("#iniStartDate").val(), $("#iniEndDate").val(), possibleDateList, "/receiveDateList")
     });
 
 

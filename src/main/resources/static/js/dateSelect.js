@@ -140,12 +140,15 @@ function selectDate(elementParam){
     return dateListArray;
 }
 
-
-function possibleDayCount(startDate, endDate, dateListArray){
+//TODO : 재귀함수를 통해 실행
+//TODO : 아니면 lastDay 함수 로직 변경
+//TODO : setMonth()를 적용
+function possibleDayCountOriginal(startDate, endDate, dateListArray){
     var start = new Date(startDate);
     var end = new Date(endDate);
     var startMonth = start.getMonth();
     var startYear = start.getFullYear();
+    var endYear = end.getFullYear();
     var endMonth = end.getMonth();
     var dateList = dateListArray;
 
@@ -156,39 +159,143 @@ function possibleDayCount(startDate, endDate, dateListArray){
 
     var possibleDateList = [];
     var monthsBetween = endMonth - startMonth;
-    for (date of dateList) {
-        startYear = start.getFullYear();
-        for (let i = startMonth + 1; i <= startMonth + monthsBetween + 1; i++) {
-        var month = i;
-        startMonth = start.getMonth();
-            // 만약 첫 번째 달에 선택한 날짜가 없다면
-            if (startMonth + 1 == i && start.getDate() > date) {
-                continue;
-            // 만약 마지막 달에 선택한 날짜가 없다면
-            } else if (endMonth + 1 == i && end.getDate() < date){
-                continue;
-            } else {
-                // 년도가 바뀔 때마다
-                if (i > 12) {
-                    month -= 12 * parseInt(i / 12);
-                    // 1월에
-                    if (i % 12 == 1) startYear += parseInt(i / 12);
-                }
-                possibleDay = startYear + "-";
-                possibleDay += month.toString().length < 2? "0" + month : month;
-                possibleDay += "-";
-                // "말일" 옵션을 선택했을 경우
-                if(date == "말일") date = lastDay(possibleDay + "01");
-                lastDay(possibleDay + "01")
-                console.log("possibleDay : " + possibleDay);
-                console.log("lastDay(possibleDay + '01') : " + lastDay(possibleDay + "01"));
-                possibleDay += date.length < 2? "0" + date :  date;
-                console.log(date);
-                console.log(possibleDay);
-                possibleDateList.push(possibleDay);
+
+    for (let i = startMonth + 1; i <= startMonth + monthsBetween + 1; i++) {
+            var month = i;
+            startMonth = start.getMonth();
+                for (date of dateList) {
+                    // 만약 첫 번째 달에 선택한 날짜가 없다면
+                    if (startMonth + 1 == i && start.getDate() > date) {
+                        continue;
+                    // 만약 마지막 달에 선택한 날짜가 없다면
+                    } else if (endMonth + 1 == i && end.getDate() < date) {
+                        continue;
+                    } else if (endMonth + 1 == i && date) {
+
+                    } else {
+                        // 년도가 바뀔 때마다
+                        if (i > 12) {
+                            month -= 12 * parseInt(i / 12);
+                            // 1월에
+                            if (i % 12 == 1) startYear += parseInt(i / 12);
+                        }
+                    possibleDay = startYear + "-";
+                    possibleDay += month.toString().length < 2? "0" + month : month;
+                    possibleDay += "-";
+                    // "말일" 옵션을 선택했을 경우
+                    if(date == "말일") date = lastDay(possibleDay + "01");
+                    lastDay(possibleDay + "01")
+                    console.log("possibleDay : " + possibleDay);
+                    console.log("lastDay(possibleDay + '01') : " + lastDay(possibleDay + "01"));
+                    possibleDay += date.toString().length < 2? "0" + date :  date;
+                    console.log(date);
+                    console.log(possibleDay);
+                    possibleDateList.push(possibleDay);
             }
         }
     }
+    console.log(possibleDateList);
+    console.log(possibleDateList.length);
+    return possibleDateList;
+}
+
+//TODO : 재귀함수를 통해 실행
+//TODO : 아니면 lastDay 함수 로직 변경
+//TODO : setMonth()를 적용
+// 로직 변경 테스트용 함수
+function possibleDayCount(startDate, endDate, dateListArray){
+    var start = new Date(startDate);
+    var end = new Date(endDate);
+    var startYear = start.getFullYear();
+    var startTemp = new Date(startDate);
+    var startMonth = start.getMonth();
+    var endYear = end.getFullYear();
+    var endMonth = end.getMonth();
+    var dateList = dateListArray;
+
+    if(end.getFullYear() > startYear){
+        var yearsBetween = end.getFullYear() - startYear;
+        endMonth = endMonth + (12 * yearsBetween);
+    }
+
+    var possibleDateList = [];
+    var monthsBetween = endMonth - startMonth;
+    console.log(monthsBetween);
+    console.log(dateList);
+    for (let i = startMonth; i <= startMonth + monthsBetween; i++) {
+        //var month = i - (i - 1);
+        var month = i;
+        console.log("month : " + month);
+        console.log("startMonth : " + startMonth);
+        console.log("start.getDate : " + start.getDate());
+        console.log("monthsBetween : " + monthsBetween);
+        console.log("date : " + date);
+        for (date of dateList) {
+            startTemp = new Date(startDate);
+            startTemp.setMonth(month);
+            if (date == "말일"){
+                date = lastDay(startTemp.getFullYear() + "-" + (startTemp.getMonth() + 1) + "-01");
+            } else {
+                date = parseInt(date);
+            }
+            console.log("이중 포문 date 반복 안");
+            console.log("parseInt(date) : " + parseInt(date))
+            // 만약 첫 번째 달에 선택한 날짜가 없다면
+            console.log(startMonth == i && start.getDate() > date);
+            console.log(endMonth == i && end.getDate() < date);
+            if (startMonth == i && start.getDate() > date) {
+                continue;
+            // 만약 마지막 달에 선택한 날짜가 없다면
+            } else if (endMonth == i && end.getDate() < date) {
+                continue;
+            } else {
+                // "말일" 옵션을 선택했을 경우
+
+                if(date == "말일") date = lastDay(startTemp.getFullYear() + "-" + (startTemp.getMonth() + 1) + "-01");
+                startTemp.setDate(parseInt(date));
+                var possibleMonth = startTemp.getMonth() + 1;
+                var possibleDay = startTemp.getFullYear() + "-" + possibleMonth + "-" + startTemp.getDate();
+                if (possibleDateList.includes(possibleDay)) continue;
+                possibleDateList.push(startTemp.getFullYear() + "-" + possibleMonth + "-" + startTemp.getDate());
+            }
+        }
+    }
+
+    //원본
+    /*for (let i = startMonth + 1; i <= startMonth + monthsBetween + 1; i++) {
+            var month = i;
+            startMonth = start.getMonth();
+                for (date of dateList) {
+                    // 만약 첫 번째 달에 선택한 날짜가 없다면
+                    if (startMonth + 1 == i && start.getDate() > date) {
+                        continue;
+                    // 만약 마지막 달에 선택한 날짜가 없다면
+                    } else if (endMonth + 1 == i && end.getDate() < date) {
+                        continue;
+                    } else if (endMonth + 1 == i && date) {
+
+                    } else {
+                        // 년도가 바뀔 때마다
+                        if (i > 12) {
+                            month -= 12 * parseInt(i / 12);
+                            // 1월에
+                            if (i % 12 == 1) startYear += parseInt(i / 12);
+                        }
+                    possibleDay = startYear + "-";
+                    possibleDay += month.toString().length < 2? "0" + month : month;
+                    possibleDay += "-";
+                    // "말일" 옵션을 선택했을 경우
+                    if(date == "말일") date = lastDay(possibleDay + "01");
+                    lastDay(possibleDay + "01")
+                    console.log("possibleDay : " + possibleDay);
+                    console.log("lastDay(possibleDay + '01') : " + lastDay(possibleDay + "01"));
+                    possibleDay += date.toString().length < 2? "0" + date :  date;
+                    console.log(date);
+                    console.log(possibleDay);
+                    possibleDateList.push(possibleDay);
+            }
+        }
+    }*/
     console.log(possibleDateList);
     console.log(possibleDateList.length);
     return possibleDateList;
