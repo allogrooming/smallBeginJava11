@@ -16,8 +16,8 @@ public class CalendarServiceImpl implements CalendarService {
     private final CalendarMapper calendarMapper;
 
     @Override
-    public List<Calendar> getTodoList(){
-        return calendarMapper.getTodoList();
+    public List<Calendar> getTodoList(String selectedDate){
+        return calendarMapper.getTodoList(selectedDate);
     }
 
 }

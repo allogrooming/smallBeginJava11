@@ -5,8 +5,8 @@
 
 <mapper namespace="com.project.smallbeginjava11.mapper.CalendarMapper">
 
-    <select id="getTodoList" parameterType="hashMap" resultType="Calendar">
-        SELECT to_do_content FROM to_do;
+    <select id="getTodoList" parameterType="String" resultType="hashMap">
+        SELECT to_do_content FROM to_do where plan_date = #{selectedDate};
     </select>
 
 </mapper>

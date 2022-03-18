@@ -19,21 +19,22 @@ public class CalendarController {
 
     @GetMapping("/calendar")
     public ModelAndView calendar(){
-        List<Calendar> to_do = calendarService.getTodoList();
         ModelAndView modelAndView = new ModelAndView("calendar");
-        modelAndView.addObject("to_do", to_do);
         return modelAndView;
     }
 
 
+    // TODO : todo의 경우 ini와 다르게 완료했을 때 칼럼 X, 쿼리에서 donedate 여부로 판단해야됨
     @Transactional
-    @RequestMapping(value="/readCalendar", produces="text/html;charset=UTF-8")
+    @RequestMapping(value="/readCalendar", produces="text/html;charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
-    @PostMapping
     public ModelAndView readCalendar(@RequestParam Map<String, String> param) throws ParseException {
 
         String selectedDate = param.get("selectedDate");
         System.out.println(selectedDate);
+        List<Calendar> result = calendarService.getTodoList(selectedDate);
+
+        System.out.println(result);
 
         ModelAndView modelAndView = new ModelAndView("calendar");
         return modelAndView;

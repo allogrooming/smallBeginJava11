@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CalendarMapper {
-    List<Calendar> getTodoList();
+    List<Calendar> getTodoList(String selectedDate);
 }
