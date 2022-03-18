@@ -128,14 +128,12 @@ function next(){
     let selectedDate = showMain();
     //clickedDate1.classList.add('active');
     clickStart();
-    reshowingList(selectedDate);
+    reshowingList();
 }
 
 function reshowingList(selectedDate){
-    console.log("selectedDate - reshowingList");
-    console.log(selectedDate);
     $.ajax({
-        url : 'todoList',
+        url : '/readCalendar',
         type : "post",
         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
         dataType : "text",
@@ -280,7 +278,7 @@ function changeToday(e){
     clickedDate1 = e.currentTarget;
     clickedDate1.classList.add('active');
     today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
-    showMain();
+    let selectedDate = showMain();
     keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-    reshowingList();
+    reshowingList(selectedDate);
 }

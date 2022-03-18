@@ -1,4 +1,4 @@
-package config;
+package com.project.smallbeginjava11.config;
 
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

@@ -81,6 +81,12 @@
 
 <script>
     showCalendar();
+    clickStart();
+
+    var selectedDate = document.getElementById("selected-date").innerText;
+    console.log("selectedDate - html reshowing");
+    console.log(selectedDate);
+    reshowingList(selectedDate);
 
     $("#prev").click(function(){
         prev();
@@ -90,11 +96,16 @@
         next();
     })
 
-    $("#input-data").click(function(){
+/*    $("#input-data").click(function(){
         readForm("toDoList", "/toDoList");
         addTodoList();
         //readFormTodo("toDoList", "/toDoList");
         console.log("input btn is clicked + ajax");
+    })*/
+
+    $("#calendar-body").click(function(){
+        console.log("changeToday");
+        changeToday();
     })
 </script>
 </html>
