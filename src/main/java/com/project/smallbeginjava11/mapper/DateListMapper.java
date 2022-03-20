@@ -8,5 +8,5 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface DateListMapper {
-    void insertDateList(Map<String, String> map);
+    void insertDateList(Map<String, Object> map);
 }

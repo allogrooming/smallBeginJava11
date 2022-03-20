@@ -1,16 +1,13 @@
 package com.project.smallbeginjava11.serviceImpl;
 
-import com.project.smallbeginjava11.DTO.Initiative;
-import com.project.smallbeginjava11.mapper.CategoryMapper;
 import com.project.smallbeginjava11.mapper.IniMapper;
-import com.project.smallbeginjava11.mapper.MonthListMapper;
 import com.project.smallbeginjava11.service.DateListService;
 import com.project.smallbeginjava11.service.IniService;
+import com.project.smallbeginjava11.service.MonthListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -18,27 +15,47 @@ import java.util.*;
 public class IniServiceImpl implements IniService{
 
     private final IniMapper iniMapper;
-    private final MonthListMapper monthListMapper;
     private final DateListService dateListService;
+    private final MonthListService monthListService;
 
     @Override
-    public void insertIni(Map<String, String> params) throws ParseException {
-
-        // DTO에 파라미터 값들 넣어주고 DTO를 Mapper로 넘겨주어 insert 실행
-        //Initiative initiative = new Initiative(obCode, iniPeriod, iniCount, iniContent, iniStartDate, iniEndDate);
-        System.out.println("ServiceImpl - DTO");
-        //initiative.getIniData();
+    public void insertIni(Map<String, Object> params) throws ParseException {
+        // initiative insert 실행
         iniMapper.insertIni(params);
+        params.keySet().forEach(x -> System.out.println(x + " : " + params.get(x)));
+        System.out.println("obCode : "+ params.get("obCode"));
+        getDateListCodeOrMonthListCode(params);
+    }
+
+    // Initiative가 입력된 다음 MonthListCode나 DateListCode를 가져온다.
+    @Override
+    public void getDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException {
+        Map<String, Object> initiative = iniMapper.selectDateListCodeOrMonthListCode(map);
+        String monthListCode = String.valueOf(initiative.get("MonthListCode"));
+        String dateListCode = String.valueOf(initiative.get("DateListCode"));
+
+        System.out.println("dateListCode : " + dateListCode);
+
+        if (dateListCode != null){
+            initiative.put("DateListCode", dateListCode);
+            dateListService.insertDateList(initiative);
+        } else if(monthListCode != null){
+            initiative.put("MonthListCode", monthListCode);
+            monthListService.insertMonthList(initiative);
+        }
+
     }
 
     @Override
-    public Map<String, String> getRecentDateListCode(Map<String, String> map) throws ParseException {
-        return iniMapper.selectRecentDateListCodeAndIniCode(map);
+    public void insertDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException{
+
+
     }
+
 
     //매주일 경우 실행가능횟수를 구하는 메소드
     @Override
-    public int getDayOfWeek(Date startDate, Date endDate, int iniDuration, Map<String, String> map){
+    public int getDayOfWeek(Date startDate, Date endDate, int iniDuration, Map<String, Object> map){
         Calendar cal = Calendar.getInstance();
         ArrayList<Integer> days = new ArrayList<Integer>();
         int total = 0;
@@ -84,10 +101,5 @@ public class IniServiceImpl implements IniService{
     }
 
     // 날짜를 직접 지정해서 선택할 경우, 해당 날짜를 데이터베이스에 insert
-    @Override
-    public List<String> getDateList(List<String> list) {
-        //monthListMapper.insertMonthList(list);
-        return list;
-    }
 
 }

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,7 +15,7 @@ public class MonthList {
 
     private int monthListCode;
     private int monthListDetailCode;
-    private String monthDate;
+    private List<String> monthDate;
 
 }
 

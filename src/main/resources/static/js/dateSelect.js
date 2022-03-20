@@ -245,7 +245,6 @@ function possibleDayCount(startDate, endDate, dateListArray){
             }
         }
     }
-
     console.log(possibleDateList);
     console.log(possibleDateList.length);
     return possibleDateList;

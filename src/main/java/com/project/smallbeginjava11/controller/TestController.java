@@ -39,7 +39,7 @@ public class TestController {
     @RequestMapping(value="/readForm", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
-    public String test2(@RequestParam Map<String, String> params) throws ParseException {
+        public String createInitiative(@RequestParam Map<String, Object> params) throws ParseException {
 
         for (String key : params.keySet()) {
             System.out.println(key + " : " + params.get(key) + " & " + params.get(key).getClass().getName());
@@ -53,7 +53,7 @@ public class TestController {
 
 
         // 달 주 일(iniPeriod)
-        int iniPeriod = Integer.parseInt(params.get("iniPeriod"));
+        int iniPeriod = Integer.parseInt(String.valueOf(params.get("iniPeriod")));;
 
         //달 일 경우(2) : (기간) 개월 수 달의 같은 날짜까지
         //주 일 경우(1) : (기강) 주 수의 같은 요일까지
@@ -61,11 +61,11 @@ public class TestController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         // 시작일(iniStartDate)
-        String iniStartDateString = params.get("iniStartDate");
+        String iniStartDateString = String.valueOf(params.get("iniStartDate"));
         Date iniStartDate = sdf.parse(iniStartDateString);
 
         // 종료일(iniEndDate)
-        String iniEndDateString = params.get("iniEndDate");
+        String iniEndDateString = String.valueOf(params.get("iniEndDate"));
         Date iniEndDate = sdf.parse(iniEndDateString);
 
         // 전체 기간(iniDuration)
@@ -73,7 +73,7 @@ public class TestController {
         System.out.println("long 타입으로 iniDuration(전체기간) "+iniDurationLong);
         int iniDuration = Long.valueOf(iniDurationLong).intValue();
         System.out.println("int 타입으로 iniDuration "+iniDuration);
-
+        params.put("iniDuration", iniDuration);
 
         // 전체 기간 동안 가능한 횟수(iniPossibleCount)
         switch (iniPeriod) {
@@ -83,12 +83,13 @@ public class TestController {
                 break;
             //매주라면 : iniPeriod가 1이라면
             case 1:
-                int total = iniService.getDayOfWeek(iniStartDate, iniEndDate, iniDuration,params);
+                int total = iniService.getDayOfWeek(iniStartDate, iniEndDate, iniDuration, params);
                 params.put("iniPossibleCount", String.valueOf(total));
                 break;
             //매달 날짜를 직접 선택해서 입력할 경우
             case 2:
                 params.put("iniPossibleCount", String.valueOf(monthDateList.size()));
+                params.put("monthDateList", monthDateList);
                 //int total = iniService.getDateList()
         }
 
@@ -117,9 +118,9 @@ public class TestController {
 
 
 
-        iniService.insertIni(params);
+        iniService.getDateListCodeOrMonthListCode(params);
 
-        return "success";
+        return "readForm success";
     }
 
 
@@ -132,8 +133,8 @@ public class TestController {
         return "getDateList success";
     }
 
-    public List<String> getDateList(List<String> dateList){
-        return iniService.getDateList(dateList);
+    public void createDateListCodeOrMonthList(){
+
     }
 
 }
