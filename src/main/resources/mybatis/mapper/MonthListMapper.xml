@@ -13,7 +13,7 @@
                 month_date
                 )
             VALUES
-            <foreach collection = "monthDate" item="item" separator=",">
+            <foreach collection = "monthDateList" item="item" separator=",">
                 (#{monthListCode},
                 (SELECT IFNULL(MAX(a.month_list_detail_code), 0) + 1
                 FROM month_list a

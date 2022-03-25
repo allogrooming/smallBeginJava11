@@ -20,30 +20,16 @@ public class IniServiceImpl implements IniService{
 
     @Override
     public void insertIni(Map<String, Object> params) throws ParseException {
-        // initiative insert 실행
         iniMapper.insertIni(params);
-        params.keySet().forEach(x -> System.out.println(x + " : " + params.get(x)));
-        System.out.println("iniService 안-------------------");
-        System.out.println("obCode : "+ params.get("obCode"));
         Map<String, Object> map = getDateListCodeOrMonthListCode(params);
 
         String monthListCode = String.valueOf(map.get("monthListCode"));
-        String monthListCodeSnake = String.valueOf(map.get("month_list_code"));
         String dateListCode = String.valueOf(map.get("dateListCode"));
 
-        System.out.println("dateListCode : " + dateListCode);
-        System.out.println("monthListCode : " + monthListCode);
-        System.out.println("monthListCodeSnake : " + monthListCodeSnake);
-
-        System.out.println("select 결과값");
-        map.keySet().forEach(x -> System.out.println(x + " : " + map.get(x)));
-
         if (dateListCode != "null"){
-            System.out.println("**************dateListCode != null");
             params.put("dateListCode", dateListCode);
             dateListService.insertDateList(params);
         } else if(monthListCode != "null"){
-            System.out.println("**************monthListCode != null");
             params.put("monthListCode", monthListCode);
             monthListService.insertMonthList(params);
 
