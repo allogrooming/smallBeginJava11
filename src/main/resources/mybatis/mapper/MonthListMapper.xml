@@ -12,13 +12,13 @@
                 month_list_detail_code,
                 month_date
                 )
-            VALUES(
-                #{monthListCode},
+            VALUES
+            <foreach collection = "monthDate" item="item" separator=",">
+                (#{monthListCode},
                 (SELECT IFNULL(MAX(a.month_list_detail_code), 0) + 1
                 FROM month_list a
                 WHERE a.month_list_code = #{monthListCode}),
-            <foreach collection = "monthDateList" item="item" separator=",">
-                STR_TO_DATE(#{item.monthDate}, '%Y-%m-%d'));
+                STR_TO_DATE(#{item}, '%Y-%m-%d'))
             </foreach>
     </insert>
 </mapper>

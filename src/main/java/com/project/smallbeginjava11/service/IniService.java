@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface IniService {
     void insertIni(Map<String, Object> params) throws ParseException;
-    void getDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException;
+    Map<String, Object> getDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException;
     void insertDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException;
     int getDayOfWeek(Date startDate, Date endDate, int iniDuration, Map<String, Object> map) throws ParseException;
 

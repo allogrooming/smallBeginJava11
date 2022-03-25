@@ -53,8 +53,8 @@
 
     <select id="selectDateListCodeOrMonthListCode" parameterType="hashMap" resultType="hashMap">
         SELECT
-            date_list_code,
-            month_list_code
+            date_list_code as dateListCode,
+            month_list_code as monthListCode
         FROM
             initiative
         WHERE
