@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Calendar {
+public class Todo {
     int to_do_code;
     int member_code;
     String to_do_content;

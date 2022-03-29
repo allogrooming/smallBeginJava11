@@ -1,6 +1,6 @@
 package com.project.smallbeginjava11.controller;
 
-import com.project.smallbeginjava11.DTO.Calendar;
+import com.project.smallbeginjava11.DTO.Todo;
 import com.project.smallbeginjava11.service.CalendarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,6 @@ public class CalendarController {
     }
 
 
-    // TODO : todo의 경우 ini와 다르게 완료했을 때 칼럼 X, 쿼리에서 donedate 여부로 판단해야됨
     @Transactional
     @RequestMapping(value="/readCalendar", produces="text/html;charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
@@ -32,9 +31,9 @@ public class CalendarController {
 
         String selectedDate = param.get("selectedDate");
         System.out.println(selectedDate);
-        List<Calendar> result = calendarService.getTodoList(selectedDate);
+        List<Todo> todo = calendarService.getTodoList(selectedDate);
 
-        System.out.println(result);
+        System.out.println(todo);
 
         ModelAndView modelAndView = new ModelAndView("calendar");
         return modelAndView;

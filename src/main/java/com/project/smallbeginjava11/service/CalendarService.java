@@ -1,8 +1,8 @@
 package com.project.smallbeginjava11.service;
 
-import com.project.smallbeginjava11.DTO.Calendar;
+import com.project.smallbeginjava11.DTO.Todo;
 import java.util.List;
 
 public interface CalendarService {
-    List<Calendar> getTodoList(String selectedDate);
+    List<Todo> getTodoList(String selectedDate);
 }

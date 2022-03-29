@@ -139,7 +139,6 @@ function reshowingList(selectedDate){
         dataType : "text",
         data : {selectedDate : selectedDate},
         success : function(result){
-            console.log(result);
             console.log(this.data);
         },
         error : function(err){

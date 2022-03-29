@@ -37,7 +37,14 @@
                             <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="toDoList">
                             <button type="button" id="input-data" class="input-data">INPUT</button>
                         </form>
-                        <div id="input-list" class="input-list"></div>
+                        <table id="todoListFromDB">
+                            <tr th:each="todo: ${todo}">
+                                <td   class="categoryCode">
+                                    <a th:href="@{/objective(code = ${category.categoryCode})}"
+                                       th:utext="${category.categoryName}">
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
