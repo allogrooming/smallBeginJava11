@@ -7,18 +7,20 @@
 
 <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/dateSelect.js"></script>
 
-    <!-- navbar 및 전체 css 관련 !-->
+<!-- navbar 및 전체 css 관련 !-->
     <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/navbar.css}" rel="stylesheet" />
     <link th:href="@{/css/footer.css}" rel="stylesheet" />
     <link th:href="@{/css/dateSelect.css}" rel="stylesheet" />
     <script th:src="@{/js/navbar.js}"></script>
+<!-- bootstrap !-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <!-- 폼 관련 !-->
-    <script src="/js/iniForm.js"></script>
-
-
+</script>
 </head>
 <body>
     <div id="container">
@@ -32,15 +34,15 @@
                                 th:value="${category.categoryCode}" th:utext="${category.categoryName}">
                         </option>
                     </select> 을/를 이루기 위해
-                </span> <br>
+                </span><br>
                 <input type="text" id="ini" name="iniContent" class="form" size="70" placeholder="목표를 적어주세요"> <br>
                 <input type="date" id="iniStartDate" name="iniStartDate" class="form">
                 <input type="date" id="iniEndDate" name="iniEndDate" class="form"><br>
 
                 <select name="iniPeriod" id="iniPeriod" size="1" class="form">
-                    <option value="0">매달</option>
+                    <option value="2">매달</option>
                     <option value="1">매주</option>
-                    <option value="2">매일</option>
+                    <option value="0">매일</option>
                 </select>
                 <span id="week" class="form">
                     <select name="week" id="week-pick" size="1">
@@ -91,46 +93,62 @@
     <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 </body>
 
+<!-- 폼 관련 !-->
+<script src="/js/iniForm.js"></script>
 <script>
+$(function(){
 
     datePicker();
 
-    $(function(){
+    $("#date-select-content").html(showDate($("#iniStartDate").val(), $("#iniEndDate").val()));
 
-        $("#iniStartDate").change(function(){
-            duration();
-        })
+    $("#iniStartDate").on("change", function(){
+        duration();
+        $("#date-select-content").html(showDate($("#iniStartDate").val(), $("#iniEndDate").val()));
+        showDateLessMonth($("#iniStartDate").val(), $("#iniEndDate").val());
+    });
 
-        $("#iniPeriod").change(function (){
-            var duration = $(this).val();
+    $("#iniEndDate").on("change", function(){
+        $("#date-select-content").html(showDate($("#iniStartDate").val(), $("#iniEndDate").val()));
+        showDateLessMonth($("#iniStartDate").val(), $("#iniEndDate").val());
+    });
 
-            if(duration == "0"){
-                showElements();
+    $(".date-select-content").on("click", ".day", function(){
+        var dateListArray = selectDate($(this));
+        var possibleDateList = possibleDayCount($("#iniStartDate").val(), $("#iniEndDate").val(), dateListArray);
+        sendDateList($("#iniStartDate").val(), $("#iniEndDate").val(), possibleDateList, "/receiveDateList")
+    });
+
+    $("#click").on("click", function(){
+        readForm("#iniForm", "/readForm");
+    });
 
 
-            }else if(duration == "1"){
-                everyWeek();
+    $("#iniPeriod").change(function(){
+        var duration = $(this).val();
 
-                $("#day-pick").click(function(){
-                    var checked = $('input[name="day"]:checked').length;
-                    if(checked == 7){
-                        dayPicker();
-                    }
-                })
+        if(duration == "0"){
+            showElements();
 
-            }else if(duration == "2"){
-                everyday();
-            }
-        })
-    })
+        }else if(duration == "1"){
+            everyWeek();
 
-     $(function(){
+            $("#day-pick").click(function(){
+                var checked = $('input[name="day"]:checked').length;
+                if(checked == 7){
+                    dayPicker();
+                }
+            })
 
-        $("#click").click(function(){
-            readForm("#iniForm", "/readForm");
-        });
+        }else if(duration == "2"){
+            everyday();
+        }
+    });
 
-    })
+
+});
+
+
 </script>
 
 </html>

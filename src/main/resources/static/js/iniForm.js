@@ -43,7 +43,7 @@ function duration(){
 
     document.getElementById("iniEndDate").setAttribute("max", maxDate);
     document.getElementById("iniEndDate").setAttribute("min", minDate);
-    document.getElementById("iniEndDate").setAttribute("value", maxDate);
+    //document.getElementById("iniEndDate").setAttribute("value", maxDate);
 }
 
 function everyday(){
