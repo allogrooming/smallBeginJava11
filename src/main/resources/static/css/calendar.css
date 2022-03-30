@@ -35,10 +35,10 @@ html, body{
     font-weight: bold;
     margin: 20px 0;
 }
-.todo-wrap{
+.ToDo-wrap{
     padding: 0 0 0 40px;
 }
-.todo-title{
+.ToDo-title{
     font-size: 20px;
     font-weight: 100;
     margin: 0 0 10px 0;
@@ -159,10 +159,10 @@ html, body{
         font-weight: bold;
         margin: 20px 0;
     }
-    .todo-wrap{
+    .ToDo-wrap{
         padding: 0 0 0 40px;
     }
-    .todo-title{
+    .ToDo-title{
         font-size: 20px;
         font-weight: 100;
         margin: 0 0 10px 0;

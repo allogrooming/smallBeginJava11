@@ -115,8 +115,8 @@ function showDateLessMonth(startDate, endDate){
 }
 
 
-// TODO  날짜 클릭과 실행 가능 횟수 나열
-// TODO alert창 customize 논의
+// ToDo  날짜 클릭과 실행 가능 횟수 나열
+// ToDo alert창 customize 논의
 function selectDate(elementParam){
     var element = $(elementParam);
     var dataDateSelected = element.attr("data-date-selected");
@@ -140,9 +140,9 @@ function selectDate(elementParam){
     return dateListArray;
 }
 
-//TODO : 재귀함수를 통해 실행
-//TODO : 아니면 lastDay 함수 로직 변경
-//TODO : setMonth()를 적용
+//ToDo : 재귀함수를 통해 실행
+//ToDo : 아니면 lastDay 함수 로직 변경
+//ToDo : setMonth()를 적용
 function possibleDayCountOriginal(startDate, endDate, dateListArray){
     var start = new Date(startDate);
     var end = new Date(endDate);

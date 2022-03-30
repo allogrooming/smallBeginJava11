@@ -30,18 +30,17 @@
                     <p id="selected-date"></p>
                     <p id="selected-date-show"></p>
                 </div>
-                <div class="todo-wrap">
-                    <div class="todo-title">Todo List</div>
+                <div class="ToDo-wrap">
+                    <div class="ToDo-title">ToDo List</div>
                     <div class="input-wrap">
-                        <form method="post" id="toDoList">
-                            <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="toDoList">
+                        <form method="post" id="ToDoList">
+                            <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="ToDoList">
                             <button type="button" id="input-data" class="input-data">INPUT</button>
                         </form>
-                        <table id="todoListFromDB">
-                            <tr th:each="todo: ${todo}">
-                                <td   class="categoryCode">
-                                    <a th:href="@{/objective(code = ${category.categoryCode})}"
-                                       th:utext="${category.categoryName}">
+                        <table id="ToDoListFromDB">
+                            <tr th:each="ToDo: ${toDo}">
+                                <td class="toDoCode">
+                                    <a th:utext="${ToDo.toDoContent}">
                                 </td>
                             </tr>
                         </table>
@@ -104,9 +103,9 @@
     })
 
 /*    $("#input-data").click(function(){
-        readForm("toDoList", "/toDoList");
-        addTodoList();
-        //readFormTodo("toDoList", "/toDoList");
+        readForm("ToDoList", "/ToDoList");
+        addToDoList();
+        //readFormToDo("ToDoList", "/ToDoList");
         console.log("input btn is clicked + ajax");
     })*/
 

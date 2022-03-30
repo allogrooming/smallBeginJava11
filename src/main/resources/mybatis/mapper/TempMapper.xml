@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.smallbeginjava11.mapper.TempMapper">
+    <select id="getTemp" resultType="Temp">
+        SELECT * FROM temp_table;
+    </select>
+
+    <!--<select id="getTemp" parameterType="String" resultType="Temp">
+        SELECT * FROM  = #{selectedDate};
+    </select>
+    -->
+</mapper>

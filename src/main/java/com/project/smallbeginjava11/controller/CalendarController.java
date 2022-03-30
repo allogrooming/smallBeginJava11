@@ -1,7 +1,9 @@
 package com.project.smallbeginjava11.controller;
 
-import com.project.smallbeginjava11.DTO.Todo;
+import com.project.smallbeginjava11.DTO.Temp;
+import com.project.smallbeginjava11.DTO.ToDo;
 import com.project.smallbeginjava11.service.CalendarService;
+import com.project.smallbeginjava11.service.TempService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.Map;
 public class CalendarController {
 
     private final CalendarService calendarService;
+    private final TempService tempService;
 
     @GetMapping("/calendar")
     public ModelAndView calendar(){
@@ -31,11 +34,15 @@ public class CalendarController {
 
         String selectedDate = param.get("selectedDate");
         System.out.println(selectedDate);
-        List<Todo> todo = calendarService.getTodoList(selectedDate);
+        List<ToDo> toDo = calendarService.getToDoList(selectedDate);
+        List<Temp> temp = tempService.getTemp();
 
-        System.out.println(todo);
+        System.out.println(toDo);
+        System.out.println(temp);
 
         ModelAndView modelAndView = new ModelAndView("calendar");
+        modelAndView.addObject("toDo", toDo);
+
         return modelAndView;
     }
 

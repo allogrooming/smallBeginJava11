@@ -38,6 +38,14 @@
       </td>
     </tr>
   </table>
+
+  <table id="tempTable">
+    <tr>
+      <td  th:each="temp: ${temp}" class="id">
+        <a th:utext="${temp.column1}">
+      </td>
+    </tr>
+  </table>
 </div>
 <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 </body>

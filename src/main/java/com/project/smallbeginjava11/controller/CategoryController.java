@@ -1,7 +1,9 @@
 package com.project.smallbeginjava11.controller;
 
 import com.project.smallbeginjava11.DTO.Category;
+import com.project.smallbeginjava11.DTO.Temp;
 import com.project.smallbeginjava11.service.CategoryService;
+import com.project.smallbeginjava11.service.TempService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ import java.util.Map;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final TempService tempService;
+
 /*
     @GetMapping("/getAllCategory")
     public List<Category> getAllCategory(Model model){
@@ -40,6 +44,9 @@ public class CategoryController {
         ModelAndView modelAndView = new ModelAndView("category");
         modelAndView.addObject("category", category);
         System.out.println(category);
+        List<Temp> tempList = tempService.getTemp();
+        modelAndView.addObject("temp", tempList);
+        System.out.println(tempList);
         return modelAndView;
     }
 

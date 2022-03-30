@@ -13,11 +13,11 @@ let inputBox = document.getElementById('input-box');
 var inputDate = document.getElementById('input-data');
 var inputList = document.getElementById('input-list');
 var delText = 'X';
-//inputDate.addEventListener('click',addTodoList);
+//inputDate.addEventListener('click',addToDoList);
 var dataCnt = 1;
 var keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-let todoList = [];
-todoList[keyValue] = [];
+let ToDoList = [];
+ToDoList[keyValue] = [];
 
 if(first.getFullYear() % 4 === 0){
     pageYear = leapYear;
@@ -151,9 +151,9 @@ function reshowingList(selectedDate){
 /*function reshowingList(){
     keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
     let reshowList = document.getElementById('input-list').value;
-    if(todoList[keyValue] === undefined){
+    if(ToDoList[keyValue] === undefined){
         reshowList.remove();
-        todoList[keyValue] = [];
+        ToDoList[keyValue] = [];
         const $divs = document.querySelectorAll('#input-list > div');
         $divs.forEach(function(e){
             e.remove();
@@ -162,7 +162,7 @@ function reshowingList(selectedDate){
         $btns.forEach(function(e1){
             e1.remove();
         });
-    }else if(todoList[keyValue].length ===0){
+    }else if(ToDoList[keyValue].length ===0){
         reshowList.remove();
         const $divs = document.querySelectorAll('#input-list > div');
         $divs.forEach(function(e){
@@ -182,9 +182,9 @@ function reshowingList(selectedDate){
             e1.remove();
         });
         var $div = document.createElement('div');
-        for(var i = 0; i < todoList[keyValue].length; i++){
+        for(var i = 0; i < ToDoList[keyValue].length; i++){
             var $div = document.createElement('div');
-            $div.textContent = '-' + todoList[keyValue][i];
+            $div.textContent = '-' + ToDoList[keyValue][i];
             var $btn = document.createElement('button');
             $btn.setAttribute('type', 'button');
             $btn.setAttribute('id', 'del-ata');
@@ -194,9 +194,9 @@ function reshowingList(selectedDate){
             inputList.appendChild($div);
             inputList.appendChild($btn);
             $div.addEventListener('click',checkList);
-            $btn.addEventListener('click',deleteTodo);
+            $btn.addEventListener('click',deleteToDo);
             inputBox.value = '';
-            function deleteTodo(){
+            function deleteToDo(){
                 $div.remove();
                 $btn.remove();
             }
@@ -205,7 +205,7 @@ function reshowingList(selectedDate){
 
 }*/
 
-function addTodoList(){
+function addToDoList(){
     var $div = document.createElement('div');
     var temp = document.getElementById('input-box');
     $div.textContent = '-' + temp.value;
@@ -215,20 +215,20 @@ function addTodoList(){
     $btn.setAttribute('id', dataCnt+keyValue);
     $btn.setAttribute('class', "del-data");
     $btn.textContent = delText;
-    console.log("$div at addTodoList : ", $div);
-    console.log("$btn at addTodoList : ", $btn);
+    console.log("$div at addToDoList : ", $div);
+    console.log("$btn at addToDoList : ", $btn);
     console.log("input-list : ", inputList);
     var inputList2 = document.getElementById('input-list');
     inputList2.appendChild($div);
     inputList2.appendChild($btn);
     //inputList.appendChild($div);
     //inputList.appendChild($btn);
-    todoList[keyValue].push(temp.value);
+    ToDoList[keyValue].push(temp.value);
     dataCnt++;
     temp.value = '';
     //$div.addEventListener('click',checkList);
-    //$btn.addEventListener('click',deleteTodo);
-    function deleteTodo(){
+    //$btn.addEventListener('click',deleteToDo);
+    function deleteToDo(){
         $div.remove();
         $btn.remove();
     }
