@@ -11,13 +11,13 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Calendar {
-    int to_do_code;
-    int member_code;
-    String to_do_content;
-    Date set_up_date;
-    int to_do_state;
-    String to_do_color;
-    Date done_date;
-    Date plan_date;
+public class Todo {
+    int toDoCode;
+    int memberCode;
+    String toDoContent;
+    Date setUpDate;
+    int toDoState;
+    String toDoColor;
+    Date doneDate;
+    Date planDate;
 }

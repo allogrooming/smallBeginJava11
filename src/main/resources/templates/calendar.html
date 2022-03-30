@@ -37,7 +37,13 @@
                             <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="toDoList">
                             <button type="button" id="input-data" class="input-data">INPUT</button>
                         </form>
-                        <div id="input-list" class="input-list"></div>
+                        <table id="toDoTable">
+                            <tr th:each="result : ${result}">
+                                <td th:text="${result.toDoColor}"></td>
+                                <td th:text="${result.toDoContent}"></td>
+                                <td th:text="${result.toDoState}"></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
