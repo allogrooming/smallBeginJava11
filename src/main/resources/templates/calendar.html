@@ -27,8 +27,8 @@
                 <div class="main-wrap">
                     <div id="main-day" class="main-day"></div>
                     <div id="main-date" class="main-date"></div>
-                    <p id="selected-date"></p>
-                    <p id="selected-date-show"></p>
+                    <p id="selected-date" style="display: none"></p>
+                    <p id="selected-date-show" style="display: none"></p>
                 </div>
                 <div class="todo-wrap">
                     <div class="todo-title">Todo List</div>
@@ -37,15 +37,15 @@
                             <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="toDoList">
                             <button type="button" id="input-data" class="input-data">INPUT</button>
                         </form>
-                        <table id="toDoTable">
-                            <tr th:each="result : ${result}">
-                                <td th:text="${result.toDoColor}"></td>
-                                <td th:text="${result.toDoContent}"></td>
-                                <td th:text="${result.toDoState}"></td>
-                            </tr>
-                        </table>
                     </div>
                 </div>
+                <table id="toDoTable">
+                    <tr th:each="todo: ${todo}">
+                        <td th:value="${todo.toDoColor}"></td>
+                        <td th:value="${todo.toDoState}"></td>
+                        <td th:value="${todo.toDoContent}"></td>
+                    </tr>
+                </table>
             </div>
             <div class="content-right">
                 <table id="calendar" align="center">
@@ -109,9 +109,9 @@
         console.log("input btn is clicked + ajax");
     })*/
 
-    $("#calendar-body").click(function(){
+    $("#calendar-body").click(function(event){
         console.log("changeToday");
-        changeToday();
+        changeToday(event);
     })
 </script>
 </html>

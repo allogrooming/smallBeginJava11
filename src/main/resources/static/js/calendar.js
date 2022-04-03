@@ -274,7 +274,7 @@ function changeToday(e){
             tdGroup[i].classList.remove('active');
         }
     }
-    clickedDate1 = e.currentTarget;
+    clickedDate1 = e.target;
     clickedDate1.classList.add('active');
     today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
     let selectedDate = showMain();
