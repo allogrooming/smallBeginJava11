@@ -30,15 +30,18 @@
 
   <h2>이루고 싶은 목표의 카테고리를 선택해주세요</h2>
 
-  <table id="categoryTable">
-    <tr>
-      <td  th:each="category: ${category}" class="categoryCode">
+<table id="categoryTable">
+  <tr>
+    <td th:each="category: ${category}">
+      <div th:with="categoryId=${category.categoryCode}" th:id="${categoryId}">
+        <span th:text="${category.categoryCode}"/>
+        <span>${category.categoryCode}</span>
         <a th:href="@{/objective(code = ${category.categoryCode})}"
            th:utext="${category.categoryName}">
-      </td>
-    </tr>
-  </table>
-</div>
+      </div>
+    </td>
+  </tr>
+</table>
 <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 </body>
 
