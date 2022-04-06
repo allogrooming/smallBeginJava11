@@ -135,15 +135,16 @@ function reshowingList(selectedDate){
     $.ajax({
         url : '/readCalendar',
         type : "post",
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType : "text",
+        contentType : "application/json",
+        dataType : "json",
         data : {selectedDate : selectedDate},
         success : function(result){
-            console.log(this.data);
+            console.log("show the data")
+            console.log(JSON.stringify(this.data));
         },
         error : function(err){
             console.log(err+"에러발생");
-            console.log(this.data);
+            console.log(JSON.stringify(this.data));
         }
     });
 }
