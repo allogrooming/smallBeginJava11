@@ -135,11 +135,10 @@ function reshowingList(selectedDate){
     $.ajax({
         url : '/readCalendar',
         type : "post",
-        contentType : "application/json",
+        contentType: 'application/json',
         dataType : "json",
         data : {selectedDate : selectedDate},
         success : function(result){
-            console.log("show the data")
             console.log(JSON.stringify(this.data));
         },
         error : function(err){
@@ -246,9 +245,14 @@ function showMain(){
     const selectedDateShow = document.getElementById('selected-date-show');
     let returnDate;
     if(today.getMonth()+1 < 10){
-        returnDate = today.getFullYear() + "-0" + (today.getMonth()+1) + "-" + today.getDate();
+        returnDate = today.getFullYear() + "-0" + (today.getMonth()+1);
     }else{
-        returnDate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
+        returnDate = today.getFullYear() + "-" + (today.getMonth()+1);
+    }
+    if(today.getDate() < 10){
+        returnDate += "-0" + today.getDate();
+    }else{
+        returnDate += "-" + today.getDate();
     }
     mainDay.innerHTML = dayList[today.getDay()];
     mainDate.innerHTML = today.getDate().toString();
