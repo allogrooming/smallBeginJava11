@@ -64,14 +64,14 @@ public class CalendarController {
     @Transactional
     @RequestMapping(value="/readCalendar", produces="text/html;charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
-    public List<Todo> readCalendar(@RequestParam Map<String, String> param) {
+    public List<Todo> readCalendar(@RequestParam(value = "selectedDate") String param) {
 
         //String selectedDate = param.get("selectedDate");
         System.out.println("Got the param");
         System.out.println(param);
-        String selectedDate = param.get("param");
+/*        String selectedDate = param.get("param");*/
 
-        List<Todo> todo = calendarService.getTodoList(selectedDate);
+        List<Todo> todo = calendarService.getTodoList(param);
         System.out.println(todo);
         return todo;
     }
