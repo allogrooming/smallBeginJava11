@@ -132,7 +132,6 @@ function next(){
 }
 
 function reshowingList(selectedDate){
-    console.log(selectedDate);
     $.ajax({
         url : '/readCalendar',
         type : "post",
