@@ -6,6 +6,7 @@
 
   <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
   <script type="text/javascript" src="/js/common.js"></script>
+  <script type="text/javascript" src="/js/colorCoding.js"></script>
 
   <!-- navbar 및 전체 css 관련 !-->
   <link th:href="@{/css/common.css}" rel="stylesheet" />
@@ -21,6 +22,15 @@
       cursor: pointer;
     }
   </style>
+  <script th:inline="javascript">
+  // [CDATA 를 사용해서 자바스크립트에서 모델에서 지정한 값 호출 실시 : 주석까지 필수 등록]
+  /*<![CDATA[*/
+  var categoryList = [[${categoryList}]];
+  /*]]>*/
+
+
+
+  </script>
 
 </head>
 <body>
@@ -32,10 +42,8 @@
 
 <table id="categoryTable">
   <tr>
-    <td th:each="category: ${category}">
-      <div th:with="categoryId=${category.categoryCode}" th:id="${categoryId}">
-        <span th:text="${category.categoryCode}"/>
-        <span>${category.categoryCode}</span>
+    <td th:each="category: ${categoryList}">
+      <div th:id="${category.categoryCode}">
         <a th:href="@{/objective(code = ${category.categoryCode})}"
            th:utext="${category.categoryName}">
       </div>
@@ -45,7 +53,11 @@
 <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 </body>
 
-<script>
+<script th:inline="javascript">
+
+  changeColor(categoryList);
+
+
 
 /*    $.ajax({
       url : "/objective/{code}",

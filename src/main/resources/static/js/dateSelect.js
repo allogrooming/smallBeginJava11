@@ -115,7 +115,6 @@ function showDateLessMonth(startDate, endDate){
 }
 
 
-// TODO  날짜 클릭과 실행 가능 횟수 나열
 // TODO alert창 customize 논의
 function selectDate(elementParam){
     var element = $(elementParam);

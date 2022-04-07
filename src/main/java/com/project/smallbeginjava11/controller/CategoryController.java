@@ -36,10 +36,9 @@ public class CategoryController {
 
     @GetMapping("/category")
     public ModelAndView categoryIndex(){
-        List<Category> category = categoryService.getAllCategory();
+        List<Category> categoryList = categoryService.getAllCategory();
         ModelAndView modelAndView = new ModelAndView("category");
-        modelAndView.addObject("category", category);
-        System.out.println(category);
+        modelAndView.addObject("categoryList", categoryList);
         return modelAndView;
     }
 
