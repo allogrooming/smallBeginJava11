@@ -39,13 +39,8 @@
                         </form>
                     </div>
                 </div>
-                <table id="toDoTable">
-                    <tr th:each="todo: ${todo}">
-                        <td th:value="${todo.toDoColor}"></td>
-                        <td th:value="${todo.toDoState}"></td>
-                        <td th:value="${todo.toDoContent}"></td>
-                    </tr>
-                </table>
+                <div id="toDoLists">
+                </div>
             </div>
             <div class="content-right">
                 <table id="calendar" align="center">

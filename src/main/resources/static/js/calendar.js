@@ -139,14 +139,43 @@ function reshowingList(selectedDate){
         dataType : "json",
         data : {selectedDate : selectedDate},
         success : function(resp){
-            console.log(this.data);
             console.log(resp);
+            addTodoLists(resp);
         },
         error : function(err, resp){
             console.log(err+"에러발생");
             console.log(resp);
         }
     });
+}
+
+function addTodoLists(resp){
+    // toDoListsTable 이 있는지 확인
+    // 그 다음 있으면 요소 삭제, 없으면 그대로 진행
+    // 그러고 toDoLists에 테이블 id = toDoListsTable - resp 추가하기
+
+    var todo = resp;
+    var todoCount = resp.length;
+    var toDoLists = document.getElementById("toDoLists");
+    var tableCheck = !!document.getElementById("toDoListsTable");
+
+    // toDoListsTable이란 요소가 있다면 tableCheck에는 true가 들어감
+    // true일 경우 요소를 삭제한 뒤 테이블을 다시 만들기
+    if(tableCheck){
+        console.log(tableCheck);
+        document.getElementById("toDoListsTable").remove();
+    }
+
+    // table id=toDoListsTable을 toDoLists 안에 생성
+    var toDoTable = "<table id='toDoListsTable'>";
+
+    for (var i=0; i<todoCount; i++){
+        toDoTable += "<tr>";
+        // 테이블엔느 컬러, 콘텐츠, 실행여부 순서대로 td 추가
+    }
+
+    toDoTable += "</table>";
+    toDoLists.appendChild(toDoTable);
 }
 
 /*function reshowingList(){
