@@ -170,24 +170,44 @@ function addTodoLists(resp){
     var toDoTable = "<table id='toDoListsTable'>";
     var temp;
     var first = '';
+    var second = '';
+    var third = '';
 
-    console.log(todo);
+    //console.log(todo);
 
-    for (var obj of todo){
+/*    for (var obj of todo){
         temp = Object.entries(obj).map(x=>x.join(":")).join("\n");
         console.log(temp);
         first = obj[Object.keys(obj)[2]];
         console.log(first);
-    }
+    }*/
 
     for (var i=0; i<todoCount; i++){
         toDoTable += "<tr>";
         // 테이블엔느 컬러, 콘텐츠, 실행여부 순서대로 td 추가
 
+        for (var obj of todo){
+            first = obj[Object.keys(obj)[2]];
+            toDoTable += "<td>"
+            toDoTable += first;
+            toDoTable += "</td>";
+
+            second = obj[Object.keys(obj)[4]];
+            toDoTable += "<td>"
+            toDoTable += second;
+            toDoTable += "</td>";
+
+            third = obj[Object.keys(obj)[5]];
+            toDoTable += "<td>"
+            toDoTable += third;
+            toDoTable += "</td>";
+        }
+
         toDoTable += "</tr>";
     }
 
     toDoTable += "</table>";
+    console.log(toDoTable);
     toDoLists.appendChild(toDoTable);
 }
 
