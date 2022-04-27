@@ -139,7 +139,7 @@ function reshowingList(selectedDate){
         dataType : "json",
         data : {selectedDate : selectedDate},
         success : function(resp){
-            console.log(resp);
+            //console.log(resp);
             addTodoLists(resp);
         },
         error : function(err, resp){
@@ -168,10 +168,23 @@ function addTodoLists(resp){
 
     // table id=toDoListsTable을 toDoLists 안에 생성
     var toDoTable = "<table id='toDoListsTable'>";
+    var temp;
+    var first = '';
+
+    console.log(todo);
+
+    for (var obj of todo){
+        temp = Object.entries(obj).map(x=>x.join(":")).join("\n");
+        console.log(temp);
+        first = obj[Object.keys(obj)[2]];
+        console.log(first);
+    }
 
     for (var i=0; i<todoCount; i++){
         toDoTable += "<tr>";
         // 테이블엔느 컬러, 콘텐츠, 실행여부 순서대로 td 추가
+
+        toDoTable += "</tr>";
     }
 
     toDoTable += "</table>";
