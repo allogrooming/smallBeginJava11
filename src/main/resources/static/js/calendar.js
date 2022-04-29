@@ -167,7 +167,7 @@ function addTodoLists(resp){
     }
 
     // table id=toDoListsTable을 toDoLists 안에 생성
-    var toDoTable = "<table id='toDoListsTable'>";
+    var toDoTable = '';
     var temp;
     var first = '';
     var second = '';
@@ -204,11 +204,8 @@ function addTodoLists(resp){
         }
 
         toDoTable += "</tr>";
+        toDoLists.append(toDoListsTable);
     }
-
-    toDoTable += "</table>";
-    console.log(toDoTable);
-    toDoLists.appendChild(toDoTable);
 }
 
 /*function reshowingList(){
