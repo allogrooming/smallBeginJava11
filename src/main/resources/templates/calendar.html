@@ -15,6 +15,18 @@
     <script th:src="@{/js/navbar.js}"></script>
     <script th:src="@{/js/calendar.js}"></script>
     <script th:src="@{/js/common.js}"></script>
+
+    <style>
+        table{
+            border: 1px white solid;
+        }
+        tr{
+            border: 1px solid red;
+        }
+        td{
+            border: 1px solid blue;
+        }
+    </style>
 </head>
 <body>
 <div id="container">
@@ -37,8 +49,11 @@
                             <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="toDoList">
                             <button type="button" id="input-data" class="input-data">INPUT</button>
                         </form>
-                    </div>
-                    <div id="toDoLists">
+                        <table id="toDoListsTable">
+                            <tr>
+                                <td>Color</td><td>Content</td><td>State</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

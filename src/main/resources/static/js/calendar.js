@@ -156,57 +156,41 @@ function addTodoLists(resp){
 
     var todo = resp;
     var todoCount = resp.length;
-    var toDoLists = document.getElementById("toDoLists");
+    var toDoLists = document.getElementById("toDoListsTable");
     var tableCheck = !!document.getElementById("toDoListsTable");
     console.log(tableCheck);
 
-    // toDoListsTable이란 요소가 있다면 tableCheck에는 true가 들어감
-    // true일 경우 요소를 삭제한 뒤 테이블을 다시 만들기 - 이거 안됨
-    if(tableCheck){
-        console.log(tableCheck);
-        document.getElementById("toDoListsTable").remove();
-    }
-
     // table id=toDoListsTable을 toDoLists 안에 생성
-    var toDoTable = "<table id='toDoListsTable'>";
+    var toDoTable = "";
     var temp;
     var first = '';
     var second = '';
     var third = '';
 
-    //console.log(todo);
-
-/*    for (var obj of todo){
-        temp = Object.entries(obj).map(x=>x.join(":")).join("\n");
-        console.log(temp);
-        first = obj[Object.keys(obj)[2]];
-        console.log(first);
-    }*/
-
         for (var obj of todo){
-            first = obj[Object.keys(obj)[2]];
+            toDoTable += "<tr>";
+
+            first = obj[Object.keys(obj)[5]];
             toDoTable += "<td>"
             toDoTable += first;
             toDoTable += "</td>";
 
-            second = obj[Object.keys(obj)[4]];
+            second = obj[Object.keys(obj)[2]];
             toDoTable += "<td>"
             toDoTable += second;
             toDoTable += "</td>";
 
-            third = obj[Object.keys(obj)[5]];
+            third = obj[Object.keys(obj)[4]];
             toDoTable += "<td>"
             toDoTable += third;
             toDoTable += "</td>";
 
             toDoTable += "</tr>";
+            toDoLists.html(toDoTable);
 
-            
+            toDoTable = '';
         }
-
-    toDoTable += "</table>";
-    console.log(toDoTable);
-    toDoLists.append(toDoTable);
+    //toDoTable += "</table>";
 }
 
 /*function reshowingList(){
