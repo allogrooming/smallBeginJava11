@@ -158,9 +158,10 @@ function addTodoLists(resp){
     var todoCount = resp.length;
     var toDoLists = document.getElementById("toDoLists");
     var tableCheck = !!document.getElementById("toDoListsTable");
+    console.log(tableCheck);
 
     // toDoListsTable이란 요소가 있다면 tableCheck에는 true가 들어감
-    // true일 경우 요소를 삭제한 뒤 테이블을 다시 만들기
+    // true일 경우 요소를 삭제한 뒤 테이블을 다시 만들기 - 이거 안됨
     if(tableCheck){
         console.log(tableCheck);
         document.getElementById("toDoListsTable").remove();
@@ -182,10 +183,6 @@ function addTodoLists(resp){
         console.log(first);
     }*/
 
-    for (var i=0; i<todoCount; i++){
-        toDoTable += "<tr>";
-        // 테이블엔느 컬러, 콘텐츠, 실행여부 순서대로 td 추가
-
         for (var obj of todo){
             first = obj[Object.keys(obj)[2]];
             toDoTable += "<td>"
@@ -201,14 +198,15 @@ function addTodoLists(resp){
             toDoTable += "<td>"
             toDoTable += third;
             toDoTable += "</td>";
-        }
 
-        toDoTable += "</tr>";
-    }
+            toDoTable += "</tr>";
+
+            
+        }
 
     toDoTable += "</table>";
     console.log(toDoTable);
-    toDoLists.appendChild(toDoTable);
+    toDoLists.append(toDoTable);
 }
 
 /*function reshowingList(){
