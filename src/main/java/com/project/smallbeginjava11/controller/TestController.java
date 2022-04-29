@@ -41,6 +41,9 @@ public class TestController {
     @PostMapping
         public String createInitiative(@RequestParam Map<String, Object> params) throws ParseException {
 
+        // DB에서 가져올 때는 DTO
+        // DB로 보낼 깨는 Map<String, Object>
+
         for (String key : params.keySet()) {
             System.out.println(key + " : " + params.get(key) + " & " + params.get(key).getClass().getName());
       }

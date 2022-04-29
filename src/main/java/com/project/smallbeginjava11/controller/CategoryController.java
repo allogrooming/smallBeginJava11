@@ -53,34 +53,6 @@ public class CategoryController {
         return modelAndView;
     }*/
 
-    @RequestMapping("/objective")
-    public ModelAndView objectivePage(HttpServletRequest request){
-        String code = request.getParameter("code");
-        System.out.println("Controller : code parameter "+code);
-
-        Category code4Ob = categoryService.selectCategory(code);
-        System.out.println("Controller"+code4Ob);
-        ModelAndView modelAndView = new ModelAndView("objective");
-        modelAndView.addObject("category", code4Ob);
-        return modelAndView;
-    }
-
-    @Transactional
-    @RequestMapping(value="/readOBForm", produces="text/html;charset=UTF-8")
-    @ResponseBody
-    @PostMapping
-    public ModelAndView obAdd(@RequestParam Map<String, String> params) throws ParseException {
-
-        System.out.println("obAdd Controller");
-        for(String key : params.keySet()){
-            System.out.println(key + " : "+params.get(key));
-        }
-
-        ModelAndView modelAndView = new ModelAndView("ini");
-        //modelAndView.addObject("objective", code4Ob);
-        return modelAndView;
-    }
-
     @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView("login");

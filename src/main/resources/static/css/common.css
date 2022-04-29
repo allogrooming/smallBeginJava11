@@ -3,6 +3,12 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+/* a 태그로 링크시 text decoration 해제 */
+a {
+  text-decoration: none;
+}
+
+
 /*Icon 관련*/
 @font-face {
     font-family: 'Material Icons';
