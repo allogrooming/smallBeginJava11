@@ -161,36 +161,38 @@ function addTodoLists(resp){
     console.log(tableCheck);
 
     // table id=toDoListsTable을 toDoLists 안에 생성
-    var toDoTable = "";
+    var toDoTable = "<table><tr><td>Color</td><td>Content</td><td>State</td></tr>";
     var temp;
-    var first = '';
-    var second = '';
-    var third = '';
+    var first = "";
+    var second = "";
+    var third = "";
 
-        for (var obj of todo){
-            toDoTable += "<tr>";
+    for (var obj of todo){
+        toDoTable += "<tr>";
 
-            first = obj[Object.keys(obj)[5]];
-            toDoTable += "<td>"
-            toDoTable += first;
-            toDoTable += "</td>";
+        first = obj[Object.keys(obj)[5]];
+        toDoTable += "<td>"
+        toDoTable += first;
+        toDoTable += "</td>";
 
-            second = obj[Object.keys(obj)[2]];
-            toDoTable += "<td>"
-            toDoTable += second;
-            toDoTable += "</td>";
+        second = obj[Object.keys(obj)[2]];
+        toDoTable += "<td>"
+        toDoTable += second;
+        toDoTable += "</td>";
 
-            third = obj[Object.keys(obj)[4]];
-            toDoTable += "<td>"
-            toDoTable += third;
-            toDoTable += "</td>";
+        third = obj[Object.keys(obj)[4]];
+        toDoTable += "<td>"
+        toDoTable += third;
+        toDoTable += "</td>";
 
-            toDoTable += "</tr>";
-            toDoLists.html(toDoTable);
+        toDoTable += "</tr>";
 
-            toDoTable = '';
-        }
-    //toDoTable += "</table>";
+    }
+    toDoTable += "</table>";
+
+    console.log(toDoTable)
+    $(toDoLists).html(toDoTable);
+
 }
 
 /*function reshowingList(){
