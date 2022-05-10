@@ -20,5 +20,4 @@ public class Todo {
     String toDoColor;
     Date doneDate;
     Date planDate;
-
 }
