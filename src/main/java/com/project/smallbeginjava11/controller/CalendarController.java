@@ -45,7 +45,7 @@ public class CalendarController {
         }
     }
 
-/*    @Transactional
+/*  @Transactional
     @RequestMapping(value="/readCalendar", produces="text/html;charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public RedirectView readCalendar(@RequestParam Map<String, String> param, RedirectAttributes re) throws ParseException {
