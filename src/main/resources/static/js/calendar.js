@@ -162,7 +162,6 @@ function addTodoLists(resp){
 
     // table id=toDoListsTable을 toDoLists 안에 생성
     var toDoTable = "<table><tr><td>Color</td><td>Content</td><td>State</td></tr>";
-    var temp;
     var first = "";
     var second = "";
     var third = "";
