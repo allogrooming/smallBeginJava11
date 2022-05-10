@@ -15,6 +15,18 @@
     <script th:src="@{/js/navbar.js}"></script>
     <script th:src="@{/js/calendar.js}"></script>
     <script th:src="@{/js/common.js}"></script>
+
+    <style>
+        table{
+            border: 1px white solid;
+        }
+        tr{
+            border: 1px solid red;
+        }
+        td{
+            border: 1px solid blue;
+        }
+    </style>
 </head>
 <body>
 <div id="container">
@@ -37,15 +49,13 @@
                             <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="toDoList">
                             <button type="button" id="input-data" class="input-data">INPUT</button>
                         </form>
+                        <table id="toDoListsTable">
+                            <tr>
+                                <td>Color</td><td>Content</td><td>State</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-                <table id="toDoTable">
-                    <tr th:each="todo: ${todo}">
-                        <td th:value="${todo.toDoColor}"></td>
-                        <td th:value="${todo.toDoState}"></td>
-                        <td th:value="${todo.toDoContent}"></td>
-                    </tr>
-                </table>
             </div>
             <div class="content-right">
                 <table id="calendar" align="center">
@@ -102,16 +112,14 @@
         next();
     })
 
-/*    $("#input-data").click(function(){
+    $("#input-data").click(function(){
         readForm("toDoList", "/toDoList");
         addTodoList();
         //readFormTodo("toDoList", "/toDoList");
         console.log("input btn is clicked + ajax");
-    })*/
+    })
 
     $("#calendar-body").click(function(event){
-        console.log("changeToday");
-        changeToday(event);
     })
 </script>
 </html>
