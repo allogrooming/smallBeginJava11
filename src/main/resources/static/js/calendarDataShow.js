@@ -39,7 +39,11 @@ function showCalendar(){
                 var $td = document.createElement('td');
                 $td.textContent = cnt;
                 var CNT = cnt.toString();
+                var tdDateCnt = CNT.length < 2? 0 + CNT : CNT;
+                //TODO: 변경설명, td에 attr 추가
                 $td.setAttribute('id', CNT);
+                $td.setAttribute('data-td-date', showMain().substring(0, 8) + tdDateCnt);
+                $td.setAttribute('class', 'td-date');
                 $tr.appendChild($td);
                 cnt++;
             }
@@ -194,6 +198,47 @@ function addTodoLists(resp){
 
 }
 
+
+function showIniAndObList(resp){
+    // iniAndObTable이 있는지 확인
+    // 그 다음 있으면 요소 삭제, 없으면 그대로 진행
+    // 그러고 iniAndObTable에 테이블 id = iniAndObTable - resp 추가하기
+    var iniAndOb = resp;
+    var iniAndObTable = document.getElementById("iniAndObTable");
+    var tableCheck = !!document.getElementById("iniAndObTable");
+
+    let selectedDate = showMain();
+    var tdDate = new Date(selectedDate);
+    var str = "<tr><td>Ob Content</td><td>Ini Content</td><td>State</td></tr>";
+    for (var obj of iniAndOb){
+        var dateList = obj["dateList"];
+        var monthList = obj["plannedDateList"];
+        if (dateList && tdDate > new Date(obj.iniStartDate) && tdDate < new Date(obj.iniEndDate)){
+            var dayList = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+            for (day of dayList){
+                if(dateList[day] == "1" && dayList.indexOf(day) == tdDate.getDay()){
+                    str += "<tr id=" + obj.categoryCode + ">";
+                    str += "<td>" + obj.obContent + "</td>";
+                    str += "<td>" + obj.iniContent + "</td>";
+                    str += "<td><input type='checkbox'></td>";
+                    str += "</tr>";
+                }
+            }
+        } else if (monthList){
+            for (date of monthList){
+                if (selectedDate == date){
+                    str += "<tr id=" + obj.categoryCode + ">";
+                    str += "<td>" + obj.obContent + "</td>";
+                    str += "<td>" + obj.iniContent + "</td>";
+                    str += "<td><input type='checkbox'></td>";
+                    str += "</tr>";
+                }
+            }
+        }
+    }
+    $(iniAndObTable).html(str);
+}
+
 /*function reshowingList(){
     keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
     let reshowList = document.getElementById('input-list').value;
@@ -251,34 +296,6 @@ function addTodoLists(resp){
 
 }*/
 
-function addTodoList(){
-    var $div = document.createElement('div');
-    var temp = document.getElementById('input-box');
-    $div.textContent = '-' + temp.value;
-    var $btn = document.createElement('button');
-    $btn.setAttribute('type', 'button');
-    $btn.setAttribute('id', 'del-ata');
-    $btn.setAttribute('id', dataCnt+keyValue);
-    $btn.setAttribute('class', "del-data");
-    $btn.textContent = delText;
-    console.log("$div at addTodoList : ", $div);
-    console.log("$btn at addTodoList : ", $btn);
-    console.log("input-list : ", inputList);
-    var inputList2 = document.getElementById('input-list');
-    inputList2.appendChild($div);
-    inputList2.appendChild($btn);
-    //inputList.appendChild($div);
-    //inputList.appendChild($btn);
-    todoList[keyValue].push(temp.value);
-    dataCnt++;
-    temp.value = '';
-    //$div.addEventListener('click',checkList);
-    //$btn.addEventListener('click',deleteTodo);
-    function deleteTodo(){
-        $div.remove();
-        $btn.remove();
-    }
-}
 console.log(keyValue);
 function checkList(e){
     e.currentTarget.classList.add('checked');

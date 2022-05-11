@@ -16,7 +16,8 @@ public class MonthList {
 
     private int monthListCode;
     private int monthListDetailCode;
-    private List<String> monthDate;
+    private String monthDate;
+    private List<String> monthDateList;
 
 }
 

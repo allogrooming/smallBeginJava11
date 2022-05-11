@@ -23,10 +23,12 @@
             b.member_code,
             b.category_code,
             b.ob_content
-        FROM initiative a
+        FROM
+            initiative a
             JOIN objective b
             ON a.ob_code = b.ob_code
-        WHERE member_code=#{memberCode};
+        WHERE
+            member_code=#{memberCode};
     </select>
 
 

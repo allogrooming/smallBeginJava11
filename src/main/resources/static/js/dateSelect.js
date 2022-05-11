@@ -139,9 +139,7 @@ function selectDate(elementParam){
     return dateListArray;
 }
 
-//TODO : 재귀함수를 통해 실행
-//TODO : 아니면 lastDay 함수 로직 변경
-//TODO : setMonth()를 적용
+
 function possibleDayCountOriginal(startDate, endDate, dateListArray){
     var start = new Date(startDate);
     var end = new Date(endDate);

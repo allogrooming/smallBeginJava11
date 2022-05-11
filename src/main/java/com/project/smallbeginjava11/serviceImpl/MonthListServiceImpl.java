@@ -1,10 +1,12 @@
 package com.project.smallbeginjava11.serviceImpl;
 
+import com.project.smallbeginjava11.DTO.MonthList;
 import com.project.smallbeginjava11.mapper.MonthListMapper;
 import com.project.smallbeginjava11.service.MonthListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -19,4 +21,8 @@ public class MonthListServiceImpl implements MonthListService {
         monthListMapper.insertMonthList(map);
     }
 
+    @Override
+    public List<String> selectMonthList(int monthListCode){
+        return monthListMapper.selectMonthList(monthListCode);
+    }
 }

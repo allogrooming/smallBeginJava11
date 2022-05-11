@@ -28,7 +28,18 @@
                 IFNULL(#{sun}, 0));
     </insert>
 
-    <select id="getDateList" parameterType="int" resultType="DateList">
-
+    <select id="selectDateList" parameterType="int" resultType="DateList">
+        SELECT
+            mon,
+            tue,
+            wed,
+            thu,
+            fri,
+            sat,
+            sun
+        FROM
+            date_list
+        WHERE
+            date_list_code = #{dateListCode};
     </select>
 </mapper>

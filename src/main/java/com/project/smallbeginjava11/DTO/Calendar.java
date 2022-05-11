@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,11 +27,13 @@ public class Calendar {
     private int iniDuration;
     private int iniPeriod;
     private String iniContent;
-    private Date plannedDate; //(일자)
-    private int plannedDay; //(요일)
+
+    //private Date plannedDate; //(일자)
+    //private int plannedDay; //(요일)
 
     // <일자/요일 리스트> //
-    private ArrayList<String> plannedDateList;
-    private ArrayList<Integer> plannedDayList;
+    private DateList dateList;
+    private List<String> plannedDateList;
+    private List<Integer> plannedDayList;
 
 }

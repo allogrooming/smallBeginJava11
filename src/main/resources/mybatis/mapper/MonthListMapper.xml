@@ -16,9 +16,21 @@
             <foreach collection = "monthDateList" item="item" separator=",">
                 (#{monthListCode},
                 (SELECT IFNULL(MAX(a.month_list_detail_code), 0) + 1
-                FROM month_list a
-                WHERE a.month_list_code = #{monthListCode}),
+            FROM
+                month_list a
+            WHERE
+                a.month_list_code = #{monthListCode}),
                 STR_TO_DATE(#{item}, '%Y-%m-%d'))
             </foreach>
     </insert>
+
+    <select id="selectMonthList" parameterType="int" resultType="String">
+        SELECT
+            month_date
+        FROM
+            month_list
+        WHERE
+            month_list_code = #{monthListCode};
+    </select>
+
 </mapper>

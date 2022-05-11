@@ -65,8 +65,9 @@ function loadCalendar(memberCode){
         dataType : "json",
         data : {
             "memberCode" : memberCode
-            },
+        },
         success : function(resp){
+            showIniAndObList(resp);
             console.log(resp);
         },
         error : function(err, resp){
