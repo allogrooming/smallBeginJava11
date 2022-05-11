@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.text.ParseException;
 import java.util.Map;
 
 @RestController
@@ -74,5 +75,22 @@ public class CalendarController {
         List<Todo> todo = calendarService.getTodoList(selectedDate);
         System.out.println("todo : "+ todo);
         return todo;
+    }
+
+    @Transactional
+    @RequestMapping(value="/toDoList", produces="text/html;charset=UTF-8")
+    @ResponseBody
+    @PostMapping
+    public String toDoListInsert(@RequestParam Map<String, String> params) throws ParseException {
+
+        System.out.println("toDoListInsert");
+
+        for (String key : params.keySet()) {
+            System.out.println(key + " : " + params.get(key));
+        }
+
+        calendarService.inputTodoList(params);
+
+        return "success";
     }
 }

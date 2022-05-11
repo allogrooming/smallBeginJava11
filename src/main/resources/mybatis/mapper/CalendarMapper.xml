@@ -9,4 +9,20 @@
         SELECT to_do_content, to_do_state, to_do_color FROM to_do where plan_date = #{selectedDate};
     </select>
 
+    <insert id="inputTodoList" parameterType="hashMap">
+        insert into to_do(
+                          to_do_code,
+                          member_code,
+                          to_do_content,
+                          set_up_date,
+                          to_do_state,
+                          to_do_color,
+                          plan_date
+        )
+        values(
+               (select IFNULL(MAX(a.to_do_code), 0) + 1 FROM to_do a),
+               2,
+               #{
+              )
+    </insert>
 </mapper>
