@@ -96,31 +96,6 @@ public class TestController {
                 //int total = iniService.getDateList()
         }
 
-
-
-
-
-        //dateListCode??? 이거는 어떻게 추가할지? 매일이면 0123456
-
-
-
-        // 한 주마다 몇 번씩 진행할 것인지(iniCount)
-        //int iniCount = 0;
-        //if(iniPeriod == 2){
-            //iniCount = 7;
-        //}
-
-        // iniOrder
-
-        // ini 내용(iniContent)
-        //String iniContent = params.get("iniContent");
-
-        // iniMonthDate
-
-
-
-
-
         iniService.insertIni(params);
 
         return "readForm success";

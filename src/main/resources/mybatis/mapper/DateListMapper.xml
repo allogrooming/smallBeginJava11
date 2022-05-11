@@ -27,4 +27,8 @@
                 IFNULL(#{sat}, 0),
                 IFNULL(#{sun}, 0));
     </insert>
+
+    <select id="getDateList" parameterType="int" resultType="DateList">
+
+    </select>
 </mapper>

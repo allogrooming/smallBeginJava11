@@ -1,4 +1,3 @@
-
 function readForm(formId, url){
 
     $.ajax({
@@ -56,4 +55,23 @@ function readFormTodo(formId, url){
         }
     });
 
+}
+
+function loadCalendar(memberCode){
+    $.ajax({
+        url : '/loadCalendar',
+        type : "post",
+        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+        dataType : "json",
+        data : {
+            "memberCode" : memberCode
+            },
+        success : function(resp){
+            console.log(resp);
+        },
+        error : function(err, resp){
+            console.log(err+"에러발생");
+            console.log(resp);
+        }
+    });
 }
