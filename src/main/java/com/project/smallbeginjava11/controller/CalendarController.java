@@ -7,10 +7,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +45,7 @@ public class CalendarController {
         }
     }
 
-    @Transactional
+/*  @Transactional
     @RequestMapping(value="/readCalendar", produces="text/html;charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public RedirectView readCalendar(@RequestParam Map<String, String> param, RedirectAttributes re) throws ParseException {
@@ -62,6 +59,20 @@ public class CalendarController {
         System.out.println("addAttribute");
         System.out.println(re);
         return new RedirectView("/calendar");
-    }
+    }*/
 
+    @Transactional
+    @RequestMapping(value="/readCalendar")
+    @ResponseBody
+    public List<Todo> readCalendar(@RequestParam Map<String, String> param) {
+
+        System.out.println("Got the param");
+        System.out.println(param);
+        String selectedDate = param.get("selectedDate");
+        System.out.println("selectedDate : "+ selectedDate);
+
+        List<Todo> todo = calendarService.getTodoList(selectedDate);
+        System.out.println("todo : "+ todo);
+        return todo;
+    }
 }

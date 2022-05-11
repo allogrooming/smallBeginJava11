@@ -136,16 +136,62 @@ function reshowingList(selectedDate){
         url : '/readCalendar',
         type : "post",
         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType : "text",
+        dataType : "json",
         data : {selectedDate : selectedDate},
-        success : function(result){
-            console.log(this.data);
+        success : function(resp){
+            //console.log(resp);
+            addTodoLists(resp);
         },
-        error : function(err){
+        error : function(err, resp){
             console.log(err+"에러발생");
-            console.log(this.data);
+            console.log(resp);
         }
     });
+}
+
+function addTodoLists(resp){
+    // toDoListsTable 이 있는지 확인
+    // 그 다음 있으면 요소 삭제, 없으면 그대로 진행
+    // 그러고 toDoLists에 테이블 id = toDoListsTable - resp 추가하기
+
+    var todo = resp;
+    var todoCount = resp.length;
+    var toDoLists = document.getElementById("toDoListsTable");
+    var tableCheck = !!document.getElementById("toDoListsTable");
+    console.log(tableCheck);
+
+    // table id=toDoListsTable을 toDoLists 안에 생성
+    var toDoTable = "<table><tr><td>Color</td><td>Content</td><td>State</td></tr>";
+    var first = "";
+    var second = "";
+    var third = "";
+
+    for (var obj of todo){
+        toDoTable += "<tr>";
+
+        first = obj[Object.keys(obj)[5]];
+        toDoTable += "<td>"
+        toDoTable += first;
+        toDoTable += "</td>";
+
+        second = obj[Object.keys(obj)[2]];
+        toDoTable += "<td>"
+        toDoTable += second;
+        toDoTable += "</td>";
+
+        third = obj[Object.keys(obj)[4]];
+        toDoTable += "<td>"
+        toDoTable += third;
+        toDoTable += "</td>";
+
+        toDoTable += "</tr>";
+
+    }
+    toDoTable += "</table>";
+
+    console.log(toDoTable)
+    $(toDoLists).html(toDoTable);
+
 }
 
 /*function reshowingList(){
@@ -245,9 +291,14 @@ function showMain(){
     const selectedDateShow = document.getElementById('selected-date-show');
     let returnDate;
     if(today.getMonth()+1 < 10){
-        returnDate = today.getFullYear() + "-0" + (today.getMonth()+1) + "-" + today.getDate();
+        returnDate = today.getFullYear() + "-0" + (today.getMonth()+1);
     }else{
-        returnDate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
+        returnDate = today.getFullYear() + "-" + (today.getMonth()+1);
+    }
+    if(today.getDate() < 10){
+        returnDate += "-0" + today.getDate();
+    }else{
+        returnDate += "-" + today.getDate();
     }
     mainDay.innerHTML = dayList[today.getDay()];
     mainDate.innerHTML = today.getDate().toString();
