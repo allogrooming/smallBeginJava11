@@ -46,7 +46,10 @@
                     <div class="todo-title">Todo List</div>
                     <div class="input-wrap">
                         <form method="post" id="toDoList">
-                            <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="toDoList">
+                            <input type="text" placeholder="please write here" id="toDoContent" class="input-box" name="toDoContent">
+                            <input type="date" style="display: none" id="setUpDate" class="input-box" name="setUpDate">
+                            <input type="date" id="planDate" class="input-box" name="planDate">
+                            <input type="color" id="toDoColor" class="input-box" name="toDoColor">
                             <button type="button" id="input-data" class="input-data">INPUT</button>
                         </form>
                         <table id="toDoListsTable">

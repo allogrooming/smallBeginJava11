@@ -22,7 +22,11 @@
         values(
                (select IFNULL(MAX(a.to_do_code), 0) + 1 FROM to_do a),
                2,
-               #{
+               #{},
+               #{},
+               0,
+               #{},
+               #{}
               )
     </insert>
 </mapper>
