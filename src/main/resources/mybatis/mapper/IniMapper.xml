@@ -47,14 +47,15 @@
                 #{iniContent},
                 #{iniStartDate},
                 #{iniEndDate},
-                #{iniPossibleCount},
+                0,
                 NULL);
     </insert>
 
-    <select id="selectDateListCodeOrMonthListCode" parameterType="hashMap" resultType="hashMap">
+    <select id="selectMaxIniByObCode" parameterType="hashMap" resultType="Initiative">
         SELECT
-            date_list_code as dateListCode,
-            month_list_code as monthListCode
+            ini_code,
+            date_list_code,
+            month_list_code
         FROM
             initiative
         WHERE

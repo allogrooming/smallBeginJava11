@@ -1,13 +1,16 @@
 package com.project.smallbeginjava11.service;
 
+import com.project.smallbeginjava11.DTO.IniDetail;
+import com.project.smallbeginjava11.DTO.Initiative;
+
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public interface IniService {
     void insertIni(Map<String, Object> params) throws ParseException;
-    Map<String, Object> getDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException;
-    void insertDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException;
-    int getDayOfWeek(Date startDate, Date endDate, int iniDuration, Map<String, Object> map) throws ParseException;
+    Initiative getDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException;
+    Initiative getRecentIniCodeByObCode(Map<String, Object> map);
 
 }

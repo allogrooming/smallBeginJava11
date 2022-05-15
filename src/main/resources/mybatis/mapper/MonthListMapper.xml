@@ -16,11 +16,11 @@
             <foreach collection = "monthDateList" item="item" separator=",">
                 (#{monthListCode},
                 (SELECT IFNULL(MAX(a.month_list_detail_code), 0) + 1
-            FROM
-                month_list a
-            WHERE
-                a.month_list_code = #{monthListCode}),
-                STR_TO_DATE(#{item}, '%Y-%m-%d'))
+                FROM
+                    month_list a
+                WHERE
+                    a.month_list_code = #{monthListCode}),
+                    STR_TO_DATE(#{item}, '%Y-%m-%d'))
             </foreach>
     </insert>
 

@@ -43,6 +43,7 @@ function showCalendar(){
                 //TODO: 변경설명, td에 attr 추가
                 $td.setAttribute('id', CNT);
                 $td.setAttribute('data-td-date', showMain().substring(0, 8) + tdDateCnt);
+                // td.attr('data-td-date') = td의 해당날짜;
                 $td.setAttribute('class', 'td-date');
                 $tr.appendChild($td);
                 cnt++;
@@ -198,7 +199,7 @@ function addTodoLists(resp){
 
 }
 
-
+//TODO : 새로 추가 된 함수
 function showIniAndObList(resp){
     // iniAndObTable이 있는지 확인
     // 그 다음 있으면 요소 삭제, 없으면 그대로 진행

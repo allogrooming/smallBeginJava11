@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.smallbeginjava11.mapper.IniDetailMapper">
+
+    <insert id="insertIniDetail" parameterType="hashMap">
+        INSERT
+            INTO
+                ini_detail(
+                ini_dtl_code,
+                ini_code,
+                week_order,
+                date_list_code,
+                ini_dtl_start_date,
+                ini_dtl_end_date,
+                ini_dtl_psb_count,
+                ini_dtl_done_count
+                )
+            VALUES
+            <foreach collection = "iniDetails" item="item" index="index" separator=",">
+                ((select IFNULL(MAX(a.ini_dtl_code), 0) + 1 FROM ini_detail a),
+                #{iniCode},
+                #{index} + 1,
+                #{dateListCode},
+                #{item.iniDetailStartDate},
+                #{item.iniDetailEndDate},
+                #{item.iniDetailPossibleCount},
+                0)
+            </foreach>
+    </insert>
+
+</mapper>

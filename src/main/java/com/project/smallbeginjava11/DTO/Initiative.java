@@ -2,7 +2,9 @@ package com.project.smallbeginjava11.DTO;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +24,7 @@ public class Initiative {
     private Date iniStartDate;
     private Date iniEndDate;
     private int iniPossibleCount; // 전체 기간 동안 가능한 횟수
+    private List<IniDetail> iniDetails = new ArrayList<IniDetail>();
 
     public Initiative(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate, int iniDuration) {
         this.obCode = obCode;

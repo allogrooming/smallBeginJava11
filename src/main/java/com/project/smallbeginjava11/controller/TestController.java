@@ -25,6 +25,7 @@ public class TestController {
 
     private final CategoryService categoryService;
     private final IniService iniService;
+    private final IniDetailService iniDetailService;
     private static List<String> monthDateList;
 
     @GetMapping("/test")
@@ -66,10 +67,12 @@ public class TestController {
         // 시작일(iniStartDate)
         String iniStartDateString = String.valueOf(params.get("iniStartDate"));
         Date iniStartDate = sdf.parse(iniStartDateString);
+        params.put("iniStartDate", iniStartDate);
 
         // 종료일(iniEndDate)
         String iniEndDateString = String.valueOf(params.get("iniEndDate"));
         Date iniEndDate = sdf.parse(iniEndDateString);
+        params.put("iniEndDate", iniEndDate);
 
         // 전체 기간(iniDuration)
         long iniDurationLong = (iniEndDate.getTime() - iniStartDate.getTime()) / (24*60*60*1000);
@@ -86,18 +89,18 @@ public class TestController {
                 break;
             //매주라면 : iniPeriod가 1이라면
             case 1:
-                int total = iniService.getDayOfWeek(iniStartDate, iniEndDate, iniDuration, params);
-                params.put("iniPossibleCount", String.valueOf(total));
+                Initiative initiative = iniDetailService.calculateWeeks(iniStartDate, iniEndDate, iniDuration, params);
+                params.put("iniPossibleCount", String.valueOf(initiative.getIniPossibleCount()));
+                params.put("iniDetails", initiative.getIniDetails());
                 break;
             //매달 날짜를 직접 선택해서 입력할 경우
             case 2:
                 params.put("iniPossibleCount", String.valueOf(monthDateList.size()));
                 params.put("monthDateList", monthDateList);
                 //int total = iniService.getDateList()
+                break;
         }
-
         iniService.insertIni(params);
-
         return "readForm success";
     }
 
