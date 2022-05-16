@@ -10,9 +10,10 @@ import java.util.Map;
 
 public interface IniDetailService {
     void insertIniDetail(Map<String, Object> params) throws ParseException;
-    Initiative calculateWeeks(Date startDate, Date endDate, int iniDuration, Map<String, Object> params) throws ParseException;
+    Initiative calculateWeeks(Map<String, Object> params) throws ParseException;
     List<Integer> mapToDays(Map<String, Object> params) throws ParseException;
     int getDayOfWeek(List<IniDetail> iniDetails) throws ParseException;
+    List<Integer> selectIniDtlCodes(Map<String, Object> params) throws ParseException;
 
 
 

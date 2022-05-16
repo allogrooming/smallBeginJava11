@@ -1,7 +1,7 @@
 package com.project.smallbeginjava11.mapper;
 
-import com.project.smallbeginjava11.DTO.IniDetail;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,7 +9,6 @@ import java.util.Map;
 
 @Mapper
 @Repository
-public interface IniDetailMapper {
-    void insertIniDetail(Map<String, Object> params);
-    List<Integer> selectIniDtlCodes(Map<String, Object> params);
+public interface IniDetailAddMapper {
+    void insertIniDetailAdd(List<Integer> list);
 }

@@ -39,14 +39,18 @@ public class IniDetailServiceImpl implements IniDetailService {
 
     //TODO : 메소드 나누기
     @Override
-    public Initiative calculateWeeks(Date startDate, Date endDate, int iniDuration, Map<String, Object> params) throws ParseException{
+    public Initiative calculateWeeks(Map<String, Object> params) throws ParseException{
+        Date startDate = (Date) params.get("iniStartDate");
+        Date endDate = (Date) params.get("iniEndDate");
+        int duration = (int) params.get("iniDuration");
+
         Calendar cal = Calendar.getInstance();
         Initiative initiative = new Initiative();
         ArrayList<IniDetail> iniDetails = (ArrayList<IniDetail>) initiative.getIniDetails();
         List<Integer> days = mapToDays(params);
 
-        int weeks = iniDuration / 7;
-        int leftDays = iniDuration % 7;
+        int weeks = duration / 7;
+        int leftDays = duration % 7;
 
         cal.setTime(startDate);
         for (int i = 0; i < weeks; i++){
@@ -95,6 +99,12 @@ public class IniDetailServiceImpl implements IniDetailService {
             total += iniDetail.getIniDetailPossibleCount();
         }
         return total;
+    }
+
+    // 입력된 iniDetails의 iniDetailCode 리스트를 반환하는 메소드
+    @Override
+    public List<Integer> selectIniDtlCodes(Map<String, Object> params) throws ParseException{
+        return iniDetailMapper.selectIniDtlCodes(params);
     }
 
 }

@@ -53,7 +53,7 @@ public class TestController {
         // Ob 코드
         //String obCodeString = param.get("obCode");
         //int obCode = Integer.parseInt(obCodeString);
-        params.put("obCode", String.valueOf(1));
+        params.put("obCode", String.valueOf(5));
 
 
         // 달 주 일(iniPeriod)
@@ -89,9 +89,9 @@ public class TestController {
                 break;
             //매주라면 : iniPeriod가 1이라면
             case 1:
-                Initiative initiative = iniDetailService.calculateWeeks(iniStartDate, iniEndDate, iniDuration, params);
-                params.put("iniPossibleCount", String.valueOf(initiative.getIniPossibleCount()));
-                params.put("iniDetails", initiative.getIniDetails());
+//                Initiative initiative = iniDetailService.calculateWeeks(iniStartDate, iniEndDate, iniDuration, params);
+//                params.put("iniPossibleCount", String.valueOf(initiative.getIniPossibleCount()));
+//                params.put("iniDetails", initiative.getIniDetails());
                 break;
             //매달 날짜를 직접 선택해서 입력할 경우
             case 2:
