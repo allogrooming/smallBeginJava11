@@ -5,19 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
+import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MonthList {
-
-    private int monthListCode;
-    private int monthListDetailCode;
-    private String monthDate;
-    private List<String> monthDateList;
+public class PossibleDate {
+    private int psbDtCode; // PossibleDateCode
+    private int psbDtLsCode; // PossibleDateListCode
+    private Date psbDt; // PossibleDate
 
 }
-

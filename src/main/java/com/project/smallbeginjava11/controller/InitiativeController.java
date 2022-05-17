@@ -8,12 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-public class TestController {
+public class InitiativeController {
 
     private final CategoryService categoryService;
     private final IniService iniService;
@@ -40,21 +36,12 @@ public class TestController {
     @RequestMapping(value="/readForm", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
-        public String createInitiative(@RequestParam Map<String, Object> params) throws ParseException {
-
-        // DB에서 가져올 때는 DTO
-        // DB로 보낼 깨는 Map<String, Object>
-
-        for (String key : params.keySet()) {
-            System.out.println(key + " : " + params.get(key) + " & " + params.get(key).getClass().getName());
-      }
-
-
+    public String createInitiative(@RequestParam Map<String, Object> params) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         // Ob 코드
         //String obCodeString = param.get("obCode");
         //int obCode = Integer.parseInt(obCodeString);
         params.put("obCode", String.valueOf(5));
-
 
         // 달 주 일(iniPeriod)
         int iniPeriod = Integer.parseInt(String.valueOf(params.get("iniPeriod")));;
@@ -62,7 +49,6 @@ public class TestController {
         //달 일 경우(2) : (기간) 개월 수 달의 같은 날짜까지
         //주 일 경우(1) : (기강) 주 수의 같은 요일까지
         //일의 경우(0) : 임의 설정
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         // 시작일(iniStartDate)
         String iniStartDateString = String.valueOf(params.get("iniStartDate"));
@@ -76,9 +62,7 @@ public class TestController {
 
         // 전체 기간(iniDuration)
         long iniDurationLong = (iniEndDate.getTime() - iniStartDate.getTime()) / (24*60*60*1000);
-        System.out.println("long 타입으로 iniDuration(전체기간) "+iniDurationLong);
         int iniDuration = Long.valueOf(iniDurationLong).intValue();
-        System.out.println("int 타입으로 iniDuration "+iniDuration);
         params.put("iniDuration", iniDuration);
 
         // 전체 기간 동안 가능한 횟수(iniPossibleCount)

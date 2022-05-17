@@ -1,6 +1,5 @@
 package com.project.smallbeginjava11.serviceImpl;
 
-import com.project.smallbeginjava11.DTO.IniDetail;
 import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.mapper.IniMapper;
 import com.project.smallbeginjava11.service.*;
@@ -19,6 +18,22 @@ public class IniServiceImpl implements IniService{
     private final MonthListService monthListService;
     private final IniDetailService iniDetailService;
     private final IniDetailAddService iniDetailAddService;
+    private final PossibleDateService possibleDateService;
+
+    @Override
+    public List<Integer> mapToDays(Map<String, Object> params) throws ParseException {
+        ArrayList<Integer> days = new ArrayList<Integer>();
+
+        if(params.containsKey("mon")) days.add(2);
+        if(params.containsKey("tue")) days.add(3);
+        if(params.containsKey("wed")) days.add(4);
+        if(params.containsKey("thu")) days.add(5);
+        if(params.containsKey("fri")) days.add(6);
+        if(params.containsKey("sat")) days.add(7);
+        if(params.containsKey("sun")) days.add(1);
+
+        return days;
+    }
 
     @Override
     public void insertIni(Map<String, Object> params) throws ParseException {
@@ -28,6 +43,8 @@ public class IniServiceImpl implements IniService{
 
         String monthListCode = String.valueOf(iniByObCode.getMonthListCode());
         String dateListCode = String.valueOf(iniByObCode.getDateListCode());
+
+        possibleDateService.insertPossibleDataList(params);
 
         if (dateListCode != "null"){
             params.put("dateListCode", dateListCode);
@@ -57,9 +74,10 @@ public class IniServiceImpl implements IniService{
 
     //Initiative가 입력된 다음 해당 IniCode를 반환한다.
     @Override
-    public Initiative getRecentIniCodeByObCode(Map <String, Object> map){
+    public Initiative getRecentIniCodeByObCode(Map <String, Object> map) throws ParseException {
         return iniMapper.selectMaxIniByObCode(map);
     }
+
 
 
 
