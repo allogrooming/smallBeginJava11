@@ -1,9 +1,6 @@
 package com.project.smallbeginjava11.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -11,6 +8,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class PossibleDate {
     private int psbDtCode; // PossibleDateCode
     private int psbDtLsCode; // PossibleDateListCode

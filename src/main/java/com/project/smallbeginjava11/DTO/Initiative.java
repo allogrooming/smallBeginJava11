@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Initiative {
     private int iniCode; // sequence - sql에서 추가됨
     private int obCode;
@@ -25,6 +26,7 @@ public class Initiative {
     private Date iniEndDate;
     private int iniPossibleCount; // 전체 기간 동안 가능한 횟수
     private List<IniDetail> iniDetails = new ArrayList<IniDetail>();
+    private List<Integer> dateList = new ArrayList<Integer>(); // 주일 경우 요일을 나타내는 리스트
 
     public Initiative(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate, int iniDuration) {
         this.obCode = obCode;

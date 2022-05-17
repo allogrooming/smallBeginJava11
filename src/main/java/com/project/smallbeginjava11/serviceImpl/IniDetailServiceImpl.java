@@ -43,11 +43,13 @@ public class IniDetailServiceImpl implements IniDetailService {
         Date startDate = (Date) params.get("iniStartDate");
         Date endDate = (Date) params.get("iniEndDate");
         int duration = (int) params.get("iniDuration");
+        int iniCode = (int) params.get("iniCode");
 
         Calendar cal = Calendar.getInstance();
         Initiative initiative = new Initiative();
         ArrayList<IniDetail> iniDetails = (ArrayList<IniDetail>) initiative.getIniDetails();
         List<Integer> days = mapToDays(params);
+        initiative.setDateList(days);
 
         int weeks = duration / 7;
         int leftDays = duration % 7;

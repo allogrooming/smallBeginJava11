@@ -8,6 +8,7 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface PossibleDateMapper {
-    void insertPossibleDataList(Map<String, Object> params);
+    void insertPossibleDateList(Map<String, Object> params);
+    void insertPossibleDate(Map<String, Object> params);
 
 }

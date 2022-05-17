@@ -1,6 +1,7 @@
 package com.project.smallbeginjava11.serviceImpl;
 
 import com.project.smallbeginjava11.DTO.Initiative;
+import com.project.smallbeginjava11.DTO.PossibleDate;
 import com.project.smallbeginjava11.mapper.IniMapper;
 import com.project.smallbeginjava11.service.*;
 import lombok.RequiredArgsConstructor;
@@ -44,14 +45,20 @@ public class IniServiceImpl implements IniService{
         String monthListCode = String.valueOf(iniByObCode.getMonthListCode());
         String dateListCode = String.valueOf(iniByObCode.getDateListCode());
 
-        possibleDateService.insertPossibleDataList(params);
+        possibleDateService.insertPossibleDateList(params);
 
         if (dateListCode != "null"){
             params.put("dateListCode", dateListCode);
             dateListService.insertDateList(params);
 
-
             Initiative iniForDetail = iniDetailService.calculateWeeks(params);
+            List<PossibleDate> possibleDateList = possibleDateService.fromDateListToPossibleDateList(iniForDetail);
+            params.put("possibleDateList", possibleDateList);
+            System.out.println("****************************");
+            possibleDateList.forEach(possibleDate -> System.out.println(possibleDate));
+            System.out.println("****************************");
+            possibleDateService.insertPossibleDate(params);
+
             params.put("iniPossibleCount", String.valueOf(iniForDetail.getIniPossibleCount()));
             params.put("iniDetails", iniForDetail.getIniDetails());
             iniDetailService.insertIniDetail(params);
