@@ -67,13 +67,8 @@ public class CalendarController {
     @ResponseBody
     public List<Todo> readCalendar(@RequestParam Map<String, String> param) {
 
-        System.out.println("Got the param");
-        System.out.println(param);
         String selectedDate = param.get("selectedDate");
-        System.out.println("selectedDate : "+ selectedDate);
-
         List<Todo> todo = calendarService.getTodoList(selectedDate);
-        System.out.println("todo : "+ todo);
         return todo;
     }
 

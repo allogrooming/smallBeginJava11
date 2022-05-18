@@ -10,23 +10,26 @@
     </select>
 
     <insert id="inputTodoList" parameterType="hashMap">
-        insert into to_do(
+        INSERT INTO to_do(
                           to_do_code,
                           member_code,
                           to_do_content,
                           set_up_date,
                           to_do_state,
                           to_do_color,
+                          done_date,
                           plan_date
         )
-        values(
+        VALUES(
                (select IFNULL(MAX(a.to_do_code), 0) + 1 FROM to_do a),
                2,
-               #{},
-               #{},
+               #{toDoContent},
+               #{setUpDate},
                0,
-               #{},
-               #{}
+               #{toDoColor},
+               0000-00-00,
+               #{planDate}
               )
     </insert>
+
 </mapper>

@@ -3,7 +3,6 @@ function readData(data){
 }
 
 function readForm(formId, url){
-
       $.ajax({
              url : url,
              type : "post",
@@ -19,7 +18,6 @@ function readForm(formId, url){
                  console.log(this.data);
              }
       });
-
 }
 
 function readFormTodo(formId, url){
