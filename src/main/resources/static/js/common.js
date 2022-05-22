@@ -41,19 +41,22 @@ function readFormTodo(formId, url){
 
 }
 
-
-function ajaxTest(){
-
-      $.ajax({
-             url : "ajaxTest", //서버주소
-             type : "post",//요청방식
-             dataType :"text", //서버가 보내온 데이터 타입(응답 : text, html, xml, json)
-             success : function(result){
-                 $("#result").text(result);
-             },
-             error : function(err){
-                 console.log(err+"에러발생");
-             }
-      });
-
-};
+function loadCalendar(memberCode){
+    $.ajax({
+        url : '/loadCalendar',
+        type : "post",
+        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+        dataType : "json",
+        data : {
+            "memberCode" : memberCode
+        },
+        success : function(resp){
+            showIniAndObList(resp);
+            console.log(resp);
+        },
+        error : function(err, resp){
+            console.log(err+"에러발생");
+            console.log(resp);
+        }
+    });
+}
