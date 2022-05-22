@@ -191,7 +191,6 @@ function addTodoLists(resp){
 
     console.log(toDoTable)
     $(toDoLists).html(toDoTable);
-
 }
 
 /*function reshowingList(){
@@ -248,7 +247,6 @@ function addTodoLists(resp){
             }
         }
     }
-
 }*/
 
 function addTodoList(){
@@ -327,6 +325,7 @@ function changeToday(e){
             tdGroup[i].classList.remove('active');
         }
     }
+    console.log(e);
     clickedDate1 = e.target;
     clickedDate1.classList.add('active');
     today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
