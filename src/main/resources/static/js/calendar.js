@@ -191,7 +191,6 @@ function addTodoLists(resp){
 
     console.log(toDoTable)
     $(toDoLists).html(toDoTable);
-
 }
 
 /*function reshowingList(){
@@ -248,7 +247,6 @@ function addTodoLists(resp){
             }
         }
     }
-
 }*/
 
 function addTodoList(){
@@ -287,9 +285,10 @@ function checkList(e){
 function showMain(){
     const mainDay = document.getElementById('main-day');
     const mainDate = document.getElementById('main-date');
-    const selectedDate = document.getElementById('selected-date');
-    const selectedDateShow = document.getElementById('selected-date-show');
+    const mainMonth = document.getElementById('main-month');
+    const setUpDate = document.getElementById('setUpDate');
     let returnDate;
+
     if(today.getMonth()+1 < 10){
         returnDate = today.getFullYear() + "-0" + (today.getMonth()+1);
     }else{
@@ -302,8 +301,9 @@ function showMain(){
     }
     mainDay.innerHTML = dayList[today.getDay()];
     mainDate.innerHTML = today.getDate().toString();
-    selectedDate.innerHTML = returnDate;
-    selectedDateShow.innerHTML = today.getDate();
+    mainMonth.innerHTML = today.toLocaleString("en-US", {month : "short"});
+    setUpDate.value = returnDate;
+    setUpDate.innerHTML = returnDate;
     return returnDate;
 }
 var clickedDate1 = document.getElementById(today.getDate());
@@ -325,6 +325,7 @@ function changeToday(e){
             tdGroup[i].classList.remove('active');
         }
     }
+    console.log(e);
     clickedDate1 = e.target;
     clickedDate1.classList.add('active');
     today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);

@@ -1,6 +1,5 @@
 package com.project.smallbeginjava11.controller;
 
-import com.project.smallbeginjava11.DTO.Calendar;
 import com.project.smallbeginjava11.DTO.Todo;
 import com.project.smallbeginjava11.service.CalendarService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.text.ParseException;
 import java.util.Map;
 
 @RestController
@@ -67,22 +67,25 @@ public class CalendarController {
     @ResponseBody
     public List<Todo> readCalendar(@RequestParam Map<String, String> param) {
 
-        System.out.println("Got the param");
-        System.out.println(param);
         String selectedDate = param.get("selectedDate");
-        System.out.println("selectedDate : "+ selectedDate);
-
         List<Todo> todo = calendarService.getTodoList(selectedDate);
-        System.out.println("todo : "+ todo);
         return todo;
     }
 
-    @RequestMapping(value="/loadCalendar")
+    @Transactional
+    @RequestMapping(value="/toDoList", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
-    public List<Calendar> loadCalendar(@RequestParam Map<String, String> params){
-        int memberCode = Integer.parseInt(params.get("memberCode"));
-        List<Calendar> calendarList = calendarService.getIniAndObList(memberCode);
-        return calendarList;
+    public String toDoListInsert(@RequestParam Map<String, String> params) throws ParseException {
+
+        System.out.println("toDoListInsert");
+
+        for (String key : params.keySet()) {
+            System.out.println(key + " : " + params.get(key));
+        }
+
+        calendarService.inputTodoList(params);
+
+        return "success";
     }
 }

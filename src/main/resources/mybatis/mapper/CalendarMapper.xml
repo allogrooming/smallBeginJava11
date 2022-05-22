@@ -9,28 +9,27 @@
         SELECT to_do_content, to_do_state, to_do_color FROM to_do where plan_date = #{selectedDate};
     </select>
 
-    <select id="selectIniAndObList" parameterType="int" resultType="Calendar">
-        SELECT
-            a.ob_code,
-            a.ini_code,
-            a.ini_content,
-            a.ini_period,
-            a.date_list_code,
-            a.month_list_code,
-            a.ini_start_date,
-            a.ini_end_date,
-            a.ini_week_order,
-            b.member_code,
-            b.category_code,
-            b.ob_content
-        FROM
-            initiative a
-            JOIN objective b
-            ON a.ob_code = b.ob_code
-        WHERE
-            member_code=#{memberCode};
-    </select>
-
-
+    <insert id="inputTodoList" parameterType="hashMap">
+        INSERT INTO to_do(
+                          to_do_code,
+                          member_code,
+                          to_do_content,
+                          set_up_date,
+                          to_do_state,
+                          to_do_color,
+                          done_date,
+                          plan_date
+        )
+        VALUES(
+               (select IFNULL(MAX(a.to_do_code), 0) + 1 FROM to_do a),
+               2,
+               #{toDoContent},
+               #{setUpDate},
+               0,
+               #{toDoColor},
+               0000-00-00,
+               #{planDate}
+              )
+    </insert>
 
 </mapper>

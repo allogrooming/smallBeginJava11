@@ -37,16 +37,18 @@
         <div class="content-wrap">
             <div class="content-left">
                 <div class="main-wrap">
-                    <div id="main-day" class="main-day"></div>
-                    <div id="main-date" class="main-date"></div>
-                    <p id="selected-date" style="display: none"></p>
-                    <p id="selected-date-show" style="display: none"></p>
+                    <span id="main-month" class="main-month"></span> &nbsp;
+                    <span id="main-date" class="main-date"></span> &nbsp;
+                    <span id="main-day" class="main-day"></span>
                 </div>
                 <div class="todo-wrap">
                     <div class="todo-title">Todo List</div>
                     <div class="input-wrap">
                         <form method="post" id="toDoList">
-                            <input type="text" placeholder="please write here!!" id="input-box" class="input-box" name="toDoList">
+                            <input type="text" placeholder="please write here" id="toDoContent" class="input-box" name="toDoContent">
+                            <input type="date" id="planDate" class="input-box" name="planDate">
+                            <input type="color" id="toDoColor" class="input-box" name="toDoColor">
+                            <input type="date" id="setUpDate" class="input-box" name="setUpDate" style="display: none"></input>
                             <button type="button" id="input-data" class="input-data">INPUT</button>
                         </form>
                         <table id="toDoListsTable">
@@ -93,21 +95,22 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
-
 </body>
 
 <script>
     showCalendar();
     clickStart();
 
-    var selectedDate = document.getElementById("selected-date").innerText;
+    var selectedDate = document.getElementById("setUpDate").innerText;
     console.log("selectedDate - html reshowing");
     console.log(selectedDate);
     reshowingList(selectedDate);
+
+    var clickedDate1 = document.getElementById(today.getDate());
+    clickedDate1.classList.add('active');
 
     $("#prev").click(function(){
         prev();
@@ -118,10 +121,11 @@
     })
 
     $("#input-data").click(function(){
-        readForm("toDoList", "/toDoList");
-        addTodoList();
-        //readFormTodo("toDoList", "/toDoList");
-        console.log("input btn is clicked + ajax");
+        readForm("#toDoList", "/toDoList");
+        var planDate = $('planDate').val();
+
+
+        changeToday(planDate);
     })
 
     $(".calendar-body").click(function(event){
