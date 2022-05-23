@@ -1,23 +1,20 @@
 html, body{
     background-color: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
 }
 .main{
     width: 100%;
     display: block;
-    background: #ababab;
+    background: #ffffff;
 }
 .content-wrap{
     width: 100%;
     margin:0 auto;
-    border: 4px solid rgba(161, 161, 161, 0.5);
-    border-radius: 20px;
     overflow: hidden;
-    background: #ddaf35;
+    background: #ffffff;
 }
 .content-left{
-    background: #0b0809;
-    color:#ddaf35;
+    background: #ffffff;
+    color:#000000;
     float: left;
     width: 100%;
     padding: 30px;
@@ -51,13 +48,13 @@ html, body{
     /*width: 50%;*/
     margin-right: 20px;
    /* height: auto;*/
-    background: #0b0809;
-    color: #ddaf35;
+    background: #ffffff;
+    color: #000000;
     line-height : normal;
     padding: .8em .5em 0 0;
     font-family: inherit;
     border: 0;
-    border-bottom: 1px dashed #ddaf35;;
+    border-bottom: 1px dashed #ffffff;;
     border-radius: 0;
     outline-style: none;
     -webkit-appearance: none;
@@ -69,20 +66,20 @@ html, body{
     font-size: 10px;
     padding: 10px;
     margin: 10px 0 10px 0;
-    background: #ddaf35;
-    border: none;
-    color: #0b0809;
+    background: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
     border-radius: 10px;
 }
 .input-data:hover{
-    background: #ffffff;
-    color: #0b0809;
+    background: #000000;
+    color: #ffffff;
 }
 .input-list > div{
     font-size: 10px;
     width: 60%;
     float: left;
-    color: #ddaf35;
+    color: #000000;
 }
 .input-list > .checked{
     color: #FFFFFF;
@@ -90,13 +87,13 @@ html, body{
 }
 .del-data{
     display: block;
-    color: #ddaf35;
+    color: #ffffff;
     float: left;
     width: 10%;
     cursor: pointer;
     font-size: 10px;
     padding: 10px;
-    background: #0b0809;
+    background: #000000;
     border: none;
     border-radius: 10px;
 }
@@ -104,6 +101,8 @@ html, body{
     float: left;
     width: 90%;
     padding: 10px;
+    color: #ffffff;
+    background-color: #000000;
 }
 .sun{
     color:#ef3333;
@@ -119,32 +118,37 @@ html, body{
     font-weight: bold;
 }
 .active{
-    background: #0b0809;
+    background: #ffffff;
     border-radius: 50%;
-    color: #ffffff;
+    color: #000000;
 }
 
-@media(min-width: 850px){
+input#toDoColor {
+    border: none;
+    margin: 0;
+    padding: 0;
+    height: 18px;
+}
+
+@media(min-width: 800px){
     .main{
         display: flex;
         align-items: center;
         justify-content:  center;
         width: 100vw;
         height: 100vh;
-        background: #ababab;
+        background: #ffffff;
     }
     .content-wrap{
         width: 800px;
         height: 600px;
         margin:0 auto;
-        border: 4px solid rgba(161, 161, 161, 0.5);
-        border-radius: 20px;
         overflow: hidden;
-        background: #ddaf35;
+        background: #ffffff;
     }
     .content-left{
-        background: #0b0809;
-        color:#ddaf35;
+        background: #ffffff;
+        color:#000000;
         float: left;
         width: 360px;
         height: 600px;
@@ -173,13 +177,13 @@ html, body{
     .input-box{
         width: 70%;
         height: auto;
-        background: #0b0809;
-        color: #ddaf35;
+        background: #ffffff;
+        color: #000000;
         line-height : normal;
         padding: .8em .5em 0 0;
         font-family: inherit;
         border: 0;
-        border-bottom: 1px dashed #ddaf35;;
+        border-bottom: 1px dashed #000000;;
         border-radius: 0;
         outline-style: none;
         -webkit-appearance: none;
@@ -191,24 +195,24 @@ html, body{
         font-size: 10px;
         padding: 10px;
         margin: 20px 0 30px 0;
-        background: #ddaf35;
-        border: none;
-        color: #0b0809;
+        background: #ffffff;
+        border: 1px solid #000000;
+        color: #000000;
         border-radius: 10px;
     }
     .input-data:hover{
-        background: #ffffff;
-        color: #0b0809;
+        background: #000000;
+        color: #ffffff;
     }
     .input-list > div{
         font-size: 10px;
         width: 60%;
         float: left;
-        color: #ddaf35;
+        color: #000000;
     }
     .del-data{
         display: block;
-        color: #ddaf35;
+        color: #ffffff;
         float: left;
         width: 10%;
         cursor: pointer;
@@ -223,6 +227,8 @@ html, body{
         width: 360px;
         height: 600px;
         padding: 100px 20px 20px 20px;
+        background-color: #000000;
+        color: #ffffff;
     }
     .sun{
         color:#ef3333;
@@ -238,8 +244,8 @@ html, body{
         font-weight: bold;
     }
     .active{
-        background: #0b0809;
+        background: #ffffff;
         border-radius: 50%;
-        color: #ffffff;
+        color: #000000;
     }
 }
