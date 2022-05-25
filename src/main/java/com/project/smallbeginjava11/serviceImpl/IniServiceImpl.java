@@ -1,5 +1,6 @@
 package com.project.smallbeginjava11.serviceImpl;
 
+import com.project.smallbeginjava11.DTO.IniDetailAdd;
 import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.DTO.PossibleDate;
 import com.project.smallbeginjava11.mapper.IniMapper;
@@ -8,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -54,18 +57,37 @@ public class IniServiceImpl implements IniService{
             Initiative iniForDetail = iniDetailService.calculateWeeks(params);
             List<PossibleDate> possibleDateList = possibleDateService.fromDateListToPossibleDateList(iniForDetail);
             params.put("possibleDateList", possibleDateList);
+
+            System.out.println("1) possibleDateList : ****************************");
+            possibleDateList.forEach(possibleDate -> System.out.println(possibleDate.getPsbDt()));
             System.out.println("****************************");
-            possibleDateList.forEach(possibleDate -> System.out.println(possibleDate));
-            System.out.println("****************************");
+
             possibleDateService.insertPossibleDate(params);
+            List<PossibleDate> possibleDateCodeList = possibleDateService.selectPossibleDateCodeByIniCode(params);
+            params.put("possibleDateCodeList", possibleDateCodeList);
+
+            System.out.println("2) possibleDateCodeList : ****************************");
+            possibleDateCodeList.forEach(possibleDate -> System.out.println(possibleDate.getPsbDtCode()));
+            System.out.println("****************************");
 
             params.put("iniPossibleCount", String.valueOf(iniForDetail.getIniPossibleCount()));
             params.put("iniDetails", iniForDetail.getIniDetails());
+            possibleDateList.forEach(possibleDate -> System.out.println(possibleDate));
             iniDetailService.insertIniDetail(params);
 
             List<Integer> iniDtlCodeList = iniDetailService.selectIniDtlCodes(params);
+            params.put("iniDtlCodeList", iniDtlCodeList);
             List<Integer> iniDtlCountList = iniDetailAddService.calculateDaysInclude(iniForDetail, iniDtlCodeList);
-            iniDetailAddService.insertIniDetailAdd(iniDtlCountList);
+            params.put("iniDtlCountList", iniDtlCountList);
+
+            System.out.println("3) iniDtlCountList : ****************************");
+            iniDtlCountList.forEach(y -> System.out.println(y));
+            System.out.println("****************************");
+
+            List<IniDetailAdd> iniDtlAddList = iniDetailAddService.combineIniDtlCodeAndPossibleDate(params);
+            params.put("iniDtlAddList", iniDtlAddList);
+
+            iniDetailAddService.insertIniDetailAdd(params);
 
         } else if(monthListCode != "null"){
             params.put("monthListCode", monthListCode);

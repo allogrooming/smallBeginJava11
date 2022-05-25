@@ -5,20 +5,34 @@
 
 <mapper namespace="com.project.smallbeginjava11.mapper.IniDetailAddMapper">
 
-    <insert id="insertIniDetailAdd" parameterType="java.util.List">
+    <insert id="insertIniDetailAdd" parameterType="hashMap">
         INSERT
             INTO
                 ini_detail_add(
                 ini_dtl_add_code,
                 ini_dtl_code,
+                psb_dt_cd,
+                ini_dtl_pln_date,
                 ini_dtl_add_done_date,
                 ini_dtl_add_state
                 )
             VALUES
-            <foreach collection = "list" item="item" separator=",">
-                ((select IFNULL(MAX(a.ini_dtl_add_code), 0) + 1 FROM ini_detail_add a),
-                #{item},
+            <foreach collection="iniDtlAddList" item="item" index="index" separator=",">
+                <!-- 1) ini_dtl_add_code -->
+                ((SELECT IFNULL(MAX(a.ini_dtl_add_code), 0) + 1 FROM ini_detail_add a),
+                <!-- 2) ini_dtl_code -->
+                #{item.iniDetailCode},
+                <!-- 3) psb_dt_cd -->
+                (SELECT MIN(b.psb_dt_code) + #{index}
+                FROM possible_date b
+                WHERE psb_dt_ls_code = (SELECT c.psb_dt_ls_code
+                                        FROM possible_date_list c
+                                        WHERE c.ini_code = #{iniCode})),
+                <!-- 4) ini_dtl_pln_date -->
+                #{item.iniDetailAddPlanDate},
+                <!-- 5) ini_dtl_add_done_date -->
                 NULL,
+                <!-- ini_dtl_add_state -->
                 0)
             </foreach>
     </insert>

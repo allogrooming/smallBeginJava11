@@ -1,8 +1,8 @@
 package com.project.smallbeginjava11.service;
 
-import java.util.List;
-
 import com.project.smallbeginjava11.DTO.Category;
+
+import java.util.List;
 
 public interface CategoryService {
     List<Category> getAllCategory();

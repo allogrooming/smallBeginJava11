@@ -4,9 +4,8 @@ import com.project.smallbeginjava11.DTO.IniDetail;
 import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.DTO.PossibleDate;
 import com.project.smallbeginjava11.DTO.PossibleDateList;
-import com.project.smallbeginjava11.mapper.IniMapper;
 import com.project.smallbeginjava11.mapper.PossibleDateMapper;
-import com.project.smallbeginjava11.service.*;
+import com.project.smallbeginjava11.service.PossibleDateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -58,4 +57,10 @@ public class PossibleDateServiceImpl implements PossibleDateService{
         }
         return possibleDateList;
     }
+
+    @Override
+    public List<PossibleDate> selectPossibleDateCodeByIniCode(Map<String, Object> params) throws ParseException{
+        return  possibleDateMapper.selectPossibleDateCodeByIniCode(params);
+    }
+
 }

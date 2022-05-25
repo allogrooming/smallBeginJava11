@@ -33,4 +33,15 @@
         </foreach>
     </insert>
 
+    <select id="selectPossibleDateCodeByIniCode" parameterType="hashMap" resultType="PossibleDate">
+        SELECT
+            psb_dt_code
+        FROM
+            possible_date
+        WHERE
+            psb_dt_ls_code = (SELECT psb_dt_ls_code
+                              FROM possible_date_list a
+                              WHERE a.ini_code = #{iniCode});
+    </select>
+
 </mapper>

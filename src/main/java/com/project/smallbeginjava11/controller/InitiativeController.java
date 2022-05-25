@@ -1,8 +1,11 @@
 package com.project.smallbeginjava11.controller;
 
 
-import com.project.smallbeginjava11.DTO.*;
-import com.project.smallbeginjava11.service.*;
+import com.project.smallbeginjava11.DTO.Category;
+import com.project.smallbeginjava11.DTO.Initiative;
+import com.project.smallbeginjava11.service.CategoryService;
+import com.project.smallbeginjava11.service.IniDetailService;
+import com.project.smallbeginjava11.service.IniService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +27,7 @@ public class InitiativeController {
     private final IniDetailService iniDetailService;
     private static List<String> monthDateList;
 
-    @GetMapping("/test")
+    @GetMapping("/initiative")
     public ModelAndView test(ModelAndView modelAndView){
         modelAndView.setViewName("ini");
         List<Category> category = categoryService.getAllCategory();
@@ -73,9 +76,9 @@ public class InitiativeController {
                 break;
             //매주라면 : iniPeriod가 1이라면
             case 1:
-//                Initiative initiative = iniDetailService.calculateWeeks(iniStartDate, iniEndDate, iniDuration, params);
-//                params.put("iniPossibleCount", String.valueOf(initiative.getIniPossibleCount()));
-//                params.put("iniDetails", initiative.getIniDetails());
+                Initiative initiative = iniDetailService.calculateWeeks(params);
+                params.put("iniPossibleCount", String.valueOf(initiative.getIniPossibleCount()));
+                params.put("iniDetails", initiative.getIniDetails());
                 break;
             //매달 날짜를 직접 선택해서 입력할 경우
             case 2:

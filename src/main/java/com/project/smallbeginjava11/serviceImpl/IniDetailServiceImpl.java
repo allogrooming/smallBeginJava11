@@ -40,10 +40,13 @@ public class IniDetailServiceImpl implements IniDetailService {
     //TODO : 메소드 나누기
     @Override
     public Initiative calculateWeeks(Map<String, Object> params) throws ParseException{
+        System.out.println("------calculateWeeks------");
         Date startDate = (Date) params.get("iniStartDate");
+        System.out.println(startDate);
         Date endDate = (Date) params.get("iniEndDate");
+        System.out.println(endDate);
         int duration = (int) params.get("iniDuration");
-        int iniCode = (int) params.get("iniCode");
+        System.out.println(duration);
 
         Calendar cal = Calendar.getInstance();
         Initiative initiative = new Initiative();
@@ -90,6 +93,15 @@ public class IniDetailServiceImpl implements IniDetailService {
         initiative.setIniEndDate(endDate);
         initiative.setIniPossibleCount(psbCount);
         initiative.setIniDetails(iniDetails);
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("initiative.getIniPossibleCount(): " + initiative.getIniPossibleCount());
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println();
+        System.out.println();
+        System.out.println();
         return initiative;
     }
 

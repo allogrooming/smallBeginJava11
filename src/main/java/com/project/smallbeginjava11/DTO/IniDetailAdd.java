@@ -16,6 +16,8 @@ import java.util.Date;
 public class IniDetailAdd {
     private int iniDetailAddCode; // sequence - sql에서 추가됨
     private int iniDetailCode; //
+    private int psbDtCode; // PossibleDateCode
+    private Date iniDetailAddPlanDate; // = PossibleDate
     private Date iniDetailAddDoneDate; //
     private int iniDetailAddState; //
 

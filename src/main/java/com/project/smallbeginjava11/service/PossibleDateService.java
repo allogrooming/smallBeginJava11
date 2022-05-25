@@ -11,4 +11,5 @@ public interface PossibleDateService {
     void insertPossibleDateList(Map<String, Object> params) throws ParseException;
     void insertPossibleDate(Map<String, Object> params) throws ParseException;
     List<PossibleDate> fromDateListToPossibleDateList(Initiative initiative) throws ParseException;
+    List<PossibleDate> selectPossibleDateCodeByIniCode(Map<String, Object> params) throws ParseException;
 }

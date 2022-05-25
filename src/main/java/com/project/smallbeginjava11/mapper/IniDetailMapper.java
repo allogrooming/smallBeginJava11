@@ -1,6 +1,5 @@
 package com.project.smallbeginjava11.mapper;
 
-import com.project.smallbeginjava11.DTO.IniDetail;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

@@ -3,14 +3,11 @@ package com.project.smallbeginjava11.controller;
 import com.project.smallbeginjava11.DTO.Category;
 import com.project.smallbeginjava11.service.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
