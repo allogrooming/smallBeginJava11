@@ -1,5 +1,6 @@
 package com.project.smallbeginjava11.serviceImpl;
 
+import com.project.smallbeginjava11.DTO.IniDetail;
 import com.project.smallbeginjava11.DTO.IniDetailAdd;
 import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.DTO.PossibleDate;
@@ -24,19 +25,17 @@ public class IniServiceImpl implements IniService{
     private final IniDetailAddService iniDetailAddService;
     private final PossibleDateService possibleDateService;
 
+
+    // Initiative가 입력된 다음 MonthListCode나 DateListCode를 가져온다.
     @Override
-    public List<Integer> mapToDays(Map<String, Object> params) throws ParseException {
-        ArrayList<Integer> days = new ArrayList<Integer>();
+    public Initiative getDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException {
+        return iniMapper.selectMaxIniByObCode(map);
+    }
 
-        if(params.containsKey("mon")) days.add(2);
-        if(params.containsKey("tue")) days.add(3);
-        if(params.containsKey("wed")) days.add(4);
-        if(params.containsKey("thu")) days.add(5);
-        if(params.containsKey("fri")) days.add(6);
-        if(params.containsKey("sat")) days.add(7);
-        if(params.containsKey("sun")) days.add(1);
-
-        return days;
+    //Initiative가 입력된 다음 해당 IniCode를 반환한다.
+    @Override
+    public Initiative getRecentIniCodeByObCode(Map <String, Object> map) throws ParseException {
+        return iniMapper.selectMaxIniByObCode(map);
     }
 
     @Override
@@ -45,16 +44,24 @@ public class IniServiceImpl implements IniService{
         Initiative iniByObCode = iniMapper.selectMaxIniByObCode(params);
         params.put("iniCode", iniByObCode.getIniCode());
 
-        String monthListCode = String.valueOf(iniByObCode.getMonthListCode());
+        // String monthListCode = String.valueOf(iniByObCode.getMonthListCode());
         String dateListCode = String.valueOf(iniByObCode.getDateListCode());
+
+        int iniPeriod = (int) params.get("iniPeriod");
 
         possibleDateService.insertPossibleDateList(params);
 
-        if (dateListCode != "null"){
+        if (iniPeriod == 1){
+            System.out.println("왜 일로오지???????");
             params.put("dateListCode", dateListCode);
             dateListService.insertDateList(params);
 
             Initiative iniForDetail = iniDetailService.calculateWeeks(params);
+
+            for (IniDetail iniDetail : iniForDetail.getIniDetails()){
+                System.out.println(iniDetail);
+            }
+
             List<PossibleDate> possibleDateList = possibleDateService.fromDateListToPossibleDateList(iniForDetail);
             params.put("possibleDateList", possibleDateList);
 
@@ -89,25 +96,22 @@ public class IniServiceImpl implements IniService{
 
             iniDetailAddService.insertIniDetailAdd(params);
 
-        } else if(monthListCode != "null"){
-            params.put("monthListCode", monthListCode);
-            monthListService.insertMonthList(params);
+        } else if(iniPeriod == 2){
+            // params.put("monthListCode", monthListCode);
+            List<IniDetail> iniDetails = iniDetailService.calculateMonths(params);
+
+            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            iniDetails.forEach(x -> System.out.println(x));
+            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
+            params.put("iniDetails", iniDetails);
+            iniDetailService.insertIniDetail(params);
+            iniDetailService.getDayOfMonth(iniDetails, params);
+
+
+            //monthListService.insertMonthList(params);
         }
     }
-
-    // Initiative가 입력된 다음 MonthListCode나 DateListCode를 가져온다.
-    @Override
-    public Initiative getDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException {
-        return iniMapper.selectMaxIniByObCode(map);
-    }
-
-    //Initiative가 입력된 다음 해당 IniCode를 반환한다.
-    @Override
-    public Initiative getRecentIniCodeByObCode(Map <String, Object> map) throws ParseException {
-        return iniMapper.selectMaxIniByObCode(map);
-    }
-
-
 
 
 }

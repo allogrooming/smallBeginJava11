@@ -10,6 +10,4 @@ public interface IniService {
     void insertIni(Map<String, Object> params) throws ParseException;
     Initiative getDateListCodeOrMonthListCode(Map<String, Object> map) throws ParseException;
     Initiative getRecentIniCodeByObCode(Map<String, Object> map) throws ParseException;
-    List<Integer> mapToDays(Map<String, Object> params) throws ParseException;
-
 }

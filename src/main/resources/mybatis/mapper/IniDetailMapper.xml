@@ -11,7 +11,7 @@
                 ini_detail(
                 ini_dtl_code,
                 ini_code,
-                week_order,
+                ini_dtl_order,
                 date_list_code,
                 ini_dtl_start_date,
                 ini_dtl_end_date,

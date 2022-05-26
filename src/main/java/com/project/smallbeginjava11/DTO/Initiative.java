@@ -15,7 +15,7 @@ public class Initiative {
     private int iniCode; // sequence - sql에서 추가됨
     private int obCode;
     private int dateListCode;  //
-    private int monthListCode; //
+    //private int monthListCode; //
     private int iniDuration; // 전체 기간 - 계산해줌(컨트롤러에서는 밑에 있음)
     private int iniPeriod;  // 달 주 일 중 하나 고르는거
     private int iniCount;  // 한 주 마다 몇번씩 하는지 세는거

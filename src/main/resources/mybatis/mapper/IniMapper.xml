@@ -13,7 +13,6 @@
                 ob_code,
                 ini_period,
                 date_list_code,
-                month_list_code,
                 ini_duration,
                 ini_count,
                 ini_order,
@@ -30,15 +29,12 @@
         <choose>
             <when test="iniPeriod == 0">
                 NULL,
-                NULL,
             </when>
             <when test="iniPeriod == 1">
                 (select IFNULL(MAX(b.date_list_code), 0) + 1 FROM date_list b),
-                NULL,
             </when>
             <when test="iniPeriod == 2">
                 NULL,
-                (select IFNULL(MAX(b.month_list_code), 0) + 1 FROM month_list b),
             </when>
         </choose>
                 #{iniDuration},
@@ -54,8 +50,7 @@
     <select id="selectMaxIniByObCode" parameterType="hashMap" resultType="Initiative">
         SELECT
             ini_code,
-            date_list_code,
-            month_list_code
+            date_list_code
         FROM
             initiative
         WHERE

@@ -140,63 +140,6 @@ function selectDate(elementParam){
 }
 
 
-function possibleDayCountOriginal(startDate, endDate, dateListArray){
-    var start = new Date(startDate);
-    var end = new Date(endDate);
-    var startMonth = start.getMonth();
-    var startYear = start.getFullYear();
-    var endYear = end.getFullYear();
-    var endMonth = end.getMonth();
-    var dateList = dateListArray;
-
-    if(end.getFullYear() > startYear){
-        var yearsBetween = end.getFullYear() - startYear;
-        endMonth = endMonth + (12 * yearsBetween);
-    }
-
-    var possibleDateList = [];
-    var monthsBetween = endMonth - startMonth;
-
-    for (let i = startMonth + 1; i <= startMonth + monthsBetween + 1; i++) {
-            var month = i;
-            startMonth = start.getMonth();
-                for (date of dateList) {
-                    // 만약 첫 번째 달에 선택한 날짜가 없다면
-                    if (startMonth + 1 == i && start.getDate() > date) {
-                        continue;
-                    // 만약 마지막 달에 선택한 날짜가 없다면
-                    } else if (endMonth + 1 == i && end.getDate() < date) {
-                        continue;
-                    } else if (endMonth + 1 == i && date) {
-
-                    } else {
-                        // 년도가 바뀔 때마다
-                        if (i > 12) {
-                            month -= 12 * parseInt(i / 12);
-                            // 1월에
-                            if (i % 12 == 1) startYear += parseInt(i / 12);
-                        }
-                    possibleDay = startYear + "-";
-                    possibleDay += month.toString().length < 2? "0" + month : month;
-                    possibleDay += "-";
-                    // "말일" 옵션을 선택했을 경우
-                    if(date == "말일") date = lastDay(possibleDay + "01");
-                    lastDay(possibleDay + "01")
-                    console.log("possibleDay : " + possibleDay);
-                    console.log("lastDay(possibleDay + '01') : " + lastDay(possibleDay + "01"));
-                    possibleDay += date.toString().length < 2? "0" + date :  date;
-                    console.log(date);
-                    console.log(possibleDay);
-                    possibleDateList.push(possibleDay);
-            }
-        }
-    }
-    console.log(possibleDateList);
-    console.log(possibleDateList.length);
-    return possibleDateList;
-}
-
-// 로직 변경 테스트용 함수
 function possibleDayCount(startDate, endDate, dateListArray){
     var start = new Date(startDate);
     var end = new Date(endDate);

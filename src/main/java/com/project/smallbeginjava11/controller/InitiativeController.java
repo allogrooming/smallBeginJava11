@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class InitiativeController {
     private final CategoryService categoryService;
     private final IniService iniService;
     private final IniDetailService iniDetailService;
-    private static List<String> monthDateList;
+    private static List<Date> monthDateList;
 
     @GetMapping("/initiative")
     public ModelAndView test(ModelAndView modelAndView){
@@ -48,6 +49,7 @@ public class InitiativeController {
 
         // 달 주 일(iniPeriod)
         int iniPeriod = Integer.parseInt(String.valueOf(params.get("iniPeriod")));;
+        params.put("iniPeriod", iniPeriod);
 
         //달 일 경우(2) : (기간) 개월 수 달의 같은 날짜까지
         //주 일 경우(1) : (기강) 주 수의 같은 요일까지
@@ -83,7 +85,7 @@ public class InitiativeController {
             //매달 날짜를 직접 선택해서 입력할 경우
             case 2:
                 params.put("iniPossibleCount", String.valueOf(monthDateList.size()));
-                params.put("monthDateList", monthDateList);
+                params.put("possibleDateList", monthDateList);
                 //int total = iniService.getDateList()
                 break;
         }
@@ -94,10 +96,15 @@ public class InitiativeController {
 
     @RequestMapping(value="/receiveDateList", produces = "text/html;charset=UTF-8")
     @PostMapping
-    public String receiveDateList(@RequestParam(value = "dateList[]") List<String> dateList){
+    public String receiveDateList(@RequestParam(value = "dateList[]") List<String> dateList) throws ParseException {
         dateList.forEach(x -> System.out.println(x));
-        monthDateList = dateList;
-        //iniService.getDateList(dateList);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        monthDateList = new ArrayList<Date>();
+
+        for (String dateString : dateList) {
+            monthDateList.add(sdf.parse(dateString));
+        }
+
         return "getDateList success";
     }
 

@@ -4,6 +4,7 @@ import com.project.smallbeginjava11.DTO.IniDetail;
 import com.project.smallbeginjava11.DTO.Initiative;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,8 @@ public interface IniDetailService {
     List<Integer> mapToDays(Map<String, Object> params) throws ParseException;
     int getDayOfWeek(List<IniDetail> iniDetails) throws ParseException;
     List<Integer> selectIniDtlCodes(Map<String, Object> params) throws ParseException;
-
+    List<IniDetail> calculateMonths(Map<String, Object> params) throws ParseException;
+    List<IniDetail> getDayOfMonth(List<IniDetail> iniDetails, Map<String, Object> params) throws ParseException;
 
 
 }

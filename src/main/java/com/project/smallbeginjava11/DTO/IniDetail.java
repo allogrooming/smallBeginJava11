@@ -14,7 +14,7 @@ import java.util.List;
 public class IniDetail{
     private int iniDetailCode; // sequence - sql에서 추가됨
     private int iniCode; // sequence - sql에서 추가됨
-    private int weekOrder; // 주차??단위
+    private int iniDetailOrder; // 주일 경우 주차/ 월일 경우 월 단위
     private Date iniDetailStartDate;
     private Date iniDetailEndDate;
     private int iniDetailPossibleCount; // 부분 기간 동안 가능한 횟수

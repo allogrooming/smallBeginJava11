@@ -20,6 +20,26 @@ function readForm(formId, url){
       });
 }
 
+function sendDateList(startDate, endDate, dateList, url){
+
+    $.ajax({
+         url : url,
+         type : "post",
+         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+         dataType : "text",
+         data : {
+                "dateList" : dateList
+                },
+         success : function(result){
+             console.log("sendDateList success");
+         },
+         error : function(err){
+             console.log("sendDateList error");
+         }
+    });
+
+};
+
 function readFormTodo(formId, url){
 
     let dataToDo = $('input[name=toDoList]').val();
