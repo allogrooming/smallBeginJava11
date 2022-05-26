@@ -56,12 +56,6 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @GetMapping("/joinus")
-    public ModelAndView signin(){
-        ModelAndView modelAndView = new ModelAndView("joinUs");
-        return modelAndView;
-    }
-
     @GetMapping("/home")
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView("home");
