@@ -1,5 +1,3 @@
-let currentTitle = document.getElementById('current-year-month');
-/*var calendarBody = document.getElementById('calendar-body');*/
 var today = new Date();
 var first = new Date(today.getFullYear(), today.getMonth(),1);
 var dayList = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -60,7 +58,7 @@ function removeCalendar(){
 }
 
 function prev(){
-    let preBox = document.getElementById('input-box').value;
+    let preBox = document.getElementById('toDoContent').value;
     preBox.value = '';
     const $divs = document.querySelectorAll('#input-list > div');
 /*    console.log("$divs");
@@ -86,18 +84,17 @@ function prev(){
     }
     // 이전으로 클릭 될때 날짜가 같은 달에 대해서 오늘로 보여줌(달력에 크게 띄우는거)
     today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
-    currentTitle = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'+ first.getFullYear();
     removeCalendar();
     showCalendar();
     showMain();
     clickedDate1 = document.getElementById(today.getDate());
-    //clickedDate1.classList.add('active');
+    clickedDate1.classList.add('active');
     clickStart();
     reshowingList();
 }
 
 function next(){
-    let nextBox = document.getElementById('input-box').value;
+    let nextBox = document.getElementById('toDoContent').value;
     nextBox.value = '';
     const $divs = document.querySelectorAll('#input-list > div');
     $divs.forEach(function(e){
@@ -120,13 +117,12 @@ function next(){
         first = pageFirst;
     }
     today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
-    currentTitle = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'+ first.getFullYear();
     removeCalendar();
     showCalendar();
     showMain();
-    clickedDate1 = document.getElementById('selected-date-show');
-    let selectedDate = showMain();
-    //clickedDate1.classList.add('active');
+    clickedDate1 = document.getElementById(today.getDate());
+    clickedDate1.classList.add('active');
+    console.log(clickedDate1);
     clickStart();
     reshowingList();
 }
@@ -277,7 +273,6 @@ function addTodoList(){
         $btn.remove();
     }
 }
-console.log(keyValue);
 function checkList(e){
     e.currentTarget.classList.add('checked');
 }
@@ -287,6 +282,8 @@ function showMain(){
     const mainDate = document.getElementById('main-date');
     const mainMonth = document.getElementById('main-month');
     const setUpDate = document.getElementById('setUpDate');
+    const mainYear = document.getElementById('main-year');
+
     let returnDate;
 
     if(today.getMonth()+1 < 10){
@@ -299,11 +296,21 @@ function showMain(){
     }else{
         returnDate += "-" + today.getDate();
     }
-    mainDay.innerHTML = dayList[today.getDay()];
-    mainDate.innerHTML = today.getDate().toString();
-    mainMonth.innerHTML = today.toLocaleString("en-US", {month : "short"});
+
+    var day = dayList[today.getDay()];
+    var date = today.getDate().toString();
+    var month = today.toLocaleString("en-US", {month : "short"});
+    var year = today.getFullYear().toString();
+
+    var theDate = year + '&nbsp;' + month + '&nbsp;' + date + '&nbsp;' + day.slice(0,3);
+
+    var calendarTitle = $("#current-year-month");
+    calendarTitle.empty();
+    calendarTitle.append(theDate);
+
     setUpDate.value = returnDate;
     setUpDate.innerHTML = returnDate;
+
     return returnDate;
 }
 var clickedDate1 = document.getElementById(today.getDate());

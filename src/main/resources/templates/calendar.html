@@ -29,15 +29,23 @@
                     <span id="main-month" class="main-month"></span> &nbsp;
                     <span id="main-date" class="main-date"></span> &nbsp;
                     <span id="main-day" class="main-day"></span>
+                    <span id="main-year" class="main-day"></span>
                 </div>
                 <div class="todo-wrap">
-                    <div class="todo-title">Todo List</div>
+                    <div class="todo-title">You can add "todo list" here</div>
                     <div class="input-wrap">
                         <form method="post" id="toDoList">
                             <input type="text" placeholder="please write here" id="toDoContent" class="input-box" name="toDoContent">
                             <input type="date" id="planDate" class="input-box" name="planDate">
-                            <input type="color" id="toDoColor" class="input-box" name="toDoColor">
                             <input type="date" id="setUpDate" class="input-box" name="setUpDate" style="display: none"></input>
+                            <input type="color" id="toDoColor" name="toDoColor" value="#16aaad" list="colors4palette" />
+                            <datalist id="colors4palette">
+                                <option>#355070</option>
+                                <option>#6D597A</option>
+                                <option>#B56576</option>
+                                <option>#E56B6F</option>
+                                <option>#EAAC8B</option>
+                            </datalist>
                             <button type="button" id="input-data" class="input-data">INPUT</button>
                         </form>
                         <table id="toDoListsTable">
@@ -112,8 +120,6 @@
     $("#input-data").click(function(){
         readForm("#toDoList", "/toDoList");
         var planDate = $('planDate').val();
-
-
         changeToday(planDate);
     })
 
