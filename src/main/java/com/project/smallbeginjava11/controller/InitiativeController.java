@@ -28,6 +28,13 @@ public class InitiativeController {
     private final IniDetailService iniDetailService;
     private static List<Date> monthDateList;
 
+    // 무한스크롤 테스트 페이지 연결
+    @GetMapping("/scroll")
+    public ModelAndView scroll(ModelAndView modelAndView){
+        modelAndView.setViewName("calendarScroll");
+        return modelAndView;
+    }
+
     @GetMapping("/initiative")
     public ModelAndView test(ModelAndView modelAndView){
         modelAndView.setViewName("ini");

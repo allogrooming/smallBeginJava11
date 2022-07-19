@@ -26,7 +26,8 @@ public class CalendarController {
 
         if(param == null){
             System.out.println("first calendar");
-            ModelAndView modelAndView = new ModelAndView("calendar");
+            // 무한스크롤 확인용 임시
+            ModelAndView modelAndView = new ModelAndView("calendar1");
             return modelAndView;
         }else{
             System.out.println("Got the param");
@@ -37,7 +38,8 @@ public class CalendarController {
             List<Todo> todo = calendarService.getTodoList(selectedDate);
             System.out.println(todo);
 
-            ModelAndView modelAndView = new ModelAndView("calendar");
+            // 무한스크롤 확인용 임시
+            ModelAndView modelAndView = new ModelAndView("calendar1");
             modelAndView.addObject("todo", todo);
 
             System.out.println("Send the result");
