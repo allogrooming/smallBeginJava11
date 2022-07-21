@@ -27,6 +27,7 @@ function showCalendar(){
     let monthCnt = '100';
     let cnt = 1;
     for(var i = 0; i < 6; i++){ //주에 대한 for문
+        monthCnt++;
         var $tr = document.createElement('tr');
         $tr.setAttribute('id', monthCnt);
         for(var j = 0; j < 7; j++){
@@ -42,7 +43,12 @@ function showCalendar(){
                 cnt++;
             }
         }
-        monthCnt++;
+        // 이전달 날짜 채우기
+        var trMonthCntPre = $("#100") // tr의 아이디가 100이며 td가 비어있을 경우 빈칸 채우기
+
+        // 다음달 날짜 채우기
+        var trMonthCntNext = $("#105") // tr의 아이디가 105인 td가 비어있을 경우 빈칸 채우기
+
         document.getElementById("calendar-body").appendChild($tr);
     }
     showMain();
