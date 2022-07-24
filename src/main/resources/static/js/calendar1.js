@@ -27,11 +27,71 @@ function getPageYear(date){
     return pageYear;
 }
 
+function linkMonthToMonth(headMonthCode, tailMonthCode){
+    var linkedMonthFList = document.createDocumentFragment();
+
+    var preMonthLastWeek = headMonthCode.lastElementChild;
+    var preMonthLastWeekEmptyDays = preMonthLastWeek.getElementsByClassName(0);
+    var mainMonthFirstWeek = tailMonthCode.firstElementChild;
+    var mainMonthFirstWeekFilledDays = mainMonthFirstWeek.getElementsByClassName(1)
+    const length = preMonthLastWeekEmptyDays.length;
+    for (var i = 0; i < length; i++) {
+        preMonthLastWeek.replaceChild(mainMonthFirstWeekFilledDays[0], preMonthLastWeekEmptyDays[0]);
+    }
+    tailMonthCode.removeChild(mainMonthFirstWeek);
+    linkedMonthFList.append(headMonthCode);
+    linkedMonthFList.append(tailMonthCode);
+    return linkedMonthFList;
+}
+
+
 function attachPrevNextForMain(){
     var mainThisMonth = new Date();
     var tbodyPrevCode = showCalendar(prev(mainThisMonth), 100);
     var tbodyMainCode = showCalendar(mainThisMonth, 200);
     var tbodyNextCode = showCalendar(next(mainThisMonth), 300);
+
+    console.log("********************");
+    console.log(tbodyPrevCode.childNodes);
+    console.log(tbodyPrevCode.lastElementChild);
+    var preMonthLastWeek = tbodyPrevCode.lastElementChild;
+    var preMonthLastWeekEmptyDays = preMonthLastWeek.getElementsByClassName(0);
+    console.log('preMonthLastWeek');
+    console.log(preMonthLastWeek);
+    console.log('preMonthLastWeekEmptyDays');
+    console.log(preMonthLastWeekEmptyDays);
+    var mainMonthFirstWeek = tbodyMainCode.firstElementChild;
+    var mainMonthFirstWeekFilledDays = mainMonthFirstWeek.getElementsByClassName(1)
+    console.log('mainMonthFirstWeek');
+    console.log(mainMonthFirstWeek);
+    console.log('mainMonthFirstWeekFilledDays');
+    console.log(mainMonthFirstWeekFilledDays);
+    console.log('preMonthLastWeekEmptyDays.length :', preMonthLastWeekEmptyDays.length);
+    const length = preMonthLastWeekEmptyDays.length;
+    for (var i = 0; i < length; i++) {
+        console.log('i :', i);
+        console.log('preMonthLastWeekEmptyDays.length :', preMonthLastWeekEmptyDays.length);
+        console.log('mainMonthFirstWeekFilledDays[i] :', mainMonthFirstWeekFilledDays[0]);
+        console.log(' preMonthLastWeekEmptyDays[i] :',  preMonthLastWeekEmptyDays[0]);
+        preMonthLastWeek.replaceChild(mainMonthFirstWeekFilledDays[0], preMonthLastWeekEmptyDays[0]);
+    }
+    tbodyMainCode.removeChild(mainMonthFirstWeek);
+    console.log("********************");
+    console.log('preMonthLastWeek');
+    console.log(preMonthLastWeek.childNodes);
+    console.log('preMonthLastWeekEmptyDays');
+    console.log(preMonthLastWeekEmptyDays);
+    console.log('mainMonthFirstWeek');
+    console.log(mainMonthFirstWeek.childNodes);
+    console.log('mainMonthFirstWeekFilledDays');
+    console.log(mainMonthFirstWeekFilledDays);
+    console.log("********************");
+
+//    var linkedMonthList = linkMonthToMonth(tbodyMainCode, tbodyNextCode)
+//    tbodyMainCode = linkedMonthList[0];
+//    tbodyNextCode = linkedMonthList[1];
+
+
     document.getElementById("calendar-body").append(tbodyPrevCode);
     document.getElementById("calendar-body").append(tbodyMainCode);
     document.getElementById("calendar-body").append(tbodyNextCode);
@@ -77,23 +137,26 @@ function showCalendar(pointDate, monthCnt){
         var $tr = document.createElement('tr');
         $tr.setAttribute('id', monthCnt + i);
         for(var j = 0; j < 7; j++){
-            if((i === 0 && j < pointFirst.getDay()) || cnt > pointPageYear[pointFirst.getMonth()]){
+            if((i === 1 && j < pointFirst.getDay()) || cnt > pointPageYear[pointFirst.getMonth()]){
                 var $td = document.createElement('td');
+                $td.setAttribute('class', 0);
                 $tr.appendChild($td);
             }else{
                 var $td = document.createElement('td');
                 $td.textContent = cnt;
                 var CNT = cnt.toString();
                 $td.setAttribute('id', id);
+                $td.setAttribute('class', 1);
                 $tr.appendChild($td);
                 cnt++;
                 id++;
             }
         }
-        monthCnt++;
+//        monthCnt++;
         console.log($tr);
-//        tbodyList.append($tr);
         tbodyFList.appendChild($tr);
+        // 주차 수 관리
+        if (cnt > pointPageYear[pointFirst.getMonth()]) break;
     }
 //    showMain();
     return tbodyFList;
