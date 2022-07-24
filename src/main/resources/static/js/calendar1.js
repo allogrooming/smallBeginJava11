@@ -87,9 +87,10 @@ function attachPrevNextForMain(){
     console.log(mainMonthFirstWeekFilledDays);
     console.log("********************");
 
-//    var linkedMonthList = linkMonthToMonth(tbodyMainCode, tbodyNextCode)
-//    tbodyMainCode = linkedMonthList[0];
-//    tbodyNextCode = linkedMonthList[1];
+    var linkedMonthFList = linkMonthToMonth(tbodyMainCode, tbodyNextCode)
+    console.log(linkedMonthFList.childNodes);
+    tbodyMainCode = linkedMonthFList.firstElementChild;
+    tbodyNextCode = linkedMonthFList.lastElementChild;
 
 
     document.getElementById("calendar-body").append(tbodyPrevCode);
