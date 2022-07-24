@@ -5,7 +5,7 @@ var monthList = ['January','February','March','April','May','June','July','Augus
 var leapYear=[31,29,31,30,31,30,31,31,30,31,30,31];
 var notLeapYear=[31,28,31,30,31,30,31,31,30,31,30,31];
 var pageFirst = first;
-var pageYear;
+//var pageYear;
 
 let inputBox = document.getElementById('input-box');
 var inputDate = document.getElementById('input-data');
@@ -17,35 +17,86 @@ var keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate()
 let todoList = [];
 todoList[keyValue] = [];
 
-if(first.getFullYear() % 4 === 0){
-    pageYear = leapYear;
-}else{
-    pageYear = notLeapYear;
+function getPageYear(date){
+    var pageYear;
+    if(date.getFullYear() % 4 === 0){
+        pageYear = leapYear;
+    }else{
+        pageYear = notLeapYear;
+    }
+    return pageYear;
 }
 
-function showCalendar(){
-    let monthCnt = '100';
+function attachPrevNextForMain(){
+    var mainThisMonth = new Date();
+    var tbodyPrevCode = showCalendar(prev(mainThisMonth), 100);
+    var tbodyMainCode = showCalendar(mainThisMonth, 200);
+    var tbodyNextCode = showCalendar(next(mainThisMonth), 300);
+    document.getElementById("calendar-body").append(tbodyPrevCode);
+    document.getElementById("calendar-body").append(tbodyMainCode);
+    document.getElementById("calendar-body").append(tbodyNextCode);
+}
+
+
+// TODO: monthCnt 조정 필요
+function attachNextForScroll(mainThisMonth, monthCnt){
+    if (!mainThisMonth) mainThisMonth = next(new Date());
+    var bottomMain = next(mainThisMonth);
+    var tbodyNextCodeForScroll = showCalendar(bottomMain, monthCnt);
+    document.getElementById("calendar-body").append(tbodyNextCodeForScroll);
+    return bottomMain;
+}
+
+// TODO: monthCnt 조정 필요
+function attachPrevForScroll(mainThisMonth, monthCnt){
+    if (!mainThisMonth) mainThisMonth = prev(new Date());
+    var topMain = prev(mainThisMonth);
+    var tbodyPrevCodeForScroll = showCalendar(topMain, monthCnt);
+    document.getElementById("calendar-body").before(tbodyPrevCodeForScroll);
+    return topMain;
+}
+
+function setDateId(pointDate){
+    var dateId = ""
+    dateId += pointDate.getFullYear();
+    var monthStr = (pointDate.getMonth() + 1).toString();
+    dateId += monthStr.length < 2? "0" + monthStr : monthStr;
+    dateId += "01";
+    return dateId;
+}
+
+function showCalendar(pointDate, monthCnt){
+    var tbodyFList = document.createDocumentFragment();
+    var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
+    var pointPageYear = getPageYear(pointDate);
+//    let monthCnt = '200';
+    let id = parseInt(setDateId(pointDate));
     let cnt = 1;
-    for(var i = 0; i < 6; i++){ //주에 대한 for문
+//    var tbodyCode;
+    for(var i = 1; i < 7; i++){ //주에 대한 for문
         var $tr = document.createElement('tr');
-        $tr.setAttribute('id', monthCnt);
+        $tr.setAttribute('id', monthCnt + i);
         for(var j = 0; j < 7; j++){
-            if((i === 0 && j < first.getDay()) || cnt > pageYear[first.getMonth()]){
+            if((i === 0 && j < pointFirst.getDay()) || cnt > pointPageYear[pointFirst.getMonth()]){
                 var $td = document.createElement('td');
                 $tr.appendChild($td);
             }else{
                 var $td = document.createElement('td');
                 $td.textContent = cnt;
                 var CNT = cnt.toString();
-                $td.setAttribute('id', CNT);
+                $td.setAttribute('id', id);
                 $tr.appendChild($td);
                 cnt++;
+                id++;
             }
         }
         monthCnt++;
-        document.getElementById("calendar-body").appendChild($tr);
+        console.log($tr);
+//        tbodyList.append($tr);
+        tbodyFList.appendChild($tr);
     }
-    showMain();
+//    showMain();
+    return tbodyFList;
 }
 
 function removeCalendar(){
@@ -57,43 +108,90 @@ function removeCalendar(){
     }
 }
 
-function prev(){
-    let preBox = document.getElementById('toDoContent').value;
-    preBox.value = '';
-    const $divs = document.querySelectorAll('#input-list > div');
+function prev(pointDate){
+    var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
+    var pointPrev;
+//    let preBox = document.getElementById('toDoContent').value;
+//    preBox.value = '';
+//    const $divs = document.querySelectorAll('#input-list > div');
 /*    console.log("$divs");
     console.log($divs);*/
-    $divs.forEach(function(e){
-        e.remove(); //
-    });
-    const $btns = document.querySelectorAll('#input-list > button');
-    $btns.forEach(function(e1){
-        e1.remove();
-    });
-    if(pageFirst.getMonth() === 1){ //현재 1월일 경우 이전 년도 보여주기
-        pageFirst = new Date(first.getFullYear()-1, 12, 1);
-        first = pageFirst;
-        if(first.getFullYear() % 4 === 0){
-            pageYear = leapYear;
-        }else{
-            pageYear = notLeapYear;
-        }
+//    $divs.forEach(function(e){
+//        e.remove(); //
+//    });
+//    const $btns = document.querySelectorAll('#input-list > button');
+//    $btns.forEach(function(e1){
+//        e1.remove();
+//    });
+    if(pointFirst.getMonth() === 1){ //현재 1월일 경우 이전 년도 보여주기
+        pointPrev = new Date(pointFirst.getFullYear()-1, 12, 1);
+//        first = pageFirst;
+//        if(first.getFullYear() % 4 === 0){
+//            pageYear = leapYear;
+//        }else{
+//            pageYear = notLeapYear;
+//        }
     }else{
-        pageFirst = new Date(first.getFullYear(), first.getMonth()-1, 1);
-        first = pageFirst;
+        pointPrev = new Date(pointFirst.getFullYear(), pointFirst.getMonth()-1, 1);
+//        first = pageFirst;
     }
     // 이전으로 클릭 될때 날짜가 같은 달에 대해서 오늘로 보여줌(달력에 크게 띄우는거)
-    today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
-    removeCalendar();
-    showCalendar();
-    showMain();
-    clickedDate1 = document.getElementById(today.getDate());
-    clickedDate1.classList.add('active');
-    clickStart();
-    reshowingList();
+//    today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
+//    removeCalendar();
+//    tbodyPrevCode = showCalendar(pointPrev);
+    return pointPrev;
+//    showMain();
+//    clickedDate1 = document.getElementById(today.getDate());
+//    clickedDate1.classList.add('active');
+//    clickStart();
+//    reshowingList();
+
 }
 
-function next(){
+
+// 원본 prev 메소드
+//function prev(){
+//    let preBox = document.getElementById('toDoContent').value;
+//    preBox.value = '';
+//    const $divs = document.querySelectorAll('#input-list > div');
+///*    console.log("$divs");
+//    console.log($divs);*/
+//    $divs.forEach(function(e){
+//        e.remove(); //
+//    });
+//    const $btns = document.querySelectorAll('#input-list > button');
+//    $btns.forEach(function(e1){
+//        e1.remove();
+//    });
+//    if(pageFirst.getMonth() === 1){ //현재 1월일 경우 이전 년도 보여주기
+//        pageFirst = new Date(first.getFullYear()-1, 12, 1);
+//        first = pageFirst;
+//        if(first.getFullYear() % 4 === 0){
+//            pageYear = leapYear;
+//        }else{
+//            pageYear = notLeapYear;
+//        }
+//    }else{
+//        pageFirst = new Date(first.getFullYear(), first.getMonth()-1, 1);
+//        first = pageFirst;
+//    }
+//    // 이전으로 클릭 될때 날짜가 같은 달에 대해서 오늘로 보여줌(달력에 크게 띄우는거)
+//    today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
+////    removeCalendar();
+//    showCalendar();
+//    showMain();
+//    clickedDate1 = document.getElementById(today.getDate());
+//    clickedDate1.classList.add('active');
+//    clickStart();
+//    reshowingList();
+//}
+
+function next(pointDate){
+    var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
+    console.log('pointFirst :', pointFirst);
+    var pointNext;
+//    var tbodyNextCode;
+
 //    let nextBox = document.getElementById('toDoContent').value;
 //    nextBox.value = '';
 //    const $divs = document.querySelectorAll('#input-list > div');
@@ -104,29 +202,31 @@ function next(){
 //    $btns.forEach(function(e1){
 //        e1.remove();
 //    });
-    if(pageFirst.getMonth() === 12){
-        pageFirst = new Date(first.getFullYear()+1, 1, 1);
-        first = pageFirst;
-        if(first.getFullYear() % 4 === 0){
-            pageYear = leapYear;
-        }else{
-            pageYear = notLeapYear;
-        }
+    if(pointFirst.getMonth() === 12){
+        pointNext = new Date(pointFirst.getFullYear()+1, 1, 1);
+//        first = pageFirst;
+//        if(first.getFullYear() % 4 === 0){
+//            pageYear = leapYear;
+//        }else{
+//            pageYear = notLeapYear;
+//        }
     }else{
-        pageFirst = new Date(first.getFullYear(), first.getMonth()+1, 1);
-        first = pageFirst;
+        pointNext = new Date(pointFirst.getFullYear(), pointFirst.getMonth()+1, 1);
+//        first = pageFirst;
     }
-    today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
+//    today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
 //    removeCalendar();
 //    flag = false;
-    showCalendar();
-    showMain();
-    clickedDate1 = document.getElementById(today.getDate());
-    clickedDate1.classList.add('active');
-    console.log(clickedDate1);
-    clickStart();
-    reshowingList();
+//    showCalendar();
+//    showMain();
+//    clickedDate1 = document.getElementById(today.getDate());
+//    clickedDate1.classList.add('active');
+//    console.log(clickedDate1);
+//    clickStart();
+//    reshowingList();
 //    return flag
+    console.log('pointNext :', pointNext);
+    return pointNext;
 }
 
 function reshowingList(selectedDate){
@@ -322,23 +422,24 @@ var clickedDate1 = document.getElementById(today.getDate());
 //prevBtn.addEventListener('click',prev);
 //nextBtn.addEventListener('click',next);
 var tdGroup = [];
-function clickStart(){
-    for(let i = 1; i <= pageYear[first.getMonth()]; i++){
+function clickStart(pointFirst){
+    var pointPageYear = getPageYear(pointFirst);
+    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
         tdGroup[i] = document.getElementById(i);
-        tdGroup[i].addEventListener('click',changeToday);
+        tdGroup[i].addEventListener('click', changeToday);
     }
-}
-function changeToday(e){
-    for(let i = 1; i <= pageYear[first.getMonth()]; i++){
-        if(tdGroup[i].classList.contains('active')){
-            tdGroup[i].classList.remove('active');
+    function changeToday(e){
+        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
+            if(tdGroup[i].classList.contains('active')){
+                tdGroup[i].classList.remove('active');
+            }
         }
+        console.log(e);
+        clickedDate1 = e.target;
+        clickedDate1.classList.add('active');
+//        today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
+        let selectedDate = showMain();
+        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
+        reshowingList(selectedDate);
     }
-    console.log(e);
-    clickedDate1 = e.target;
-    clickedDate1.classList.add('active');
-    today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
-    let selectedDate = showMain();
-    keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-    reshowingList(selectedDate);
 }

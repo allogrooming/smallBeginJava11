@@ -250,7 +250,7 @@ input#toDoColor {
         background-color: #333333;
         color: #ffffff;
         /* 수정 */
-        height: 100vh;
+        height: 100%;
         display: flex;
         flex-direction: column;
         width: 70%;

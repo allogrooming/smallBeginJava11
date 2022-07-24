@@ -98,8 +98,8 @@
 
 <script>
 
-    showCalendar();
-    clickStart();
+    attachPrevNextForMain();
+<!--    clickStart(new Date());-->
 
     YesScroll();
 
@@ -108,8 +108,8 @@
     console.log(selectedDate);
     reshowingList(selectedDate);
 
-    var clickedDate1 = document.getElementById(today.getDate());
-    clickedDate1.classList.add('active');
+<!--    var clickedDate1 = document.getElementById(today.getDate());-->
+<!--    clickedDate1.classList.add('active');-->
 
     $("#prev").click(function(){
         prev();
