@@ -21,11 +21,11 @@
 
     <div id="formCss">
         <form method="post" id="joinUs">
-            <span>ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="userId" name="userId" class="form" size="25"><br>
-            <span>Password</span> &nbsp; &nbsp; &nbsp; <input type="text" id="password" name="password" class="form" size="25"><br>
-            <span>Nickname</span> &nbsp; &nbsp; &nbsp; <input type="text" id="nickname" name="nickname" class="form" size="25"><br>
-            <span>Email</span> &nbsp; &nbsp; &nbsp; <input type="text" id="email" name="email" class="form" size="25"><br>
-            <input type="button" id="click" value="sumbit" class="buttons">
+            <span>ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="userId" name="userId" class="form" size="25">&nbsp; <span id="idEmpty"/> <br>
+            <span>Password</span> &nbsp; &nbsp; &nbsp; <input type="text" id="password" name="password" class="form" size="25">&nbsp; <span id="pwEmpty" /><br>
+            <span>Nickname</span> &nbsp; &nbsp; &nbsp; <input type="text" id="nickname" name="nickname" class="form" size="25">&nbsp; <span id="nickEmpty" /><br>
+            <span>Email</span> &nbsp; &nbsp; &nbsp; <input type="text" id="email" name="email" class="form" size="25">&nbsp; <span id="emailEmpty" /><br>
+            <input type="button" id="form-submit" value="sumbit" class="buttons">
         </form>
     </div>
 
@@ -34,5 +34,37 @@
 <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 
 </body>
-</html>
 
+<script>
+    $(function(){
+        var id = $("#id").val();
+        var password = $("#password").val();
+        var nickname = $("#nickname").val();
+        var email = $("#email").val();
+
+        id.focus();
+
+        if(id == ''){
+            $("#idEmpty").text("Enter your name").css("color", "darkred");
+        }
+        if(password == ''){
+            $("#pwEmpty").text("Enter the password").css("color", "darkred");
+        }
+        if(nickname == ''){
+            $("#nickEmpty").text("Enter your nickname").css("color", "darkred");
+        }
+        if(email == ''){
+            $("#emailEmpty").text("Enter your email").css("color", "darkred");
+        }
+
+        $("#form-submit").click(function(){
+            if(id == '' || password== '' || nickname == '' || email == ''){
+                alert("Please fill the form completely");
+            }else{
+                readForm("#joinUs", "/readJoinUs");
+            }
+        })
+
+    })
+</script>
+</html>

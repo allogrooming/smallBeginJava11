@@ -8,9 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class Category {
-
     private int categoryCode;
     private String categoryColor;
     private String categoryName;
-
 }
