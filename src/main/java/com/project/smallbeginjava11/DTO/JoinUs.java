@@ -8,7 +8,6 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class JoinUs {
     private int memberCode;
     private String memberId;
@@ -17,4 +16,5 @@ public class JoinUs {
     private String email;
     private Date signUpDate;
     private int activeState;
+
 }

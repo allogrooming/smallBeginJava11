@@ -21,30 +21,22 @@
 
     <div id="formCss">
         <form method="post" id="joinUs">
-            <span>ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="userId" name="userId" class="form" size="25">&nbsp; <span id="idEmpty"/> <br>
-            <span>Password</span> &nbsp; &nbsp; &nbsp; <input type="text" id="password" name="password" class="form" size="25">&nbsp; <span id="pwEmpty" /><br>
-            <span>Nickname</span> &nbsp; &nbsp; &nbsp; <input type="text" id="nickname" name="nickname" class="form" size="25">&nbsp; <span id="nickEmpty" /><br>
-            <span>Email</span> &nbsp; &nbsp; &nbsp; <input type="text" id="email" name="email" class="form" size="25">&nbsp; <span id="emailEmpty" /><br>
-            <input type="button" id="form-submit" value="sumbit" class="buttons">
+            <span class="joinInput">ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="memberId" name="memberId" class="form" size="25">&nbsp; <span id="idEmpty"></span> <br>
+            <span class="joinInput">Password</span> &nbsp; &nbsp; &nbsp; <input type="password" id="password" name="password" class="form" size="25">&nbsp; <span id="pwEmpty"></span><br>
+            <span class="joinInput">Nickname</span> &nbsp; &nbsp; &nbsp; <input type="text" id="nickname" name="nickname" class="form" size="25">&nbsp; <span id="nickEmpty"></span><br>
+            <span class="joinInput">Email</span> &nbsp; &nbsp; &nbsp; <input type="text" id="email" name="email" class="form" size="25">&nbsp; <span id="emailEmpty"></span><br>
+            <input type="button" id="form-submit" value="submit" class="buttons">
         </form>
     </div>
 
 </div>
 
 <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
-
 </body>
 
 <script>
     $(function(){
-        var id = $("#id").val();
-        var password = $("#password").val();
-        var nickname = $("#nickname").val();
-        var email = $("#email").val();
-
-        id.focus();
-
-        if(id == ''){
+/*        if(id == ''){
             $("#idEmpty").text("Enter your name").css("color", "darkred");
         }
         if(password == ''){
@@ -55,11 +47,20 @@
         }
         if(email == ''){
             $("#emailEmpty").text("Enter your email").css("color", "darkred");
-        }
+        }*/
 
         $("#form-submit").click(function(){
+            var id = $("#memberId").val();
+            var password = $("#password").val();
+            var nickname = $("#nickname").val();
+            var email = $("#email").val();
+
+            var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
             if(id == '' || password== '' || nickname == '' || email == ''){
                 alert("Please fill the form completely");
+            }else if(emailCheck.test(email) == false) {
+                alert("잘못된 이메일 형식입니다");
             }else{
                 readForm("#joinUs", "/readJoinUs");
             }

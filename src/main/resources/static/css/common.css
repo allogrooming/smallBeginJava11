@@ -98,6 +98,12 @@ select:focus{
     margin-top: 10px;
     margin-bottom: 5px;
 }
+
+.joinInput{
+    width: 250px;
+    text-align: right;
+}
+
 /*input[type="checkbox"]{
     display: none;
 }
