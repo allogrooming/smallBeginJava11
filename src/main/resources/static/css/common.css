@@ -45,10 +45,17 @@ a {
     /* Support for IE. */
     font-feature-settings: 'liga';
 }
-
+/* 2022년 7월 29일 추가 */
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
 
 #container{
-    margin-bottom: 45px;
+    /* margin-bottom: 45px; */
+    /* 2022년 7월 29일 추가 */
+    height: 100%;
 }
 #formCss, #otherContents{
     width: 700px;

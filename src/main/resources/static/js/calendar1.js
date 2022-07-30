@@ -27,85 +27,38 @@ function getPageYear(date){
     return pageYear;
 }
 
-function linkMonthToMonth(headMonthCode, tailMonthCode){
-    var linkedMonthFList = document.createDocumentFragment();
-
-    var preMonthLastWeek = headMonthCode.lastElementChild;
-    var preMonthLastWeekEmptyDays = preMonthLastWeek.getElementsByClassName(0);
-    var mainMonthFirstWeek = tailMonthCode.firstElementChild;
-    var mainMonthFirstWeekFilledDays = mainMonthFirstWeek.getElementsByClassName(1)
-    const length = preMonthLastWeekEmptyDays.length;
-    for (var i = 0; i < length; i++) {
-        preMonthLastWeek.replaceChild(mainMonthFirstWeekFilledDays[0], preMonthLastWeekEmptyDays[0]);
-    }
-    tailMonthCode.removeChild(mainMonthFirstWeek);
-    linkedMonthFList.append(headMonthCode);
-    linkedMonthFList.append(tailMonthCode);
-    return linkedMonthFList;
-}
-
-
-function attachPrevNextForMain(){
+function attachMain(){
     var mainThisMonth = new Date();
-    var tbodyPrevCode = showCalendar(prev(mainThisMonth), 100);
-    var tbodyMainCode = showCalendar(mainThisMonth, 200);
-    var tbodyNextCode = showCalendar(next(mainThisMonth), 300);
+    var tbodyFList = document.createDocumentFragment();
+    var tbodyMainCode = showCalendar(mainThisMonth, 100);
+//    var tbodyNextFirstWeekCode = showCalendar(next(mainThisMonth), 200).firstElementChild;
+    var tbodyNextFirstWeekCode = showCalendar(next(mainThisMonth), 200);
 
-    console.log("********************");
-    console.log(tbodyPrevCode.childNodes);
-    console.log(tbodyPrevCode.lastElementChild);
-    var preMonthLastWeek = tbodyPrevCode.lastElementChild;
-    var preMonthLastWeekEmptyDays = preMonthLastWeek.getElementsByClassName(0);
-    console.log('preMonthLastWeek');
-    console.log(preMonthLastWeek);
-    console.log('preMonthLastWeekEmptyDays');
-    console.log(preMonthLastWeekEmptyDays);
-    var mainMonthFirstWeek = tbodyMainCode.firstElementChild;
-    var mainMonthFirstWeekFilledDays = mainMonthFirstWeek.getElementsByClassName(1)
-    console.log('mainMonthFirstWeek');
-    console.log(mainMonthFirstWeek);
-    console.log('mainMonthFirstWeekFilledDays');
-    console.log(mainMonthFirstWeekFilledDays);
-    console.log('preMonthLastWeekEmptyDays.length :', preMonthLastWeekEmptyDays.length);
-    const length = preMonthLastWeekEmptyDays.length;
+    tbodyFList.append(tbodyMainCode);
+    tbodyFList.append(tbodyNextFirstWeekCode);
+    let length = tbodyFList.childElementCount;
+    console.log('length :', length);
     for (var i = 0; i < length; i++) {
-        console.log('i :', i);
-        console.log('preMonthLastWeekEmptyDays.length :', preMonthLastWeekEmptyDays.length);
-        console.log('mainMonthFirstWeekFilledDays[i] :', mainMonthFirstWeekFilledDays[0]);
-        console.log(' preMonthLastWeekEmptyDays[i] :',  preMonthLastWeekEmptyDays[0]);
-        preMonthLastWeek.replaceChild(mainMonthFirstWeekFilledDays[0], preMonthLastWeekEmptyDays[0]);
+        console.log('tbodyFList[i]');
+        console.log(tbodyFList[i]);
+        tbodyFList.children[i].setAttribute('data-main-month-block', i);
+
+
     }
-    tbodyMainCode.removeChild(mainMonthFirstWeek);
-    console.log("********************");
-    console.log('preMonthLastWeek');
-    console.log(preMonthLastWeek.childNodes);
-    console.log('preMonthLastWeekEmptyDays');
-    console.log(preMonthLastWeekEmptyDays);
-    console.log('mainMonthFirstWeek');
-    console.log(mainMonthFirstWeek.childNodes);
-    console.log('mainMonthFirstWeekFilledDays');
-    console.log(mainMonthFirstWeekFilledDays);
-    console.log("********************");
 
-    var linkedMonthFList = linkMonthToMonth(tbodyMainCode, tbodyNextCode)
-    console.log(linkedMonthFList.childNodes);
-    tbodyMainCode = linkedMonthFList.firstElementChild;
-    tbodyNextCode = linkedMonthFList.lastElementChild;
-
-
-    document.getElementById("calendar-body").append(tbodyPrevCode);
-    document.getElementById("calendar-body").append(tbodyMainCode);
-    document.getElementById("calendar-body").append(tbodyNextCode);
+//    document.getElementById("calendar-body").append(tbodyMainCode)
+//    document.getElementById("calendar-body").append(tbodyNextFirstWeekCode)
+    document.getElementById("calendar-body").append(tbodyFList);
+    return next(mainThisMonth)
 }
-
 
 // TODO: monthCnt 조정 필요
-function attachNextForScroll(mainThisMonth, monthCnt){
-    if (!mainThisMonth) mainThisMonth = next(new Date());
-    var bottomMain = next(mainThisMonth);
-    var tbodyNextCodeForScroll = showCalendar(bottomMain, monthCnt);
+function attachNextForScroll(bottomMonthDate, monthCnt){
+    if (!bottomMonthDate) bottomMonthDate = next(new Date());
+    var tbodyNextCodeForScroll = showCalendar(bottomMonthDate, monthCnt);
+
     document.getElementById("calendar-body").append(tbodyNextCodeForScroll);
-    return bottomMain;
+    return bottomMonthDate;
 }
 
 // TODO: monthCnt 조정 필요
@@ -117,51 +70,62 @@ function attachPrevForScroll(mainThisMonth, monthCnt){
     return topMain;
 }
 
-function setDateId(pointDate){
-    var dateId = ""
+function setDateId(pointDate, date){
+    var dateId = "";
+    var dateStr = date.toString();
     dateId += pointDate.getFullYear();
     var monthStr = (pointDate.getMonth() + 1).toString();
     dateId += monthStr.length < 2? "0" + monthStr : monthStr;
-    dateId += "01";
+    var dateStr = date.toString();
+    dateId += dateStr.length < 2? "0" + dateStr : dateStr;
     return dateId;
 }
 
 function showCalendar(pointDate, monthCnt){
     var tbodyFList = document.createDocumentFragment();
+    if (!pointDate) pointDate = new Date();
     var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
     var pointPageYear = getPageYear(pointDate);
-//    let monthCnt = '200';
-    let id = parseInt(setDateId(pointDate));
+    var pointFirstWeekStartDate = pointFirst.getDay();
+
+    var prevFirst = prev(pointDate);
+    var prevPageYear = getPageYear(prevFirst);
+    var prevLastDate = prevPageYear[prevFirst.getMonth()];
+    var prevLastWeekStartDate = prevLastDate - pointFirstWeekStartDate + 1;
+
+    let pointId = parseInt(setDateId(pointDate, 1));
+    let prevId = parseInt(setDateId(prevFirst, prevLastWeekStartDate));
     let cnt = 1;
-//    var tbodyCode;
     for(var i = 1; i < 7; i++){ //주에 대한 for문
         var $tr = document.createElement('tr');
         $tr.setAttribute('id', monthCnt + i);
         for(var j = 0; j < 7; j++){
-            if((i === 1 && j < pointFirst.getDay()) || cnt > pointPageYear[pointFirst.getMonth()]){
+            if(i === 1 && j < pointFirstWeekStartDate){
                 var $td = document.createElement('td');
-                $td.setAttribute('class', 0);
+                $td.setAttribute('id', prevId);
+                $td.setAttribute('class', 's');
+                $td.textContent = prevLastWeekStartDate;
                 $tr.appendChild($td);
-            }else{
+                prevLastWeekStartDate++;
+                prevId++;
+            } else{
                 var $td = document.createElement('td');
                 $td.textContent = cnt;
-                var CNT = cnt.toString();
-                $td.setAttribute('id', id);
+                $td.setAttribute('id', pointId);
                 $td.setAttribute('class', 1);
                 $tr.appendChild($td);
                 cnt++;
-                id++;
+                pointId++;
             }
         }
-//        monthCnt++;
-        console.log($tr);
-        tbodyFList.appendChild($tr);
-        // 주차 수 관리
         if (cnt > pointPageYear[pointFirst.getMonth()]) break;
+        tbodyFList.appendChild($tr);
     }
 //    showMain();
     return tbodyFList;
 }
+
+
 
 function removeCalendar(){
     let catchTr = 100;
@@ -252,7 +216,7 @@ function prev(pointDate){
 
 function next(pointDate){
     var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
-    console.log('pointFirst :', pointFirst);
+//    console.log('pointFirst :', pointFirst);
     var pointNext;
 //    var tbodyNextCode;
 
@@ -289,7 +253,7 @@ function next(pointDate){
 //    clickStart();
 //    reshowingList();
 //    return flag
-    console.log('pointNext :', pointNext);
+//    console.log('pointNext :', pointNext);
     return pointNext;
 }
 

@@ -12,6 +12,7 @@
 <link th:href="@{/css/navbar.css}" rel="stylesheet" />
 <link th:href="@{/css/footer.css}" rel="stylesheet" />
 <link th:href="@{/css/calendar1.css}" rel="stylesheet" />
+<link th:href="@{/css/resetCSS.css}" rel="stylesheet" />
 <script th:src="@{/js/navbar.js}"></script>
 <script th:src="@{/js/calendar1.js}"></script>
 <script th:src="@{/js/infiniteScroll.js}"></script>
@@ -62,19 +63,19 @@
             </div>
             <div class="content-right">
                 <table id="calendar" align="center">
-                    <thead>
+                    <thead id = "calendar-head">
                     <tr class="btn-wrap clearfix">
-                        <td>
-                            <label id="prev">
-                                &#60;
-                            </label>
-                        </td>
-                        <td align="center" id="current-year-month" colspan="5"></td>
-                        <td>
-                            <label id="next">
-                                &#62;
-                            </label>
-                        </td>
+<!--                        <td>-->
+<!--                            <label id="prev">-->
+<!--                                &#60;-->
+<!--                            </label>-->
+<!--                        </td>-->
+                        <td align="center" id="current-year-month" colspan="7"></td>
+<!--                        <td>-->
+<!--                            <label id="next">-->
+<!--                                &#62;-->
+<!--                            </label>-->
+<!--                        </td>-->
                     </tr>
                     <tr>
                         <td class = "sun" align="center">Sun</td>
@@ -86,7 +87,7 @@
                         <td class= "sat" align="center">Sat</td>
                     </tr>
                     </thead>
-                    <tbody id="calendar-body" class="calendar-body"></tbody>
+                    <tbody id="calendar-body"></tbody>
                 </table>
             </div>
         </div>
@@ -98,15 +99,15 @@
 
 <script>
 
-    attachPrevNextForMain();
+    attachMain();
 <!--    clickStart(new Date());-->
 
     YesScroll();
 
-    var selectedDate = document.getElementById("setUpDate").innerText;
-    console.log("selectedDate - html reshowing");
-    console.log(selectedDate);
-    reshowingList(selectedDate);
+<!--    var selectedDate = document.getElementById("setUpDate").innerText;-->
+<!--    console.log("selectedDate - html reshowing");-->
+<!--    console.log(selectedDate);-->
+<!--    reshowingList(selectedDate);-->
 
 <!--    var clickedDate1 = document.getElementById(today.getDate());-->
 <!--    clickedDate1.classList.add('active');-->
