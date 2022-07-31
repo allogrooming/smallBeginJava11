@@ -37,13 +37,11 @@ function attachMain(){
     tbodyFList.append(tbodyMainCode);
     tbodyFList.append(tbodyNextFirstWeekCode);
     let length = tbodyFList.childElementCount;
-    console.log('length :', length);
+//    console.log('length :', length);
     for (var i = 0; i < length; i++) {
         console.log('tbodyFList[i]');
         console.log(tbodyFList[i]);
-        tbodyFList.children[i].setAttribute('data-main-month-block', i);
-
-
+        tbodyFList.children[i].setAttribute('data-main-month-block', 0);
     }
 
 //    document.getElementById("calendar-body").append(tbodyMainCode)
@@ -86,33 +84,42 @@ function showCalendar(pointDate, monthCnt){
     if (!pointDate) pointDate = new Date();
     var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
     var pointPageYear = getPageYear(pointDate);
-    var pointFirstWeekStartDate = pointFirst.getDay();
+    var pointFirstWeekStartDay = pointFirst.getDay();
 
     var prevFirst = prev(pointDate);
     var prevPageYear = getPageYear(prevFirst);
     var prevLastDate = prevPageYear[prevFirst.getMonth()];
-    var prevLastWeekStartDate = prevLastDate - pointFirstWeekStartDate + 1;
+    var prevLastWeekStartDate = prevLastDate - pointFirstWeekStartDay + 1;
 
     let pointId = parseInt(setDateId(pointDate, 1));
-    let prevId = parseInt(setDateId(prevFirst, prevLastWeekStartDate));
+    let prevId = parseInt(setDateId(prevFirst, pointFirstWeekStartDay));
     let cnt = 1;
     for(var i = 1; i < 7; i++){ //주에 대한 for문
         var $tr = document.createElement('tr');
         $tr.setAttribute('id', monthCnt + i);
         for(var j = 0; j < 7; j++){
-            if(i === 1 && j < pointFirstWeekStartDate){
+            if(i === 1 && j < pointFirstWeekStartDay){
                 var $td = document.createElement('td');
+                var $div = document.createElement('div');
+                $div.textContent = prevLastWeekStartDate;;
+                $td.appendChild($div);
                 $td.setAttribute('id', prevId);
-                $td.setAttribute('class', 's');
-                $td.textContent = prevLastWeekStartDate;
+                $td.setAttribute('class', 'prev-month');
                 $tr.appendChild($td);
                 prevLastWeekStartDate++;
                 prevId++;
             } else{
                 var $td = document.createElement('td');
-                $td.textContent = cnt;
+                var $div = document.createElement('div');
+                $div.textContent = cnt;
+                $td.appendChild($div);
                 $td.setAttribute('id', pointId);
-                $td.setAttribute('class', 1);
+                // 달의 첫 날과 마지막 날 구분용 class
+                if (cnt == 1){
+                    $td.setAttribute('class', 'month-start-date');
+                } else if (cnt == pointPageYear[pointFirst.getMonth()]){
+                    $td.setAttribute('class', 'month-end-date');
+                }
                 $tr.appendChild($td);
                 cnt++;
                 pointId++;
@@ -121,10 +128,20 @@ function showCalendar(pointDate, monthCnt){
         if (cnt > pointPageYear[pointFirst.getMonth()]) break;
         tbodyFList.appendChild($tr);
     }
-//    showMain();
+    showCurrentMonthTitle(pointDate);
     return tbodyFList;
 }
 
+function showCurrentMonthTitle(pointDate){
+    var currentMonthStr = '';
+    currentMonthStr += pointDate.getFullYear() + '.';
+    var monthStr = (pointDate.getMonth() + 1).toString();
+    currentMonthStr += monthStr.length < 2? "0" + monthStr : monthStr;
+
+    var calendarTitle = $("#current-year-month");
+    calendarTitle.empty();
+    calendarTitle.append(currentMonthStr);
+}
 
 
 function removeCalendar(){
@@ -177,42 +194,6 @@ function prev(pointDate){
 }
 
 
-// 원본 prev 메소드
-//function prev(){
-//    let preBox = document.getElementById('toDoContent').value;
-//    preBox.value = '';
-//    const $divs = document.querySelectorAll('#input-list > div');
-///*    console.log("$divs");
-//    console.log($divs);*/
-//    $divs.forEach(function(e){
-//        e.remove(); //
-//    });
-//    const $btns = document.querySelectorAll('#input-list > button');
-//    $btns.forEach(function(e1){
-//        e1.remove();
-//    });
-//    if(pageFirst.getMonth() === 1){ //현재 1월일 경우 이전 년도 보여주기
-//        pageFirst = new Date(first.getFullYear()-1, 12, 1);
-//        first = pageFirst;
-//        if(first.getFullYear() % 4 === 0){
-//            pageYear = leapYear;
-//        }else{
-//            pageYear = notLeapYear;
-//        }
-//    }else{
-//        pageFirst = new Date(first.getFullYear(), first.getMonth()-1, 1);
-//        first = pageFirst;
-//    }
-//    // 이전으로 클릭 될때 날짜가 같은 달에 대해서 오늘로 보여줌(달력에 크게 띄우는거)
-//    today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
-////    removeCalendar();
-//    showCalendar();
-//    showMain();
-//    clickedDate1 = document.getElementById(today.getDate());
-//    clickedDate1.classList.add('active');
-//    clickStart();
-//    reshowingList();
-//}
 
 function next(pointDate){
     var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
@@ -319,61 +300,6 @@ function addTodoLists(resp){
     $(toDoLists).html(toDoTable);
 }
 
-/*function reshowingList(){
-    keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-    let reshowList = document.getElementById('input-list').value;
-    if(todoList[keyValue] === undefined){
-        reshowList.remove();
-        todoList[keyValue] = [];
-        const $divs = document.querySelectorAll('#input-list > div');
-        $divs.forEach(function(e){
-            e.remove();
-        });
-        const $btns = document.querySelectorAll('#input-list > button');
-        $btns.forEach(function(e1){
-            e1.remove();
-        });
-    }else if(todoList[keyValue].length ===0){
-        reshowList.remove();
-        const $divs = document.querySelectorAll('#input-list > div');
-        $divs.forEach(function(e){
-            e.remove();
-        });
-        const $btns = document.querySelectorAll('#input-list > button');
-        $btns.forEach(function(e1){
-            e1.remove();
-        });
-    }else{
-        const $divs = document.querySelectorAll('#input-list > div');
-        $divs.forEach(function(e){
-            e.remove();
-        });
-        const $btns = document.querySelectorAll('#input-list > button');
-        $btns.forEach(function(e1){
-            e1.remove();
-        });
-        var $div = document.createElement('div');
-        for(var i = 0; i < todoList[keyValue].length; i++){
-            var $div = document.createElement('div');
-            $div.textContent = '-' + todoList[keyValue][i];
-            var $btn = document.createElement('button');
-            $btn.setAttribute('type', 'button');
-            $btn.setAttribute('id', 'del-ata');
-            $btn.setAttribute('id', dataCnt+keyValue);
-            $btn.setAttribute('class', 'del-data');
-            $btn.textContent = delText;
-            inputList.appendChild($div);
-            inputList.appendChild($btn);
-            $div.addEventListener('click',checkList);
-            $btn.addEventListener('click',deleteTodo);
-            inputBox.value = '';
-            function deleteTodo(){
-                $div.remove();
-                $btn.remove();
-            }
-        }
-    }
-}*/
 
 function addTodoList(){
     var $div = document.createElement('div');
@@ -406,6 +332,8 @@ function addTodoList(){
 function checkList(e){
     e.currentTarget.classList.add('checked');
 }
+
+
 
 function showMain(){
     const mainDay = document.getElementById('main-day');
@@ -443,6 +371,43 @@ function showMain(){
 
     return returnDate;
 }
+//
+//function showMain(){
+//    const mainDay = document.getElementById('main-day');
+//    const mainDate = document.getElementById('main-date');
+//    const mainMonth = document.getElementById('main-month');
+//    const setUpDate = document.getElementById('setUpDate');
+//    const mainYear = document.getElementById('main-year');
+//
+//    let returnDate;
+//
+//    if(today.getMonth()+1 < 10){
+//        returnDate = today.getFullYear() + "-0" + (today.getMonth()+1);
+//    }else{
+//        returnDate = today.getFullYear() + "-" + (today.getMonth()+1);
+//    }
+//    if(today.getDate() < 10){
+//        returnDate += "-0" + today.getDate();
+//    }else{
+//        returnDate += "-" + today.getDate();
+//    }
+//
+//    var day = dayList[today.getDay()];
+//    var date = today.getDate().toString();
+//    var month = today.toLocaleString("en-US", {month : "short"});
+//    var year = today.getFullYear().toString();
+//
+//    var theDate = year + '&nbsp;' + month + '&nbsp;' + date + '&nbsp;' + day.slice(0,3);
+//
+//    var calendarTitle = $("#current-year-month");
+//    calendarTitle.empty();
+//    calendarTitle.append(theDate);
+//
+//    setUpDate.value = returnDate;
+//    setUpDate.innerHTML = returnDate;
+//
+//    return returnDate;
+//}
 var clickedDate1 = document.getElementById(today.getDate());
 //clickedDate1.classList.add('active');
 //var prevBtn = document.getElementById('prev');

@@ -39,7 +39,7 @@ public class CalendarController {
             System.out.println(todo);
 
             // 무한스크롤 확인용 임시
-            ModelAndView modelAndView = new ModelAndView("calendar1");
+            ModelAndView modelAndView = new ModelAndView("calendar");
             modelAndView.addObject("todo", todo);
 
             System.out.println("Send the result");
@@ -48,6 +48,36 @@ public class CalendarController {
         }
     }
 
+    // 임시 calendar1.html 연결용
+    @RequestMapping("/calendar1")
+    public ModelAndView calendar1(@RequestParam @Nullable Map<String, String> param){
+
+        System.out.println("param - Calendar");
+        System.out.println(param);
+
+        if(param == null){
+            System.out.println("first calendar");
+            // 무한스크롤 확인용 임시
+            ModelAndView modelAndView = new ModelAndView("calendar1");
+            return modelAndView;
+        }else{
+            System.out.println("Got the param");
+            System.out.println(param);
+            String selectedDate = param.get("param");
+
+            System.out.println(selectedDate);
+            List<Todo> todo = calendarService.getTodoList(selectedDate);
+            System.out.println(todo);
+
+            // 무한스크롤 확인용 임시
+            ModelAndView modelAndView = new ModelAndView("calendar1");
+            modelAndView.addObject("todo", todo);
+
+            System.out.println("Send the result");
+
+            return modelAndView;
+        }
+    }
 /*  @Transactional
     @RequestMapping(value="/readCalendar", produces="text/html;charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
