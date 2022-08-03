@@ -9,4 +9,6 @@ import java.util.Map;
 @Repository
 public interface JoinMapper {
     void insertMember(Map<String, String> param);
+    int checkId(Map<String, String> memberId);
+    int checkNick(Map<String, String> nickname);
 }

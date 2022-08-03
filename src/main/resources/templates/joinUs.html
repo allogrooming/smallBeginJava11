@@ -12,7 +12,16 @@
     <link th:href="@{/css/navbar.css}" rel="stylesheet" />
     <link th:href="@{/css/footer.css}" rel="stylesheet" />
     <script th:src="@{/js/navbar.js}"></script>
+    <script th:src="@{/js/calendar.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
 
+    <style>
+        .joinAlert{
+            font-size: 8pt;
+            color: darkred;
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div id="container">
@@ -21,11 +30,28 @@
 
     <div id="formCss">
         <form method="post" id="joinUs">
-            <span class="joinInput">ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="memberId" name="memberId" class="form" size="25">&nbsp; <span id="idEmpty"></span> <br>
-            <span class="joinInput">Password</span> &nbsp; &nbsp; &nbsp; <input type="password" id="password" name="password" class="form" size="25">&nbsp; <span id="pwEmpty"></span><br>
-            <span class="joinInput">Nickname</span> &nbsp; &nbsp; &nbsp; <input type="text" id="nickname" name="nickname" class="form" size="25">&nbsp; <span id="nickEmpty"></span><br>
-            <span class="joinInput">Email</span> &nbsp; &nbsp; &nbsp; <input type="text" id="email" name="email" class="form" size="25">&nbsp; <span id="emailEmpty"></span><br>
-            <input type="button" id="form-submit" value="submit" class="buttons">
+            <span class="joinInput">ID</span> &nbsp; &nbsp; &nbsp;
+            <input type="text" id="memberId" name="memberId" class="form" size="25" />&nbsp;<br>
+            <span class="joinAlert" id="id_ok">That ID is available.</span>
+            <span id="id_already" class="joinAlert">That ID is taken. Try another</span>
+            <span id="idEmpty" class="joinAlert">Enter your ID</span>
+            <br>
+            <span class="joinInput">Password</span> &nbsp; &nbsp; &nbsp;
+            <input type="password" id="password" name="password" class="form" size="25" />&nbsp;<br>
+            <span id="pwEmpty" class="joinAlert">Enter your password</span>
+            <span id="pwWrong" class="joinAlert" style="display: inline-block">8 to 20 characters with upper and lower case letters and numbers </span>
+            <br>
+            <span class="joinInput">Nickname</span> &nbsp; &nbsp; &nbsp;
+            <input type="text" id="nickname" name="nickname" class="form" size="25" /> <br>
+            <span id="nick_ok" class="joinAlert">That nickname is available.</span>
+            <span id="nick_already" class="joinAlert">That nickname is taken. Try another</span>
+            <span id="nickEmpty" class="joinAlert">Enter your nickname</span>
+            <br>
+            <span class="joinInput">Email</span> &nbsp; &nbsp; &nbsp;
+            <input type="text" id="email" name="email" class="form" size="25" />&nbsp; <br>
+            <span id="emailWrong" class="joinAlert">Enter valid email</span>
+            <span id="emailEmpty" class="joinAlert">Enter your email</span><br>
+            <input type="button" id="form-submit" value="submit" class="buttons" />
         </form>
     </div>
 
@@ -35,37 +61,148 @@
 </body>
 
 <script>
-    $(function(){
-/*        if(id == ''){
-            $("#idEmpty").text("Enter your name").css("color", "darkred");
-        }
-        if(password == ''){
-            $("#pwEmpty").text("Enter the password").css("color", "darkred");
-        }
-        if(nickname == ''){
-            $("#nickEmpty").text("Enter your nickname").css("color", "darkred");
-        }
-        if(email == ''){
-            $("#emailEmpty").text("Enter your email").css("color", "darkred");
-        }*/
-
-        $("#form-submit").click(function(){
-            var id = $("#memberId").val();
-            var password = $("#password").val();
-            var nickname = $("#nickname").val();
-            var email = $("#email").val();
-
-            var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-
-            if(id == '' || password== '' || nickname == '' || email == ''){
-                alert("Please fill the form completely");
-            }else if(emailCheck.test(email) == false) {
-                alert("잘못된 이메일 형식입니다");
-            }else{
-                readForm("#joinUs", "/readJoinUs");
+    function checkId(memberId){
+        $.ajax({
+            url : "/checkId",
+            type : "post",
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType : "text",
+            data : {"memberId" : memberId},
+            success: function (cnt) {
+                console.log("Success");
+                console.log(cnt);
+                if (cnt == '0') {
+                    $("#id_ok").css("display", "inline-block");
+                    $("#id_already").css("display", "none");
+                } else {
+                    $("#id_already").css("display", "inline-block");
+                    $("#id_ok").css("display", "none");
+                }
+            },
+            error: function (err) {
+                alert("Error");
+                console.log(err);
             }
-        })
+        });
+    }
 
+    function checkNick(nickname){
+        $.ajax({
+            url : "/checkNick",
+            type : "post",
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType : "text",
+            data : {"nickname" : nickname},
+            success: function (cnt) {
+                console.log("Success");
+                console.log(cnt);
+                if (cnt == '0') {
+                    $("#nick_ok").css("display", "inline-block");
+                    $("#nick_already").css("display", "none");
+                } else {
+                    $("#nick_already").css("display", "inline-block");
+                    $("#nick_ok").css("display", "none");
+                }
+            },
+            error: function (err) {
+                alert("Error");
+                console.log(err);
+            }
+        });
+    }
+
+ /*   function checkNick(nickname){
+        var obj = $(nickname).val();
+        console.log(obj);
+        $.ajax({
+            url : "/checkNick",
+            type : "post",
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType : "text",
+            data : {"nickname" : obj},
+            success: function (cnt) {
+                console.log("Success");
+                console.log(cnt);
+                if (cnt == '0') {
+                    $("#nick_ok").css("display", "inline-block");
+                    $("#nick_already").css("display", "none");
+                } else {
+                    $("#nick_already").css("display", "inline-block");
+                    $("#nick_ok").css("display", "none");
+                }
+            },
+            error: function (err) {
+                alert("Error");
+                console.log(err);
+            }
+        });
+    }*/
+
+    $("#memberId").on("change", function(){
+        var memberId = $("#memberId").val()
+        if(memberId == ''){
+            $("#idEmpty").css("display", "inline-block");
+        }else{
+            checkId(memberId);
+        }
     })
+
+    $("#password").on("change", function(){
+        var password = $("#password").val();
+        var passwordCheck = "/^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$/";
+        if(password == ''){
+            $("#pwEmpty").css("display", "inline-block");
+        }
+        if(/^[a-zA-Z0-9]{8,20}$/.test(password) === false){
+            $("#pwWrong").css("display", "inline-block");
+        }else{
+            $("#pwWrong").css("display", "none");
+        }
+    })
+
+    $("#nickname").on("change", function(){
+        var nickname = $("#nickname").val()
+        if(nickname == ''){
+            $("#nickEmpty").css("display", "inline-block");
+        }else{
+            checkNick(nickname);
+        }
+    })
+
+    $("#email").on("change", function(){
+        var email = $("#email").val();
+        var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+        if(email == ''){
+            $("#emailEmpty").css("display", "inline-block");
+        }
+        if(emailCheck.test(email) === false){
+            $("#emailWrong").css("display", "inline-block");
+        }else{
+            $("#emailWrong").css("display", "none");
+        }
+    })
+
+    $("#form-submit").click(function(){
+        var idOk = $("#id_ok");
+        var pwWrong = $("#pwWrong");
+        var pwEmpty = $("#password").val();
+        var nickOk = $("#nick_ok");
+        var emailWrong = $("#emailWrong");
+        var emailEmpty = $("#email").val();
+
+        if(idOk.css("display") == 'inline-block' && pwEmpty != '' && pwWrong.css("display") == 'none'
+        && nickOk.css("display") == 'inline-block' && emailWrong.css("display") == 'none' && emailEmpty != ''){
+            readForm("#joinUs", "/readJoinUs");
+        }else{
+            alert("Fill the form correctly");
+            console.log("pwEmpty : ", pwEmpty);
+            console.log("email : ", emailEmpty);
+            console.log(idOk.style.display);
+            console.log(pwWrong.style.display);
+            console.log(nickOk.style.display);
+            console.log(emailWrong.style.display);
+        }
+    })
+
 </script>
 </html>

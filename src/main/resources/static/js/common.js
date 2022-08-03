@@ -11,7 +11,7 @@ function readForm(formId, url){
              data : $(formId).serialize(),
              success : function(result){
                  console.log(result);
-                 console.log(this.data);
+                 //console.log(this.data);
              },
              error : function(err){
                  console.log(err+"에러발생");
@@ -80,3 +80,25 @@ function loadCalendar(memberCode){
         }
     });
 }
+
+/*
+function checkId(memberId, url){
+    $.ajax({
+        url : url,
+        type : 'post',
+        data:{memberId : memberId},
+        success:function(){
+            console.log("Success");
+            if(cnt != 1){
+                $('.id_ok').css("display","inline-block");
+                $('.id_already').css("display", "none");
+            } else {
+                $('.id_already').css("display","inline-block");
+                $('.id_ok').css("display", "none");
+            }
+        },
+        error:function(){
+            alert("Error");
+        }
+    });
+}*/

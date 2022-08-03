@@ -16,7 +16,18 @@ public class JoinServiceImpl implements JoinService {
 
     @Override
     public void inputJoin(Map<String, String> param) throws ParseException {
-        System.out.println("Service layer : " + param);
         joinMapper.insertMember(param);
+    }
+
+    @Override
+    public int checkId(Map<String, String> memberId){
+        int cnt = joinMapper.checkId(memberId);
+        return cnt;
+    }
+
+    @Override
+    public int checkNick(Map<String, String> nickname){
+        int cnt = joinMapper.checkNick(nickname);
+        return cnt;
     }
 }
