@@ -103,12 +103,7 @@ select:focus{
     width: 250px;
     text-align: right;
 }
-
-
-
-/*input[type="checkbox"]{
-    display: none;
-}
+/*
 input[type="checkbox"]+ label {
     display: inline-block;
     width: 16px;
