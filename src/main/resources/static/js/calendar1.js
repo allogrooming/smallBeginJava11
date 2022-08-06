@@ -37,10 +37,8 @@ function attachMain(){
     tbodyFList.append(tbodyMainCode);
     tbodyFList.append(tbodyNextFirstWeekCode);
     let length = tbodyFList.childElementCount;
-//    console.log('length :', length);
+
     for (var i = 0; i < length; i++) {
-        console.log('tbodyFList[i]');
-        console.log(tbodyFList[i]);
         tbodyFList.children[i].setAttribute('data-main-month-block', 0);
     }
 
@@ -68,6 +66,18 @@ function attachPrevForScroll(mainThisMonth, monthCnt){
     return topMain;
 }
 
+function getDateSepPoint(pointDate){
+    var currentMonthStr = '';
+    currentMonthStr += pointDate.getFullYear() + '.';
+    var monthStr = (pointDate.getMonth() + 1).toString();
+    var dateStr = (pointDate.getDate() + 1).toString();
+    currentMonthStr += monthStr.length < 2? "0" + monthStr : monthStr;
+    currentMonthStr += '.'
+    currentMonthStr += dateStr.length < 2? "0" + dateStr : dateStr;
+
+    return currentMonthStr;
+}
+
 function setDateId(pointDate, date){
     var dateId = "";
     var dateStr = date.toString();
@@ -77,6 +87,17 @@ function setDateId(pointDate, date){
     var dateStr = date.toString();
     dateId += dateStr.length < 2? "0" + dateStr : dateStr;
     return dateId;
+}
+
+function showCurrentMonthTitle(pointDate){
+    var currentMonthStr = '';
+    currentMonthStr += pointDate.getFullYear() + '.';
+    var monthStr = (pointDate.getMonth() + 1).toString();
+    currentMonthStr += monthStr.length < 2? "0" + monthStr : monthStr;
+
+    var calendarTitle = $("#current-year-month");
+    calendarTitle.empty();
+    calendarTitle.append(currentMonthStr);
 }
 
 function showCalendar(pointDate, monthCnt){
@@ -105,6 +126,7 @@ function showCalendar(pointDate, monthCnt){
                 $td.appendChild($div);
                 $td.setAttribute('id', prevId);
                 $td.setAttribute('class', 'prev-month');
+                if (prevLastWeekStartDate == prevLastDate) $td.setAttribute('class', 'prev-month month-end-date');
                 $tr.appendChild($td);
                 prevLastWeekStartDate++;
                 prevId++;
@@ -115,11 +137,7 @@ function showCalendar(pointDate, monthCnt){
                 $td.appendChild($div);
                 $td.setAttribute('id', pointId);
                 // 달의 첫 날과 마지막 날 구분용 class
-                if (cnt == 1){
-                    $td.setAttribute('class', 'month-start-date');
-                } else if (cnt == pointPageYear[pointFirst.getMonth()]){
-                    $td.setAttribute('class', 'month-end-date');
-                }
+                if (cnt == 1) $td.setAttribute('class', 'month-start-date');
                 $tr.appendChild($td);
                 cnt++;
                 pointId++;
@@ -128,19 +146,49 @@ function showCalendar(pointDate, monthCnt){
         if (cnt > pointPageYear[pointFirst.getMonth()]) break;
         tbodyFList.appendChild($tr);
     }
-    showCurrentMonthTitle(pointDate);
+    showCurrentMonthTitle(new Date());
+    showCurrentDateOnLeft();
     return tbodyFList;
 }
 
-function showCurrentMonthTitle(pointDate){
-    var currentMonthStr = '';
-    currentMonthStr += pointDate.getFullYear() + '.';
-    var monthStr = (pointDate.getMonth() + 1).toString();
-    currentMonthStr += monthStr.length < 2? "0" + monthStr : monthStr;
+function getDateForLeft(pointDate){
+    var mainDateForLeft = [];
+    var yearStr = pointDate.getFullYear();
+    var monthStr = pointDate.toLocaleString("en-US", {month : "short"});
+    var dateStr = (pointDate.getDate() + 1).toString();
+    var dayStr = pointDate.toLocaleString("en-US", {weekday : "long"});
 
-    var calendarTitle = $("#current-year-month");
-    calendarTitle.empty();
-    calendarTitle.append(currentMonthStr);
+
+    mainDateForLeft.push(yearStr);
+    monthStr = monthStr.length < 2? "0" + monthStr : monthStr;
+    mainDateForLeft.push(monthStr);
+    dateStr = dateStr.length < 2? "0" + dateStr : dateStr;
+    mainDateForLeft.push(dateStr);
+    mainDateForLeft.push(dayStr);
+
+    return mainDateForLeft;
+}
+
+function showCurrentDateOnLeft(){
+    var mainDateList = getDateForLeft(new Date());
+    var mainYear = $("#main-year");
+    var mainMonth = $("#main-month");
+    var mainDate = $("#main-date");
+    var mainDay = $("#main-day");
+//    var setUpDate = $("#setUpDate");
+
+//    setUpDate.empty();
+    mainYear.empty();
+    mainMonth.empty();
+    mainDate.empty();
+    mainDay.empty();
+
+//    setUpDate.append(mainDateList);
+    mainYear.append(mainDateList[0]);
+    mainMonth.append(mainDateList[1]);
+    mainDate.append(mainDateList[2]);
+    mainDay.append(mainDateList[3]);
+
 }
 
 
@@ -408,15 +456,17 @@ function showMain(){
 //
 //    return returnDate;
 //}
-var clickedDate1 = document.getElementById(today.getDate());
+
 //clickedDate1.classList.add('active');
 //var prevBtn = document.getElementById('prev');
 //var nextBtn = document.getElementById('next');
 //prevBtn.addEventListener('click',prev);
 //nextBtn.addEventListener('click',next);
-var tdGroup = [];
-function clickStart(pointFirst){
+
+function activeMainMonth(pointFirst){
+    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
     var pointPageYear = getPageYear(pointFirst);
+    var mainMonthTable = [];
     for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
         tdGroup[i] = document.getElementById(i);
         tdGroup[i].addEventListener('click', changeToday);
@@ -435,4 +485,29 @@ function clickStart(pointFirst){
         keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
         reshowingList(selectedDate);
     }
+}
+
+
+function clickDate(pointDate){
+    // 캘린더 화면에 접속하면 자동으로 해당일의 날짜가 클릭되어진다.
+    if (!pointDate) pointDate = new Date();
+    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
+//    var pointPageYear = getPageYear(pointFirst);
+    tdList = $("#calendar-body td").on('click', );
+    tdList.addEventListener('click', changeClickedDate);
+    function changeClickedDate(e){
+        alert(e.target.id);
+//        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
+//            if(tdGroup[i].classList.contains('active')){
+//                tdGroup[i].classList.remove('active');
+//            }
+        }
+//        console.log(e);
+//        clickedDate1 = e.target;
+//        clickedDate1.classList.add('active');
+////        today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
+//        let selectedDate = showMain();
+//        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
+//        reshowingList(selectedDate);
+//    }
 }

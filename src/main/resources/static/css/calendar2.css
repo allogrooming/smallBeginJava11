@@ -34,6 +34,10 @@ html, body{
         background: #ffffff;
     }
     .content-left{
+        /* font-family: droid-serif, serif;
+        font-weight: 400;
+        font-style: normal; */
+
         background: #ffffff;
         color:#000000;
         float: left;
@@ -115,12 +119,17 @@ html, body{
     .main-wrap{
         text-align: left;
         margin: 0 0 0 40px;
+        display: grid;
     }
     .main-day{
         font-size: 30px;
         font-weight: bold;
     }
     .main-date{
+        font-size: 30px;
+        font-weight: bold;
+    }
+    .main-month{
         font-size: 30px;
         font-weight: bold;
     }
