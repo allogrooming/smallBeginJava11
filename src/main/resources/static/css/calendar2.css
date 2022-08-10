@@ -198,8 +198,9 @@ html, body{
     }
     .active{
         background: #ffffff;
-        border-radius: 50%;
+        /*border-radius: 50%;*/
         color: #000000;
+        font-weight: bold;
     }
     input#toDoColor {
         border: none;

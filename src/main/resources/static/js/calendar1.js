@@ -169,8 +169,9 @@ function getDateForLeft(pointDate){
     return mainDateForLeft;
 }
 
-function showCurrentDateOnLeft(){
-    var mainDateList = getDateForLeft(new Date());
+function showCurrentDateOnLeft(pointDate){
+    if(!pointDate) pointDate = new Date();
+    var mainDateList = getDateForLeft(pointDate);
     var mainYear = $("#main-year");
     var mainMonth = $("#main-month");
     var mainDate = $("#main-date");
@@ -419,43 +420,6 @@ function showMain(){
 
     return returnDate;
 }
-//
-//function showMain(){
-//    const mainDay = document.getElementById('main-day');
-//    const mainDate = document.getElementById('main-date');
-//    const mainMonth = document.getElementById('main-month');
-//    const setUpDate = document.getElementById('setUpDate');
-//    const mainYear = document.getElementById('main-year');
-//
-//    let returnDate;
-//
-//    if(today.getMonth()+1 < 10){
-//        returnDate = today.getFullYear() + "-0" + (today.getMonth()+1);
-//    }else{
-//        returnDate = today.getFullYear() + "-" + (today.getMonth()+1);
-//    }
-//    if(today.getDate() < 10){
-//        returnDate += "-0" + today.getDate();
-//    }else{
-//        returnDate += "-" + today.getDate();
-//    }
-//
-//    var day = dayList[today.getDay()];
-//    var date = today.getDate().toString();
-//    var month = today.toLocaleString("en-US", {month : "short"});
-//    var year = today.getFullYear().toString();
-//
-//    var theDate = year + '&nbsp;' + month + '&nbsp;' + date + '&nbsp;' + day.slice(0,3);
-//
-//    var calendarTitle = $("#current-year-month");
-//    calendarTitle.empty();
-//    calendarTitle.append(theDate);
-//
-//    setUpDate.value = returnDate;
-//    setUpDate.innerHTML = returnDate;
-//
-//    return returnDate;
-//}
 
 //clickedDate1.classList.add('active');
 //var prevBtn = document.getElementById('prev');
@@ -486,25 +450,40 @@ function activeMainMonth(pointFirst){
     }
 }
 
+function getDateFromId(idStr){
+    dateStr = "";
+    dateStr += idStr.slice(0, 4);
+    dateStr += "-";
+    dateStr += idStr.slice(4, 6);
+    dateStr += "-";
+    dateStr += idStr.slice(-2);
+    console.log(dateStr);
+    return new Date(dateStr);
+}
 
 function clickDate(pointDate){
-    // 캘린더 화면에 접속하면 자동으로 해당일의 날짜가 클릭되어진다.
+    // 캘린더 화면에 접속하면 자동으로 해당일의 날짜가 클릭되어 활성화 상태가 된다.
     if (!pointDate) pointDate = new Date();
-    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
-//    var pointPageYear = getPageYear(pointFirst);
-//    tdList = $("#calendar-body td").on('click', );
+    var clickedDate = setDateId(pointDate, pointDate.getDate());
+    var clickedDateElement = document.getElementById(clickedDate);
+    console.log('clickedDate: ', clickedDate);
+    clickedDateElement.classList.add('active');
+
     tdList = $("#calendar-body td");
-//    tdList.addEventListener('click', changeClickedDate);
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
     }
     function changeClickedDate(e){
-        alert(e.target.id);
-//        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
-//            if(tdGroup[i].classList.contains('active')){
-//                tdGroup[i].classList.remove('active');
-//            }
+        if (clickedDateElement != e.target){
+            clickedDateElement.classList.remove('active');
+            clickedDateElement = e.target;
+            clickedDate = e.target.id;
+            e.target.classList.add('active');
+            console.log(getDateFromId(clickedDate));
+            showCurrentDateOnLeft(getDateFromId(clickedDate));
         }
+    }
+
 //        console.log(e);
 //        clickedDate1 = e.target;
 //        clickedDate1.classList.add('active');
