@@ -1,5 +1,6 @@
 package com.project.smallbeginjava11.controller;
 
+import com.project.smallbeginjava11.DTO.Calendar;
 import com.project.smallbeginjava11.DTO.Todo;
 import com.project.smallbeginjava11.service.CalendarService;
 import lombok.RequiredArgsConstructor;
@@ -77,6 +78,10 @@ public class CalendarController {
 
             return modelAndView;
         }
+
+
+
+
     }
 /*  @Transactional
     @RequestMapping(value="/readCalendar", produces="text/html;charset=UTF-8", method = RequestMethod.POST)
@@ -120,4 +125,15 @@ public class CalendarController {
 
         return "success";
     }
+
+
+    @RequestMapping(value="/loadCalendar")
+    @ResponseBody
+    @PostMapping
+    public List<Calendar> loadCalendar(@RequestParam Map<String, String> params){
+        int memberCode = Integer.parseInt(params.get("memberCode"));
+        List<Calendar> calendarList = calendarService.getIniAndObList(memberCode);
+        return calendarList;
+    }
+
 }

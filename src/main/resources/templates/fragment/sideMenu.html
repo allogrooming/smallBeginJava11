@@ -52,6 +52,13 @@
                         <td>Color</td><td>Content</td><td>State</td>
                     </tr>
                 </table>
+                <table id="toDoTable">
+                    <tr th:each="todo: ${todo}">
+                        <td th:value="${todo.toDoColor}"></td>
+                        <td th:value="${todo.toDoState}"></td>
+                        <td th:value="${todo.toDoContent}"></td>
+                    </tr>
+                </table>
                 <table id="iniAndObTable">
                     <tr>
                         <td>Ob Content</td><td>Ini Content</td><td>State</td>
