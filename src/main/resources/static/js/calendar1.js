@@ -382,6 +382,46 @@ function checkList(e){
     e.currentTarget.classList.add('checked');
 }
 
+//TODO : 새로 추가 된 함수
+function showIniAndObList(resp){
+    // iniAndObTable이 있는지 확인
+    // 그 다음 있으면 요소 삭제, 없으면 그대로 진행
+    // 그러고 iniAndObTable에 테이블 id = iniAndObTable - resp 추가하기
+    var iniAndOb = resp;
+    var iniAndObTable = document.getElementById("iniAndObTable");
+    var tableCheck = !!document.getElementById("iniAndObTable");
+
+    let selectedDate = showMain();
+    var tdDate = new Date(selectedDate);
+    var str = "<tr><td>Ob Content</td><td>Ini Content</td><td>State</td></tr>";
+    for (var obj of iniAndOb){
+        var dateList = obj["dateList"];
+        var monthList = obj["plannedDateList"];
+        if (dateList && tdDate > new Date(obj.iniStartDate) && tdDate < new Date(obj.iniEndDate)){
+            var dayList = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+            for (day of dayList){
+                if(dateList[day] == "1" && dayList.indexOf(day) == tdDate.getDay()){
+                    str += "<tr id=" + obj.categoryCode + ">";
+                    str += "<td>" + obj.obContent + "</td>";
+                    str += "<td>" + obj.iniContent + "</td>";
+                    str += "<td><input type='checkbox'></td>";
+                    str += "</tr>";
+                }
+            }
+        } else if (monthList){
+            for (date of monthList){
+                if (selectedDate == date){
+                    str += "<tr id=" + obj.categoryCode + ">";
+                    str += "<td>" + obj.obContent + "</td>";
+                    str += "<td>" + obj.iniContent + "</td>";
+                    str += "<td><input type='checkbox'></td>";
+                    str += "</tr>";
+                }
+            }
+        }
+    }
+    $(iniAndObTable).html(str);
+}
 
 
 function showMain(){
@@ -469,6 +509,7 @@ function clickDate(pointDate){
     console.log('clickedDate: ', clickedDate);
     clickedDateElement.classList.add('active');
 
+    // TODO: 하위 엘리멘트도 이벤트가 등록되게 해야 함
     tdList = $("#calendar-body td");
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);

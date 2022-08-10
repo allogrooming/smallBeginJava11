@@ -52,7 +52,7 @@ public class InitiativeController {
         // Ob 코드
         //String obCodeString = param.get("obCode");
         //int obCode = Integer.parseInt(obCodeString);
-        params.put("obCode", String.valueOf(5));
+        params.put("obCode", String.valueOf(1));
 
         // 달 주 일(iniPeriod)
         int iniPeriod = Integer.parseInt(String.valueOf(params.get("iniPeriod")));;

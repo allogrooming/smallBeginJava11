@@ -29,6 +29,7 @@
         <div id="formCss">
             <form method="post" id="iniForm">
                <span class="form">
+                    <!--    TODO: Objective로 변경 필요               -->
                     <select name="obCode" id="categoryCode" size="1">
                         <option th:each="category: ${category}"
                                 th:value="${category.categoryCode}" th:utext="${category.categoryName}">

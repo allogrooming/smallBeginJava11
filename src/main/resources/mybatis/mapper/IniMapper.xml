@@ -19,8 +19,7 @@
                 ini_content,
                 ini_start_date,
                 ini_end_date,
-                ini_possible_count,
-                ini_week_order
+                ini_possible_count
                 )
             VALUES(
                 (select IFNULL(MAX(a.ini_code), 0) + 1 FROM initiative a),
@@ -43,8 +42,7 @@
                 #{iniContent},
                 #{iniStartDate},
                 #{iniEndDate},
-                #{iniPossibleCount},
-                NULL);
+                #{iniPossibleCount});
     </insert>
 
     <select id="selectMaxIniByObCode" parameterType="hashMap" resultType="Initiative">
