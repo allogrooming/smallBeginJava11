@@ -467,28 +467,28 @@ function showMain(){
 //prevBtn.addEventListener('click',prev);
 //nextBtn.addEventListener('click',next);
 
-function activeMainMonth(pointFirst){
-    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
-    var pointPageYear = getPageYear(pointFirst);
-    var mainMonthTable = [];
-    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
-        tdGroup[i] = document.getElementById(i);
-        tdGroup[i].addEventListener('click', changeToday);
-    }
-    function changeToday(e){
-        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
-            if(tdGroup[i].classList.contains('active')){
-                tdGroup[i].classList.remove('active');
-            }
-        }
-        console.log(e);
-        clickedDate1 = e.target;
-        clickedDate1.classList.add('active');
-        let selectedDate = showMain();
-        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-        reshowingList(selectedDate);
-    }
-}
+//function activeMainMonth(pointFirst){
+//    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
+//    var pointPageYear = getPageYear(pointFirst);
+//    var mainMonthTable = [];
+//    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
+//        tdGroup[i] = document.getElementById(i);
+//        tdGroup[i].addEventListener('click', changeToday);
+//    }
+//    function changeToday(e){
+//        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
+//            if(tdGroup[i].classList.contains('active')){
+//                tdGroup[i].classList.remove('active');
+//            }
+//        }
+//        console.log(e);
+//        clickedDate1 = e.target;
+//        clickedDate1.classList.add('active');
+//        let selectedDate = showMain();
+//        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
+//        reshowingList(selectedDate);
+//    }
+//}
 
 function getDateFromId(idStr){
     dateStr = "";

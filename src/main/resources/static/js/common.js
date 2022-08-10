@@ -62,9 +62,9 @@ function readFormTodo(formId, url){
 
 
 // TODO: memberCode 입력 필수
-function loadCalendar(memberCode){
+function roadInitiative(memberCode){
     $.ajax({
-        url : '/loadCalendar',
+        url : '/roadInitiative',
         type : "post",
         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
         dataType : "json",

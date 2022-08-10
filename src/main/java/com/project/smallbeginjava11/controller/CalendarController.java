@@ -127,10 +127,10 @@ public class CalendarController {
     }
 
 
-    @RequestMapping(value="/loadCalendar")
+    @RequestMapping(value="/roadInitiative")
     @ResponseBody
     @PostMapping
-    public List<Calendar> loadCalendar(@RequestParam Map<String, String> params){
+    public List<Calendar> roadInitiative(@RequestParam Map<String, String> params){
         int memberCode = Integer.parseInt(params.get("memberCode"));
         List<Calendar> calendarList = calendarService.getIniAndObList(memberCode);
         return calendarList;
