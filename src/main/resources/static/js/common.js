@@ -21,7 +21,6 @@ function readForm(formId, url){
 }
 
 function sendDateList(startDate, endDate, dateList, url){
-
     $.ajax({
          url : url,
          type : "post",
@@ -61,6 +60,8 @@ function readFormTodo(formId, url){
 
 }
 
+
+// TODO: memberCode 입력 필수
 function loadCalendar(memberCode){
     $.ajax({
         url : '/loadCalendar',

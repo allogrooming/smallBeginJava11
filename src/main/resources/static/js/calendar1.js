@@ -155,7 +155,7 @@ function getDateForLeft(pointDate){
     var mainDateForLeft = [];
     var yearStr = pointDate.getFullYear();
     var monthStr = pointDate.toLocaleString("en-US", {month : "short"});
-    var dateStr = (pointDate.getDate() + 1).toString();
+    var dateStr = pointDate.getDate().toString();
     var dayStr = pointDate.toLocaleString("en-US", {weekday : "long"});
 
 
@@ -522,6 +522,7 @@ function clickDate(pointDate){
             e.target.classList.add('active');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
+            loadCalendar(2);
         }
     }
 

@@ -115,8 +115,4 @@ public class InitiativeController {
         return "getDateList success";
     }
 
-    public void createDateListCodeOrMonthList(){
-
-    }
-
 }
