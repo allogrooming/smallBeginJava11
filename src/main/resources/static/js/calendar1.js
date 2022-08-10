@@ -480,7 +480,6 @@ function activeMainMonth(pointFirst){
         console.log(e);
         clickedDate1 = e.target;
         clickedDate1.classList.add('active');
-//        today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
         let selectedDate = showMain();
         keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
         reshowingList(selectedDate);
@@ -493,8 +492,12 @@ function clickDate(pointDate){
     if (!pointDate) pointDate = new Date();
     var clickedDate = document.getElementById(pointDate, pointDate.getDate());
 //    var pointPageYear = getPageYear(pointFirst);
-    tdList = $("#calendar-body td").on('click', );
-    tdList.addEventListener('click', changeClickedDate);
+//    tdList = $("#calendar-body td").on('click', );
+    tdList = $("#calendar-body td");
+//    tdList.addEventListener('click', changeClickedDate);
+    for (td of tdList){
+        td.addEventListener('click', changeClickedDate);
+    }
     function changeClickedDate(e){
         alert(e.target.id);
 //        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
