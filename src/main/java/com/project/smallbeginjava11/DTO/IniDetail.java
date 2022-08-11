@@ -20,5 +20,6 @@ public class IniDetail{
     private int iniDetailPossibleCount; // 부분 기간 동안 가능한 횟수
     private int iniDetailDoneCount; // 부분 기간 동안 달성 횟수
     private List<IniDetailAdd> iniDetailAdds = new ArrayList<IniDetailAdd>();
+    private IniDetailAdd iniDetailAdd = new IniDetailAdd();
 
 }

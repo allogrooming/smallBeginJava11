@@ -1,6 +1,7 @@
 package com.project.smallbeginjava11.controller;
 
 
+import com.project.smallbeginjava11.DTO.Calendar;
 import com.project.smallbeginjava11.DTO.Category;
 import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.service.CategoryService;
@@ -52,7 +53,7 @@ public class InitiativeController {
         // Ob 코드
         //String obCodeString = param.get("obCode");
         //int obCode = Integer.parseInt(obCodeString);
-        params.put("obCode", String.valueOf(1));
+        params.put("obCode", String.valueOf(2));
 
         // 달 주 일(iniPeriod)
         int iniPeriod = Integer.parseInt(String.valueOf(params.get("iniPeriod")));;
@@ -93,7 +94,6 @@ public class InitiativeController {
             case 2:
                 params.put("iniPossibleCount", String.valueOf(monthDateList.size()));
                 params.put("possibleDateList", monthDateList);
-                //int total = iniService.getDateList()
                 break;
         }
         iniService.insertIni(params);

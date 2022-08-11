@@ -1,6 +1,7 @@
 package com.project.smallbeginjava11.controller;
 
 import com.project.smallbeginjava11.DTO.Calendar;
+import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.DTO.Todo;
 import com.project.smallbeginjava11.service.CalendarService;
 import lombok.RequiredArgsConstructor;
@@ -126,14 +127,12 @@ public class CalendarController {
         return "success";
     }
 
-
-    @RequestMapping(value="/roadInitiative")
+    @RequestMapping(value="/readInitiative")
     @ResponseBody
     @PostMapping
-    public List<Calendar> roadInitiative(@RequestParam Map<String, String> params){
-        int memberCode = Integer.parseInt(params.get("memberCode"));
-        List<Calendar> calendarList = calendarService.getIniAndObList(memberCode);
-        return calendarList;
+    public List<Calendar> readInitiative(@RequestParam Map<String, Object> params) throws ParseException{
+        List<Calendar> initiativeList = calendarService.getIniAndObList(params);
+        return initiativeList;
     }
 
 }

@@ -62,14 +62,15 @@ function readFormTodo(formId, url){
 
 
 // TODO: memberCode 입력 필수
-function roadInitiative(memberCode){
+function readInitiative(memberCode, iniDetailAddPlanDate){
     $.ajax({
-        url : '/roadInitiative',
+        url : '/readInitiative',
         type : "post",
         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
         dataType : "json",
         data : {
-            "memberCode" : memberCode
+            "memberCode" : memberCode,
+            "iniDetailAddPlanDate" : iniDetailAddPlanDate
         },
         success : function(resp){
             showIniAndObList(resp);

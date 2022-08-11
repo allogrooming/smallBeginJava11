@@ -19,13 +19,11 @@ public class Calendar {
     private int memberCode;
     private int categoryCode;
     private int dateListCode;
-    private int monthListCode;
-    private Date iniStartDate;
-    private Date iniEndDate;
-    private int iniWeekOrder;
     private int iniDuration;
     private int iniPeriod;
     private String iniContent;
+    private int iniDtlAddCode;
+    private int iniDtlAddState;
 
     //private Date plannedDate; //(일자)
     //private int plannedDay; //(요일)

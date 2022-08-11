@@ -21,12 +21,13 @@ public class Initiative {
     private int iniCount;  // 한 주 마다 몇번씩 하는지 세는거
     private int iniOrder;
     private String iniContent;
-    private Date iniMonthDate; // 달로 선택했을 경우 날짜들의 집합
     private Date iniStartDate;
     private Date iniEndDate;
     private int iniPossibleCount; // 전체 기간 동안 가능한 횟수
     private List<IniDetail> iniDetails = new ArrayList<IniDetail>();
     private List<Integer> dateList = new ArrayList<Integer>(); // 주일 경우 요일을 나타내는 리스트
+    private IniDetail iniDetail = new IniDetail();
+
 
     public Initiative(int obCode, int iniPeriod, int iniCount, String iniContent, Date iniStartDate, Date iniEndDate, int iniDuration) {
         this.obCode = obCode;

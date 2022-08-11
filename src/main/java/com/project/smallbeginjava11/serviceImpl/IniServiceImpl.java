@@ -1,16 +1,12 @@
 package com.project.smallbeginjava11.serviceImpl;
 
-import com.project.smallbeginjava11.DTO.IniDetail;
-import com.project.smallbeginjava11.DTO.IniDetailAdd;
-import com.project.smallbeginjava11.DTO.Initiative;
-import com.project.smallbeginjava11.DTO.PossibleDate;
+import com.project.smallbeginjava11.DTO.*;
 import com.project.smallbeginjava11.mapper.IniMapper;
 import com.project.smallbeginjava11.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +48,6 @@ public class IniServiceImpl implements IniService{
         possibleDateService.insertPossibleDateList(params);
 
         if (iniPeriod == 1){
-            System.out.println("왜 일로오지???????");
             params.put("dateListCode", dateListCode);
             dateListService.insertDateList(params);
 
@@ -109,7 +104,6 @@ public class IniServiceImpl implements IniService{
             iniDetailService.getDayOfMonth(iniDetails, params);
 
 
-            //monthListService.insertMonthList(params);
         }
     }
 

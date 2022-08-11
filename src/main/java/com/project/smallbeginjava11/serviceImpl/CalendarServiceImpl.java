@@ -2,6 +2,7 @@ package com.project.smallbeginjava11.serviceImpl;
 
 
 import com.project.smallbeginjava11.DTO.Calendar;
+import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.DTO.Todo;
 import com.project.smallbeginjava11.mapper.CalendarMapper;
 import com.project.smallbeginjava11.service.CalendarService;
@@ -29,7 +30,8 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public List<Calendar> getIniAndObList(int memberCode){
-        return calendarMapper.selectIniAndObList(memberCode);
+    public List<Calendar> getIniAndObList(Map<String, Object> params) throws ParseException{
+        return calendarMapper.selectIniAndObList(params);
     }
+
 }

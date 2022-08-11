@@ -32,24 +32,26 @@
               )
     </insert>
 
-    <select id="selectIniAndObList" parameterType="int" resultType="Calendar">
+    <select id="selectIniAndObList" parameterType="hashMap" resultType="Calendar">
         SELECT
-            a.ob_code,
-            a.ini_code,
-            a.ini_content,
-            a.ini_period,
-            a.date_list_code,
-            a.month_list_code,
-            a.ini_start_date,
-            a.ini_end_date,
-            a.ini_week_order,
-            b.member_code,
-            b.category_code,
-            b.ob_content
-        FROM initiative a
-            JOIN objective b
-            ON a.ob_code = b.ob_code
-        WHERE member_code=#{memberCode};
+            a.ob_content,
+            b.ini_content,
+            d.ini_dtl_add_code,
+            d.ini_dtl_add_state
+        FROM
+            objective a,
+            (SELECT ini_code, ini_content, ob_code
+            FROM initiative) b,
+            (SELECT ini_code, ini_dtl_code
+            FROM ini_detail) c,
+            (SELECT ini_dtl_code, ini_dtl_add_code, ini_dtl_add_state
+            FROM ini_detail_add
+            WHERE ini_dtl_add_plan_date = date(#{iniDetailAddPlanDate})) d
+        WHERE
+            a.member_code = #{memberCode}
+            AND a.ob_code = b.ob_code
+            AND b.ini_code = c.ini_code
+            AND c.ini_dtl_code = d.ini_dtl_code;
     </select>
 
 
