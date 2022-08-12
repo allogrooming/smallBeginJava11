@@ -451,14 +451,46 @@ function activeMainMonth(pointFirst){
 }
 
 function getDateFromId(idStr){
-    dateStr = "";
-    dateStr += idStr.slice(0, 4);
-    dateStr += "-";
-    dateStr += idStr.slice(4, 6);
-    dateStr += "-";
-    dateStr += idStr.slice(-2);
-    console.log(dateStr);
-    return new Date(dateStr);
+    if(idStr != ""){
+        dateStr = "";
+        dateStr += idStr.slice(0, 4);
+        dateStr += "-";
+        dateStr += idStr.slice(4, 6);
+        dateStr += "-";
+        dateStr += idStr.slice(-2);
+        console.log(dateStr);
+        return new Date(dateStr);
+    }
+}
+
+function getDate4Ajax(idStr){
+    if(idStr != ""){
+        dateStr = "";
+        dateStr += idStr.slice(0, 4);
+        dateStr += "-";
+        dateStr += idStr.slice(4, 6);
+        dateStr += "-";
+        dateStr += idStr.slice(-2);
+        console.log(dateStr);
+        return dateStr;
+    }
+}
+
+function readToDo(clickedDate){
+    console.log(clickedDate);
+     $.ajax({
+             url : "/readCalendar",
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : {"clickedDate" : clickedDate},
+             success : function(result){
+                 console.log(result);
+             },
+             error : function(err){
+                 console.log(err+"에러발생");
+             }
+      });
 }
 
 function clickDate(pointDate){
@@ -469,6 +501,10 @@ function clickDate(pointDate){
     console.log('clickedDate: ', clickedDate);
     clickedDateElement.classList.add('active');
 
+    // 여기에 첫화면에 대한 to_do 서치하는 함수 넣기 parameter = getDateFromId(clickedDate)
+    var param4readToDo = getDate4Ajax(clickedDate);
+    readToDo(param4readToDo);
+
     tdList = $("#calendar-body td");
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
@@ -478,9 +514,14 @@ function clickDate(pointDate){
             clickedDateElement.classList.remove('active');
             clickedDateElement = e.target;
             clickedDate = e.target.id;
-            e.target.classList.add('active');
-            console.log(getDateFromId(clickedDate));
-            showCurrentDateOnLeft(getDateFromId(clickedDate));
+            if(clickedDate == ""){
+                var tempClickedDate = clickedDateElement.parentNode.id;
+                clickedDateElement.parentNode.classList.add('active');
+                showCurrentDateOnLeft(getDateFromId(tempClickedDate));
+            }else{
+                e.target.classList.add('active');
+                showCurrentDateOnLeft(getDateFromId(clickedDate));
+            }
         }
     }
 

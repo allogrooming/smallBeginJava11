@@ -36,20 +36,20 @@
 <!--                <div class="todo-wrap">-->
 <!--                    <div class="todo-title">You can add "todo list" here</div>-->
 <!--                    <div class="input-wrap">-->
-<!--                        <form method="post" id="toDoList">-->
-<!--                            <input type="text" placeholder="please write here" id="toDoContent" class="input-box" name="toDoContent">-->
-<!--                            <input type="date" id="planDate" class="input-box" name="planDate">-->
-<!--                            <input type="date" id="setUpDate" class="input-box" name="setUpDate" style="display: none"></input>-->
-<!--                            <input type="color" id="toDoColor" name="toDoColor" value="#16aaad" list="colors4palette" />-->
-<!--                            <datalist id="colors4palette">-->
-<!--                                <option>#355070</option>-->
-<!--                                <option>#6D597A</option>-->
-<!--                                <option>#B56576</option>-->
-<!--                                <option>#E56B6F</option>-->
-<!--                                <option>#EAAC8B</option>-->
-<!--                            </datalist>-->
-<!--                            <button type="button" id="input-data" class="input-data">INPUT</button>-->
-<!--                        </form>-->
+<!--                        <form method="post" id="toDoList">
+                            <input type="text" placeholder="please write here" id="toDoContent" class="input-box" name="toDoContent">
+                            <input type="date" id="planDate" class="input-box" name="planDate">
+                            <input type="date" id="setUpDate" class="input-box" name="setUpDate" style="display: none"></input>
+                            <input type="color" id="toDoColor" name="toDoColor" value="#16aaad" list="colors4palette" />
+                            <datalist id="colors4palette">
+                                <option>#355070</option>
+                                <option>#6D597A</option>
+                                <option>#B56576</option>
+                                <option>#E56B6F</option>
+                                <option>#EAAC8B</option>
+                            </datalist>
+                            <button type="button" id="input-data" class="input-data">INPUT</button>
+                        </form>-->
 <!--                        <table id="toDoListsTable">-->
 <!--                            <tr>-->
 <!--                                <td>Color</td><td>Content</td><td>State</td>-->
@@ -148,8 +148,17 @@
     })
 
     $(".td-date").on("click", function(){
+        console.log("td-date click");
         loadCalendar(2);
-    });
+    })
+
+    $('#calendar td').click(function(){
+        var tdID = $(this).attr('id');
+        console.log("click!!");
+        var param4readToDo = getDate4Ajax(tdID);
+        readToDo(param4readToDo);
+    })
+
 </script>
 </html>
 
