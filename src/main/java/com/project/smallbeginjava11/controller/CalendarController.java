@@ -41,7 +41,7 @@ public class CalendarController {
             System.out.println(todo);
 
             // 무한스크롤 확인용 임시
-            ModelAndView modelAndView = new ModelAndView("calendar");
+            ModelAndView modelAndView = new ModelAndView("calendar1");
             modelAndView.addObject("todo", todo);
 
             System.out.println("Send the result");
@@ -53,9 +53,6 @@ public class CalendarController {
     // 임시 calendar1.html 연결용
     @RequestMapping("/calendar1")
     public ModelAndView calendar1(@RequestParam @Nullable Map<String, String> param){
-
-        System.out.println("param - Calendar");
-        System.out.println(param);
 
         if(param == null){
             System.out.println("first calendar");
@@ -105,8 +102,11 @@ public class CalendarController {
     @ResponseBody
     public List<Todo> readCalendar(@RequestParam Map<String, String> param) {
 
-        String selectedDate = param.get("selectedDate");
+        String selectedDate = param.get("clickedDate");
+        System.out.println("readCalendar");
+        System.out.println(selectedDate);
         List<Todo> todo = calendarService.getTodoList(selectedDate);
+        System.out.println(todo);
         return todo;
     }
 

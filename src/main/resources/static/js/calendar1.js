@@ -462,38 +462,70 @@ function showMain(){
 //prevBtn.addEventListener('click',prev);
 //nextBtn.addEventListener('click',next);
 
-//function activeMainMonth(pointFirst){
-//    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
-//    var pointPageYear = getPageYear(pointFirst);
-//    var mainMonthTable = [];
-//    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
-//        tdGroup[i] = document.getElementById(i);
-//        tdGroup[i].addEventListener('click', changeToday);
-//    }
-//    function changeToday(e){
-//        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
-//            if(tdGroup[i].classList.contains('active')){
-//                tdGroup[i].classList.remove('active');
-//            }
-//        }
-//        console.log(e);
-//        clickedDate1 = e.target;
-//        clickedDate1.classList.add('active');
-//        let selectedDate = showMain();
-//        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-//        reshowingList(selectedDate);
-//    }
-//}
+function activeMainMonth(pointFirst){
+    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
+    var pointPageYear = getPageYear(pointFirst);
+    var mainMonthTable = [];
+    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
+        tdGroup[i] = document.getElementById(i);
+        tdGroup[i].addEventListener('click', changeToday);
+    }
+    function changeToday(e){
+        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
+            if(tdGroup[i].classList.contains('active')){
+                tdGroup[i].classList.remove('active');
+            }
+        }
+        console.log(e);
+        clickedDate1 = e.target;
+        clickedDate1.classList.add('active');
+        let selectedDate = showMain();
+        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
+        reshowingList(selectedDate);
+    }
+}
 
 function getDateFromId(idStr){
-    dateStr = "";
-    dateStr += idStr.slice(0, 4);
-    dateStr += "-";
-    dateStr += idStr.slice(4, 6);
-    dateStr += "-";
-    dateStr += idStr.slice(-2);
-    console.log(dateStr);
-    return new Date(dateStr);
+    if(idStr != ""){
+        dateStr = "";
+        dateStr += idStr.slice(0, 4);
+        dateStr += "-";
+        dateStr += idStr.slice(4, 6);
+        dateStr += "-";
+        dateStr += idStr.slice(-2);
+        console.log(dateStr);
+        return new Date(dateStr);
+    }
+}
+
+function getDate4Ajax(idStr){
+    if(idStr != ""){
+        dateStr = "";
+        dateStr += idStr.slice(0, 4);
+        dateStr += "-";
+        dateStr += idStr.slice(4, 6);
+        dateStr += "-";
+        dateStr += idStr.slice(-2);
+        console.log(dateStr);
+        return dateStr;
+    }
+}
+
+function readToDo(clickedDate){
+    console.log(clickedDate);
+     $.ajax({
+             url : "/readCalendar",
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : {"clickedDate" : clickedDate},
+             success : function(result){
+                 console.log(result);
+             },
+             error : function(err){
+                 console.log(err+"에러발생");
+             }
+      });
 }
 
 function removeAllChildElements(parentElement){
@@ -513,6 +545,11 @@ function clickDate(pointDate){
     // TODO: memberCode 입력부분 수정 필요
     readInitiative(3, clickedDate);
     // TODO: 하위 엘리멘트도 이벤트가 등록되게 해야 함
+
+    // 여기에 첫화면에 대한 to_do 서치하는 함수 넣기 parameter = getDateFromId(clickedDate)
+    var param4readToDo = getDate4Ajax(clickedDate);
+    readToDo(param4readToDo);
+
     tdList = $("#calendar-body td");
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
@@ -527,6 +564,14 @@ function clickDate(pointDate){
             showCurrentDateOnLeft(getDateFromId(clickedDate));
             // TODO: memberCode 입력부분 수정 필요
             readInitiative(3, clickedDate);
+            if(clickedDate == ""){
+                var tempClickedDate = clickedDateElement.parentNode.id;
+                clickedDateElement.parentNode.classList.add('active');
+                showCurrentDateOnLeft(getDateFromId(tempClickedDate));
+            }else{
+                e.target.classList.add('active');
+                showCurrentDateOnLeft(getDateFromId(clickedDate));
+            }
         }
     }
 
