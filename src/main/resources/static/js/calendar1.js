@@ -389,18 +389,19 @@ function showIniAndObList(resp){
     // var tableCheck = !!document.getElementById("iniAndObTable");
 
     console.log('(iniAndOb.length :', iniAndOb.length);
-    if (iniAndOb.length > 0){
-        var $tr = document.createElement("tr");
-        var $td1 = document.createElement("td").textContent = "Ob Content";
-        var $td2 = document.createElement("td").textContent = "Ini Content";
-        var $td3 = document.createElement("td").textContent = "State";
-        $tr.append($td1);
-        $tr.append($td2);
-        $tr.append($td3);
-        iniAndObTable.append($tr);
-    } else{
-        removeAllChildElements(iniAndObTable);
-    }
+    removeAllChildElements(iniAndObTable);
+
+//    if (iniAndOb.length > 0){
+    var $tr = document.createElement("tr");
+    var $td1 = document.createElement("td").textContent = "Ob Content";
+    var $td2 = document.createElement("td").textContent = "Ini Content";
+    var $td3 = document.createElement("td").textContent = "State";
+    $tr.append($td1);
+    $tr.append($td2);
+    $tr.append($td3);
+    iniAndObTable.append($tr);
+//    } else{
+//    }
 
     for (var obj of iniAndOb){
         var $tr = document.createElement("tr");
