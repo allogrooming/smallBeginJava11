@@ -551,28 +551,29 @@ function clickDate(pointDate){
     readToDo(param4readToDo);
 
     tdList = $("#calendar-body td");
-    console.log(tdList);
+    // console.log(tdList);
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
+        for (tdDiv of td.childNodes){
+                tdDiv.addEventListener('click', changeClickedDate);
+        }
     }
     function changeClickedDate(e){
-        if (clickedDateElement != e.target){
+        if (clickedDateElement != e.target || clickedDateElement != e.target.parentNode){
             clickedDateElement.classList.remove('active');
             clickedDateElement = e.target;
             clickedDate = e.target.id;
-            e.target.classList.add('active');
+            if(clickedDate == ""){
+               clickedDate = clickedDateElement.parentNode.id;
+               clickedDateElement = clickedDateElement.parentNode;
+                // clickedDateElement.parentNode.classList.add('active');
+                ///showCurrentDateOnLeft(getDateFromId(tempClickedDate));
+            }
+            clickedDateElement.classList.add('active');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
             // TODO: memberCode 입력부분 수정 필요
             readInitiative(3, clickedDate);
-            if(clickedDate == ""){
-                var tempClickedDate = clickedDateElement.parentNode.id;
-                clickedDateElement.parentNode.classList.add('active');
-                showCurrentDateOnLeft(getDateFromId(tempClickedDate));
-            }else{
-                e.target.classList.add('active');
-                showCurrentDateOnLeft(getDateFromId(clickedDate));
-            }
         }
     }
 
