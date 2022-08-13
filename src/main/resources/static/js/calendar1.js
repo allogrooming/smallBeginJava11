@@ -70,7 +70,7 @@ function getDateSepPoint(pointDate){
     var currentMonthStr = '';
     currentMonthStr += pointDate.getFullYear() + '.';
     var monthStr = (pointDate.getMonth() + 1).toString();
-    var dateStr = (pointDate.getDate() + 1).toString();
+    var dateStr = (pointDate.getDate()).toString();
     currentMonthStr += monthStr.length < 2? "0" + monthStr : monthStr;
     currentMonthStr += '.'
     currentMonthStr += dateStr.length < 2? "0" + dateStr : dateStr;
@@ -462,28 +462,28 @@ function showMain(){
 //prevBtn.addEventListener('click',prev);
 //nextBtn.addEventListener('click',next);
 
-function activeMainMonth(pointFirst){
-    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
-    var pointPageYear = getPageYear(pointFirst);
-    var mainMonthTable = [];
-    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
-        tdGroup[i] = document.getElementById(i);
-        tdGroup[i].addEventListener('click', changeToday);
-    }
-    function changeToday(e){
-        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
-            if(tdGroup[i].classList.contains('active')){
-                tdGroup[i].classList.remove('active');
-            }
-        }
-        console.log(e);
-        clickedDate1 = e.target;
-        clickedDate1.classList.add('active');
-        let selectedDate = showMain();
-        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-        reshowingList(selectedDate);
-    }
-}
+//function activeMainMonth(pointFirst){
+//    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
+//    var pointPageYear = getPageYear(pointFirst);
+//    var mainMonthTable = [];
+//    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
+//        tdGroup[i] = document.getElementById(i);
+//        tdGroup[i].addEventListener('click', changeToday);
+//    }
+//    function changeToday(e){
+//        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
+//            if(tdGroup[i].classList.contains('active')){
+//                tdGroup[i].classList.remove('active');
+//            }
+//        }
+//        console.log(e);
+//        clickedDate1 = e.target;
+//        clickedDate1.classList.add('active');
+//        let selectedDate = showMain();
+//        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
+//        reshowingList(selectedDate);
+//    }
+//}
 
 function getDateFromId(idStr){
     if(idStr != ""){
@@ -551,6 +551,7 @@ function clickDate(pointDate){
     readToDo(param4readToDo);
 
     tdList = $("#calendar-body td");
+    console.log(tdList);
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
     }
