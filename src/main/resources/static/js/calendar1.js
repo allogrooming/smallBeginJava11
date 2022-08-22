@@ -559,6 +559,8 @@ function addTodo(result){
             color.innerText = "●";
             color.id = values[5];
 
+            console.log(values[0]);
+
             content.innerText = values[2];
             state.innerText = values[4];
             deleteBtn.innerText = "delete";
@@ -570,20 +572,7 @@ function addTodo(result){
     }
 }
 
-function todoColor(){
-    var lengthT = $("#toDoListsTable > tbody tr").length;
-
-    if(lengthT > 0){
-        var todoTcolor = document.getElementById("toDoListsTable");
-        for(var i=lengthT-1; i>0; i--){
-           //todoT.deleteRow(i);
-           var color = todoTcolor.find()
-        }
-    }
-}
-
 function readToDo(clickedDate){
-    console.log(clickedDate);
      $.ajax({
              url : "/readCalendar",
              type : "post",

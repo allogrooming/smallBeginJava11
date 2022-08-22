@@ -6,7 +6,8 @@
 <mapper namespace="com.project.smallbeginjava11.mapper.CalendarMapper">
 
     <select id="getTodoList" parameterType="String" resultType="Todo">
-        SELECT to_do_content, to_do_state, to_do_color FROM to_do where set_up_date = #{selectedDate};
+        SELECT to_do_code, member_code, to_do_content, set_up_date, to_do_state, to_do_color, done_date, plan_date
+        FROM to_do where set_up_date = #{selectedDate};
     </select>
 
     <insert id="inputTodoList" parameterType="hashMap">
@@ -16,8 +17,7 @@
                           to_do_content,
                           set_up_date,
                           to_do_state,
-                          to_do_color,
-                          done_date
+                          to_do_color
         )
         VALUES(
                (select IFNULL(MAX(a.to_do_code), 0) + 1 FROM to_do a),
@@ -25,8 +25,7 @@
                #{toDoContent},
                #{setUpDate},
                0,
-               #{toDoColor},
-               0000-00-00
+               #{toDoColor}
               )
     </insert>
 
