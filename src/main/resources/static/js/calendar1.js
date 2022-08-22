@@ -522,7 +522,9 @@ function addTodo(result){
         var content = newRaw.insertCell(1);
         var state = newRaw.insertCell(2);
 
-        //color.innerText =
+        color.innerText = addTodoListTable.color;
+        content.innerText = addTodoListTable.content;
+        state.innerText = addTodoListTable.state;
     }
 }
 
@@ -537,7 +539,8 @@ function readToDo(clickedDate){
              data : {"clickedDate" : insertDate},
              success : function(result){
                  console.log(result.color);
-                 console.log(result.content);
+                 console.log(result);
+                 addTodo(result);
              },
              error : function(err){
                  console.log(err+"에러발생");
