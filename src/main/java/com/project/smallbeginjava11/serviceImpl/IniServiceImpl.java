@@ -44,9 +44,9 @@ public class IniServiceImpl implements IniService{
         String dateListCode = String.valueOf(iniByObCode.getDateListCode());
 
         int iniPeriod = (int) params.get("iniPeriod");
-
         possibleDateService.insertPossibleDateList(params);
 
+        //  주 단위일 때
         if (iniPeriod == 1){
             params.put("dateListCode", dateListCode);
             dateListService.insertDateList(params);
@@ -91,17 +91,42 @@ public class IniServiceImpl implements IniService{
 
             iniDetailAddService.insertIniDetailAdd(params);
 
+
+        //  월 단위일 때
         } else if(iniPeriod == 2){
             // params.put("monthListCode", monthListCode);
             List<IniDetail> iniDetails = iniDetailService.calculateMonths(params);
-
-            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-            iniDetails.forEach(x -> System.out.println(x));
-            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-
             params.put("iniDetails", iniDetails);
+
+            List<PossibleDate> possibleDateList = possibleDateService.convertFromDateToPossibleDate(params);
+            params.put("possibleDateList", possibleDateList);
+            possibleDateService.insertPossibleDate(params);
+
+            // System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            iniDetails.forEach(x -> System.out.println(x));
+            // System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
             iniDetailService.insertIniDetail(params);
-            iniDetailService.getDayOfMonth(iniDetails, params);
+            // iniDetailService.getDayOfMonth(iniDetails, params);
+
+            List<Integer> iniDtlCodeList = iniDetailService.selectIniDtlCodes(params);
+
+            System.out.println("1) $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            iniDtlCodeList.forEach(x -> System.out.println(x));
+            params.put("iniDtlCodeList", iniDtlCodeList);
+            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
+
+            List<IniDetailAdd> iniDtlAddList = iniDetailAddService.combineIniDtlCodeAndIniDtlAdd(params);
+            System.out.println("3) $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            iniDtlAddList.forEach(x -> System.out.println(x));
+            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
+
+
+            params.put("iniDtlAddList", iniDtlAddList);
+
+            iniDetailAddService.insertIniDetailAdd(params);
 
 
         }

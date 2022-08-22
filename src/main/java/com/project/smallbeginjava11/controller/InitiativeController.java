@@ -44,6 +44,7 @@ public class InitiativeController {
         return modelAndView;
     }
 
+
     @Transactional
     @RequestMapping(value="/readForm", produces="text/html;charset=UTF-8")
     @ResponseBody

@@ -107,6 +107,7 @@ public class IniDetailServiceImpl implements IniDetailService {
         return total;
     }
 
+    //매달일 경우 실행가능횟수를 구하는 메소드
     // TODO : 메소드 나누기
     @Override
     public List<IniDetail> calculateMonths(Map<String, Object> params) throws ParseException {
@@ -207,7 +208,6 @@ public class IniDetailServiceImpl implements IniDetailService {
         return iniDetails;
     }
 
-    //매달일 경우 실행가능횟수를 구하는 메소드
     @Override
     public List<IniDetail> getDayOfMonth(List<IniDetail> iniDetails, Map<String, Object> params){
         List<Date> possibleDateList = (List<Date>) params.get("possibleDateList");

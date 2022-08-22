@@ -12,4 +12,6 @@ public interface IniDetailAddService {
     List<Integer> calculateDaysInclude(Initiative initiative, List<Integer> list) throws ParseException;
     List<IniDetailAdd> combineIniDtlCodeAndPossibleDate(Map<String, Object> params) throws ParseException;
 
+    // 월 단위일 경우 사용하는 메소드
+    List<IniDetailAdd> combineIniDtlCodeAndIniDtlAdd(Map<String, Object> params) throws ParseException;
 }

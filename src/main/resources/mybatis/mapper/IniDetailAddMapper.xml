@@ -32,7 +32,7 @@
                 #{item.iniDetailAddPlanDate},
                 <!-- 5) ini_dtl_add_done_date -->
                 NULL,
-                <!-- ini_dtl_add_state -->
+                <!-- 6) ini_dtl_add_state -->
                 0)
             </foreach>
     </insert>
