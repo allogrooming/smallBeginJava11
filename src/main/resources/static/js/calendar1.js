@@ -305,7 +305,7 @@ function reshowingList(selectedDate){
     });
 }
 
-/*function addTodoLists(resp){
+function addTodoLists(resp){
     // toDoListsTable 이 있는지 확인
     // 그 다음 있으면 요소 삭제, 없으면 그대로 진행
     // 그러고 toDoLists에 테이블 id = toDoListsTable - resp 추가하기
@@ -347,10 +347,10 @@ function reshowingList(selectedDate){
 
     console.log(toDoTable)
     $(toDoLists).html(toDoTable);
-}*/
+}
 
 
-/*function addTodoList(){
+function addTodoList(){
     var $div = document.createElement('div');
     var temp = document.getElementById('input-box');
     $div.textContent = '-' + temp.value;
@@ -377,31 +377,31 @@ function reshowingList(selectedDate){
         $div.remove();
         $btn.remove();
     }
-}*/
+}
 function checkList(e){
     e.currentTarget.classList.add('checked');
 }
 
 function showIniAndObList(resp){
     // iniAndObTable에 테이블 id = iniAndObTable - resp 추가하기
-    console.log(typeof(resp));
     var iniAndOb = resp;
     var iniAndObTable = document.getElementById("iniAndObTable");
     // var tableCheck = !!document.getElementById("iniAndObTable");
 
     console.log('(iniAndOb.length :', iniAndOb.length);
-    if (iniAndOb.length > 0){
-        var $tr = document.createElement("tr");
-        var $td1 = document.createElement("td").textContent = "Ob Content";
-        var $td2 = document.createElement("td").textContent = "Ini Content";
-        var $td3 = document.createElement("td").textContent = "State";
-        $tr.append($td1);
-        $tr.append($td2);
-        $tr.append($td3);
-        iniAndObTable.append($tr);
-    } else{
-        removeAllChildElements(iniAndObTable);
-    }
+    removeAllChildElements(iniAndObTable);
+
+//    if (iniAndOb.length > 0){
+    var $tr = document.createElement("tr");
+    var $td1 = document.createElement("td").textContent = "Ob Content";
+    var $td2 = document.createElement("td").textContent = "Ini Content";
+    var $td3 = document.createElement("td").textContent = "State";
+    $tr.append($td1);
+    $tr.append($td2);
+    $tr.append($td3);
+    iniAndObTable.append($tr);
+//    } else{
+//    }
 
     for (var obj of iniAndOb){
         var $tr = document.createElement("tr");
@@ -469,8 +469,7 @@ function showMain(){
 //    var mainMonthTable = [];
 //    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
 //        tdGroup[i] = document.getElementById(i);
-//        tdGroup[i].addEventListener('click',
-// );
+//        tdGroup[i].addEventListener('click', changeToday);
 //    }
 //    function changeToday(e){
 //        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
@@ -508,6 +507,7 @@ function getDate4Ajax(idStr){
         dateStr += idStr.slice(4, 6);
         dateStr += "-";
         dateStr += idStr.slice(-2);
+        console.log(dateStr);
         return dateStr;
     }
 }
@@ -566,6 +566,7 @@ function addTodo(result){
 }
 
 function readToDo(clickedDate){
+    console.log(clickedDate);
      $.ajax({
              url : "/readCalendar",
              type : "post",
@@ -605,27 +606,29 @@ function clickDate(pointDate){
     readToDo(param4readToDo);
 
     tdList = $("#calendar-body td");
+    console.log(tdList);
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
+        for (tdDiv of td.childNodes){
+                tdDiv.addEventListener('click', changeClickedDate);
+        }
     }
     function changeClickedDate(e){
-        if (clickedDateElement != e.target){
+        if (clickedDateElement != e.target || clickedDateElement != e.target.parentNode){
             clickedDateElement.classList.remove('active');
             clickedDateElement = e.target;
             clickedDate = e.target.id;
-            e.target.classList.add('active');
+            if(clickedDate == ""){
+               clickedDate = clickedDateElement.parentNode.id;
+               clickedDateElement = clickedDateElement.parentNode;
+                // clickedDateElement.parentNode.classList.add('active');
+                ///showCurrentDateOnLeft(getDateFromId(tempClickedDate));
+            }
+            clickedDateElement.classList.add('active');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
             // TODO: memberCode 입력부분 수정 필요
             readInitiative(3, clickedDate);
-            if(clickedDate == ""){
-                var tempClickedDate = clickedDateElement.parentNode.id;
-                clickedDateElement.parentNode.classList.add('active');
-                showCurrentDateOnLeft(getDateFromId(tempClickedDate));
-            }else{
-                e.target.classList.add('active');
-                showCurrentDateOnLeft(getDateFromId(clickedDate));
-            }
         }
     }
 

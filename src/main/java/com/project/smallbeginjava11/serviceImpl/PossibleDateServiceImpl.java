@@ -63,4 +63,18 @@ public class PossibleDateServiceImpl implements PossibleDateService{
         return  possibleDateMapper.selectPossibleDateCodeByIniCode(params);
     }
 
+    @Override
+    public List<PossibleDate> convertFromDateToPossibleDate(Map<String, Object> params) throws ParseException{
+        List<Date> dateList = (List<Date>) params.get("possibleDateList");
+        List<PossibleDate> possibleDateList = new ArrayList<PossibleDate>();
+
+        for (Date date : dateList) {
+            PossibleDate possibleDate = new PossibleDate();
+            possibleDate.setPsbDt(date);
+            possibleDateList.add(possibleDate);
+        }
+
+        return  possibleDateList;
+    }
+
 }
