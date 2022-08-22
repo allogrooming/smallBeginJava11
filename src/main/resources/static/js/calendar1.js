@@ -305,7 +305,7 @@ function reshowingList(selectedDate){
     });
 }
 
-function addTodoLists(resp){
+/*function addTodoLists(resp){
     // toDoListsTable 이 있는지 확인
     // 그 다음 있으면 요소 삭제, 없으면 그대로 진행
     // 그러고 toDoLists에 테이블 id = toDoListsTable - resp 추가하기
@@ -347,10 +347,10 @@ function addTodoLists(resp){
 
     console.log(toDoTable)
     $(toDoLists).html(toDoTable);
-}
+}*/
 
 
-function addTodoList(){
+/*function addTodoList(){
     var $div = document.createElement('div');
     var temp = document.getElementById('input-box');
     $div.textContent = '-' + temp.value;
@@ -377,13 +377,14 @@ function addTodoList(){
         $div.remove();
         $btn.remove();
     }
-}
+}*/
 function checkList(e){
     e.currentTarget.classList.add('checked');
 }
 
 function showIniAndObList(resp){
     // iniAndObTable에 테이블 id = iniAndObTable - resp 추가하기
+    console.log(typeof(resp));
     var iniAndOb = resp;
     var iniAndObTable = document.getElementById("iniAndObTable");
     // var tableCheck = !!document.getElementById("iniAndObTable");
@@ -469,7 +470,7 @@ function showMain(){
 //    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
 //        tdGroup[i] = document.getElementById(i);
 //        tdGroup[i].addEventListener('click',
-);
+// );
 //    }
 //    function changeToday(e){
 //        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
@@ -507,39 +508,72 @@ function getDate4Ajax(idStr){
         dateStr += idStr.slice(4, 6);
         dateStr += "-";
         dateStr += idStr.slice(-2);
-        console.log(dateStr);
         return dateStr;
     }
 }
 
+function addTodoTable(){
+    console.log("delete");
+    var lengthT = $("#toDoListsTable > tbody tr").length;
+    console.log(lengthT);
+    if(lengthT > 0){
+        console.log("delete rows");
+        var todoT = document.getElementById("toDoListsTable");
+        for(var i=lengthT-1; i>=0; i--){
+           //todoT.deleteRow(i);
+           console.log(i);
+           var test = todoT.deleteRow(i);
+        }
+    }
+}
+
 function addTodo(result){
-    var addTodoListTable = result;
-    if(addTodoListTable != ''){
+    var resultTodo = JSON.parse(result);
+    console.log(resultTodo);
+
+    if(resultTodo.length > 0){
         var table4Todo = document.getElementById("toDoListsTable");
-        var newRaw = table.insertRow();
 
-        var color = newRaw.insertCell(0);
-        var content = newRaw.insertCell(1);
-        var state = newRaw.insertCell(2);
+        var indexRaw = table4Todo.insertRow();
+        var cell1 = indexRaw.insertCell(0);
+        var cell2 = indexRaw.insertCell(1);
+        var cell3 = indexRaw.insertCell(2);
+        var cell4 = indexRaw.insertCell(3);
+        var cell5 = indexRaw.insertCell(4);
 
-        color.innerText = addTodoListTable.color;
-        content.innerText = addTodoListTable.content;
-        state.innerText = addTodoListTable.state;
+        cell1.innerText = ' ';
+        cell2.innerText = 'content';
+        cell3.innerText = 'state';
+        cell4.innerText = ' ';
+        cell5.innerText = ' ';
+
+        for(var obj of resultTodo){
+            var newRaw = table4Todo.insertRow();
+            var color = newRaw.insertCell(0);
+            var content = newRaw.insertCell(1);
+            var state = newRaw.insertCell(2);
+            var deleteBtn = newRaw.insertCell(3);
+
+            var values = Object.values(obj);
+
+            color.innerText = "●";
+
+            content.innerText = values[2];
+            state.innerText = values[4];
+            deleteBtn.innerText = "delete";
+        }
     }
 }
 
 function readToDo(clickedDate){
-    console.log(clickedDate);
-    insertDate = getDate4Ajax(clickedDate);
      $.ajax({
              url : "/readCalendar",
              type : "post",
              contentType: 'application/x-www-form-urlencoded; charset=utf-8',
              dataType : "text",
-             data : {"clickedDate" : insertDate},
+             data : {"clickedDate" : clickedDate},
              success : function(result){
-                 console.log(result.color);
-                 console.log(result);
+                 addTodoTable();
                  addTodo(result);
              },
              error : function(err){

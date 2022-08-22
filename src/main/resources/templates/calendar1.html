@@ -138,27 +138,28 @@
         console.log("start");
         attachMain();
         clickDate();
-    });
 
-    $("#input-data").click(function(){
-        readForm("#toDoList", "/toDoList");
-        var planDate = $('planDate').val();
-        console.log("create todo");
-    });
+        $("#input-data").click(function(){
+            readForm("#toDoList", "/toDoList");
+            var planDate = $('planDate').val();
+            console.log("create todo");
+        });
 
-    $(".calendar-body").click(function(event){
-    });
+        $(".calendar-body").click(function(event){
+        });
 
-    $(".td-date").on("click", function(){
-        console.log("td-date click");
-        loadCalendar(2);
-    });
+        $(".td-date").on("click", function(){
+            console.log("td-date click");
+            loadCalendar(2);
+        });
 
-    $('#calendar td').click(function(){
-        var tdID = $(this).attr('id');
-        console.log("click!!");
-        var param4readToDo = getDate4Ajax(tdID);
-        readToDo(param4readToDo);
+        $('#calendar td').click(function(){
+            var tdID = $(this).attr('id');
+            console.log("click!!");
+            var param4readToDo = getDate4Ajax(tdID);
+            console.log(param4readToDo);
+            readToDo(param4readToDo);  // 처음에는 되는데 사용자가 클릭을 했을 경우 실행이 안됨??????
+        });
     });
 
 </script>
