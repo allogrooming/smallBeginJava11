@@ -2,7 +2,6 @@ package com.project.smallbeginjava11.serviceImpl;
 
 
 import com.project.smallbeginjava11.DTO.Calendar;
-import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.DTO.Todo;
 import com.project.smallbeginjava11.mapper.CalendarMapper;
 import com.project.smallbeginjava11.service.CalendarService;
@@ -21,6 +20,7 @@ public class CalendarServiceImpl implements CalendarService {
 
     @Override
     public List<Todo> getTodoList(String selectedDate){
+        System.out.println(selectedDate);
         return calendarMapper.getTodoList(selectedDate);
     }
 

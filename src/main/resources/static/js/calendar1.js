@@ -468,7 +468,8 @@ function showMain(){
 //    var mainMonthTable = [];
 //    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
 //        tdGroup[i] = document.getElementById(i);
-//        tdGroup[i].addEventListener('click', changeToday);
+//        tdGroup[i].addEventListener('click',
+);
 //    }
 //    function changeToday(e){
 //        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
@@ -511,16 +512,32 @@ function getDate4Ajax(idStr){
     }
 }
 
+function addTodo(result){
+    var addTodoListTable = result;
+    if(addTodoListTable != ''){
+        var table4Todo = document.getElementById("toDoListsTable");
+        var newRaw = table.insertRow();
+
+        var color = newRaw.insertCell(0);
+        var content = newRaw.insertCell(1);
+        var state = newRaw.insertCell(2);
+
+        //color.innerText =
+    }
+}
+
 function readToDo(clickedDate){
     console.log(clickedDate);
+    insertDate = getDate4Ajax(clickedDate);
      $.ajax({
              url : "/readCalendar",
              type : "post",
              contentType: 'application/x-www-form-urlencoded; charset=utf-8',
              dataType : "text",
-             data : {"clickedDate" : clickedDate},
+             data : {"clickedDate" : insertDate},
              success : function(result){
-                 console.log(result);
+                 console.log(result.color);
+                 console.log(result.content);
              },
              error : function(err){
                  console.log(err+"에러발생");
@@ -551,7 +568,6 @@ function clickDate(pointDate){
     readToDo(param4readToDo);
 
     tdList = $("#calendar-body td");
-    console.log(tdList);
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
     }

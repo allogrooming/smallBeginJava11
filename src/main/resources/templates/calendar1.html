@@ -116,11 +116,6 @@
 </body>
 
 <script>
-    $(function(){
-        console.log("start");
-        attachMain();
-        clickDate();
-    });
 <!--    YesScroll();-->
 
 <!--    var selectedDate = document.getElementById("setUpDate").innerText;-->
@@ -139,26 +134,32 @@
         next();
     })
 
+    $(function(){
+        console.log("start");
+        attachMain();
+        clickDate();
+    });
+
     $("#input-data").click(function(){
         readForm("#toDoList", "/toDoList");
         var planDate = $('planDate').val();
-        changeToday(planDate);
-    })
+        console.log("create todo");
+    });
 
     $(".calendar-body").click(function(event){
-    })
+    });
 
     $(".td-date").on("click", function(){
         console.log("td-date click");
         loadCalendar(2);
-    })
+    });
 
     $('#calendar td').click(function(){
         var tdID = $(this).attr('id');
         console.log("click!!");
         var param4readToDo = getDate4Ajax(tdID);
         readToDo(param4readToDo);
-    })
+    });
 
 </script>
 </html>

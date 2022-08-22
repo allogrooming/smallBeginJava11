@@ -1,7 +1,6 @@
 package com.project.smallbeginjava11.controller;
 
 import com.project.smallbeginjava11.DTO.Calendar;
-import com.project.smallbeginjava11.DTO.Initiative;
 import com.project.smallbeginjava11.DTO.Todo;
 import com.project.smallbeginjava11.service.CalendarService;
 import lombok.RequiredArgsConstructor;
@@ -103,7 +102,7 @@ public class CalendarController {
     public List<Todo> readCalendar(@RequestParam Map<String, String> param) {
 
         String selectedDate = param.get("clickedDate");
-        System.out.println("readCalendar");
+        System.out.println("readTodor");
         System.out.println(selectedDate);
         List<Todo> todo = calendarService.getTodoList(selectedDate);
         System.out.println(todo);
