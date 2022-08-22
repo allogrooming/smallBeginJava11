@@ -519,7 +519,7 @@ function addTodoTable(){
     if(lengthT > 0){
         console.log("delete rows");
         var todoT = document.getElementById("toDoListsTable");
-        for(var i=lengthT-1; i>=0; i--){
+        for(var i=lengthT-1; i>0; i--){
            //todoT.deleteRow(i);
            console.log(i);
            var test = todoT.deleteRow(i);
@@ -535,7 +535,7 @@ function addTodo(result){
         var table4Todo = document.getElementById("toDoListsTable");
 
         var indexRaw = table4Todo.insertRow();
-        var cell1 = indexRaw.insertCell(0);
+/*        var cell1 = indexRaw.insertCell(0);
         var cell2 = indexRaw.insertCell(1);
         var cell3 = indexRaw.insertCell(2);
         var cell4 = indexRaw.insertCell(3);
@@ -545,7 +545,7 @@ function addTodo(result){
         cell2.innerText = 'content';
         cell3.innerText = 'state';
         cell4.innerText = ' ';
-        cell5.innerText = ' ';
+        cell5.innerText = ' ';*/
 
         for(var obj of resultTodo){
             var newRaw = table4Todo.insertRow();
@@ -557,10 +557,27 @@ function addTodo(result){
             var values = Object.values(obj);
 
             color.innerText = "●";
+            color.id = values[5];
 
             content.innerText = values[2];
             state.innerText = values[4];
             deleteBtn.innerText = "delete";
+
+            var tester = document.getElementById(values[5]);
+            var colorTodo = "#" + values[5];
+            $(tester).css("color", values[5]);
+        }
+    }
+}
+
+function todoColor(){
+    var lengthT = $("#toDoListsTable > tbody tr").length;
+
+    if(lengthT > 0){
+        var todoTcolor = document.getElementById("toDoListsTable");
+        for(var i=lengthT-1; i>0; i--){
+           //todoT.deleteRow(i);
+           var color = todoTcolor.find()
         }
     }
 }
