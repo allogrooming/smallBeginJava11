@@ -125,8 +125,8 @@ function showCalendar(pointDate, monthCnt){
                 $div.textContent = prevLastWeekStartDate;;
                 $td.appendChild($div);
                 $td.setAttribute('id', prevId);
-                $td.setAttribute('class', 'main-calendar');
-                if (prevLastWeekStartDate == prevLastDate) $td.setAttribute('class', 'month-end-date');
+                $td.setAttribute('class', 'prev-calendar');
+                if (prevLastWeekStartDate == prevLastDate) $td.classList.add('month-end-date');
                 $tr.appendChild($td);
                 prevLastWeekStartDate++;
                 prevId++;
@@ -136,9 +136,9 @@ function showCalendar(pointDate, monthCnt){
                 $div.textContent = cnt;
                 $td.appendChild($div);
                 $td.setAttribute('id', pointId);
-                $td.setAttribute('class', 'prev-calendar');
+                $td.setAttribute('class', 'main-calendar');
                 // 달의 첫 날과 마지막 날 구분용 class
-                if (cnt == 1) $td.setAttribute('class', 'month-start-date');
+                if (cnt == 1) $td.classList.add('month-start-date');
                 $tr.appendChild($td);
                 cnt++;
                 pointId++;
@@ -673,8 +673,8 @@ function clickDate(pointDate){
 function loadCalendar(pointDate){
     // 캘린더 화면이 로드되면 현재 로그인한 member의 memberCode에 해당하는 toDo가
     // 현재 날짜의 월을 기준으로 읽어진다.
-    if (!pointDate) pointDate = new Date();
-    var clickedDate = setDateId(pointDate, pointDate.getDate());
+    if (!pointDate) pointDate = $(".active").attr("id");
+    var clickedDate = pointDate;
 
     window.addEventListener("load", showToDoOnCalendar);
     function showToDoOnCalendar(e){
