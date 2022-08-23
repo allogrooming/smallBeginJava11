@@ -113,7 +113,7 @@ function showCalendar(pointDate, monthCnt){
     var prevLastWeekStartDate = prevLastDate - pointFirstWeekStartDay + 1;
 
     let pointId = parseInt(setDateId(pointDate, 1));
-    let prevId = parseInt(setDateId(prevFirst, pointFirstWeekStartDay));
+    let prevId = parseInt(setDateId(prevFirst, prevLastWeekStartDate));
     let cnt = 1;
     for(var i = 1; i < 7; i++){ //주에 대한 for문
         var $tr = document.createElement('tr');
@@ -125,8 +125,8 @@ function showCalendar(pointDate, monthCnt){
                 $div.textContent = prevLastWeekStartDate;;
                 $td.appendChild($div);
                 $td.setAttribute('id', prevId);
-                $td.setAttribute('class', 'prev-month');
-                if (prevLastWeekStartDate == prevLastDate) $td.setAttribute('class', 'prev-month month-end-date');
+                $td.setAttribute('class', 'main-calendar');
+                if (prevLastWeekStartDate == prevLastDate) $td.setAttribute('class', 'month-end-date');
                 $tr.appendChild($td);
                 prevLastWeekStartDate++;
                 prevId++;
@@ -136,6 +136,7 @@ function showCalendar(pointDate, monthCnt){
                 $div.textContent = cnt;
                 $td.appendChild($div);
                 $td.setAttribute('id', pointId);
+                $td.setAttribute('class', 'prev-calendar');
                 // 달의 첫 날과 마지막 날 구분용 class
                 if (cnt == 1) $td.setAttribute('class', 'month-start-date');
                 $tr.appendChild($td);
@@ -568,8 +569,10 @@ function addTodo(result){
 
 // TODO: memberCode 입력부분 필요
 // TODO: selectedDate? clickedDate
+// TODO: dataType => JSON
 function readToDo(clickedDate){
     console.log(clickedDate);
+
      $.ajax({
              url : "/readCalendar",
              type : "post",
@@ -581,11 +584,35 @@ function readToDo(clickedDate){
              success : function(result){
                  addTodoTable();
                  addTodo(result);
+                 // addTodoOnCalendar(result);
              },
              error : function(err){
                  console.log(err+"에러발생");
              }
       });
+}
+
+// TODO: memberCode 입력부분 필요
+// TODO: dataType => JSON(Done)
+function readToDoInMonth(selectedDate){
+    var selectedMonth = selectedDate.slice(0, 7);
+    console.log(selectedMonth);
+
+    $.ajax({
+        url : "/readToDoInMonth",
+        type : "post",
+        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+        dataType : "JSON",
+        data : {"selectedMonth" : selectedMonth,
+                "memberCode" : 2
+        },
+        success : function(result){
+            addTodoOnCalendar(result);
+        },
+        error : function(err){
+            console.log(err+"에러발생");
+        }
+    });
 }
 
 function removeAllChildElements(parentElement){
@@ -607,7 +634,7 @@ function clickDate(pointDate){
     var param4readToDo = getDate4Ajax(clickedDate);
     readToDo(param4readToDo);
 
-    tdList = $("#calendar-body td");
+    var tdList = $("#calendar-body td");
     // console.log(tdList);
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
@@ -641,4 +668,17 @@ function clickDate(pointDate){
 //        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
 //        reshowingList(selectedDate);
 //    }
+}
+
+function loadCalendar(pointDate){
+    // 캘린더 화면이 로드되면 현재 로그인한 member의 memberCode에 해당하는 toDo가
+    // 현재 날짜의 월을 기준으로 읽어진다.
+    if (!pointDate) pointDate = new Date();
+    var clickedDate = setDateId(pointDate, pointDate.getDate());
+
+    window.addEventListener("load", showToDoOnCalendar);
+    function showToDoOnCalendar(e){
+        readToDoInMonth(getDate4Ajax(clickedDate));
+    }
+
 }

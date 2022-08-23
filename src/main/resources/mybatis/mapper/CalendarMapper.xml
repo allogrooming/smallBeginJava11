@@ -11,13 +11,29 @@
 
     <select id="getTodoList" parameterType="hashMap" resultType="Todo">
         SELECT
+            to_do_code,
             to_do_content,
             to_do_state,
-            to_do_color
+            to_do_color,
+            DATE_FORMAT(plan_date, '%Y-%m-%d') as plan_date
         FROM
             to_do
         WHERE
             DATE_FORMAT(plan_date, '%Y-%m-%d') = #{selectedDate}
+            AND member_code = #{memberCode};
+    </select>
+
+    <select id="getTodoListInMonth" parameterType="hashMap" resultType="Todo">
+        SELECT
+            to_do_code,
+            to_do_content,
+            to_do_state,
+            to_do_color,
+            DATE_FORMAT(plan_date, '%Y-%m-%d') as plan_date
+        FROM
+            to_do
+        WHERE
+            DATE_FORMAT(plan_date, '%Y-%m') =#{selectedMonth}
             AND member_code = #{memberCode};
     </select>
 

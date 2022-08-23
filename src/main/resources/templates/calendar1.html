@@ -15,8 +15,8 @@
 <link th:href="@{/css/calendar2.css}" rel="stylesheet" />
 <link th:href="@{/css/resetCSS.css}" rel="stylesheet" />
 <script th:src="@{/js/navbar.js}"></script>
-<script th:src="@{/js/calendar1.js}"></script>
 <script th:src="@{/js/calendarDataShow.js}"></script>
+<script th:src="@{/js/calendar1.js}"></script>
 <script th:src="@{/js/infiniteScroll.js}"></script>
 <script th:src="@{/js/common.js}"></script>
 
@@ -135,24 +135,28 @@
         next();
     })
 
-    $(function(){
-        console.log("start");
-        attachMain();
-        clickDate();
 
-        $("#input-data").click(function(){
-            readForm("#toDoList", "/toDoList");
-            var planDate = $('planDate').val();
-            console.log("create todo");
-        });
 
-        $(".calendar-body").click(function(event){
-        });
+    attachMain();
+    clickDate();
 
-        $(".td-date").on("click", function(){
-            console.log("td-date click");
-            loadCalendar(2);
-        });
+
+    $("#input-data").click(function(){
+        readForm("#toDoList", "/toDoList");
+        var planDate = $('planDate').val();
+        console.log("create todo");
+    });
+
+    $(".calendar-body").click(function(event){
+    });
+
+    $(".td-date").on("click", function(){
+        console.log("td-date click");
+<!--        loadCalendar(2);-->
+    });
+
+    loadCalendar();
+
 
 <!--        $('#calendar td').click(function(){-->
 <!--            var tdID = $(this).attr('id');-->
@@ -161,7 +165,8 @@
 <!--            console.log(param4readToDo);-->
 <!--            readToDo(param4readToDo);  // 처음에는 되는데 사용자가 클릭을 했을 경우 실행이 안됨??????-->
 <!--        });-->
-    });
+
+
 
 </script>
 </html>

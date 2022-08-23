@@ -108,6 +108,18 @@ public class CalendarController {
     }
 
     @Transactional
+    @RequestMapping(value="/readToDoInMonth")
+    @ResponseBody
+    public List<Todo> readToDoInMonth(@RequestParam Map<String, Object> param) throws ParseException {
+        String selectedMonth = String.valueOf(param.get("selectedMonth"));
+        System.out.println("readToDoInMonth");
+        System.out.println(selectedMonth);
+        List<Todo> todoList = calendarService.getTodoListInMonth(param);
+        System.out.println(todoList);
+        return todoList;
+    }
+
+    @Transactional
     @RequestMapping(value="/toDoList", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
