@@ -20,7 +20,7 @@ public class CalendarController {
     private final CalendarService calendarService;
 
     @RequestMapping("/calendar")
-    public ModelAndView calendar(@RequestParam @Nullable Map<String, String> param){
+    public ModelAndView calendar1(@RequestParam @Nullable Map<String, Object> param){
 
         System.out.println("param - Calendar");
         System.out.println(param);
@@ -28,16 +28,16 @@ public class CalendarController {
         if(param == null){
             System.out.println("first calendar");
             // 무한스크롤 확인용 임시
-            ModelAndView modelAndView = new ModelAndView("calendar1");
+            ModelAndView modelAndView = new ModelAndView("calendar");
             return modelAndView;
         }else{
             System.out.println("Got the param");
             System.out.println(param);
-            String selectedDate = param.get("param");
+            // String selectedDate = param.get("param");
 
-            System.out.println(selectedDate);
-            List<Todo> todo = calendarService.getTodoList(selectedDate);
-            System.out.println(todo);
+            // System.out.println(selectedDate);
+            List<Todo> todo = calendarService.getTodoList(param);
+            //System.out.println(todo);
 
             // 무한스크롤 확인용 임시
             ModelAndView modelAndView = new ModelAndView("calendar1");
@@ -49,9 +49,8 @@ public class CalendarController {
         }
     }
 
-    // 임시 calendar1.html 연결용
     @RequestMapping("/calendar1")
-    public ModelAndView calendar1(@RequestParam @Nullable Map<String, String> param){
+    public ModelAndView calendar(@RequestParam @Nullable Map<String, Object> param){
 
         if(param == null){
             System.out.println("first calendar");
@@ -60,11 +59,11 @@ public class CalendarController {
             return modelAndView;
         }else{
             System.out.println("Got the param");
-            System.out.println(param);
-            String selectedDate = param.get("param");
+            param.entrySet().forEach(x -> System.out.println(x));
+            // String selectedDate = param.get("param");
 
-            System.out.println(selectedDate);
-            List<Todo> todo = calendarService.getTodoList(selectedDate);
+            // System.out.println(selectedDate);
+            List<Todo> todo = calendarService.getTodoList(param);
             System.out.println(todo);
 
             // 무한스크롤 확인용 임시
@@ -99,12 +98,11 @@ public class CalendarController {
     @Transactional
     @RequestMapping(value="/readCalendar")
     @ResponseBody
-    public List<Todo> readCalendar(@RequestParam Map<String, String> param) {
-
-        String selectedDate = param.get("clickedDate");
-        System.out.println("readTodor");
+    public List<Todo> readCalendar(@RequestParam Map<String, Object> param) {
+        String selectedDate = String.valueOf(param.get("clickedDate"));
+        System.out.println("readTodo");
         System.out.println(selectedDate);
-        List<Todo> todo = calendarService.getTodoList(selectedDate);
+        List<Todo> todo = calendarService.getTodoList(param);
         System.out.println(todo);
         return todo;
     }

@@ -5,8 +5,20 @@
 
 <mapper namespace="com.project.smallbeginjava11.mapper.CalendarMapper">
 
-    <select id="getTodoList" parameterType="String" resultType="Todo">
-        SELECT to_do_content, to_do_state, to_do_color FROM to_do where set_up_date = #{selectedDate};
+<!--    <select id="getTodoList" parameterType="String" resultType="Todo">-->
+<!--        SELECT to_do_content, to_do_state, to_do_color FROM to_do where set_up_date = #{selectedDate};-->
+<!--    </select>-->
+
+    <select id="getTodoList" parameterType="hashMap" resultType="Todo">
+        SELECT
+            to_do_content,
+            to_do_state,
+            to_do_color
+        FROM
+            to_do
+        WHERE
+            DATE_FORMAT(plan_date, '%Y-%m-%d') = #{selectedDate}
+            AND member_code = #{memberCode};
     </select>
 
     <insert id="inputTodoList" parameterType="hashMap">

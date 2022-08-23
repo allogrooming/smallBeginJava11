@@ -499,6 +499,7 @@ function getDateFromId(idStr){
     }
 }
 
+// TODO: 메소드명 변경 논의
 function getDate4Ajax(idStr){
     if(idStr != ""){
         dateStr = "";
@@ -565,6 +566,8 @@ function addTodo(result){
     }
 }
 
+// TODO: memberCode 입력부분 필요
+// TODO: selectedDate? clickedDate
 function readToDo(clickedDate){
     console.log(clickedDate);
      $.ajax({
@@ -572,7 +575,9 @@ function readToDo(clickedDate){
              type : "post",
              contentType: 'application/x-www-form-urlencoded; charset=utf-8',
              dataType : "text",
-             data : {"clickedDate" : clickedDate},
+             data : {"selectedDate" : clickedDate,
+                     "memberCode" : 2
+             },
              success : function(result){
                  addTodoTable();
                  addTodo(result);
@@ -597,16 +602,13 @@ function clickDate(pointDate){
     var clickedDateElement = document.getElementById(clickedDate);
     console.log('clickedDate: ', clickedDate);
     clickedDateElement.classList.add('active');
-    // TODO: memberCode 입력부분 수정 필요
-    readInitiative(3, clickedDate);
-    // TODO: 하위 엘리멘트도 이벤트가 등록되게 해야 함
 
     // 여기에 첫화면에 대한 to_do 서치하는 함수 넣기 parameter = getDateFromId(clickedDate)
     var param4readToDo = getDate4Ajax(clickedDate);
     readToDo(param4readToDo);
 
     tdList = $("#calendar-body td");
-    console.log(tdList);
+    // console.log(tdList);
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
         for (tdDiv of td.childNodes){
@@ -627,8 +629,7 @@ function clickDate(pointDate){
             clickedDateElement.classList.add('active');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
-            // TODO: memberCode 입력부분 수정 필요
-            readInitiative(3, clickedDate);
+            readToDo(getDate4Ajax(clickedDate))
         }
     }
 

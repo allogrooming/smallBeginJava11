@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -29,7 +28,7 @@ public class Calendar {
     //private int plannedDay; //(요일)
 
     // <일자/요일 리스트> //
-    private DateList dateList;
+//    private DateList dateList;
     private List<String> plannedDateList;
     private List<Integer> plannedDayList;
 

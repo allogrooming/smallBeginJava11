@@ -11,7 +11,8 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface CalendarMapper {
-    List<Todo> getTodoList(String selectedDate);
+//    List<Todo> getTodoList(String selectedDate);
+    List<Todo> getTodoList(Map<String, Object> params);
     void inputTodoList(Map<String, String> params);
     List<Calendar> selectIniAndObList(Map<String, Object> map);
 
