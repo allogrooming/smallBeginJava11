@@ -95,6 +95,8 @@ html, body{
         height: 15vh;
         text-align: center;
         font-size: 16px;
+        table-layout:fixed;
+        word-break:break-all;
     }
 
     .content-right table tr{
