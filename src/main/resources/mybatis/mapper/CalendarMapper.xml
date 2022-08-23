@@ -42,7 +42,7 @@
                           to_do_code,
                           member_code,
                           to_do_content,
-                          set_up_date,
+                            plan_date,
                           to_do_state,
                           to_do_color,
                           done_date
@@ -51,10 +51,10 @@
                (select IFNULL(MAX(a.to_do_code), 0) + 1 FROM to_do a),
                2,
                #{toDoContent},
-               #{setUpDate},
+                #{planDate},
                0,
                #{toDoColor},
-               0000-00-00
+                #{done_date}
               )
     </insert>
 
