@@ -349,35 +349,6 @@ function addTodoLists(resp){
     $(toDoLists).html(toDoTable);
 }
 
-
-function addTodoList(){
-    var $div = document.createElement('div');
-    var temp = document.getElementById('input-box');
-    $div.textContent = '-' + temp.value;
-    var $btn = document.createElement('button');
-    $btn.setAttribute('type', 'button');
-    $btn.setAttribute('id', 'del-ata');
-    $btn.setAttribute('id', dataCnt+keyValue);
-    $btn.setAttribute('class', "del-data");
-    $btn.textContent = delText;
-    console.log("$div at addTodoList : ", $div);
-    console.log("$btn at addTodoList : ", $btn);
-    console.log("input-list : ", inputList);
-    var inputList2 = document.getElementById('input-list');
-    inputList2.appendChild($div);
-    inputList2.appendChild($btn);
-    //inputList.appendChild($div);
-    //inputList.appendChild($btn);
-    todoList[keyValue].push(temp.value);
-    dataCnt++;
-    temp.value = '';
-    //$div.addEventListener('click',checkList);
-    //$btn.addEventListener('click',deleteTodo);
-    function deleteTodo(){
-        $div.remove();
-        $btn.remove();
-    }
-}
 function checkList(e){
     e.currentTarget.classList.add('checked');
 }
@@ -512,16 +483,16 @@ function getDate4Ajax(idStr){
     }
 }
 
+function showTodoTable(){
+
+}
+
 function addTodoTable(){
-    console.log("delete");
     var lengthT = $("#toDoListsTable > tbody tr").length;
-    console.log(lengthT);
     if(lengthT > 0){
         console.log("delete rows");
         var todoT = document.getElementById("toDoListsTable");
         for(var i=lengthT-1; i>0; i--){
-           //todoT.deleteRow(i);
-           console.log(i);
            var test = todoT.deleteRow(i);
         }
     }
@@ -529,13 +500,12 @@ function addTodoTable(){
 
 function addTodo(result){
     var resultTodo = JSON.parse(result);
-    console.log(resultTodo);
 
     if(resultTodo.length > 0){
         var table4Todo = document.getElementById("toDoListsTable");
 
-        var indexRaw = table4Todo.insertRow();
-/*        var cell1 = indexRaw.insertCell(0);
+/*        var indexRaw = table4Todo.insertRow();
+        var cell1 = indexRaw.insertCell(0);
         var cell2 = indexRaw.insertCell(1);
         var cell3 = indexRaw.insertCell(2);
         var cell4 = indexRaw.insertCell(3);
@@ -547,27 +517,100 @@ function addTodo(result){
         cell4.innerText = ' ';
         cell5.innerText = ' ';*/
 
+        var i=0;
+
         for(var obj of resultTodo){
+            var values = Object.values(obj);
+
+/*            var $tr = document.createElement("tr");
+            var color = "<td>●</td>";
+            var content = document.createElement("td").textContent = values[2];
+            var state = document.createElement("td").textContent = values[4];
+            var deleteBtn = document.createElement("td").textContent = "delete";
+            var editBtn = document.createElement("td").textContent = "edit";*/
+
             var newRaw = table4Todo.insertRow();
             var color = newRaw.insertCell(0);
             var content = newRaw.insertCell(1);
             var state = newRaw.insertCell(2);
             var deleteBtn = newRaw.insertCell(3);
+            var editBtn = newRaw.insertCell(4);
 
-            var values = Object.values(obj);
-
-            color.innerText = "●";
+            color.innerText = "■";
             color.id = values[5];
-
-            console.log(values[0]);
+            deleteBtn.id = values[0];
+            color.classList.add("color");
+            content.classList.add("content");
+            deleteBtn.classList.add("delete");
+            editBtn.classList.add("edit");
+            editBtn.classList.add(i);
 
             content.innerText = values[2];
             state.innerText = values[4];
             deleteBtn.innerText = "delete";
+            editBtn.innerText = "edit";
+            //deleteBtn.innerHTML = "<button type='button' class='delete'>delete</button>"
+
+/*
+            $tr.append(color);
+            $tr.append(content);
+            $tr.append(state);
+            $tr.append(deleteBtn);
+            $tr.append(editBtn);
+            table4Todo.append($tr);
+*/
+
+/*
+            toDoTable += "<tr><td id='" + values[5] + "'>●</td><td>"
+            toDoTable += "<td>" + values[2] + "</td>";
+            toDoTable += "<td>" + values[4] + "</td>";
+            toDoTable += "<td" + "class='delete'>" + "delete</td></tr>";
+
+            $(table4Todo).html(toDoTable);
+*/
 
             var tester = document.getElementById(values[5]);
             var colorTodo = "#" + values[5];
             $(tester).css("color", values[5]);
+            i++;
+        }
+    }
+}
+
+function editTodo(result){
+    var resultTodo = JSON.parse(result);
+
+    if(resultTodo.length > 0){
+        var table4Todo = document.getElementById("toDoListsTable");
+
+        for(var obj of resultTodo){
+            var values = Object.values(obj);
+
+            var newRaw = table4Todo.insertRow();
+            var color = newRaw.insertCell(0);
+            var content = newRaw.insertCell(1);
+            var state = newRaw.insertCell(2);
+            var deleteBtn = newRaw.insertCell(3);
+            var editBtn = newRaw.insertCell(4);
+
+            color.innerText = "●";
+            color.id = values[5];
+            deleteBtn.id = values[0];
+            color.classList.add("color");
+            content.classList.add("content");
+            deleteBtn.classList.add("delete");
+            editBtn.classList.add("edit");
+            editBtn.classList.add(i);
+
+            content.innerText = values[2];
+            state.innerText = values[4];
+            deleteBtn.innerText = "delete";
+            editBtn.innerText = "edit";
+
+            var tester = document.getElementById(values[5]);
+            var colorTodo = "#" + values[5];
+            $(tester).css("color", values[5]);
+            i++;
         }
     }
 }
@@ -578,13 +621,30 @@ function readToDo(clickedDate){
              type : "post",
              contentType: 'application/x-www-form-urlencoded; charset=utf-8',
              dataType : "text",
-             data : {"clickedDate" : clickedDate},
+             data : {"selectedDate" : clickedDate},
              success : function(result){
                  addTodoTable();
                  addTodo(result);
              },
              error : function(err){
                  console.log(err+"에러발생");
+             }
+      });
+}
+
+function deleteTodo(deleteid, selectedDate){
+      $.ajax({
+             url : "/toDoDelete",
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : {"toDoCode" : deleteid},
+             success : function(result){
+                 console.log(result);
+                 readToDo(selectedDate);
+             },
+             error : function(err){
+                 console.log(err+"error");
              }
       });
 }

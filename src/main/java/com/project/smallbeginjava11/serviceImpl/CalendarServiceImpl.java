@@ -19,9 +19,8 @@ public class CalendarServiceImpl implements CalendarService {
     private final CalendarMapper calendarMapper;
 
     @Override
-    public List<Todo> getTodoList(String selectedDate){
-        System.out.println(selectedDate);
-        return calendarMapper.getTodoList(selectedDate);
+    public List<Todo> getTodoList(Map<String, Object> params){
+        return calendarMapper.getTodoList(params);
     }
 
     @Override
@@ -32,6 +31,11 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public List<Calendar> getIniAndObList(Map<String, Object> params) throws ParseException{
         return calendarMapper.selectIniAndObList(params);
+    }
+
+    @Override
+    public void toDoDelete(Map<String, String> params) throws ParseException{
+        calendarMapper.toDoDelete(params);
     }
 
 }

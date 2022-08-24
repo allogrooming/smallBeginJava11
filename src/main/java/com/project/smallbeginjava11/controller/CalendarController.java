@@ -19,7 +19,7 @@ public class CalendarController {
 
     private final CalendarService calendarService;
 
-    @RequestMapping("/calendar")
+/*    @RequestMapping("/calendar")
     public ModelAndView calendar(@RequestParam @Nullable Map<String, String> param){
 
         System.out.println("param - Calendar");
@@ -47,11 +47,11 @@ public class CalendarController {
 
             return modelAndView;
         }
-    }
+    }*/
 
     // 임시 calendar1.html 연결용
     @RequestMapping("/calendar1")
-    public ModelAndView calendar1(@RequestParam @Nullable Map<String, String> param){
+    public ModelAndView calendar(@RequestParam @Nullable Map<String, Object> param){
 
         if(param == null){
             System.out.println("first calendar");
@@ -60,11 +60,11 @@ public class CalendarController {
             return modelAndView;
         }else{
             System.out.println("Got the param");
-            System.out.println(param);
-            String selectedDate = param.get("param");
+            param.entrySet().forEach(x -> System.out.println(x));
+            // String selectedDate = param.get("param");
 
-            System.out.println(selectedDate);
-            List<Todo> todo = calendarService.getTodoList(selectedDate);
+            // System.out.println(selectedDate);
+            List<Todo> todo = calendarService.getTodoList(param);
             System.out.println(todo);
 
             // 무한스크롤 확인용 임시
@@ -75,6 +75,7 @@ public class CalendarController {
 
             return modelAndView;
         }
+
 
 
 
@@ -99,12 +100,10 @@ public class CalendarController {
     @Transactional
     @RequestMapping(value="/readCalendar")
     @ResponseBody
-    public List<Todo> readCalendar(@RequestParam Map<String, String> param) {
-
-        String selectedDate = param.get("clickedDate");
-        System.out.println("readTodor");
-        System.out.println(selectedDate);
-        List<Todo> todo = calendarService.getTodoList(selectedDate);
+    public List<Todo> readCalendar(@RequestParam Map<String, Object> param) {
+        String selectedDate = String.valueOf(param.get("clickedDate"));
+        System.out.println("readTodo");
+        List<Todo> todo = calendarService.getTodoList(param);
         System.out.println(todo);
         return todo;
     }
@@ -123,6 +122,17 @@ public class CalendarController {
 
         calendarService.inputTodoList(params);
 
+        return "success";
+    }
+
+    @Transactional
+    @RequestMapping(value="/toDoDelete", produces="text/html;charset=UTF-8")
+    @ResponseBody
+    @PostMapping
+    public String toDoDelete(@RequestParam Map<String, String> params) throws ParseException {
+
+        System.out.println("toDoDelete");
+        calendarService.toDoDelete(params);
         return "success";
     }
 

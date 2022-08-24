@@ -134,7 +134,7 @@
         next();
     })
 
-    $(function(){
+    $(document).ready(function(){
         console.log("start");
         attachMain();
         clickDate();
@@ -143,9 +143,6 @@
             readForm("#toDoList", "/toDoList");
             var planDate = $('planDate').val();
             console.log("create todo");
-        });
-
-        $(".calendar-body").click(function(event){
         });
 
         $(".td-date").on("click", function(){
@@ -158,10 +155,40 @@
             console.log("click!!");
             var param4readToDo = getDate4Ajax(tdID);
             console.log(param4readToDo);
-            readToDo(param4readToDo);  // 처음에는 되는데 사용자가 클릭을 했을 경우 실행이 안됨??????
+            readToDo(param4readToDo);
+        });
+
+        $('#toDoListsTable').on("click", ".delete", function(){
+            var deleteId = $(this).attr('id');
+            var selectedDate = $(".active").attr('id');
+            deleteTodo(deleteId, selectedDate);
+            readToDo(selectedDate);
+            //reload
+        });
+
+        $('#toDoListsTable').on("click", ".edit", function(){
+            var tr = $(this).attr('class');
+            var rowNum = tr.substr(5);
+            rowNum++;
+            var tableTr = document.getElementById("toDoListsTable").getElementsByTagName("tr");
+            var selectedTr = tableTr[rowNum];
+            var colorCol = selectedTr.children[0];
+            var contentCol = selectedTr.children[1];
+
+            colorCol.innerHTML = '<input type="color" id="editColor" name="toDoColor"/>';
+            contentCol.contentEditable = 'true';
+
+            //var editId = $(this).attr('id');
         });
     });
 
+<!-- $(document).on("click", ".scroll_to", function(){-->
+<!--        console.log("delete??");-->
+<!--        var deleteId = $(this).attr('id');-->
+<!--        console.log(deleteId);-->
+<!--        deleteTodo(deleteId);-->
+<!--        $(this).parent().remove;-->
+<!--    });-->
 </script>
 </html>
 
