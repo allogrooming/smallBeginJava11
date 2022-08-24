@@ -1,9 +1,19 @@
+function removeAllToDoOnCalendar() {
+
+    var tdList = $("#calendar-body tr td");
+    for (var i = 0; i < tdList.length; i++){
+        if ($(tdList[i]).children().length > 1){
+            console.log($(tdList[i]).children(":gt(0)"));
+            $(tdList[i]).children(":gt(0)").remove();
+        }
+    }
+}
+
 function addTodoOnCalendar(result){
 
-    if(result.length > 0){
-        console.log('-----------------');
-        console.log(result);
-    }
+    // 기존의 toDoDiv를 지운다.
+    removeAllToDoOnCalendar()
+
 
     for (var i = 0; i < result.length; i++){
         var $div = document.createElement('div');
@@ -13,6 +23,5 @@ function addTodoOnCalendar(result){
         var tdId = "#" + setDateId(planDate, planDate.getDate());
         $(tdId).append($div);
     }
-
 
 }

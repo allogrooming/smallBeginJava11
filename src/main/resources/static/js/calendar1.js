@@ -584,7 +584,6 @@ function readToDo(clickedDate){
              success : function(result){
                  addTodoTable();
                  addTodo(result);
-                 // addTodoOnCalendar(result);
              },
              error : function(err){
                  console.log(err+"에러발생");
@@ -594,8 +593,11 @@ function readToDo(clickedDate){
 
 // TODO: memberCode 입력부분 필요
 // TODO: dataType => JSON(Done)
-function readToDoInMonth(selectedDate){
+var readToDoInMonth = function readToDoInMonth(selectedDate){
+    if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
+    console.log('selectedDate :', selectedDate);
     var selectedMonth = selectedDate.slice(0, 7);
+    console.log('readToDoInMonth')
     console.log(selectedMonth);
 
     $.ajax({
@@ -607,6 +609,7 @@ function readToDoInMonth(selectedDate){
                 "memberCode" : 2
         },
         success : function(result){
+            console.log(result);
             addTodoOnCalendar(result);
         },
         error : function(err){

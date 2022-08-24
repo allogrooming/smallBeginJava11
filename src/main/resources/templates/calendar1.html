@@ -142,8 +142,8 @@
 
     // TODO: setUpDate -> planDate
     $("#input-data").click(function(){
-        readForm("#toDoList", "/toDoList");
-        var planDate = $('planDate').val();
+        var planDate = $('#planDate').val();
+        readForm("#toDoList", "/toDoList", readToDoInMonth, false);
         console.log("create todo");
     });
 

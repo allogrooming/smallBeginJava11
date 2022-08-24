@@ -2,7 +2,7 @@ function readData(data){
     alert(data);
 }
 
-function readForm(formId, url){
+function readForm(formId, url, callback, flag){
       $.ajax({
              url : url,
              type : "post",
@@ -12,6 +12,13 @@ function readForm(formId, url){
              success : function(result){
                  console.log(result);
                  console.log(this.data);
+                 if (callback != null && callback != undefined) {
+                    if (flag) {
+                        callback(result);
+                    } else {
+                        callback();
+                    }
+                 }
              },
              error : function(err){
                  console.log(err+"에러발생");
