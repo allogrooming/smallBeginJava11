@@ -531,11 +531,7 @@ function addTodoTable(){
 
 function checkToDoInTable(trId, result) {
     console.log('checkToDoInTable');
-    console.log('trId :', trId);
-    console.log('result :', result);
     var selectorStr = "#" + trId + " .state";
-    console.log(selectorStr);
-    $(selectorStr).css("background-color", "yellow");
     $(selectorStr).text(result);
 }
 
