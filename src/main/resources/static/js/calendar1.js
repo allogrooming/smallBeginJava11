@@ -669,6 +669,7 @@ function clickDate(pointDate){
             clickedDateElement.classList.add('active');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
+            // TODO: 위치변경 확인 필요
             readToDo(getDate4Ajax(clickedDate))
         }
     }
