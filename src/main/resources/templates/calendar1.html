@@ -160,6 +160,10 @@ $(function(){
         //var editId = $(this).attr('id');
     });
 
+    $("#toDoListsTable").on("click", ".state", function(){
+        checkToDo(this.parentNode.id, this.innerText);
+    });
+
    loadCalendar();
 });
 </script>

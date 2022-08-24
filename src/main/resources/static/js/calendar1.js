@@ -416,6 +416,8 @@ function addTodo(result){
             deleteBtn.classList.add("delete");
             editBtn.classList.add("edit");
             editBtn.classList.add(i);
+            // TODO: className 추가
+            state.className = "state";
 
             content.innerText = values[2];
             state.innerText = values[4];
