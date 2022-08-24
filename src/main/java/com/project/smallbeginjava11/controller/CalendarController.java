@@ -140,13 +140,6 @@ public class CalendarController {
         return "success";
     }
 
-    @RequestMapping(value="/readInitiative")
-    @ResponseBody
-    @PostMapping
-    public List<Calendar> readInitiative(@RequestParam Map<String, Object> params) throws ParseException{
-        List<Calendar> initiativeList = calendarService.getIniAndObList(params);
-        return initiativeList;
-    }
 
     @RequestMapping(value="/updateToDoState")
     @ResponseBody
