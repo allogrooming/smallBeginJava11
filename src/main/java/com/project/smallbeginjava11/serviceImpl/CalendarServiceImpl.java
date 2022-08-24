@@ -26,7 +26,6 @@ public class CalendarServiceImpl implements CalendarService {
         calendarMapper.inputTodoList(params);
     }
 
-
     @Override
     public void toDoDelete(Map<String, String> params) throws ParseException {
         calendarMapper.toDoDelete(params);
@@ -35,6 +34,11 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public List<Todo> getTodoListInMonth(Map<String, Object> params) throws ParseException {
         return calendarMapper.getTodoListInMonth(params);
+    }
+
+    @Override
+    public void editToDo(Map<String, Object> params) throws ParseException {
+        calendarMapper.editToDo(params);
     }
 
     @Override

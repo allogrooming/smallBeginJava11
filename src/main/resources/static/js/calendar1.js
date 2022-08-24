@@ -428,51 +428,31 @@ function addTodo(result){
             i++;
         }
     }
+    console.log("엥");
 }
 
-function editTodo(result){
-    var resultTodo = JSON.parse(result);
-
-    if(resultTodo.length > 0){
-        var table4Todo = document.getElementById("toDoListsTable");
-
-        for(var obj of resultTodo){
-            var values = Object.values(obj);
-
-            var newRaw = table4Todo.insertRow();
-            var color = newRaw.insertCell(0);
-            var content = newRaw.insertCell(1);
-            var state = newRaw.insertCell(2);
-            var deleteBtn = newRaw.insertCell(3);
-            var editBtn = newRaw.insertCell(4);
-
-            color.innerText = "●";
-            color.id = values[5];
-            deleteBtn.id = values[0];
-            color.classList.add("color");
-            content.classList.add("content");
-            deleteBtn.classList.add("delete");
-            editBtn.classList.add("edit");
-            editBtn.classList.add(i);
-
-            content.innerText = values[2];
-            state.innerText = values[4];
-            state.className = "state";
-            deleteBtn.innerText = "delete";
-            editBtn.innerText = "edit";
-
-            var tester = document.getElementById(values[5]);
-            var colorTodo = "#" + values[5];
-            $(tester).css("color", values[5]);
-            i++;
-        }
-    }
+function editTodo(sendColor, sendContent, clickedDate, toDoCode){
+    console.log("editTodo");
+    console.log(clickedDate);
+     $.ajax({
+             url : "/editToDo",
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : {"toDoCode" : toDoCode, "toDoContent" : toDoContent, "toDoColor" : toDoColor},
+             success : function(result){
+                console.log(result);
+                 readToDo(clickedDate);
+             },
+             error : function(err){
+                 console.log(err+"에러발생");
+             }
+      });
 }
 
 // TODO: memberCode 입력부분 필요
 // TODO: dataType => JSON
 function readToDo(clickedDate){
-
      $.ajax({
              url : "/readCalendar",
              type : "post",
@@ -495,10 +475,10 @@ function readToDo(clickedDate){
 // TODO: dataType => JSON(Done)
 var readToDoInMonth = function readToDoInMonth(selectedDate){
     if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
-    console.log('selectedDate :', selectedDate);
+    //console.log('selectedDate :', selectedDate);
     var selectedMonth = selectedDate.slice(0, 7);
-    console.log('readToDoInMonth')
-    console.log(selectedMonth);
+    //console.log('readToDoInMonth')
+    //console.log(selectedMonth);
 
     $.ajax({
         url : "/readToDoInMonth",
@@ -509,7 +489,7 @@ var readToDoInMonth = function readToDoInMonth(selectedDate){
                 "memberCode" : 2
         },
         success : function(result){
-            console.log(result);
+            //console.log(result);
             addTodoOnCalendar(result);
         },
         error : function(err){
@@ -526,7 +506,6 @@ function deleteTodo(deleteid, selectedDate){
              dataType : "text",
              data : {"toDoCode" : deleteid},
              success : function(result){
-                 console.log(result);
                  readToDo(selectedDate);
              },
              error : function(err){

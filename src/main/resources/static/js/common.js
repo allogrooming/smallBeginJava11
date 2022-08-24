@@ -10,8 +10,8 @@ function readForm(formId, url, callback, flag){
              dataType : "text",
              data : $(formId).serialize(),
              success : function(result){
-                 console.log(result);
-                 console.log(this.data);
+                 //console.log(result);
+                 //console.log(this.data);
                  if (callback != null && callback != undefined) {
                     if (flag) {
                         callback(result);

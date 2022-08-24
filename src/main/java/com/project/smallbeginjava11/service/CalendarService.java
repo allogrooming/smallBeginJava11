@@ -1,6 +1,5 @@
 package com.project.smallbeginjava11.service;
 
-import com.project.smallbeginjava11.DTO.Calendar;
 import com.project.smallbeginjava11.DTO.Todo;
 
 import java.text.ParseException;
@@ -13,4 +12,5 @@ public interface CalendarService {
     void toDoDelete(Map<String, String> params) throws ParseException;
     List<Todo> getTodoListInMonth(Map<String, Object> params) throws ParseException;
     String updateToDoState(Map<String, Object> params) throws ParseException;
+    void editToDo(Map<String, Object> params) throws ParseException;
 }

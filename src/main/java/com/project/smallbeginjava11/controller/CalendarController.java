@@ -1,6 +1,5 @@
 package com.project.smallbeginjava11.controller;
 
-import com.project.smallbeginjava11.DTO.Calendar;
 import com.project.smallbeginjava11.DTO.Todo;
 import com.project.smallbeginjava11.service.CalendarService;
 import lombok.RequiredArgsConstructor;
@@ -134,12 +133,23 @@ public class CalendarController {
     @ResponseBody
     @PostMapping
     public String toDoDelete(@RequestParam Map<String, String> params) throws ParseException {
-
-        System.out.println("toDoDelete");
         calendarService.toDoDelete(params);
         return "success";
     }
 
+    @Transactional
+    @RequestMapping(value="/editToDo", produces="text/html;charset=UTF-8")
+    @ResponseBody
+    @PostMapping
+    public String editToDo(@RequestParam Map<String, Object> params) throws ParseException {
+
+        System.out.println("toDoUpdate");
+        for (String key : params.keySet()) {
+            System.out.println(key + " : " + params.get(key));
+        }
+        calendarService.editToDo(params);
+        return "success";
+    }
 
     @RequestMapping(value="/updateToDoState")
     @ResponseBody

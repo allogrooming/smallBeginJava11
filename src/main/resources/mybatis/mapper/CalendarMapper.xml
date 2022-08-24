@@ -74,4 +74,14 @@
         WHERE
             to_do_code = #{toDoCode};
     </delete>
+
+    <update id="editToDo" parameterType="hashMap">
+        UPDATE
+        to_do
+        SET
+        to_do_content = #{toDoContent},
+        to_do_color = #{toDoColor}
+        WHERE
+        to_do_code = #{toDoCode};
+    </update>
 </mapper>

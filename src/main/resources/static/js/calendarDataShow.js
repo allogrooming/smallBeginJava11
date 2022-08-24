@@ -3,7 +3,7 @@ function removeAllToDoOnCalendar() {
     var tdList = $("#calendar-body tr td");
     for (var i = 0; i < tdList.length; i++){
         if ($(tdList[i]).children().length > 1){
-            console.log($(tdList[i]).children(":gt(0)"));
+            //console.log($(tdList[i]).children(":gt(0)"));
             $(tdList[i]).children(":gt(0)").remove();
         }
     }
