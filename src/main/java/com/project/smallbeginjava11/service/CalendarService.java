@@ -9,8 +9,7 @@ import java.util.Map;
 
 public interface CalendarService {
     List<Todo> getTodoList(Map<String, Object> params);
-    void inputTodoList(Map<String, String> map) throws ParseException;
-    List<Calendar> getIniAndObList(Map<String, Object> map) throws ParseException;
+    void inputTodoList(Map<String, Object> map) throws ParseException;
     void toDoDelete(Map<String, String> params) throws ParseException;
     List<Todo> getTodoListInMonth(Map<String, Object> params) throws ParseException;
     String updateToDoState(Map<String, Object> params) throws ParseException;

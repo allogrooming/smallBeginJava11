@@ -36,12 +36,9 @@ public class CalendarController {
             String selectedDate = param.get("param");
 
             System.out.println(selectedDate);
-            List<Todo> todo = calendarService.getTodoList(selectedDate);
-            System.out.println(todo);
 
             // 무한스크롤 확인용 임시
             ModelAndView modelAndView = new ModelAndView("calendar1");
-            modelAndView.addObject("todo", todo);
 
             System.out.println("Send the result");
 
@@ -64,13 +61,9 @@ public class CalendarController {
             String selectedDate = param.get("param");
 
             System.out.println(selectedDate);
-            List<Todo> todo = calendarService.getTodoList(selectedDate);
-            System.out.println(todo);
 
             // 무한스크롤 확인용 임시
             ModelAndView modelAndView = new ModelAndView("calendar1");
-            modelAndView.addObject("todo", todo);
-
             System.out.println("Send the result");
 
             return modelAndView;
@@ -123,7 +116,7 @@ public class CalendarController {
     @RequestMapping(value="/toDoList", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
-    public String toDoListInsert(@RequestParam Map<String, String> params) throws ParseException {
+    public String toDoListInsert(@RequestParam Map<String, Object> params) throws ParseException {
 
         System.out.println("toDoListInsert");
 
