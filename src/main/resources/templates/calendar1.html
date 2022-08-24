@@ -119,36 +119,48 @@
 <script>
 $(function(){
 
-    $("#prev").click(function(){
-        prev();
-    });
-
-    $("#next").click(function(){
-        next();
-    });
-
     attachMain();
     clickDate();
 
-    // TODO: setUpDate -> planDate
     $("#input-data").click(function(){
         var planDate = $('#planDate').val();
         readForm("#toDoList", "/toDoList", readToDoInMonth, false);
         console.log("create todo");
     });
 
-    $(".td-date").on("click", function(){
-        console.log("td-date click");
+
+    $('#calendar td').click(function(){
+        var tdID = $(this).attr('id');
+        console.log("click!!");
+        var param4readToDo = getDate4Ajax(tdID);
+        console.log(param4readToDo);
+        readToDo(param4readToDo);
     });
 
-    $("#toDoListsTable").on("click", ".state", function(){
-        checkToDo(this.parentNode.id, this.innerText)
+    $('#toDoListsTable').on("click", ".delete", function(){
+        var deleteId = $(this).attr('id');
+        var selectedDate = $(".active").attr('id');
+        deleteTodo(deleteId, selectedDate);
+        readToDo(selectedDate);
+        //reload
     });
 
-    loadCalendar();
+    $('#toDoListsTable').on("click", ".edit", function(){
+        var tr = $(this).attr('class');
+        var rowNum = tr.substr(5);
+        rowNum++;
+        var tableTr = document.getElementById("toDoListsTable").getElementsByTagName("tr");
+        var selectedTr = tableTr[rowNum];
+        var colorCol = selectedTr.children[0];
+        var contentCol = selectedTr.children[1];
 
+        colorCol.innerHTML = '<input type="color" id="editColor" name="toDoColor"/>';
+        contentCol.contentEditable = 'true';
 
+        //var editId = $(this).attr('id');
+    });
 
+   loadCalendar();
 });
 </script>
 </html>

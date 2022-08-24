@@ -247,7 +247,6 @@ function prev(pointDate){
 
 function next(pointDate){
     var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
-//    console.log('pointFirst :', pointFirst);
     var pointNext;
 //    var tbodyNextCode;
 
@@ -306,120 +305,9 @@ function reshowingList(selectedDate){
     });
 }
 
-function addTodoLists(resp){
-    // toDoListsTable 이 있는지 확인
-    // 그 다음 있으면 요소 삭제, 없으면 그대로 진행
-    // 그러고 toDoLists에 테이블 id = toDoListsTable - resp 추가하기
-
-    var todo = resp;
-    var todoCount = resp.length;
-    var toDoLists = document.getElementById("toDoListsTable");
-    var tableCheck = !!document.getElementById("toDoListsTable");
-    console.log(tableCheck);
-
-    // table id=toDoListsTable을 toDoLists 안에 생성
-    var toDoTable = "<table><tr><td>Color</td><td>Content</td><td>State</td></tr>";
-    var first = "";
-    var second = "";
-    var third = "";
-
-    for (var obj of todo){
-        toDoTable += "<tr>";
-
-        first = obj[Object.keys(obj)[5]];
-        toDoTable += "<td>"
-        toDoTable += first;
-        toDoTable += "</td>";
-
-        second = obj[Object.keys(obj)[2]];
-        toDoTable += "<td>"
-        toDoTable += second;
-        toDoTable += "</td>";
-
-        third = obj[Object.keys(obj)[4]];
-        toDoTable += "<td>"
-        toDoTable += third;
-        toDoTable += "</td>";
-
-        toDoTable += "</tr>";
-
-    }
-    toDoTable += "</table>";
-
-    console.log(toDoTable)
-    $(toDoLists).html(toDoTable);
-}
-
-
-function addTodoList(){
-    var $div = document.createElement('div');
-    var temp = document.getElementById('input-box');
-    $div.textContent = '-' + temp.value;
-    var $btn = document.createElement('button');
-    $btn.setAttribute('type', 'button');
-    $btn.setAttribute('id', 'del-ata');
-    $btn.setAttribute('id', dataCnt+keyValue);
-    $btn.setAttribute('class', "del-data");
-    $btn.textContent = delText;
-    console.log("$div at addTodoList : ", $div);
-    console.log("$btn at addTodoList : ", $btn);
-    console.log("input-list : ", inputList);
-    var inputList2 = document.getElementById('input-list');
-    inputList2.appendChild($div);
-    inputList2.appendChild($btn);
-    //inputList.appendChild($div);
-    //inputList.appendChild($btn);
-    todoList[keyValue].push(temp.value);
-    dataCnt++;
-    temp.value = '';
-    //$div.addEventListener('click',checkList);
-    //$btn.addEventListener('click',deleteTodo);
-    function deleteTodo(){
-        $div.remove();
-        $btn.remove();
-    }
-}
 function checkList(e){
     e.currentTarget.classList.add('checked');
 }
-
-function showIniAndObList(resp){
-    // iniAndObTable에 테이블 id = iniAndObTable - resp 추가하기
-    var iniAndOb = resp;
-    var iniAndObTable = document.getElementById("iniAndObTable");
-    // var tableCheck = !!document.getElementById("iniAndObTable");
-
-    console.log('(iniAndOb.length :', iniAndOb.length);
-    removeAllChildElements(iniAndObTable);
-
-//    if (iniAndOb.length > 0){
-    var $tr = document.createElement("tr");
-    var $td1 = document.createElement("td").textContent = "Ob Content";
-    var $td2 = document.createElement("td").textContent = "Ini Content";
-    var $td3 = document.createElement("td").textContent = "State";
-    $tr.append($td1);
-    $tr.append($td2);
-    $tr.append($td3);
-    iniAndObTable.append($tr);
-//    } else{
-//    }
-
-    for (var obj of iniAndOb){
-        var $tr = document.createElement("tr");
-        var obContent = obj["obContent"];
-        var iniContent = obj["iniContent"];
-        var iniDtlAddState = obj["iniDtlAddState"];
-        var $td1 = document.createElement("td").textContent = obContent;
-        var $td2 = document.createElement("td").textContent = iniContent;
-        var $td3 = document.createElement("td").textContent = iniDtlAddState;
-        $tr.append($td1);
-        $tr.append($td2);
-        $tr.append($td3);
-        iniAndObTable.append($tr);
-    }
-
-}
-
 
 function showMain(){
     const mainDay = document.getElementById('main-day');
@@ -458,35 +346,6 @@ function showMain(){
     return returnDate;
 }
 
-//clickedDate1.classList.add('active');
-//var prevBtn = document.getElementById('prev');
-//var nextBtn = document.getElementById('next');
-//prevBtn.addEventListener('click',prev);
-//nextBtn.addEventListener('click',next);
-
-//function activeMainMonth(pointFirst){
-//    var clickedDate = document.getElementById(pointDate, pointDate.getDate());
-//    var pointPageYear = getPageYear(pointFirst);
-//    var mainMonthTable = [];
-//    for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
-//        tdGroup[i] = document.getElementById(i);
-//        tdGroup[i].addEventListener('click', changeToday);
-//    }
-//    function changeToday(e){
-//        for(let i = 1; i <= pointPageYear[pointFirst.getMonth()]; i++){
-//            if(tdGroup[i].classList.contains('active')){
-//                tdGroup[i].classList.remove('active');
-//            }
-//        }
-//        console.log(e);
-//        clickedDate1 = e.target;
-//        clickedDate1.classList.add('active');
-//        let selectedDate = showMain();
-//        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-//        reshowingList(selectedDate);
-//    }
-//}
-
 function getDateFromId(idStr){
     if(idStr != ""){
         dateStr = "";
@@ -500,7 +359,6 @@ function getDateFromId(idStr){
     }
 }
 
-// TODO: 메소드명 변경 논의
 function getDate4Ajax(idStr){
     if(idStr != ""){
         dateStr = "";
@@ -515,15 +373,11 @@ function getDate4Ajax(idStr){
 }
 
 function addTodoTable(){
-    console.log("delete");
     var lengthT = $("#toDoListsTable > tbody tr").length;
-    console.log(lengthT);
     if(lengthT > 0){
         console.log("delete rows");
         var todoT = document.getElementById("toDoListsTable");
-        for(var i=lengthT-1; i>=0; i--){
-           //todoT.deleteRow(i);
-           console.log(i);
+        for(var i=lengthT-1; i>0; i--){
            var test = todoT.deleteRow(i);
         }
     }
@@ -538,50 +392,86 @@ function checkToDoInTable(trId, result) {
 
 function addTodo(result){
     var resultTodo = JSON.parse(result);
-    console.log(resultTodo);
 
     if(resultTodo.length > 0){
         var table4Todo = document.getElementById("toDoListsTable");
 
-        var indexRaw = table4Todo.insertRow();
-        var cell1 = indexRaw.insertCell(0);
-        var cell2 = indexRaw.insertCell(1);
-        var cell3 = indexRaw.insertCell(2);
-        var cell4 = indexRaw.insertCell(3);
-        var cell5 = indexRaw.insertCell(4);
-
-        cell1.innerText = ' ';
-        cell2.innerText = 'content';
-        cell3.innerText = 'state';
-        cell4.innerText = ' ';
-        cell5.innerText = ' ';
-
+        var i=0;
         for(var obj of resultTodo){
+            var values = Object.values(obj);
+
             var newRaw = table4Todo.insertRow();
-            // TODO: row에 id 추가
             newRaw.id = "td-tr-" + obj.toDoCode;
             var color = newRaw.insertCell(0);
             var content = newRaw.insertCell(1);
             var state = newRaw.insertCell(2);
             var deleteBtn = newRaw.insertCell(3);
+            var editBtn = newRaw.insertCell(4);
 
+            color.innerText = "■";
+            color.id = values[5];
+            deleteBtn.id = values[0];
+            color.classList.add("color");
+            content.classList.add("content");
+            deleteBtn.classList.add("delete");
+            editBtn.classList.add("edit");
+            editBtn.classList.add(i);
+
+            content.innerText = values[2];
+            state.innerText = values[4];
+            deleteBtn.innerText = "delete";
+            editBtn.innerText = "edit";
+
+            var tester = document.getElementById(values[5]);
+            var colorTodo = "#" + values[5];
+            $(tester).css("color", values[5]);
+            i++;
+        }
+    }
+}
+
+function editTodo(result){
+    var resultTodo = JSON.parse(result);
+
+    if(resultTodo.length > 0){
+        var table4Todo = document.getElementById("toDoListsTable");
+
+        for(var obj of resultTodo){
             var values = Object.values(obj);
 
+            var newRaw = table4Todo.insertRow();
+            var color = newRaw.insertCell(0);
+            var content = newRaw.insertCell(1);
+            var state = newRaw.insertCell(2);
+            var deleteBtn = newRaw.insertCell(3);
+            var editBtn = newRaw.insertCell(4);
+
             color.innerText = "●";
+            color.id = values[5];
+            deleteBtn.id = values[0];
+            color.classList.add("color");
+            content.classList.add("content");
+            deleteBtn.classList.add("delete");
+            editBtn.classList.add("edit");
+            editBtn.classList.add(i);
 
             content.innerText = values[2];
             state.innerText = values[4];
             state.className = "state";
             deleteBtn.innerText = "delete";
+            editBtn.innerText = "edit";
+
+            var tester = document.getElementById(values[5]);
+            var colorTodo = "#" + values[5];
+            $(tester).css("color", values[5]);
+            i++;
         }
     }
 }
 
 // TODO: memberCode 입력부분 필요
-// TODO: selectedDate? clickedDate
 // TODO: dataType => JSON
 function readToDo(clickedDate){
-    console.log(clickedDate);
 
      $.ajax({
              url : "/readCalendar",
@@ -628,6 +518,23 @@ var readToDoInMonth = function readToDoInMonth(selectedDate){
     });
 }
 
+function deleteTodo(deleteid, selectedDate){
+      $.ajax({
+             url : "/toDoDelete",
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : {"toDoCode" : deleteid},
+             success : function(result){
+                 console.log(result);
+                 readToDo(selectedDate);
+             },
+             error : function(err){
+                 console.log(err+"error");
+             }
+      });
+}
+
 function removeAllChildElements(parentElement){
     while (parentElement.firstChild) {
       parentElement.removeChild(parentElement.firstChild);
@@ -648,13 +555,13 @@ function clickDate(pointDate){
     readToDo(param4readToDo);
 
     var tdList = $("#calendar-body td");
-    // console.log(tdList);
     for (td of tdList){
         td.addEventListener('click', changeClickedDate);
         for (tdDiv of td.childNodes){
                 tdDiv.addEventListener('click', changeClickedDate);
         }
     }
+
     function changeClickedDate(e){
         if (clickedDateElement != e.target || clickedDateElement != e.target.parentNode){
             clickedDateElement.classList.remove('active');

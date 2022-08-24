@@ -2,6 +2,15 @@ html, body{
     background-color: #FFFFFF;
 }
 
+input#editColor {
+    border: none;
+    background: none;
+    width: 11.5px;
+    height: 15px;
+    margin: 0;
+    padding: 0;
+}
+
 @media(min-width: 800px){
     /* 2022년 7월 29일 추가 */
     #calendar{

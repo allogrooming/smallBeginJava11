@@ -15,7 +15,8 @@
             to_do_content,
             to_do_state,
             to_do_color,
-            DATE_FORMAT(plan_date, '%Y-%m-%d') as plan_date
+            DATE_FORMAT(plan_date, '%Y-%m-%d') as plan_date,
+            done_date
         FROM
             to_do
         WHERE
@@ -69,27 +70,11 @@
             to_do_code = #{toDoCode};
     </update>
 
-    <select id="selectIniAndObList" parameterType="hashMap" resultType="Calendar">
-        SELECT
-            a.ob_content,
-            b.ini_content,
-            d.ini_dtl_add_code,
-            d.ini_dtl_add_state
+    <delete id="toDoDelete" parameterType="hashMap">
+        DELETE
         FROM
-            objective a,
-            (SELECT ini_code, ini_content, ob_code
-            FROM initiative) b,
-            (SELECT ini_code, ini_dtl_code
-            FROM ini_detail) c,
-            (SELECT ini_dtl_code, ini_dtl_add_code, ini_dtl_add_state
-            FROM ini_detail_add
-            WHERE ini_dtl_add_plan_date = date(#{iniDetailAddPlanDate})) d
+            to_do
         WHERE
-            a.member_code = #{memberCode}
-            AND a.ob_code = b.ob_code
-            AND b.ini_code = c.ini_code
-            AND c.ini_dtl_code = d.ini_dtl_code;
-    </select>
-
-
+            to_do_code = #{toDoCode};
+    </delete>
 </mapper>

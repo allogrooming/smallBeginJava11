@@ -35,10 +35,8 @@
             <div class="input-wrap">
                 <form method="post" id="toDoList">
                     <input type="text" placeholder="please write here" id="toDoContent" class="input-box" name="toDoContent">
-<!--                    TODO: setUpDate -> planDate-->
-                    <input type="date" id="setUpDate" class="input-box" name="setUpDate" style="display: none">
-<!--                    <input type="date" id="planDate" class="input-box" name="planDate" style="display: none"></input>-->
-                    <input type="date" id="planDate" value="2022-08-23" class="input-box" name="planDate"></input>
+<!--                    TODO: value가 현재날짜가 되도록-->
+                    <input type="date" id="planDate" class="input-box" name="planDate"></input>
                     <input type="color" id="toDoColor" name="toDoColor" value="#16aaad" list="colors4palette" />
                     <datalist id="colors4palette">
                         <option>#355070</option>
@@ -50,20 +48,10 @@
                     <button type="button" id="input-data" class="input-data">INPUT</button>
                 </form>
                 <table id="toDoListsTable">
+                    <tr>
+                        <td>&nbsp;</td><td>content</td><td>state</td><td>&nbsp;</td><td>&nbsp;</td>
+                    </tr>
                 </table>
-<!--                <table id="toDoTable">-->
-<!--                    <tr th:each="todo: ${todo}"  th:attr="id=td-tr-${todo.toDoCode}">-->
-<!--                        <td th:value="${todo.toDoColor}"></td>-->
-<!--                        <td th:value="${todo.toDoState}" class = "state"></td>-->
-<!--                        <td th:value="${todo.toDoContent}"></td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--                <table id="iniAndObTable">-->
-<!--                    <tr>-->
-<!--                        <td>Ob Content</td><td>Ini Content</td><td>State</td>-->
-<!--                    </tr>-->
-<!--                    <tbody id="ini-body"></tbody>-->
-<!--                </table>-->
             </div>
         </div>
     </div>
