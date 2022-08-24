@@ -174,9 +174,28 @@
             var selectedTr = tableTr[rowNum];
             var colorCol = selectedTr.children[0];
             var contentCol = selectedTr.children[1];
+            var complete = selectedTr.children[4];
 
+            colorCol.id = "editColorTd";
+            contentCol.id = "editContent";
+            complete.id = "complete";
             colorCol.innerHTML = '<input type="color" id="editColor" name="toDoColor"/>';
+            complete.innerText = 'submit';
             contentCol.contentEditable = 'true';
+
+            // submit 클릭 시 colorCol, contentCol에서 입력 받은 값을 updateTodo 메소드로 전달
+            $("#complete").on("click", function(){
+                var sendColor = $("#editColor").val();
+                var sendContent = $("#editContent").text();
+                var clickedDate = $(".active").attr("id");
+                var toDoCode = $(this).prev().attr("id");
+                console.log(sendColor);
+                console.log(sendContent);
+                console.log(clickedDate);
+                console.log(toDoCode);
+                editTodo(sendColor, sendContent, clickedDate, toDoCode);
+                complete.innerText = 'edit';
+            });
 
             //var editId = $(this).attr('id');
         });
