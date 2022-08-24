@@ -144,4 +144,13 @@ public class CalendarController {
         return initiativeList;
     }
 
+    @RequestMapping(value="/updateToDoState")
+    @ResponseBody
+    @PostMapping
+    public String updateToDoState(@RequestParam Map<String, Object> params) throws ParseException{
+        String toDoState = String.valueOf(calendarService.updateToDoState(params));
+        return toDoState;
+    }
+
+
 }

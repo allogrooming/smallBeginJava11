@@ -117,25 +117,15 @@
 </body>
 
 <script>
-<!--    YesScroll();-->
-
-<!--    var selectedDate = document.getElementById("setUpDate").innerText;-->
-<!--    console.log("selectedDate - html reshowing");-->
-<!--    console.log(selectedDate);-->
-<!--    reshowingList(selectedDate);-->
-
-<!--    var clickedDate1 = document.getElementById(today.getDate());-->
-<!--    clickedDate1.classList.add('active');-->
+$(function(){
 
     $("#prev").click(function(){
         prev();
-    })
+    });
 
     $("#next").click(function(){
         next();
-    })
-
-
+    });
 
     attachMain();
     clickDate();
@@ -147,27 +137,19 @@
         console.log("create todo");
     });
 
-    $(".calendar-body").click(function(event){
-    });
-
     $(".td-date").on("click", function(){
         console.log("td-date click");
-<!--        loadCalendar(2);-->
+    });
+
+    $("#toDoListsTable").on("click", ".state", function(){
+        checkToDo(this.parentNode.id, this.innerText)
     });
 
     loadCalendar();
 
 
-<!--        $('#calendar td').click(function(){-->
-<!--            var tdID = $(this).attr('id');-->
-<!--            console.log("click!!");-->
-<!--            var param4readToDo = getDate4Ajax(tdID);-->
-<!--            console.log(param4readToDo);-->
-<!--            readToDo(param4readToDo);  // 처음에는 되는데 사용자가 클릭을 했을 경우 실행이 안됨??????-->
-<!--        });-->
 
-
-
+});
 </script>
 </html>
 

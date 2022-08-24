@@ -67,6 +67,31 @@ function readFormTodo(formId, url){
 
 }
 
+function checkToDo(trId, toDoState){
+        var toDoCode = trId.slice(-2);
+        console.log('toDoCode :', toDoCode);
+        console.log('toDoState :', toDoState);
+
+        $.ajax({
+            url : '/updateToDoState',
+            type : "post",
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            dataType : "text",
+            data : {
+                "toDoCode" : toDoCode,
+                "toDoState" : toDoState
+            },
+            success : function(result){
+                console.log('checkToDo result');
+                console.log(result);
+                checkToDoInTable(trId, result);
+            },
+            error : function(err, resp){
+                console.log(err+"에러발생");
+                console.log(resp);
+            }
+        });
+}
 
 // TODO: memberCode 입력 필수
 function readInitiative(memberCode, iniDetailAddPlanDate){

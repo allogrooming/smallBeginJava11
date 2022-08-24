@@ -16,5 +16,5 @@ public interface CalendarMapper {
     void inputTodoList(Map<String, String> params);
     List<Calendar> selectIniAndObList(Map<String, Object> map);
     List<Todo> getTodoListInMonth(Map<String, Object> params);
-
+    void updateToDoState(Map<String, Object> params);
 }

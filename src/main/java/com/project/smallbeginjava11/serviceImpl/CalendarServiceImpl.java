@@ -44,4 +44,17 @@ public class CalendarServiceImpl implements CalendarService {
         return calendarMapper.getTodoListInMonth(params);
     }
 
+    @Override
+    public String updateToDoState(Map<String, Object> params) throws ParseException {
+        String toDoState =  params.get("toDoState").toString();
+        if (toDoState.equals("1")) {
+            toDoState = "0";
+        }else {
+            toDoState = "1";
+        }
+        params.put("toDoState", toDoState);
+        calendarMapper.updateToDoState(params);
+        return toDoState;
+    }
+
 }

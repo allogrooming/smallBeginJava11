@@ -529,6 +529,17 @@ function addTodoTable(){
     }
 }
 
+function checkToDoInTable(trId, result) {
+    console.log('checkToDoInTable');
+    console.log('trId :', trId);
+    console.log('result :', result);
+    var selectorStr = "#" + trId + " .state";
+    console.log(selectorStr);
+    $(selectorStr).css("background-color", "yellow");
+    $(selectorStr).text(result);
+}
+
+
 function addTodo(result){
     var resultTodo = JSON.parse(result);
     console.log(resultTodo);
@@ -551,6 +562,8 @@ function addTodo(result){
 
         for(var obj of resultTodo){
             var newRaw = table4Todo.insertRow();
+            // TODO: row에 id 추가
+            newRaw.id = "td-tr-" + obj.toDoCode;
             var color = newRaw.insertCell(0);
             var content = newRaw.insertCell(1);
             var state = newRaw.insertCell(2);
@@ -562,6 +575,7 @@ function addTodo(result){
 
             content.innerText = values[2];
             state.innerText = values[4];
+            state.className = "state";
             deleteBtn.innerText = "delete";
         }
     }

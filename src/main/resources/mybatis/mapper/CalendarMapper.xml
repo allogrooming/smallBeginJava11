@@ -60,6 +60,15 @@
                 )
     </insert>
 
+    <update id="updateToDoState" parameterType="hashMap">
+        UPDATE
+            to_do
+        SET
+            to_do_state = #{toDoState}
+        WHERE
+            to_do_code = #{toDoCode};
+    </update>
+
     <select id="selectIniAndObList" parameterType="hashMap" resultType="Calendar">
         SELECT
             a.ob_content,
