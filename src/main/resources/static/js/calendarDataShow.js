@@ -9,6 +9,13 @@ function removeAllToDoOnCalendar() {
     }
 }
 
+function checkToDoOnCalendar(tdId, result) {
+    console.log('checkToDoInTable');
+    var selectorStr = "#" + trId + " .state";
+    $(selectorStr).text(result);
+}
+
+
 function addTodoOnCalendar(result){
     // 기존의 Div를 모두 지운다.
     removeAllToDoOnCalendar()

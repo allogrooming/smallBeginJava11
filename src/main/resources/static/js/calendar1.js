@@ -569,16 +569,14 @@ function clickDate(pointDate){
             clickedDateElement.classList.remove('active');
             clickedDateElement = e.target;
             clickedDate = e.target.id;
-            if(clickedDate == ""){
-               clickedDate = clickedDateElement.parentNode.id;
-               clickedDateElement = clickedDateElement.parentNode;
-                // clickedDateElement.parentNode.classList.add('active');
-                ///showCurrentDateOnLeft(getDateFromId(tempClickedDate));
+            if(clickedDate == "" || clickedDate.slice(0,2) == "td"){
+                clickedDate = clickedDateElement.parentNode.id;
+                clickedDateElement = clickedDateElement.parentNode;
             }
             clickedDateElement.classList.add('active');
+            console.log('--------------debug-----------');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
-            // TODO: 위치변경 확인 필요
             readToDo(getDate4Ajax(clickedDate))
         }
     }
