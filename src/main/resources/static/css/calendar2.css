@@ -125,6 +125,10 @@ input#editColor {
     .content-right table tr td div{
         text-align: right;
         font-size: 1em;
+        /* 2022년 8월 25일 추가 */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .main-wrap{
