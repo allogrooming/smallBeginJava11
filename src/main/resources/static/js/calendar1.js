@@ -465,6 +465,7 @@ function clickDate(pointDate){
             clickedDateElement.classList.remove('active');
             clickedDateElement = e.target;
             clickedDate = e.target.id;
+
             if(clickedDate == "" || clickedDate.slice(0,2) == "td"){
                 clickedDate = clickedDateElement.parentNode.id;
                 clickedDateElement = clickedDateElement.parentNode;
