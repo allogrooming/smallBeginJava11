@@ -149,6 +149,7 @@ function showCalendar(pointDate, monthCnt){
     }
     showCurrentMonthTitle(new Date());
     showCurrentDateOnLeft();
+    inputPlanDate();
     return tbodyFList;
 }
 
@@ -191,6 +192,14 @@ function showCurrentDateOnLeft(pointDate){
     mainDate.append(mainDateList[2]);
     mainDay.append(mainDateList[3]);
 
+}
+
+function inputPlanDate(dateStr){
+    if(!dateStr) {
+        var pointDate = new Date();
+        var dateStr = getDate4Ajax(setDateId(pointDate, pointDate.getDate()));
+    }
+    $("#planDate").val(dateStr);
 }
 
 
@@ -248,61 +257,13 @@ function prev(pointDate){
 function next(pointDate){
     var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
     var pointNext;
-//    var tbodyNextCode;
-
-//    let nextBox = document.getElementById('toDoContent').value;
-//    nextBox.value = '';
-//    const $divs = document.querySelectorAll('#input-list > div');
-//    $divs.forEach(function(e){
-//        e.remove();
-//    });
-//    const $btns = document.querySelectorAll('#input-list > button');
-//    $btns.forEach(function(e1){
-//        e1.remove();
-//    });
     if(pointFirst.getMonth() === 12){
         pointNext = new Date(pointFirst.getFullYear()+1, 1, 1);
-//        first = pageFirst;
-//        if(first.getFullYear() % 4 === 0){
-//            pageYear = leapYear;
-//        }else{
-//            pageYear = notLeapYear;
-//        }
+
     }else{
         pointNext = new Date(pointFirst.getFullYear(), pointFirst.getMonth()+1, 1);
-//        first = pageFirst;
     }
-//    today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
-//    removeCalendar();
-//    flag = false;
-//    showCalendar();
-//    showMain();
-//    clickedDate1 = document.getElementById(today.getDate());
-//    clickedDate1.classList.add('active');
-//    console.log(clickedDate1);
-//    clickStart();
-//    reshowingList();
-//    return flag
-//    console.log('pointNext :', pointNext);
     return pointNext;
-}
-
-function reshowingList(selectedDate){
-    $.ajax({
-        url : '/readCalendar',
-        type : "post",
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType : "json",
-        data : {"selectedDate" : selectedDate},
-        success : function(resp){
-            //console.log(resp);
-            addTodoLists(resp);
-        },
-        error : function(err, resp){
-            console.log(err+"에러발생");
-            console.log(resp);
-        }
-    });
 }
 
 function checkList(e){
@@ -471,71 +432,6 @@ function editTodo(result){
     }
 }
 
-// TODO: memberCode 입력부분 필요
-// TODO: dataType => JSON
-function readToDo(clickedDate){
-
-     $.ajax({
-             url : "/readCalendar",
-             type : "post",
-             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-             dataType : "text",
-             data : {"selectedDate" : clickedDate,
-                     "memberCode" : 2
-             },
-             success : function(result){
-                 addTodoTable();
-                 addTodo(result);
-             },
-             error : function(err){
-                 console.log(err+"에러발생");
-             }
-      });
-}
-
-// TODO: memberCode 입력부분 필요
-// TODO: dataType => JSON(Done)
-var readToDoInMonth = function readToDoInMonth(selectedDate){
-    if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
-    console.log('selectedDate :', selectedDate);
-    var selectedMonth = selectedDate.slice(0, 7);
-    console.log('readToDoInMonth')
-    console.log(selectedMonth);
-
-    $.ajax({
-        url : "/readToDoInMonth",
-        type : "post",
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType : "JSON",
-        data : {"selectedMonth" : selectedMonth,
-                "memberCode" : 2
-        },
-        success : function(result){
-            console.log(result);
-            addTodoOnCalendar(result);
-        },
-        error : function(err){
-            console.log(err+"에러발생");
-        }
-    });
-}
-
-function deleteTodo(deleteid, selectedDate){
-      $.ajax({
-             url : "/toDoDelete",
-             type : "post",
-             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-             dataType : "text",
-             data : {"toDoCode" : deleteid},
-             success : function(result){
-                 console.log(result);
-                 readToDo(selectedDate);
-             },
-             error : function(err){
-                 console.log(err+"error");
-             }
-      });
-}
 
 function removeAllChildElements(parentElement){
     while (parentElement.firstChild) {
@@ -574,10 +470,10 @@ function clickDate(pointDate){
                 clickedDateElement = clickedDateElement.parentNode;
             }
             clickedDateElement.classList.add('active');
-            console.log('--------------debug-----------');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
-            readToDo(getDate4Ajax(clickedDate))
+            inputPlanDate(getDate4Ajax(clickedDate));
+            readToDo(getDate4Ajax(clickedDate));
         }
     }
 

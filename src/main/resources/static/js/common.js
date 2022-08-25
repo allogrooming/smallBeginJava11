@@ -114,3 +114,69 @@ function readInitiative(memberCode, iniDetailAddPlanDate){
         }
     });
 }
+
+// TODO: memberCode 입력부분 필요
+// TODO: dataType => JSON
+function readToDo(clickedDate){
+
+     $.ajax({
+             url : "/readCalendar",
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : {"selectedDate" : clickedDate,
+                     "memberCode" : 2
+             },
+             success : function(result){
+                 addTodoTable();
+                 addTodo(result);
+             },
+             error : function(err){
+                 console.log(err+"에러발생");
+             }
+      });
+}
+
+// TODO: memberCode 입력부분 필요
+// TODO: dataType => JSON(Done)
+var readToDoInMonth = function readToDoInMonth(selectedDate){
+    if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
+    console.log('selectedDate :', selectedDate);
+    var selectedMonth = selectedDate.slice(0, 7);
+    console.log('readToDoInMonth')
+    console.log(selectedMonth);
+
+    $.ajax({
+        url : "/readToDoInMonth",
+        type : "post",
+        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+        dataType : "JSON",
+        data : {"selectedMonth" : selectedMonth,
+                "memberCode" : 2
+        },
+        success : function(result){
+            console.log(result);
+            addTodoOnCalendar(result);
+        },
+        error : function(err){
+            console.log(err+"에러발생");
+        }
+    });
+}
+
+function deleteTodo(deleteid, selectedDate){
+      $.ajax({
+             url : "/toDoDelete",
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : {"toDoCode" : deleteid},
+             success : function(result){
+                 console.log(result);
+                 readToDo(selectedDate);
+             },
+             error : function(err){
+                 console.log(err+"error");
+             }
+      });
+}
