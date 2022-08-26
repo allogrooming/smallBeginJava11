@@ -79,6 +79,9 @@ function getDateSepPoint(pointDate){
 }
 
 function setDateId(pointDate, date){
+    if (typeof pointDate == "string") pointDate = new Date(pointDate);
+    if (!date) date = pointDate.getDate();
+
     var dateId = "";
     var dateStr = date.toString();
     dateId += pointDate.getFullYear();
@@ -333,8 +336,6 @@ function getDate4Ajax(idStr){
     }
 }
 
-
-
 function checkToDoInTable(trId, result) {
     console.log('checkToDoInTable');
     var selectorStr = "#" + trId + " .state";
@@ -356,8 +357,8 @@ function removeTodoTable(){
 
 function addTodoTable(result){
     // 기존의 toDoTable의 내용을 지운다.
-    console.log('addTodoTable------------------');
-    console.log(result);
+    // console.log('addTodoTable------------------');
+    // console.log(result);
     removeTodoTable();
 
     var resultTodo = JSON.parse(result);
@@ -367,8 +368,6 @@ function addTodoTable(result){
         var i=0;
         for(var obj of resultTodo){
             var values = Object.values(obj);
-            console.log('values:*********************');
-            console.log(values);
 
             var newRaw = table4Todo.insertRow();
             newRaw.id = "td-tr-" + obj.toDoCode;

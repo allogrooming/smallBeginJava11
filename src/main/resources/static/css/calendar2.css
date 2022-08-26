@@ -125,7 +125,7 @@ input#editColor {
     .content-right table tr td div{
         text-align: right;
         /* 2022년 8월 25일 추가 */
-        font-size: 0.9rem;
+        font-size: 1rem;
         height: 1.3rem;
         line-height: 1.3rem;
         white-space: nowrap;
@@ -133,10 +133,17 @@ input#editColor {
         text-overflow: ellipsis;
     }
 
-    .square{
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
+    .to-do-list{
+        list-style-type: none;
+    }
+
+    .to-do-list li{
+        font-size: 0.9rem;
+        height: 1.3rem;
+        line-height: 1.3rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .content{
