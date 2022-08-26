@@ -338,8 +338,6 @@ function getDate4Ajax(idStr){
     }
 }
 
-
-
 function checkToDoInTable(trId, result) {
     console.log('checkToDoInTable');
     var selectorStr = "#" + trId + " .state";

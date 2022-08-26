@@ -34,7 +34,9 @@
             to_do
         WHERE
             DATE_FORMAT(plan_date, '%Y-%m') =#{selectedMonth}
-            AND member_code = #{memberCode};
+            AND member_code = #{memberCode}
+        ORDER BY
+            plan_date;
     </select>
 
     <insert id="inputTodoList" parameterType="hashMap">
