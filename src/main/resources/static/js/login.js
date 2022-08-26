@@ -11,20 +11,28 @@ signInButton.addEventListener('click', () => {
     container.classList.remove("right-panel-active");
 });*/
 
-function loginProcess(formId){
+function loginProcess(){
     console.log("login");
+
+    var userId = $('input[name="userId"]').val();
+    var password = $('input[name="password"]').val();
+    var loginData = {"memberId" : userId, "password" : password};
+
      $.ajax({
              url : "/loginProcess",
              type : "post",
-             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             contentType: 'application/json; charset=utf-8',
              dataType : "text",
-             data : $(formId).serialize(),
+             data : JSON.stringify(loginData),
              success : function(result){
                 if(result == "failed"){
                     alert("Wrong ID or Password");
+                }else{
+                    window.location.href = "/calendar1";
                 }
              },
              error : function(err){
+                 console.log(data);
                  console.log(err+"에러발생");
              }
       });

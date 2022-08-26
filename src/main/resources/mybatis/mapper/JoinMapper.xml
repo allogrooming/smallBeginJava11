@@ -22,6 +22,6 @@
         #{nickname},
         #{email},
         0
-        )
+        );
     </insert>
 </mapper>

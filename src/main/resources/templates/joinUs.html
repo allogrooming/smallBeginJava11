@@ -12,6 +12,7 @@
     <link th:href="@{/css/navbar.css}" rel="stylesheet" />
     <link th:href="@{/css/footer.css}" rel="stylesheet" />
     <script th:src="@{/js/navbar.js}"></script>
+    <script th:src="@{/js/join.js}"></script>
 
 </head>
 <body>
@@ -21,11 +22,11 @@
 
     <div id="formCss">
         <form method="post" id="joinUs">
-            <span>ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="userId" name="userId" class="form" size="25"><br>
-            <span>Password</span> &nbsp; &nbsp; &nbsp; <input type="text" id="password" name="password" class="form" size="25"><br>
+            <span>ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="memberId" name="memberId" class="form" size="25"><br>
+            <span>Password</span> &nbsp; &nbsp; &nbsp; <input type="password" id="password" name="password" class="form" size="25"><br>
             <span>Nickname</span> &nbsp; &nbsp; &nbsp; <input type="text" id="nickname" name="nickname" class="form" size="25"><br>
             <span>Email</span> &nbsp; &nbsp; &nbsp; <input type="text" id="email" name="email" class="form" size="25"><br>
-            <input type="button" id="click" value="sumbit" class="buttons">
+            <input type="button" id="click" value="submit" class="buttons">
         </form>
     </div>
 
@@ -35,7 +36,7 @@
 <script src="/js/iniForm.js"></script>
 <script>
     $("#click").click(function(){
-        joinProcess(login);
+        joinProcess(joinUs);
     })
 </script>
 </body>
