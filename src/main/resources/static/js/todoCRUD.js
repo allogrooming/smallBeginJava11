@@ -118,6 +118,8 @@ function getDate4Ajax(idStr){
     }
 }
 
-function createTable4others(){
-
+// Session 값 가져오기
+function getSession(){
+    var session = $("#session").text();
+    console.log("sesssion : ", session);
 }

@@ -65,6 +65,7 @@
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
+            <p id="session" th:text="${session.memberCode}"></p>
             <div class="content-right">
                 <div id="current-year-month-div">
                     <table>
@@ -122,6 +123,7 @@ $(function(){
 
     attachMain();
     clickDate();
+    getSession();
 
     $("#input-data").click(function(){
         var planDate = $('#planDate').val();

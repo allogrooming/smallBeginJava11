@@ -54,7 +54,7 @@ public class LoginController {
 /*            Cookie memberCookie = new Cookie("memberCode", result);
             response.addCookie(memberCookie);*/
             session.setAttribute("memberCode", result);
-            return result;
+            return "/calendar1";
         }
     }
 }

@@ -2,6 +2,10 @@ html, body{
     background-color: #FFFFFF;
 }
 
+#session{
+    display: none;
+}
+
 input#editColor {
     border: none;
     background: none;
