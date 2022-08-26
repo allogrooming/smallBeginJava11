@@ -5,13 +5,11 @@ var monthList = ['January','February','March','April','May','June','July','Augus
 var leapYear=[31,29,31,30,31,30,31,31,30,31,30,31];
 var notLeapYear=[31,28,31,30,31,30,31,31,30,31,30,31];
 var pageFirst = first;
-//var pageYear;
 
 let inputBox = document.getElementById('input-box');
 var inputDate = document.getElementById('input-data');
 var inputList = document.getElementById('input-list');
 var delText = 'X';
-//inputDate.addEventListener('click',addTodoList);
 var dataCnt = 1;
 var keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
 let todoList = [];
@@ -27,23 +25,25 @@ function getPageYear(date){
     return pageYear;
 }
 
-function attachMain(){
-    var mainThisMonth = new Date();
-    var tbodyFList = document.createDocumentFragment();
-    var tbodyMainCode = showCalendar(mainThisMonth, 100);
-//    var tbodyNextFirstWeekCode = showCalendar(next(mainThisMonth), 200).firstElementChild;
-    var tbodyNextFirstWeekCode = showCalendar(next(mainThisMonth), 200);
+function removeCalendar(){
+    var calendarBody = document.getElementById('calendar-body');
+    removeAllChildElements(calendarBody);
+}
 
-    tbodyFList.append(tbodyMainCode);
-    tbodyFList.append(tbodyNextFirstWeekCode);
+
+function attachMain(mainThisMonth){
+    if (!mainThisMonth) mainThisMonth = new Date();
+    var tbodyFList = document.createDocumentFragment();
+    var tbodyMainMonth = showCalendar(mainThisMonth, 100);
+    var tbodyNextFirstWeek = showCalendar(next(mainThisMonth), 200).firstChild;
+
+    tbodyFList.append(tbodyMainMonth);
+    tbodyFList.append(tbodyNextFirstWeek);
     let length = tbodyFList.childElementCount;
 
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
         tbodyFList.children[i].setAttribute('data-main-month-block', 0);
     }
-
-//    document.getElementById("calendar-body").append(tbodyMainCode)
-//    document.getElementById("calendar-body").append(tbodyNextFirstWeekCode)
     document.getElementById("calendar-body").append(tbodyFList);
     return next(mainThisMonth)
 }
@@ -79,6 +79,9 @@ function getDateSepPoint(pointDate){
 }
 
 function setDateId(pointDate, date){
+    if (typeof pointDate == "string") pointDate = new Date(pointDate);
+    if (!date) date = pointDate.getDate();
+
     var dateId = "";
     var dateStr = date.toString();
     dateId += pointDate.getFullYear();
@@ -115,13 +118,14 @@ function showCalendar(pointDate, monthCnt){
     let pointId = parseInt(setDateId(pointDate, 1));
     let prevId = parseInt(setDateId(prevFirst, prevLastWeekStartDate));
     let cnt = 1;
-    for(var i = 1; i < 7; i++){ //주에 대한 for문
+    for(let i = 1; i < 7; i++){ //주에 대한 for문
         var $tr = document.createElement('tr');
         $tr.setAttribute('id', monthCnt + i);
-        for(var j = 0; j < 7; j++){
+        for(let j = 0; j < 7; j++){
             if(i === 1 && j < pointFirstWeekStartDay){
                 var $td = document.createElement('td');
                 var $div = document.createElement('div');
+                $div.className = 'td-date';
                 $div.textContent = prevLastWeekStartDate;;
                 $td.appendChild($div);
                 $td.setAttribute('id', prevId);
@@ -133,6 +137,7 @@ function showCalendar(pointDate, monthCnt){
             } else{
                 var $td = document.createElement('td');
                 var $div = document.createElement('div');
+                $div.className = 'td-date';
                 $div.textContent = cnt;
                 $td.appendChild($div);
                 $td.setAttribute('id', pointId);
@@ -177,132 +182,49 @@ function showCurrentDateOnLeft(pointDate){
     var mainMonth = $("#main-month");
     var mainDate = $("#main-date");
     var mainDay = $("#main-day");
-//    var setUpDate = $("#setUpDate");
 
-//    setUpDate.empty();
     mainYear.empty();
     mainMonth.empty();
     mainDate.empty();
     mainDay.empty();
 
-//    setUpDate.append(mainDateList);
     mainYear.append(mainDateList[0]);
     mainMonth.append(mainDateList[1]);
     mainDate.append(mainDateList[2]);
     mainDay.append(mainDateList[3]);
-
 }
 
-
-function removeCalendar(){
-    let catchTr = 100;
-    for(var i = 100; i< 106; i++){
-        var $tr = document.getElementById(catchTr);
-        $tr.remove();
-        catchTr++;
+function inputPlanDate(dateStr){
+    if(!dateStr) {
+        var pointDate = new Date();
+        var dateStr = getDate4Ajax(setDateId(pointDate));
     }
+    $("#planDate").val(dateStr);
 }
 
 function prev(pointDate){
     var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
     var pointPrev;
-//    let preBox = document.getElementById('toDoContent').value;
-//    preBox.value = '';
-//    const $divs = document.querySelectorAll('#input-list > div');
-/*    console.log("$divs");
-    console.log($divs);*/
-//    $divs.forEach(function(e){
-//        e.remove(); //
-//    });
-//    const $btns = document.querySelectorAll('#input-list > button');
-//    $btns.forEach(function(e1){
-//        e1.remove();
-//    });
+
     if(pointFirst.getMonth() === 1){ //현재 1월일 경우 이전 년도 보여주기
         pointPrev = new Date(pointFirst.getFullYear()-1, 12, 1);
-//        first = pageFirst;
-//        if(first.getFullYear() % 4 === 0){
-//            pageYear = leapYear;
-//        }else{
-//            pageYear = notLeapYear;
-//        }
     }else{
         pointPrev = new Date(pointFirst.getFullYear(), pointFirst.getMonth()-1, 1);
-//        first = pageFirst;
     }
     // 이전으로 클릭 될때 날짜가 같은 달에 대해서 오늘로 보여줌(달력에 크게 띄우는거)
-//    today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
-//    removeCalendar();
-//    tbodyPrevCode = showCalendar(pointPrev);
     return pointPrev;
-//    showMain();
-//    clickedDate1 = document.getElementById(today.getDate());
-//    clickedDate1.classList.add('active');
-//    clickStart();
-//    reshowingList();
-
 }
-
-
 
 function next(pointDate){
     var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
     var pointNext;
-//    var tbodyNextCode;
 
-//    let nextBox = document.getElementById('toDoContent').value;
-//    nextBox.value = '';
-//    const $divs = document.querySelectorAll('#input-list > div');
-//    $divs.forEach(function(e){
-//        e.remove();
-//    });
-//    const $btns = document.querySelectorAll('#input-list > button');
-//    $btns.forEach(function(e1){
-//        e1.remove();
-//    });
     if(pointFirst.getMonth() === 12){
         pointNext = new Date(pointFirst.getFullYear()+1, 1, 1);
-//        first = pageFirst;
-//        if(first.getFullYear() % 4 === 0){
-//            pageYear = leapYear;
-//        }else{
-//            pageYear = notLeapYear;
-//        }
     }else{
         pointNext = new Date(pointFirst.getFullYear(), pointFirst.getMonth()+1, 1);
-//        first = pageFirst;
     }
-//    today = new Date(today.getFullYear(), today.getMonth()+1, today.getDate());
-//    removeCalendar();
-//    flag = false;
-//    showCalendar();
-//    showMain();
-//    clickedDate1 = document.getElementById(today.getDate());
-//    clickedDate1.classList.add('active');
-//    console.log(clickedDate1);
-//    clickStart();
-//    reshowingList();
-//    return flag
-//    console.log('pointNext :', pointNext);
     return pointNext;
-}
-
-function reshowingList(selectedDate){
-    $.ajax({
-        url : '/readCalendar',
-        type : "post",
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType : "json",
-        data : {"selectedDate" : selectedDate},
-        success : function(resp){
-            //console.log(resp);
-            addTodoLists(resp);
-        },
-        error : function(err, resp){
-            console.log(err+"에러발생");
-            console.log(resp);
-        }
-    });
 }
 
 function checkList(e){
@@ -364,15 +286,42 @@ function checkToDoInTable(trId, result) {
     var selectorStr = "#" + trId + " .state";
     $(selectorStr).text(result);
 }
+function getDate4Ajax(idStr){
+    if(idStr != ""){
+        dateStr = "";
+        dateStr += idStr.slice(0, 4);
+        dateStr += "-";
+        dateStr += idStr.slice(4, 6);
+        dateStr += "-";
+        dateStr += idStr.slice(-2);
+        console.log(dateStr);
+        return dateStr;
+    }
+}
+
+function checkToDoInTable(trId, result) {
+    console.log('checkToDoInTable');
+    var selectorStr = "#" + trId + " .state";
+    $(selectorStr).text(result);
+}
+
+function removeTodoTable(){
+    var lengthT = $("#toDoListsTable > tbody tr").length;
+    console.log('lengthT :', lengthT);
+    if(lengthT > 0){
+        console.log("delete rows");
+        var todoT = document.getElementById("toDoListsTable");
+        for(var i=lengthT-1; i>0; i--){
+           todoT.deleteRow(i);
+        }
+    }
+}
 
 // TODO: memberCode 입력부분 필요
 // TODO: dataType => JSON(Done)
 var readToDoInMonth = function readToDoInMonth(selectedDate){
     if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
-    //console.log('selectedDate :', selectedDate);
     var selectedMonth = selectedDate.slice(0, 7);
-    //console.log('readToDoInMonth')
-    //console.log(selectedMonth);
 
     $.ajax({
         url : "/readToDoInMonth",
@@ -383,7 +332,6 @@ var readToDoInMonth = function readToDoInMonth(selectedDate){
                 "memberCode" : 2
         },
         success : function(result){
-            //console.log(result);
             addTodoOnCalendar(result);
         },
         error : function(err){
@@ -392,12 +340,93 @@ var readToDoInMonth = function readToDoInMonth(selectedDate){
     });
 }
 
+function addTodoTable(result){
+    // 기존의 toDoTable의 내용을 지운다.
+    removeTodoTable();
+
+    var resultTodo = JSON.parse(result);
+    if(resultTodo.length > 0){
+        var table4Todo = document.getElementById("toDoListsTable");
+        var i=0;
+        for(var obj of resultTodo){
+            var values = Object.values(obj);
+
+            var newRaw = table4Todo.insertRow();
+            newRaw.id = "td-tr-" + obj.toDoCode;
+            var color = newRaw.insertCell(0);
+            var content = newRaw.insertCell(1);
+            var state = newRaw.insertCell(2);
+            var deleteBtn = newRaw.insertCell(3);
+            var editBtn = newRaw.insertCell(4);
+
+            color.innerText = "■";
+            color.id = values[5];
+            deleteBtn.id = values[0];
+            color.classList.add("color");
+            content.classList.add("content");
+            deleteBtn.classList.add("delete");
+            editBtn.classList.add("edit");
+            editBtn.classList.add(i);
+            // TODO: className 추가
+            state.className = "state";
+
+            content.innerText = values[2];
+            state.innerText = values[4];
+            deleteBtn.innerText = "delete";
+            editBtn.innerText = "edit";
+
+            var tester = document.getElementById(values[5]);
+            var colorTodo = "#" + values[5];
+            $(tester).css("color", values[5]);
+            i++;
+        }
+    }
+}
+
+function editTodo(result){
+    var resultTodo = JSON.parse(result);
+
+    if(resultTodo.length > 0){
+        var table4Todo = document.getElementById("toDoListsTable");
+
+        for(var obj of resultTodo){
+            var values = Object.values(obj);
+
+            var newRaw = table4Todo.insertRow();
+            var color = newRaw.insertCell(0);
+            var content = newRaw.insertCell(1);
+            var state = newRaw.insertCell(2);
+            var deleteBtn = newRaw.insertCell(3);
+            var editBtn = newRaw.insertCell(4);
+
+            color.innerText = "●";
+            color.id = values[5];
+            deleteBtn.id = values[0];
+            color.classList.add("color");
+            content.classList.add("content");
+            deleteBtn.classList.add("delete");
+            editBtn.classList.add("edit");
+            editBtn.classList.add(i);
+
+            content.innerText = values[2];
+            state.innerText = values[4];
+            state.className = "state";
+            deleteBtn.innerText = "delete";
+            editBtn.innerText = "edit";
+
+            var tester = document.getElementById(values[5]);
+            var colorTodo = "#" + values[5];
+            $(tester).css("color", values[5]);
+            i++;
+        }
+    }
+}
+
 function removeAllChildElements(parentElement){
     while (parentElement.firstChild) {
       parentElement.removeChild(parentElement.firstChild);
     }
 }
-
 
 function clickDate(pointDate){
     // 캘린더 화면에 접속하면 자동으로 해당일의 날짜가 클릭되어 활성화 상태가 된다.
@@ -424,28 +453,19 @@ function clickDate(pointDate){
             clickedDateElement.classList.remove('active');
             clickedDateElement = e.target;
             clickedDate = e.target.id;
-            if(clickedDate == ""){
-               clickedDate = clickedDateElement.parentNode.id;
-               clickedDateElement = clickedDateElement.parentNode;
-                // clickedDateElement.parentNode.classList.add('active');
-                ///showCurrentDateOnLeft(getDateFromId(tempClickedDate));
+
+            if(clickedDate == "" || clickedDate.slice(0,2) == "td"){
+                clickedDate = clickedDateElement.parentNode.id;
+                clickedDateElement = clickedDateElement.parentNode;
             }
             clickedDateElement.classList.add('active');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
-            // TODO: 위치변경 확인 필요
-            readToDo(getDate4Ajax(clickedDate))
+            inputPlanDate(getDate4Ajax(clickedDate));
+            readToDo(getDate4Ajax(clickedDate));
         }
     }
-
-//        console.log(e);
-//        clickedDate1 = e.target;
-//        clickedDate1.classList.add('active');
-////        today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
-//        let selectedDate = showMain();
-//        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
-//        reshowingList(selectedDate);
-//    }
+    return getDateFromId(clickedDate);
 }
 
 function loadCalendar(pointDate){
@@ -459,44 +479,4 @@ function loadCalendar(pointDate){
         readToDoInMonth(getDate4Ajax(clickedDate));
     }
 
-}
-
-function addTodoLists(resp){
-    var todo = resp;
-    var todoCount = resp.length;
-    var toDoLists = document.getElementById("toDoListsTable");
-    var tableCheck = !!document.getElementById("toDoListsTable");
-    console.log(tableCheck);
-
-    // table id=toDoListsTable을 toDoLists 안에 생성
-    var toDoTable = "<table><tr><td>Color</td><td>Content</td><td>State</td></tr>";
-    var first = "";
-    var second = "";
-    var third = "";
-
-    for (var obj of todo){
-        toDoTable += "<tr>";
-
-        first = obj[Object.keys(obj)[5]];
-        toDoTable += "<td>"
-        toDoTable += first;
-        toDoTable += "</td>";
-
-        second = obj[Object.keys(obj)[2]];
-        toDoTable += "<td>"
-        toDoTable += second;
-        toDoTable += "</td>";
-
-        third = obj[Object.keys(obj)[4]];
-        toDoTable += "<td>"
-        toDoTable += third;
-        toDoTable += "</td>";
-
-        toDoTable += "</tr>";
-
-    }
-    toDoTable += "</table>";
-
-    console.log(toDoTable)
-    $(toDoLists).html(toDoTable);
 }

@@ -89,13 +89,14 @@ public class CalendarController {
     }*/
 
     @Transactional
-    @RequestMapping(value="/readCalendar")
+    @RequestMapping(value="/readToDoList")
     @ResponseBody
     public List<Todo> readCalendar(@RequestParam Map<String, Object> param) {
-        String selectedDate = String.valueOf(param.get("clickedDate"));
-        System.out.println("readTodo");
+        //String selectedDate = String.valueOf(param.get("clickedDate"));
+        System.out.println("readTodo------------------------------");
+
         List<Todo> todo = calendarService.getTodoList(param);
-        System.out.println(todo);
+        todo.forEach(x -> System.out.println(x));
         return todo;
     }
 
@@ -112,7 +113,7 @@ public class CalendarController {
     }
 
     @Transactional
-    @RequestMapping(value="/toDoList", produces="text/html;charset=UTF-8")
+    @RequestMapping(value="/toDoListInsert", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
     public String toDoListInsert(@RequestParam Map<String, Object> params) throws ParseException {

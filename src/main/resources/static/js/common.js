@@ -27,6 +27,25 @@ function readForm(formId, url, callback, flag){
       });
 }
 
+
+function readToDoForm(formId, url){
+      $.ajax({
+             url : url,
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : $(formId).serialize(),
+             success : function(result){
+                 readToDo();
+                 readToDoInMonth();
+             },
+             error : function(err){
+                 console.log(err+"에러발생");
+                 console.log(this.data);
+             }
+      });
+}
+
 function sendDateList(startDate, endDate, dateList, url){
     $.ajax({
          url : url,
@@ -45,27 +64,6 @@ function sendDateList(startDate, endDate, dateList, url){
     });
 
 };
-
-function readFormTodo(formId, url){
-
-    let dataToDo = $('input[name=toDoList]').val();
-
-    $.ajax({
-        url : url,
-        type : "post",
-        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType : "text",
-        data : {toDoList : $('#input-box').val()},
-        success : function(result){
-            console.log(dataToDo);
-        },
-        error : function(err){
-            console.log(err+"에러발생");
-            console.log(dataToDo);
-        }
-    });
-
-}
 
 function checkToDo(trId, toDoState){
         var toDoCode = trId.slice(-2);
@@ -93,24 +91,69 @@ function checkToDo(trId, toDoState){
         });
 }
 
-// TODO: memberCode 입력 필수
-function readInitiative(memberCode, iniDetailAddPlanDate){
+// TODO: memberCode 입력부분 필요
+// TODO: dataType => JSON
+function readToDo(clickedDate){
+    console.log('readToDo=========================');
+    if (!clickedDate) clickedDate = getDate4Ajax($(".active").attr("id"));
+    console.log(clickedDate);
+     $.ajax({
+             url : "/readToDoList",
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : {"selectedDate" : clickedDate,
+                     "memberCode" : 2
+             },
+             success : function(result){
+                 addTodoTable(result);
+             },
+             error : function(err){
+                 console.log(err+"에러발생");
+             }
+      });
+}
+
+// TODO: memberCode 입력부분 필요
+// TODO: dataType => JSON(Done)
+function readToDoInMonth(selectedDate){
+    if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
+    console.log('selectedDate :', selectedDate);
+    var selectedMonth = selectedDate.slice(0, 7);
+    console.log('readToDoInMonth')
+    console.log(selectedMonth);
+
     $.ajax({
-        url : '/readInitiative',
+        url : "/readToDoInMonth",
         type : "post",
         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-        dataType : "json",
-        data : {
-            "memberCode" : memberCode,
-            "iniDetailAddPlanDate" : iniDetailAddPlanDate
+        dataType : "JSON",
+        data : {"selectedMonth" : selectedMonth,
+                "memberCode" : 2
         },
-        success : function(resp){
-            showIniAndObList(resp);
-            console.log(resp);
+        success : function(result){
+            console.log(result);
+            addTodoOnCalendar(result);
         },
-        error : function(err, resp){
+        error : function(err){
             console.log(err+"에러발생");
-            console.log(resp);
         }
     });
+}
+
+function deleteTodo(deleteid, selectedDate){
+      $.ajax({
+             url : "/toDoDelete",
+             type : "post",
+             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+             dataType : "text",
+             data : {"toDoCode" : deleteid},
+             success : function(result){
+                 console.log(result);
+                 readToDo(selectedDate);
+             },
+             error : function(err){
+                 console.log(err+"error");
+             }
+      });
 }

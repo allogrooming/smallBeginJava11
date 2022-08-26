@@ -65,12 +65,13 @@
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
-            <p id="session" th:text="${session.memberCode}"></p>
             <div class="content-right">
                 <div id="current-year-month-div">
                     <table>
                         <tr class="btn-wrap clearfix">
-                            <td align="center" id="current-year-month" colspan="7"></td>
+                            <td align="center" id="prev" colspan="2">ᐸ</td>
+                            <td align="center" id="current-year-month" colspan="3"></td>
+                            <td align="center" id="next" colspan="2">ᐳ</td>
                         </tr>
                         <tr id="day-list">
                             <td class = "sun" align="center">Sun</td>
@@ -122,16 +123,32 @@
 $(function(){
 
     attachMain();
-    clickDate();
+    var mainThisMonth = clickDate();
     getSession();
+
+    $("#prev").click(function(){
+        mainThisMonth = prev(mainThisMonth);
+        removeCalendar();
+        attachMain(mainThisMonth);
+        loadCalendar(mainThisMonth);
+    });
+
+    $("#next").click(function(){
+        mainThisMonth = next(mainThisMonth);
+        removeCalendar();
+        attachMain(mainThisMonth);
+        loadCalendar(mainThisMonth);
+    });
 
     $("#input-data").click(function(){
         var planDate = $('#planDate').val();
-        readForm("#toDoList", "/toDoList", readToDoInMonth, false);
-
-        console.log("reload");
-        readToDo(planDate);
-        console.log("done");
+        var toDoContent = $("#toDoContent").val();
+        if(!toDoContent) {
+            alert('내용을 입력해주세요');
+        } else{
+            console.log("create todo");
+            readToDoForm("#toDoList", "/toDoListInsert");
+        }
     });
 
     $('#calendar td').click(function(){
@@ -184,6 +201,10 @@ $(function(){
 
             //var editId = $(this).attr('id');
         });
+
+    $("#toDoListsTable").on("click", ".state", function(){
+        checkToDo(this.parentNode.id, this.innerText);
+    });
 
    loadCalendar();
 });

@@ -61,7 +61,7 @@ input#editColor {
         /* -- */
         /* width: 360px; */
         /* height: 600px; */
-        padding: 90px 20px 20px 0;
+        /* padding: 90px 20px 20px 0; */
     }
 
     .content-right{
@@ -69,7 +69,7 @@ input#editColor {
         /* width: 360px; */
         /* height: 600px; */
         /* padding: 100px 20px 20px 20px; */
-        padding: 3vw 2vh 3vw 2vh;
+        /* padding: 3vw 2vh 3vw 2vh;*/
         /* 2022년 7월 30일 추가 */
         background-color: #f9f9f9;
         color: #333333;
@@ -113,10 +113,10 @@ input#editColor {
     }
 
     .content-right table tr{
-        width: 50px;
+        width: 10vw;
         height: 15vh;
         text-align: center;
-        font-size: 16px;
+        font-size: 1rem;
     }
 
     .content-right table tr td{
@@ -127,8 +127,26 @@ input#editColor {
     }
 
     .content-right table tr td div{
+        /* 2022년 8월 25일 추가 */
+        font-size: 1rem;
+        height: 1.3rem;
+        line-height: 1.3rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .td-date{
         text-align: right;
-        font-size: 1em;
+    }
+
+    .td-item{
+        text-align: left;
+    }
+
+    .checker{
+        margin-left: 0.2rem;
+        padding-right: 0.2rem;
     }
 
     .main-wrap{
