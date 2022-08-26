@@ -10,8 +10,6 @@ function readForm(formId, url, callback, flag){
              dataType : "text",
              data : $(formId).serialize(),
              success : function(result){
-                 //console.log(result);
-                 //console.log(this.data);
                  if (callback != null && callback != undefined) {
                     if (flag) {
                         callback(result);
@@ -94,19 +92,24 @@ function checkToDo(trId, toDoState){
 // TODO: memberCode 입력부분 필요
 // TODO: dataType => JSON
 function readToDo(clickedDate){
-    console.log('readToDo=========================');
+
+    var memberCode = getSession();
     if (!clickedDate) clickedDate = getDate4Ajax($(".active").attr("id"));
-    console.log(clickedDate);
+
      $.ajax({
              url : "/readToDoList",
              type : "post",
              contentType: 'application/x-www-form-urlencoded; charset=utf-8',
              dataType : "text",
              data : {"selectedDate" : clickedDate,
-                     "memberCode" : 2
+                     "memberCode" : memberCode
              },
              success : function(result){
                  addTodoTable(result);
+                 console.log("result : ", result);
+                 if(result == null){
+                    console.log("null : ", result);
+                 }
              },
              error : function(err){
                  console.log(err+"에러발생");
@@ -117,7 +120,10 @@ function readToDo(clickedDate){
 // TODO: memberCode 입력부분 필요
 // TODO: dataType => JSON(Done)
 function readToDoInMonth(selectedDate){
+
     if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
+    var memberCode = getSession();
+
     console.log('selectedDate :', selectedDate);
     var selectedMonth = selectedDate.slice(0, 7);
     console.log('readToDoInMonth')
@@ -129,7 +135,7 @@ function readToDoInMonth(selectedDate){
         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
         dataType : "JSON",
         data : {"selectedMonth" : selectedMonth,
-                "memberCode" : 2
+                "memberCode" : memberCode
         },
         success : function(result){
             console.log(result);

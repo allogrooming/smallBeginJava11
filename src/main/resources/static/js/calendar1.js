@@ -317,11 +317,11 @@ function removeTodoTable(){
     }
 }
 
-// TODO: memberCode 입력부분 필요
 // TODO: dataType => JSON(Done)
 var readToDoInMonth = function readToDoInMonth(selectedDate){
     if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
     var selectedMonth = selectedDate.slice(0, 7);
+    var memberCode = getSession();
 
     $.ajax({
         url : "/readToDoInMonth",
@@ -329,7 +329,7 @@ var readToDoInMonth = function readToDoInMonth(selectedDate){
         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
         dataType : "JSON",
         data : {"selectedMonth" : selectedMonth,
-                "memberCode" : 2
+                "memberCode" : memberCode
         },
         success : function(result){
             addTodoOnCalendar(result);

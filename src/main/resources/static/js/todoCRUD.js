@@ -57,43 +57,6 @@ function editTodo(sendColor, sendContent, clickedDate, toDoCode){
       });
 }
 
-// TODO: memberCode 입력부분 필요
-// TODO: dataType => JSON
-function readToDo(clickedDate){
-     $.ajax({
-             url : "/readCalendar",
-             type : "post",
-             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-             dataType : "text",
-             data : {"selectedDate" : clickedDate,
-                     "memberCode" : 2
-             },
-             success : function(result){
-                 addTodoTable();
-                 addTodo(result);
-             },
-             error : function(err){
-                 console.log(err+"에러발생");
-             }
-      });
-}
-
-function deleteTodo(deleteid, selectedDate){
-      $.ajax({
-             url : "/toDoDelete",
-             type : "post",
-             contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-             dataType : "text",
-             data : {"toDoCode" : deleteid},
-             success : function(result){
-                 readToDo(selectedDate);
-             },
-             error : function(err){
-                 console.log(err+"error");
-             }
-      });
-}
-
 function addTodoTable(){
     var lengthT = $("#toDoListsTable > tbody tr").length;
     if(lengthT > 0){
@@ -122,4 +85,5 @@ function getDate4Ajax(idStr){
 function getSession(){
     var session = $("#session").text();
     console.log("sesssion : ", session);
+    return session;
 }

@@ -72,27 +72,11 @@ public class CalendarController {
 
 
     }
-/*  @Transactional
-    @RequestMapping(value="/readCalendar", produces="text/html;charset=UTF-8", method = RequestMethod.POST)
-    @ResponseBody
-    public RedirectView readCalendar(@RequestParam Map<String, String> param, RedirectAttributes re) throws ParseException {
-
-        //String selectedDate = param.get("selectedDate");
-        System.out.println("param - readCalendar");
-        System.out.println(param);
-        
-        // 이제 됨
-        re.addAttribute("param", param.get("selectedDate"));
-        System.out.println("addAttribute");
-        System.out.println(re);
-        return new RedirectView("/calendar");
-    }*/
 
     @Transactional
     @RequestMapping(value="/readToDoList")
     @ResponseBody
     public List<Todo> readCalendar(@RequestParam Map<String, Object> param) {
-        //String selectedDate = String.valueOf(param.get("clickedDate"));
         System.out.println("readTodo------------------------------");
 
         List<Todo> todo = calendarService.getTodoList(param);
