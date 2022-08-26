@@ -128,8 +128,8 @@ $(function(){
         if(!toDoContent) {
             alert('내용을 입력해주세요');
         } else{
-            readForm("#toDoList", "/toDoList", readToDoInMonth, false);
             console.log("create todo");
+            readToDoForm("#toDoList", "/toDoListInsert");
         }
     });
 

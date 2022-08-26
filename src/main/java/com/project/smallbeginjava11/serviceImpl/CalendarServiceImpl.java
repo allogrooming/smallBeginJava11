@@ -17,7 +17,7 @@ public class CalendarServiceImpl implements CalendarService {
 
     private final CalendarMapper calendarMapper;
 
-    public List<Todo> getTodoList(Map<String, Object> params) {
+    public List<Todo> getTodoList(Map<String, Object> params){
         return calendarMapper.getTodoList(params);
     }
 

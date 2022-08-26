@@ -1,5 +1,4 @@
 function removeAllToDoOnCalendar() {
-
     var tdList = $("#calendar-body tr td");
     for (var i = 0; i < tdList.length; i++){
         if ($(tdList[i]).children().length > 1){
@@ -21,14 +20,35 @@ function addTodoOnCalendar(result){
     removeAllToDoOnCalendar()
 
     for (var i = 0; i < result.length; i++){
-        var $div = document.createElement('div');
-        $div.setAttribute('id', 'td-div-' + result[i].toDoCode);
+        var outerDivStr = "<div id='td-div-";
+        outerDivStr += result[i].toDoCode + "'>";
         // DB의 to_do_content 데이터를 trim, 공백삭제
-        $div.textContent = result[i].toDoContent.replaceAll(" ", "").trim();
+
+        //체크 상자 역할을 하는 innerDiv
+        var squareDivStr = "<div class='square' ";
+        squareDivStr += "style='background-color:" + result[i].toDoColor + ";'>";
+        squareDivStr += "</div>";
+
+        outerDivStr += squareDivStr;
+
+        var contentDivStr = "<div class='content'>";
+        contentDivStr += result[i].toDoContent.replaceAll(" ", "").trim();
+        contentDivStr += "</div>";
+
+        outerDivStr += contentDivStr;
+        outerDivStr += "</div>";
+
+        // console.log(squareDivStr);
+        // console.log(contentDivStr);
+        // console.log(outerDivStr);
+        // $div.innerHTML = innerDivStr;
+        // $div.textContent = result[i].toDoContent.replaceAll(" ", "").trim();
         var planDate = new Date(result[i].planDate);
         var tdId = "#" + setDateId(planDate, planDate.getDate());
-        $div.style.backgroundColor = result[i].toDoColor;
-        $(tdId).append($div);
+
+        // $div.style.backgroundColor = result[i].toDoColor;
+        //$(tdId).append($div);
+        $(tdId).append(outerDivStr);
     }
 
 }

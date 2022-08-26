@@ -333,16 +333,7 @@ function getDate4Ajax(idStr){
     }
 }
 
-function addTodoTable(){
-    var lengthT = $("#toDoListsTable > tbody tr").length;
-    if(lengthT > 0){
-        console.log("delete rows");
-        var todoT = document.getElementById("toDoListsTable");
-        for(var i=lengthT-1; i>0; i--){
-           var test = todoT.deleteRow(i);
-        }
-    }
-}
+
 
 function checkToDoInTable(trId, result) {
     console.log('checkToDoInTable');
@@ -350,16 +341,34 @@ function checkToDoInTable(trId, result) {
     $(selectorStr).text(result);
 }
 
+function removeTodoTable(){
+    var lengthT = $("#toDoListsTable > tbody tr").length;
+    $("#toDoListsTable > tbody tr").css("border: 1px solid red");
+    console.log('lengthT :', lengthT);
+    if(lengthT > 0){
+        console.log("delete rows");
+        var todoT = document.getElementById("toDoListsTable");
+        for(var i=lengthT-1; i>0; i--){
+           todoT.deleteRow(i);
+        }
+    }
+}
 
-function addTodo(result){
+function addTodoTable(result){
+    // 기존의 toDoTable의 내용을 지운다.
+    console.log('addTodoTable------------------');
+    console.log(result);
+    removeTodoTable();
+
     var resultTodo = JSON.parse(result);
-
     if(resultTodo.length > 0){
         var table4Todo = document.getElementById("toDoListsTable");
-
+        table4Todo.style = "border:1px solid";
         var i=0;
         for(var obj of resultTodo){
             var values = Object.values(obj);
+            console.log('values:*********************');
+            console.log(values);
 
             var newRaw = table4Todo.insertRow();
             newRaw.id = "td-tr-" + obj.toDoCode;

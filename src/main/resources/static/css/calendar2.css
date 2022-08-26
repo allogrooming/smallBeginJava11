@@ -133,6 +133,16 @@ input#editColor {
         text-overflow: ellipsis;
     }
 
+    .square{
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .content{
+        display: inline-block;
+    }
+
     .main-wrap{
         text-align: left;
         margin: 0 0 0 40px;
