@@ -37,7 +37,7 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public void editToDo(Map<String, Object> params) throws ParseException {
+    public void editToDo(Map<String, String> params) throws ParseException {
         calendarMapper.editToDo(params);
     }
 

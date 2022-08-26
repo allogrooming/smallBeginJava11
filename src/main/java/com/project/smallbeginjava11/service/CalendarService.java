@@ -12,5 +12,5 @@ public interface CalendarService {
     void toDoDelete(Map<String, String> params) throws ParseException;
     List<Todo> getTodoListInMonth(Map<String, Object> params) throws ParseException;
     String updateToDoState(Map<String, Object> params) throws ParseException;
-    void editToDo(Map<String, Object> params) throws ParseException;
+    void editToDo(Map<String, String> params) throws ParseException;
 }

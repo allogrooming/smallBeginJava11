@@ -17,6 +17,7 @@
 <script th:src="@{/js/navbar.js}"></script>
 <script th:src="@{/js/calendarDataShow.js}"></script>
 <script th:src="@{/js/calendar1.js}"></script>
+<script th:src="@{/js/todoCRUD.js}"></script>
 <script th:src="@{/js/infiniteScroll.js}"></script>
 <script th:src="@{/js/common.js}"></script>
 
@@ -140,12 +141,16 @@ $(function(){
     });
 
     $('#toDoListsTable').on("click", ".delete", function(){
-        console.log("delete");
-        var deleteId = $(this).attr('id');
-        var selectedDate = $(".active").attr('id');
-        var param4deleteTD = getDate4Ajax(selectedDate);
-        console.log(param4deleteTD);
-        deleteTodo(deleteId, param4deleteTD);
+        var answer = confirm("삭제하시겠습니까?");
+        if(answer){
+            console.log("delete");
+            var deleteId = $(this).attr('id');
+            var selectedDate = $(".active").attr('id');
+            var param4deleteTD = getDate4Ajax(selectedDate);
+            console.log(param4deleteTD);
+            deleteTodo(deleteId, param4deleteTD);
+        }
+
     });
 
     $('#toDoListsTable').on("click", ".edit", function(){
@@ -171,8 +176,6 @@ $(function(){
             var sendContent = $("#editContent").text();
             var clickedDate = $(".active").attr("id");
             var toDoCode = $(this).prev().attr("id");
-            console.log(sendColor);
-
             editTodo(sendColor, sendContent, clickedDate, toDoCode);
             complete.innerText = 'edit';
         });

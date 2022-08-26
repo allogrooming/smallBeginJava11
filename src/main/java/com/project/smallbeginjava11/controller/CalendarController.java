@@ -141,13 +141,13 @@ public class CalendarController {
     @RequestMapping(value="/editToDo", produces="text/html;charset=UTF-8")
     @ResponseBody
     @PostMapping
-    public String editToDo(@RequestParam Map<String, Object> params) throws ParseException {
+    public String editToDo(@RequestParam Map<String, String> params) throws ParseException {
 
         System.out.println("toDoUpdate");
-        for (String key : params.keySet()) {
-            System.out.println(key + " : " + params.get(key));
-        }
+
+        System.out.println("service layer start");
         calendarService.editToDo(params);
+        System.out.println("finish update");
         return "success";
     }
 
