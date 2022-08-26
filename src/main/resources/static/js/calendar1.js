@@ -27,23 +27,25 @@ function getPageYear(date){
     return pageYear;
 }
 
-function attachMain(){
-    var mainThisMonth = new Date();
-    var tbodyFList = document.createDocumentFragment();
-    var tbodyMainCode = showCalendar(mainThisMonth, 100);
-//    var tbodyNextFirstWeekCode = showCalendar(next(mainThisMonth), 200).firstElementChild;
-    var tbodyNextFirstWeekCode = showCalendar(next(mainThisMonth), 200);
+function removeCalendar(){
+    var calendarBody = document.getElementById('calendar-body');
+    removeAllChildElements(calendarBody);
+}
 
-    tbodyFList.append(tbodyMainCode);
-    tbodyFList.append(tbodyNextFirstWeekCode);
+
+function attachMain(mainThisMonth){
+    if (!mainThisMonth) mainThisMonth = new Date();
+    var tbodyFList = document.createDocumentFragment();
+    var tbodyMainMonth = showCalendar(mainThisMonth, 100);
+    var tbodyNextFirstWeek = showCalendar(next(mainThisMonth), 200).firstChild;
+
+    tbodyFList.append(tbodyMainMonth);
+    tbodyFList.append(tbodyNextFirstWeek);
     let length = tbodyFList.childElementCount;
 
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
         tbodyFList.children[i].setAttribute('data-main-month-block', 0);
     }
-
-//    document.getElementById("calendar-body").append(tbodyMainCode)
-//    document.getElementById("calendar-body").append(tbodyNextFirstWeekCode)
     document.getElementById("calendar-body").append(tbodyFList);
     return next(mainThisMonth)
 }
@@ -118,10 +120,10 @@ function showCalendar(pointDate, monthCnt){
     let pointId = parseInt(setDateId(pointDate, 1));
     let prevId = parseInt(setDateId(prevFirst, prevLastWeekStartDate));
     let cnt = 1;
-    for(var i = 1; i < 7; i++){ //주에 대한 for문
+    for(let i = 1; i < 7; i++){ //주에 대한 for문
         var $tr = document.createElement('tr');
         $tr.setAttribute('id', monthCnt + i);
-        for(var j = 0; j < 7; j++){
+        for(let j = 0; j < 7; j++){
             if(i === 1 && j < pointFirstWeekStartDay){
                 var $td = document.createElement('td');
                 var $div = document.createElement('div');
@@ -202,20 +204,20 @@ function showCurrentDateOnLeft(pointDate){
 function inputPlanDate(dateStr){
     if(!dateStr) {
         var pointDate = new Date();
-        var dateStr = getDate4Ajax(setDateId(pointDate, pointDate.getDate()));
+        var dateStr = getDate4Ajax(setDateId(pointDate));
     }
     $("#planDate").val(dateStr);
 }
 
 
-function removeCalendar(){
-    let catchTr = 100;
-    for(var i = 100; i< 106; i++){
-        var $tr = document.getElementById(catchTr);
-        $tr.remove();
-        catchTr++;
-    }
-}
+//function removeCalendar(){
+//    let catchTr = 100;
+//    for(var i = 100; i< 106; i++){
+//        var $tr = document.getElementById(catchTr);
+//        $tr.remove();
+//        catchTr++;
+//    }
+//}
 
 function prev(pointDate){
     var pointFirst = new Date(pointDate.getFullYear(), pointDate.getMonth(),1);
@@ -365,7 +367,6 @@ function addTodoTable(result){
     var resultTodo = JSON.parse(result);
     if(resultTodo.length > 0){
         var table4Todo = document.getElementById("toDoListsTable");
-        table4Todo.style = "border:1px solid";
         var i=0;
         for(var obj of resultTodo){
             var values = Object.values(obj);
@@ -486,7 +487,7 @@ function clickDate(pointDate){
             readToDo(getDate4Ajax(clickedDate));
         }
     }
-
+    return getDateFromId(clickedDate);
 //        console.log(e);
 //        clickedDate1 = e.target;
 //        clickedDate1.classList.add('active');
@@ -495,6 +496,8 @@ function clickDate(pointDate){
 //        keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
 //        reshowingList(selectedDate);
 //    }
+
+
 }
 
 function loadCalendar(pointDate){

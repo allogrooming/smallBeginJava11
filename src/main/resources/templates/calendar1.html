@@ -122,7 +122,21 @@
 $(function(){
 
     attachMain();
-    clickDate();
+    var mainThisMonth = clickDate();
+
+    $("#prev").click(function(){
+        mainThisMonth = prev(mainThisMonth);
+        removeCalendar();
+        attachMain(mainThisMonth);
+        loadCalendar(mainThisMonth);
+    });
+
+    $("#next").click(function(){
+        mainThisMonth = next(mainThisMonth);
+        removeCalendar();
+        attachMain(mainThisMonth);
+        loadCalendar(mainThisMonth);
+    });
 
     $("#input-data").click(function(){
         var planDate = $('#planDate').val();

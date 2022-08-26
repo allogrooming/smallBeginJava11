@@ -35,9 +35,8 @@ function addTodoOnCalendar(result){
         content.setAttribute('id', 'td-ct-' + result[i].toDoCode);
         content.className = 'content'
         content.textContent = result[i].toDoContent.replaceAll(" ", "").trim();
-        $div.appendChild(content)
+        $div.appendChild(content);
 
-        console.log($div);
         var tdId = "#" + setDateId(result[i].planDate);
         $(tdId).append($div);
     }
