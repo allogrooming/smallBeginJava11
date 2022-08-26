@@ -79,6 +79,9 @@ function getDateSepPoint(pointDate){
 }
 
 function setDateId(pointDate, date){
+    if (typeof pointDate == "string") pointDate = new Date(pointDate);
+    if (!date) date = pointDate.getDate();
+
     var dateId = "";
     var dateStr = date.toString();
     dateId += pointDate.getFullYear();
@@ -122,6 +125,7 @@ function showCalendar(pointDate, monthCnt){
             if(i === 1 && j < pointFirstWeekStartDay){
                 var $td = document.createElement('td');
                 var $div = document.createElement('div');
+                $div.className = 'td-date';
                 $div.textContent = prevLastWeekStartDate;;
                 $td.appendChild($div);
                 $td.setAttribute('id', prevId);
@@ -133,6 +137,7 @@ function showCalendar(pointDate, monthCnt){
             } else{
                 var $td = document.createElement('td');
                 var $div = document.createElement('div');
+                $div.className = 'td-date';
                 $div.textContent = cnt;
                 $td.appendChild($div);
                 $td.setAttribute('id', pointId);
@@ -343,7 +348,6 @@ function checkToDoInTable(trId, result) {
 
 function removeTodoTable(){
     var lengthT = $("#toDoListsTable > tbody tr").length;
-    $("#toDoListsTable > tbody tr").css("border: 1px solid red");
     console.log('lengthT :', lengthT);
     if(lengthT > 0){
         console.log("delete rows");
@@ -356,8 +360,8 @@ function removeTodoTable(){
 
 function addTodoTable(result){
     // 기존의 toDoTable의 내용을 지운다.
-    console.log('addTodoTable------------------');
-    console.log(result);
+    // console.log('addTodoTable------------------');
+    // console.log(result);
     removeTodoTable();
 
     var resultTodo = JSON.parse(result);
@@ -367,8 +371,6 @@ function addTodoTable(result){
         var i=0;
         for(var obj of resultTodo){
             var values = Object.values(obj);
-            console.log('values:*********************');
-            console.log(values);
 
             var newRaw = table4Todo.insertRow();
             newRaw.id = "td-tr-" + obj.toDoCode;

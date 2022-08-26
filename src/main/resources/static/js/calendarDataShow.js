@@ -20,35 +20,26 @@ function addTodoOnCalendar(result){
     removeAllToDoOnCalendar()
 
     for (var i = 0; i < result.length; i++){
-        var outerDivStr = "<div id='td-div-";
-        outerDivStr += result[i].toDoCode + "'>";
+        var $div = document.createElement('div');
+        $div.className = 'td-item';
+        $div.setAttribute('id', 'td-div-' + result[i].toDoCode);
         // DB의 to_do_content 데이터를 trim, 공백삭제
+        var checker = document.createElement('span');
+        checker.setAttribute('id', 'td-ck-' + result[i].toDoCode);
+        checker.className = 'checker';
+        checker.textContent = "█";
+        checker.style.color = result[i].toDoColor;
+        $div.appendChild(checker);
 
-        //체크 상자 역할을 하는 innerDiv
-        var squareDivStr = "<div class='square' ";
-        squareDivStr += "style='background-color:" + result[i].toDoColor + ";'>";
-        squareDivStr += "</div>";
+        var content = document.createElement('span');
+        content.setAttribute('id', 'td-ct-' + result[i].toDoCode);
+        content.className = 'content'
+        content.textContent = result[i].toDoContent.replaceAll(" ", "").trim();
+        $div.appendChild(content)
 
-        outerDivStr += squareDivStr;
-
-        var contentDivStr = "<div class='content'>";
-        contentDivStr += result[i].toDoContent.replaceAll(" ", "").trim();
-        contentDivStr += "</div>";
-
-        outerDivStr += contentDivStr;
-        outerDivStr += "</div>";
-
-        // console.log(squareDivStr);
-        // console.log(contentDivStr);
-        // console.log(outerDivStr);
-        // $div.innerHTML = innerDivStr;
-        // $div.textContent = result[i].toDoContent.replaceAll(" ", "").trim();
-        var planDate = new Date(result[i].planDate);
-        var tdId = "#" + setDateId(planDate, planDate.getDate());
-
-        // $div.style.backgroundColor = result[i].toDoColor;
-        //$(tdId).append($div);
-        $(tdId).append(outerDivStr);
+        console.log($div);
+        var tdId = "#" + setDateId(result[i].planDate);
+        $(tdId).append($div);
     }
 
 }
