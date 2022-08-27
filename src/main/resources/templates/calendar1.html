@@ -145,7 +145,15 @@ $(function(){
         checkToDo(this.parentNode.id, this.innerText);
     });
 
-    loadCalendar();
+    $("#login").on("click", function(){
+        window.location.href = "/login";
+    });
+
+    $("#logout").on("click", function(){
+        window.location.href = "/logout";
+    });
+
+   loadCalendar();
 });
 </script>
 </html>

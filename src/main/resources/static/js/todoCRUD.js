@@ -1,4 +1,4 @@
-function addTodoaddTodo(result){
+function addTodo(result){
     var resultTodo = JSON.parse(result);
 
     if(resultTodo.length > 0){
@@ -76,7 +76,6 @@ function getDate4Ajax(idStr){
         dateStr += idStr.slice(4, 6);
         dateStr += "-";
         dateStr += idStr.slice(-2);
-        console.log(dateStr);
         return dateStr;
     }
 }

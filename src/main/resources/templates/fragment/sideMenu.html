@@ -24,6 +24,9 @@
 <body>
 <div th:fragment = "sideMenuFragment">
     <div class="content-left">
+        <span id="logout">Logout</span>
+        <span id="login" th:if="${session.memberCode}==''" th:text="'login'"></span><span th:unless="${session.memberCode}!=''" th:text="'logout'"></span>
+        <br>
         <div class="main-wrap">
             <span id="main-day" class="main-day"></span>
             <span id="main-year" class="main-day"></span>
@@ -38,6 +41,7 @@
 <!--                    TODO: value가 현재날짜가 되도록-->
                     <input type="date" id="planDate" class="input-box" name="planDate" />
                     <input type="color" id="toDoColor" name="toDoColor" value="#16aaad" list="colors4palette" />
+                    <input type="text" id="sessionCode" name="memberCode" th:value="${session.memberCode}">
                     <datalist id="colors4palette">
                         <option>#355070</option>
                         <option>#6D597A</option>

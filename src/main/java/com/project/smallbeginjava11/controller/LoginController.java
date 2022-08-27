@@ -15,15 +15,23 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 public class LoginController {
-
     private final LoginService loginService;
 
     // 로그인 페이지 보여줌 대신 쿠키에 memberCode 저장되어 있으면 안보여줌
     @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView("login");
+        return modelAndView;
+    }
 
-        // 쿠키 판별
+    @GetMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("login");
+
+        HttpSession session = request.getSession();
+        if(session.getAttribute("memberCode") != null) {
+            session.removeAttribute("memberCode");
+        }
 
         return modelAndView;
     }

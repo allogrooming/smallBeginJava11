@@ -94,10 +94,7 @@ function checkToDo(trId, toDoState){
 function readToDo(clickedDate){
     var memberCode = getSession();
     if (!clickedDate) clickedDate = getDate4Ajax($(".active").attr("id"));
-
-     console.log("---------------------");
-     console.log('readTodoAjax');
-     console.log('memberCode :', memberCode);
+    console.log("memberCode : ", memberCode);
 
      $.ajax({
              url : "/readToDoList",
@@ -108,10 +105,8 @@ function readToDo(clickedDate){
                      "memberCode" : memberCode
              },
              success : function(result){
-                 console.log('readToDo(clickedDate)========');
-                 console.log('clickedDate :', clickedDate)
+                 addTodoTable();
                  console.log("result : ", result);
-                 addTodoTable(result);
              },
              error : function(err){
                  console.log(err+"에러발생");
