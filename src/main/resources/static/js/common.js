@@ -81,6 +81,7 @@ function checkToDo(trId, toDoState){
                 console.log('checkToDo result');
                 console.log(result);
                 checkToDoInTable(trId, result);
+                checkToDoOnCalendar(trId, result);
             },
             error : function(err, resp){
                 console.log(err+"에러발생");

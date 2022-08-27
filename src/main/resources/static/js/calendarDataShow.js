@@ -8,10 +8,18 @@ function removeAllToDoOnCalendar() {
     }
 }
 
-function checkToDoOnCalendar(tdId, result) {
-    console.log('checkToDoInTable');
-    var selectorStr = "#" + trId + " .state";
-    $(selectorStr).text(result);
+function checkToDoOnCalendar(trId, result) {
+    console.log('checkToDoOnCalendar');
+    var selectorStr = "#td-ct-" + trId.slice(-2);
+    console.log('selectorStr :', selectorStr);
+     console.log('result :', result);
+    if (result == 1){
+        $(selectorStr).css('text-decoration', 'line-through');
+        $(selectorStr).css('color', '#DADADA');
+    } else{
+        $(selectorStr).css('text-decoration', 'none');
+        $(selectorStr).css('color', '#000000');
+    }
 }
 
 

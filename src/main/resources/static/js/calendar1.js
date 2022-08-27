@@ -182,11 +182,9 @@ function showCurrentDateOnLeft(pointDate){
     mainDay.append(mainDateList[3]);
 }
 
-function inputPlanDate(dateStr){
-    if(!dateStr) {
-        var pointDate = new Date();
-        var dateStr = getDate4Ajax(setDateId(pointDate));
-    }
+function inputPlanDate(pointDate){
+    if(!pointDate) pointDate = new Date();
+    var dateStr = getDate4Ajax(setDateId(pointDate));
     $("#planDate").val(dateStr);
 }
 
@@ -361,6 +359,7 @@ function removeAllChildElements(parentElement){
     }
 }
 
+
 function clickDate(pointDate){
     // 캘린더 화면에 접속하면 자동으로 해당일의 날짜가 클릭되어 활성화 상태가 된다.
     if (!pointDate) pointDate = new Date();
@@ -387,14 +386,19 @@ function clickDate(pointDate){
             clickedDateElement = e.target;
             clickedDate = e.target.id;
 
-            if(clickedDate == "" || clickedDate.slice(0,2) == "td"){
+            while (clickedDate == "" || clickedDate.slice(0,2) == "td") {
                 clickedDate = clickedDateElement.parentNode.id;
                 clickedDateElement = clickedDateElement.parentNode;
+                console.log(clickedDate);
+                if (clickedDateElement.parentNode.nodeName == "td"){
+                    break;
+                }
             }
+
             clickedDateElement.classList.add('active');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
-            inputPlanDate((clickedDate));
+            inputPlanDate(getDateFromId(clickedDate));
             readToDo(getDate4Ajax(clickedDate));
         }
     }
