@@ -406,8 +406,4 @@ function loadCalendar(pointDate){
     readToDo(getDate4Ajax(clickedDate));
     readToDoInMonth(getDate4Ajax(clickedDate));
 
-//    window.addEventListener("load", showToDoOnCalendar);
-//    function showToDoOnCalendar(e){
-//        readToDoInMonth(getDate4Ajax(clickedDate));
-//    }
 }

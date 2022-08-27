@@ -43,6 +43,13 @@ function addTodoOnCalendar(result){
         content.setAttribute('id', 'td-ct-' + result[i].toDoCode);
         content.className = 'content'
         content.textContent = result[i].toDoContent.replaceAll(" ", "").trim();
+
+        // state에 따라 다른 css 적용, 이미 완료 상태라면 check 표시
+        if (result[i].toDoState) {
+            content.style = 'text-decoration: line-through';
+            content.style = 'color: #DADADA';
+        }
+
         $div.appendChild(content);
 
         var tdId = "#" + setDateId(result[i].planDate);
