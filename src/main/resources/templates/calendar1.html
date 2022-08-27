@@ -63,6 +63,7 @@ $(function(){
     attachMain();
     var mainThisMonth = clickDate();
     getSession();
+    inputPlanDate();
 
     $("#prev").click(function(){
         mainThisMonth = prev(mainThisMonth);
@@ -144,7 +145,7 @@ $(function(){
         checkToDo(this.parentNode.id, this.innerText);
     });
 
-   loadCalendar();
+    loadCalendar();
 });
 </script>
 </html>

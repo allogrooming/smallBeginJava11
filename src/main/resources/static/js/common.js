@@ -92,9 +92,12 @@ function checkToDo(trId, toDoState){
 // TODO: memberCode 입력부분 필요
 // TODO: dataType => JSON
 function readToDo(clickedDate){
-
     var memberCode = getSession();
     if (!clickedDate) clickedDate = getDate4Ajax($(".active").attr("id"));
+
+     console.log("---------------------");
+     console.log('readTodoAjax');
+     console.log('memberCode :', memberCode);
 
      $.ajax({
              url : "/readToDoList",
@@ -105,11 +108,10 @@ function readToDo(clickedDate){
                      "memberCode" : memberCode
              },
              success : function(result){
-                 addTodoTable(result);
+                 console.log('readToDo(clickedDate)========');
+                 console.log('clickedDate :', clickedDate)
                  console.log("result : ", result);
-                 if(result == null){
-                    console.log("null : ", result);
-                 }
+                 addTodoTable(result);
              },
              error : function(err){
                  console.log(err+"에러발생");

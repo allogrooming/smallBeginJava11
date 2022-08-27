@@ -1,4 +1,4 @@
-function addTodo(result){
+function addTodoaddTodo(result){
     var resultTodo = JSON.parse(result);
 
     if(resultTodo.length > 0){
@@ -85,5 +85,7 @@ function getDate4Ajax(idStr){
 function getSession(){
     var session = $("#session").text();
     console.log("sesssion : ", session);
+    // TODO: 테스트용 임시
+    if (!session) session = '16';
     return session;
 }
