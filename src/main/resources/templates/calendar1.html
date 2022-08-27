@@ -70,13 +70,16 @@ $(function(){
         mainThisMonth = prev(mainThisMonth);
         removeCalendar();
         attachMain(mainThisMonth);
+        showCurrentMonthTitle(mainThisMonth);
         loadCalendar(mainThisMonth);
+
     });
 
     $("#next").click(function(){
         mainThisMonth = next(mainThisMonth);
         removeCalendar();
         attachMain(mainThisMonth);
+        showCurrentMonthTitle(mainThisMonth);
         loadCalendar(mainThisMonth);
     });
 

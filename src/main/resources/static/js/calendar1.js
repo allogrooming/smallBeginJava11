@@ -66,18 +66,6 @@ function attachPrevForScroll(mainThisMonth, monthCnt){
     return topMain;
 }
 
-function getDateSepPoint(pointDate){
-    var currentMonthStr = '';
-    currentMonthStr += pointDate.getFullYear() + '.';
-    var monthStr = (pointDate.getMonth() + 1).toString();
-    var dateStr = (pointDate.getDate()).toString();
-    currentMonthStr += monthStr.length < 2? "0" + monthStr : monthStr;
-    currentMonthStr += '.'
-    currentMonthStr += dateStr.length < 2? "0" + dateStr : dateStr;
-
-    return currentMonthStr;
-}
-
 function setDateId(pointDate, date){
     if (typeof pointDate == "string") pointDate = new Date(pointDate);
     if (!date) date = pointDate.getDate();
