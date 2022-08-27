@@ -364,7 +364,7 @@ function removeAllChildElements(parentElement){
 function clickDate(pointDate){
     // 캘린더 화면에 접속하면 자동으로 해당일의 날짜가 클릭되어 활성화 상태가 된다.
     if (!pointDate) pointDate = new Date();
-    var clickedDate = setDateId(pointDate, pointDate.getDate());
+    var clickedDate = setDateId(pointDate);
     var clickedDateElement = document.getElementById(clickedDate);
     console.log('clickedDate: ', clickedDate);
     clickedDateElement.classList.add('active');
