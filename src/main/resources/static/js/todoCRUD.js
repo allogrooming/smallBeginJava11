@@ -28,8 +28,33 @@ function addTodo(result){
 
             content.innerText = values[2];
             state.innerText = values[4];
-            deleteBtn.innerText = "delete  ";
+            deleteBtn.innerText = "delete";
             editBtn.innerText = "  edit";
+
+            var tester = document.getElementById(values[5]);
+            var colorTodo = "#" + values[5];
+            $(tester).css("color", values[5]);
+            i++;
+        }
+    }
+}
+
+function addTodo4edit(result){
+    var resultTodo = JSON.parse(result);
+
+    if(resultTodo.length > 0){
+/*        var table4Todo = document.getElementById("toDoListsTable");*/
+
+        var i=0;
+        for(var obj of resultTodo){
+            var values = Object.values(obj);
+
+            var newRaw = "<tr id='td-tr-" + obj.toDoCode + "'>";
+            newRaw += "<td id='" + values[5]+ "' class='color'>■</td>" + "<td class='content'>" + values[2] + "</td>";
+            newRaw += "<td class='state'>" + values[4] + "</td>" + "<td class='delete' id='" + values[0] + "'> delete  </td>";
+            newRaw += "<td class='edit' class='" + i + "'>  edit</td></tr>";
+
+            $("#toDoListsTable").append(newRaw);
 
             var tester = document.getElementById(values[5]);
             var colorTodo = "#" + values[5];
@@ -48,7 +73,8 @@ function editTodo(sendColor, sendContent, clickedDate, toDoCode){
              dataType : "text",
              data : {"toDoCode" : toDoCode, "toDoContent" : sendContent, "toDoColor" : sendColor},
              success : function(result){
-                readToDo(clickedDate);
+                //readToDo(clickedDate);
+                window.location.href = "/calendar1";
              },
              error : function(err){
                  console.log(err+"에러발생");
@@ -84,8 +110,11 @@ function getDate4Ajax(idStr){
 function getSession(){
     var session = $("#session").text();
     // TODO: 테스트용 임시
-    if (!session) session = '16';
-    if (session == '') session = '16';
+    if(session == ''){
+        alert("로그인이 필요한 서비스입니다.");
+        window.location.href = "/login";
+    }else{
+        return session;
+    }
     console.log("sesssion : ", session);
-    return session;
 }

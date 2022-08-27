@@ -24,7 +24,7 @@
 <body>
 <div th:fragment = "sideMenuFragment">
     <div class="content-left">
-        <span id="login" th:if="${#strings.isEmpty(session.memberCode)}" th:text="'login'"></span><span id="logout" th:unless="${#strings.isEmpty(session.memberCode)}" th:text="'logout'"></span>
+        <div id="login" th:if="${#strings.isEmpty(session.memberCode)}" th:text="'login'"></div><div id="logout" th:unless="${#strings.isEmpty(session.memberCode)}" th:text="'logout'"></div>
         <br>
         <div class="main-wrap">
             <span id="main-day" class="main-day"></span>
@@ -40,8 +40,7 @@
 <!--                    TODO: value가 현재날짜가 되도록-->
                     <input type="date" id="planDate" class="input-box" name="planDate" />
                     <input type="color" id="toDoColor" name="toDoColor" value="#16aaad" list="colors4palette" />
-                    <input type="text" id="sessionCode" name="memberCode" th:if="${#strings.isEmpty(session.memberCode)}" th:value="16"/>
-                    <input type="text" id="sessionCode1" name="memberCode" th:unless="${#strings.isEmpty(session.memberCode)}" th:value="${#strings.isEmpty()}"/>
+                    <input type="text" id="sessionCode" name="memberCode" th:value="${session.memberCode}" />
                     <datalist id="colors4palette">
                         <option>#355070</option>
                         <option>#6D597A</option>

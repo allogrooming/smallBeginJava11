@@ -19,6 +19,57 @@ input#editColor {
     padding: 0;
 }
 
+#login{
+    margin: 10px 0px 0px 42px
+    cursor: pointer;
+    font-size: 10px;
+    padding: 5px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+    border-radius: 10px;
+    width: 20px;
+    margin: 10px 0px 0px 42px;
+    cursor: pointer;
+}
+
+#logout{
+    margin: 10px 0px 0px 42px
+    cursor: pointer;
+    font-size: 10px;
+    padding: 5px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+    border-radius: 10px;
+    width: 20px;
+    margin: 10px 0px 0px 42px;
+    cursor: pointer;
+}
+
+#login:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+#logout:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+.delete {
+    padding: 0 12px;
+}
+
+table#toDoListsTable {
+    width: 280px;
+}
+
+td.content {
+    padding-right: 3px;
+    padding-left: 1px;
+}
+
 @media(min-width: 800px){
     /* 2022년 7월 29일 추가 */
     #calendar{
