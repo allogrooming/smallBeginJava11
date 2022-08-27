@@ -92,7 +92,6 @@ function checkToDo(trId, toDoState){
 // TODO: memberCode 입력부분 필요
 // TODO: dataType => JSON
 function readToDo(clickedDate){
-
     var memberCode = getSession();
     if (!clickedDate) clickedDate = getDate4Ajax($(".active").attr("id"));
 

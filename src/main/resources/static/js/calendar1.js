@@ -342,9 +342,10 @@ var readToDoInMonth = function readToDoInMonth(selectedDate){
 
 /*function addTodoTable(result){
     // 기존의 toDoTable의 내용을 지운다.
-    removeTodoTable();
-
+    // removeTodoTable();
     var resultTodo = JSON.parse(result);
+    console.log('addTodoTable--------------');
+    console.log(resultTodo);
     if(resultTodo.length > 0){
         var table4Todo = document.getElementById("toDoListsTable");
         var i=0;

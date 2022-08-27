@@ -28,7 +28,6 @@
 <p id="session" th:text="${session.memberCode}"></p>
 <div id="container">
     <div class="main">
-
         <div class="content-wrap">
             <div class="content-right">
                 <div id="current-year-month-div">
@@ -56,6 +55,7 @@
         </div>
     </div>
 </div>
+
 </body>
 
 <script>
@@ -64,6 +64,7 @@ $(function(){
     attachMain();
     var mainThisMonth = clickDate();
     getSession();
+    inputPlanDate();
 
     $("#prev").click(function(){
         mainThisMonth = prev(mainThisMonth);
@@ -157,3 +158,4 @@ $(function(){
 });
 </script>
 </html>
+

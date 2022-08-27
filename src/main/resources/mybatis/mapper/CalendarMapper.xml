@@ -4,8 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.smallbeginjava11.mapper.CalendarMapper">
-
-
     <select id="getTodoList" parameterType="hashMap" resultType="Todo">
         SELECT
             to_do_code,
