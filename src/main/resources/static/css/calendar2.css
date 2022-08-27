@@ -140,6 +140,11 @@ input#editColor {
         text-overflow: ellipsis;
     }
 
+    .checked-ct{
+        color: #DADADA;
+        text-decoration: line-through;
+    }
+
     .td-date{
         text-align: right;
     }

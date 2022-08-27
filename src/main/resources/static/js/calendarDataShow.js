@@ -16,6 +16,7 @@ function checkToDoOnCalendar(trId, result) {
     if (result == 1){
         $(selectorStr).css('text-decoration', 'line-through');
         $(selectorStr).css('color', '#DADADA');
+        $(selectorStr).parent().css('color', '#DADADA');
     } else{
         $(selectorStr).css('text-decoration', 'none');
         $(selectorStr).css('color', '#000000');
@@ -45,9 +46,10 @@ function addTodoOnCalendar(result){
         content.textContent = result[i].toDoContent.replaceAll(" ", "").trim();
 
         // state에 따라 다른 css 적용, 이미 완료 상태라면 check 표시
-        if (result[i].toDoState) {
+        if (result[i].toDoState == 1) {
             content.style = 'text-decoration: line-through';
             content.style = 'color: #DADADA';
+            $div.style =  'color: #DADADA';
         }
 
         $div.appendChild(content);
