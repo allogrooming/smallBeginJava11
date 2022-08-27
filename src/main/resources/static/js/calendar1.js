@@ -305,18 +305,6 @@ function checkToDoInTable(trId, result) {
     $(selectorStr).text(result);
 }
 
-function removeTodoTable(){
-    var lengthT = $("#toDoListsTable > tbody tr").length;
-    console.log('lengthT :', lengthT);
-    if(lengthT > 0){
-        console.log("delete rows");
-        var todoT = document.getElementById("toDoListsTable");
-        for(var i=lengthT-1; i>0; i--){
-           todoT.deleteRow(i);
-        }
-    }
-}
-
 // TODO: dataType => JSON(Done)
 var readToDoInMonth = function readToDoInMonth(selectedDate){
     if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
@@ -345,6 +333,7 @@ var readToDoInMonth = function readToDoInMonth(selectedDate){
     // removeTodoTable();
     var resultTodo = JSON.parse(result);
     console.log('addTodoTable--------------');
+    console.log(resultTodo);
     console.log(resultTodo);
     if(resultTodo.length > 0){
         var table4Todo = document.getElementById("toDoListsTable");
@@ -479,5 +468,4 @@ function loadCalendar(pointDate){
     function showToDoOnCalendar(e){
         readToDoInMonth(getDate4Ajax(clickedDate));
     }
-
 }

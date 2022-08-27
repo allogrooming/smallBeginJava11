@@ -83,8 +83,9 @@ function getDate4Ajax(idStr){
 // Session 값 가져오기
 function getSession(){
     var session = $("#session").text();
-    console.log("sesssion : ", session);
     // TODO: 테스트용 임시
     if (!session) session = '16';
+    if (session == '') session = '16';
+    console.log("sesssion : ", session);
     return session;
 }
