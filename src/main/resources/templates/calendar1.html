@@ -67,7 +67,10 @@ $(function(){
     inputPlanDate();
 
     $("#prev").click(function(){
+        console.log("prev-----------------");
+        console.log(mainThisMonth);
         mainThisMonth = prev(mainThisMonth);
+        console.log(mainThisMonth);
         removeCalendar();
         attachMain(mainThisMonth);
         showCurrentMonthTitle(mainThisMonth);

@@ -125,6 +125,7 @@ function readToDo(clickedDate){
 // TODO: memberCode 입력부분 필요
 // TODO: dataType => JSON(Done)
 function readToDoInMonth(selectedDate){
+    console.log('selectedDate :', selectedDate);
 
     if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
     var memberCode = getSession();

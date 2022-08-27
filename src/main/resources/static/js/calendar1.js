@@ -272,18 +272,6 @@ function checkToDoInTable(trId, result) {
     var selectorStr = "#" + trId + " .state";
     $(selectorStr).text(result);
 }
-function getDate4Ajax(idStr){
-    if(idStr != ""){
-        dateStr = "";
-        dateStr += idStr.slice(0, 4);
-        dateStr += "-";
-        dateStr += idStr.slice(4, 6);
-        dateStr += "-";
-        dateStr += idStr.slice(-2);
-        console.log(dateStr);
-        return dateStr;
-    }
-}
 
 function checkToDoInTable(trId, result) {
     console.log('checkToDoInTable');
@@ -406,13 +394,20 @@ function clickDate(pointDate){
 }
 
 function loadCalendar(pointDate){
+    console.log('pointDate :', pointDate);
     // 캘린더 화면이 로드되면 현재 로그인한 member의 memberCode에 해당하는 toDo가
     // 현재 날짜의 월을 기준으로 읽어진다.
-    if (!pointDate) pointDate = $(".active").attr("id");
-    var clickedDate = pointDate;
-
-    window.addEventListener("load", showToDoOnCalendar);
-    function showToDoOnCalendar(e){
-        readToDoInMonth(getDate4Ajax(clickedDate));
+    if (!pointDate) {
+        var clickedDate = $(".active").attr("id");
+    } else {
+        var clickedDate = setDateId(pointDate);
     }
+    console.log('getDate4Ajax(clickedDate) :', getDate4Ajax(clickedDate));
+    readToDo(getDate4Ajax(clickedDate));
+    readToDoInMonth(getDate4Ajax(clickedDate));
+
+//    window.addEventListener("load", showToDoOnCalendar);
+//    function showToDoOnCalendar(e){
+//        readToDoInMonth(getDate4Ajax(clickedDate));
+//    }
 }
