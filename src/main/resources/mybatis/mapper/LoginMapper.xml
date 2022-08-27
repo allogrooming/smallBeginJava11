@@ -8,12 +8,12 @@
 
     <select id="loginProcess" parameterType="hashMap" resultType="String">
         SELECT
-        member_code
+            member_code
         FROM
-        member
+            member
         WHERE
-        member_id = #{memberId}
-        AND password = #{password};
+            member_id = #{memberId}
+            AND password = #{password};
     </select>
 
 </mapper>

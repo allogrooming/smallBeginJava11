@@ -2,17 +2,14 @@ function removeAllToDoOnCalendar() {
     var tdList = $("#calendar-body tr td");
     for (var i = 0; i < tdList.length; i++){
         if ($(tdList[i]).children().length > 1){
-            //console.log($(tdList[i]).children(":gt(0)"));
             $(tdList[i]).children(":gt(0)").remove();
         }
     }
 }
 
 function checkToDoOnCalendar(trId, result) {
-    console.log('checkToDoOnCalendar');
     var selectorStr = "#td-ct-" + trId.slice(-2);
-    console.log('selectorStr :', selectorStr);
-     console.log('result :', result);
+
     if (result == 1){
         $(selectorStr).css('text-decoration', 'line-through');
         $(selectorStr).css('color', '#DADADA');

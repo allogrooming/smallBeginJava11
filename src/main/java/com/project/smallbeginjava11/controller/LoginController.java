@@ -17,7 +17,6 @@ import java.util.Map;
 public class LoginController {
     private final LoginService loginService;
 
-    // 로그인 페이지 보여줌 대신 쿠키에 memberCode 저장되어 있으면 안보여줌
     @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView("login");
@@ -41,26 +40,17 @@ public class LoginController {
     @PostMapping
     @ResponseBody
     public String loginProcess(@RequestBody Map<String, String> params, HttpServletRequest request, Model model) throws ParseException {
-
-        System.out.println("login process");
-        System.out.println(params);
-
         HttpSession session = request.getSession();
 
-        //기존 세션값 삭제
         if(session.getAttribute("memberCode") != null) {
             session.removeAttribute("memberCode");
         }
 
-        //로그인이 되면 memberCode를 리턴하거나 False를 리턴
         String result = loginService.loginProcess(params);
-        System.out.println(result);
 
         if(result == null){
             return "failed";
         }else{
-/*            Cookie memberCookie = new Cookie("memberCode", result);
-            response.addCookie(memberCookie);*/
             session.setAttribute("memberCode", result);
             return "/calendar1";
         }

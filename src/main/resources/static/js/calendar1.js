@@ -262,19 +262,16 @@ function getDateFromId(idStr){
         dateStr += idStr.slice(4, 6);
         dateStr += "-";
         dateStr += idStr.slice(-2);
-        console.log(dateStr);
         return new Date(dateStr);
     }
 }
 
 function checkToDoInTable(trId, result) {
-    console.log('checkToDoInTable');
     var selectorStr = "#" + trId + " .state";
     $(selectorStr).text(result);
 }
 
 function checkToDoInTable(trId, result) {
-    console.log('checkToDoInTable');
     var selectorStr = "#" + trId + " .state";
     $(selectorStr).text(result);
 }
@@ -353,7 +350,6 @@ function clickDate(pointDate){
     if (!pointDate) pointDate = new Date();
     var clickedDate = setDateId(pointDate);
     var clickedDateElement = document.getElementById(clickedDate);
-    console.log('clickedDate: ', clickedDate);
     clickedDateElement.classList.add('active');
 
     // 여기에 첫화면에 대한 to_do 서치하는 함수 넣기 parameter = getDateFromId(clickedDate)
@@ -377,14 +373,12 @@ function clickDate(pointDate){
             while (clickedDate == "" || clickedDate.slice(0,2) == "td") {
                 clickedDate = clickedDateElement.parentNode.id;
                 clickedDateElement = clickedDateElement.parentNode;
-                console.log(clickedDate);
                 if (clickedDateElement.parentNode.nodeName == "td"){
                     break;
                 }
             }
 
             clickedDateElement.classList.add('active');
-            console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
             inputPlanDate(getDateFromId(clickedDate));
             readToDo(getDate4Ajax(clickedDate));
@@ -394,15 +388,11 @@ function clickDate(pointDate){
 }
 
 function loadCalendar(pointDate){
-    console.log('pointDate :', pointDate);
-    // 캘린더 화면이 로드되면 현재 로그인한 member의 memberCode에 해당하는 toDo가
-    // 현재 날짜의 월을 기준으로 읽어진다.
     if (!pointDate) {
         var clickedDate = $(".active").attr("id");
     } else {
         var clickedDate = setDateId(pointDate);
     }
-    console.log('getDate4Ajax(clickedDate) :', getDate4Ajax(clickedDate));
     readToDo(getDate4Ajax(clickedDate));
     readToDoInMonth(getDate4Ajax(clickedDate));
 

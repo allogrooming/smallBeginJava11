@@ -71,19 +71,19 @@
 
     <delete id="toDoDelete" parameterType="hashMap">
         DELETE
-        FROM
-            to_do
+            FROM
+                to_do
         WHERE
             to_do_code = #{toDoCode};
     </delete>
 
     <update id="editToDo" parameterType="hashMap">
         UPDATE
-        to_do
+            to_do
         SET
-        to_do_content = #{toDoContent},
-        to_do_color = #{toDoColor}
+            to_do_content = #{toDoContent},
+            to_do_color = #{toDoColor}
         WHERE
-        to_do_code = #{toDoCode};
+            to_do_code = #{toDoCode};
     </update>
 </mapper>

@@ -65,7 +65,6 @@ function addTodo4edit(result){
 }
 
 function editTodo(sendColor, sendContent, clickedDate, toDoCode){
-    console.log("editTodo");
      $.ajax({
              url : "/editToDo",
              type : "post",
@@ -86,7 +85,6 @@ function editTodo(sendColor, sendContent, clickedDate, toDoCode){
 function removeTodoTable(){
     var lengthT = $("#toDoListsTable > tbody tr").length;
     if(lengthT > 0){
-        console.log("delete rows");
         var todoT = document.getElementById("toDoListsTable");
         for(var i=lengthT-1; i>0; i--){
            var test = todoT.deleteRow(i);
@@ -116,5 +114,4 @@ function getSession(){
     }else{
         return session;
     }
-    console.log("sesssion : ", session);
 }

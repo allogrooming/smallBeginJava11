@@ -1,15 +1,4 @@
 function joinProcess(formId){
-    console.log("join");
-
-/*    var userId = $('input[name="userId"]').val();
-    var password = $('input[name="password"]').val();
-    var nickname = $('input[name="nickname"]').val();
-    var email = $('input[name="email"]').val();
-
-    console.log(userId)
-
-    var joinData = {"memberId" : userId, "password" : password, "nickname" : nickname, "email" : email};*/
-
      $.ajax({
              url : "/joinProcess",
              type : "post",

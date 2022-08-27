@@ -20,7 +20,6 @@ function readForm(formId, url, callback, flag){
              },
              error : function(err){
                  console.log(err+"에러발생");
-                 console.log(this.data);
              }
       });
 }
@@ -39,7 +38,6 @@ function readToDoForm(formId, url){
              },
              error : function(err){
                  console.log(err+"에러발생");
-                 console.log(this.data);
              }
       });
 }
@@ -54,7 +52,6 @@ function sendDateList(startDate, endDate, dateList, url){
                 "dateList" : dateList
                 },
          success : function(result){
-             console.log("sendDateList success");
          },
          error : function(err){
              console.log("sendDateList error");
@@ -65,8 +62,6 @@ function sendDateList(startDate, endDate, dateList, url){
 
 function checkToDo(trId, toDoState){
         var toDoCode = trId.slice(-2);
-        console.log('toDoCode :', toDoCode);
-        console.log('toDoState :', toDoState);
 
         $.ajax({
             url : '/updateToDoState',
@@ -78,24 +73,18 @@ function checkToDo(trId, toDoState){
                 "toDoState" : toDoState
             },
             success : function(result){
-                console.log('checkToDo result');
-                console.log(result);
                 checkToDoInTable(trId, result);
                 checkToDoOnCalendar(trId, result);
             },
             error : function(err, resp){
                 console.log(err+"에러발생");
-                console.log(resp);
             }
         });
 }
 
-// TODO: memberCode 입력부분 필요
-// TODO: dataType => JSON
 function readToDo(clickedDate){
     var memberCode = getSession();
     if (!clickedDate) clickedDate = getDate4Ajax($(".active").attr("id"));
-    console.log("memberCode : ", memberCode);
 
      $.ajax({
              url : "/readToDoList",
@@ -111,9 +100,6 @@ function readToDo(clickedDate){
 
                  // 새로 변경된 테이블 생성 뒤 로드
                  addTodo(result);
-                 if(result == null){
-                    console.log("null : ", result);
-                 }
              },
              error : function(err){
                  console.log(err+"에러발생");
@@ -121,18 +107,10 @@ function readToDo(clickedDate){
       });
 }
 
-// TODO: memberCode 입력부분 필요
-// TODO: dataType => JSON(Done)
 function readToDoInMonth(selectedDate){
-    console.log('selectedDate :', selectedDate);
-
     if (!selectedDate) selectedDate = getDate4Ajax($(".active").attr("id"));
     var memberCode = getSession();
-
-    console.log('selectedDate :', selectedDate);
     var selectedMonth = selectedDate.slice(0, 7);
-    console.log('readToDoInMonth')
-    console.log(selectedMonth);
 
     $.ajax({
         url : "/readToDoInMonth",
@@ -143,7 +121,6 @@ function readToDoInMonth(selectedDate){
                 "memberCode" : memberCode
         },
         success : function(result){
-            console.log(result);
             addTodoOnCalendar(result);
         },
         error : function(err){
@@ -160,7 +137,6 @@ function deleteTodo(deleteid, selectedDate){
              dataType : "text",
              data : {"toDoCode" : deleteid},
              success : function(result){
-                 console.log(result);
                  readToDo(selectedDate);
              },
              error : function(err){
