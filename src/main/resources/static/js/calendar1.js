@@ -461,7 +461,7 @@ function clickDate(pointDate){
             clickedDateElement.classList.add('active');
             console.log(getDateFromId(clickedDate));
             showCurrentDateOnLeft(getDateFromId(clickedDate));
-            inputPlanDate(getDate4Ajax(clickedDate));
+            inputPlanDate((clickedDate));
             readToDo(getDate4Ajax(clickedDate));
         }
     }
