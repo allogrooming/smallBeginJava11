@@ -27,6 +27,7 @@
 <p id="session" th:text="${session.memberCode}"></p>
 <div id="container">
     <div class="main">
+
         <div class="content-wrap">
             <div class="content-right">
                 <div id="current-year-month-div">
@@ -54,7 +55,6 @@
         </div>
     </div>
 </div>
-
 </body>
 
 <script>
@@ -144,8 +144,15 @@ $(function(){
         checkToDo(this.parentNode.id, this.innerText);
     });
 
+    $("#login").on("click", function(){
+        window.location.href = "/login";
+    });
+
+    $("#logout").on("click", function(){
+        window.location.href = "/logout";
+    });
+
    loadCalendar();
 });
 </script>
 </html>
-

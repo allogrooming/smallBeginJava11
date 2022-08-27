@@ -24,6 +24,9 @@
 <body>
 <div th:fragment = "sideMenuFragment">
     <div class="content-left">
+        <span id="logout">Logout</span>
+        <span id="login" th:if="${session.memberCode}==''" th:text="'login'"></span><span th:unless="${session.memberCode}!=''" th:text="'logout'"></span>
+        <br>
         <div class="main-wrap">
             <span id="main-day" class="main-day"></span>
             <span id="main-year" class="main-day"></span>

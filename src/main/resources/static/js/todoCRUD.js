@@ -76,7 +76,6 @@ function getDate4Ajax(idStr){
         dateStr += idStr.slice(4, 6);
         dateStr += "-";
         dateStr += idStr.slice(-2);
-        console.log(dateStr);
         return dateStr;
     }
 }
@@ -84,6 +83,5 @@ function getDate4Ajax(idStr){
 // Session 값 가져오기
 function getSession(){
     var session = $("#session").text();
-    console.log("sesssion : ", session);
     return session;
 }

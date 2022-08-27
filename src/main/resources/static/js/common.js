@@ -95,6 +95,7 @@ function readToDo(clickedDate){
 
     var memberCode = getSession();
     if (!clickedDate) clickedDate = getDate4Ajax($(".active").attr("id"));
+    console.log("memberCode : ", memberCode);
 
      $.ajax({
              url : "/readToDoList",
@@ -105,8 +106,9 @@ function readToDo(clickedDate){
                      "memberCode" : memberCode
              },
              success : function(result){
-                 addTodoTable(result);
+                 addTodoTable();
                  console.log("result : ", result);
+                 addTodo(result);
                  if(result == null){
                     console.log("null : ", result);
                  }
