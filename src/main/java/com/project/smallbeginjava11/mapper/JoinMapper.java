@@ -1,14 +1,12 @@
 package com.project.smallbeginjava11.mapper;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
-
-import com.project.smallbeginjava11.DTO.Category;
 import org.springframework.stereotype.Repository;
+
+import java.util.Map;
 
 @Mapper
 @Repository
-public interface CategoryMapper {
-    List<Category> getAllCategory();
+public interface JoinMapper {
+    void joinProcess(Map<String, Object> params);
 }

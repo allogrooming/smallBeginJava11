@@ -1,14 +1,12 @@
 package com.project.smallbeginjava11.mapper;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
-
-import com.project.smallbeginjava11.DTO.Initiative;
 import org.springframework.stereotype.Repository;
+
+import java.util.Map;
 
 @Mapper
 @Repository
-public interface IniMapper {
-    void insertIni(Initiative initiative);
+public interface LoginMapper {
+    String loginProcess(Map<String, String> params);
 }
