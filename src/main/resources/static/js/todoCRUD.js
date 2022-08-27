@@ -28,8 +28,8 @@ function addTodo(result){
 
             content.innerText = values[2];
             state.innerText = values[4];
-            deleteBtn.innerText = "delete";
-            editBtn.innerText = "edit";
+            deleteBtn.innerText = "delete  ";
+            editBtn.innerText = "  edit";
 
             var tester = document.getElementById(values[5]);
             var colorTodo = "#" + values[5];
@@ -37,7 +37,6 @@ function addTodo(result){
             i++;
         }
     }
-    console.log("엥");
 }
 
 function editTodo(sendColor, sendContent, clickedDate, toDoCode){
@@ -57,7 +56,8 @@ function editTodo(sendColor, sendContent, clickedDate, toDoCode){
       });
 }
 
-function addTodoTable(){
+// 삭제
+function removeTodoTable(){
     var lengthT = $("#toDoListsTable > tbody tr").length;
     if(lengthT > 0){
         console.log("delete rows");

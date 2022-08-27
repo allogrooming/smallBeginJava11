@@ -340,7 +340,7 @@ var readToDoInMonth = function readToDoInMonth(selectedDate){
     });
 }
 
-function addTodoTable(result){
+/*function addTodoTable(result){
     // 기존의 toDoTable의 내용을 지운다.
     removeTodoTable();
 
@@ -381,7 +381,7 @@ function addTodoTable(result){
             i++;
         }
     }
-}
+}*/
 
 function editTodo(result){
     var resultTodo = JSON.parse(result);

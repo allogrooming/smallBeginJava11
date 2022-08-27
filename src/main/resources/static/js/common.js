@@ -95,7 +95,6 @@ function readToDo(clickedDate){
 
     var memberCode = getSession();
     if (!clickedDate) clickedDate = getDate4Ajax($(".active").attr("id"));
-    console.log("memberCode : ", memberCode);
 
      $.ajax({
              url : "/readToDoList",
@@ -106,8 +105,11 @@ function readToDo(clickedDate){
                      "memberCode" : memberCode
              },
              success : function(result){
-                 addTodoTable();
+                 //기존 테이블 삭제
+                 removeTodoTable();
                  console.log("result : ", result);
+
+                 // 새로 변경된 테이블 생성 뒤 로드
                  addTodo(result);
                  if(result == null){
                     console.log("null : ", result);
