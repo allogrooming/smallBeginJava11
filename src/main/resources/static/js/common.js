@@ -94,6 +94,7 @@ function checkToDo(trId, toDoState){
 function readToDo(clickedDate){
     var memberCode = getSession();
     if (!clickedDate) clickedDate = getDate4Ajax($(".active").attr("id"));
+    console.log("memberCode : ", memberCode);
 
      $.ajax({
              url : "/readToDoList",

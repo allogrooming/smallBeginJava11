@@ -328,51 +328,6 @@ var readToDoInMonth = function readToDoInMonth(selectedDate){
     });
 }
 
-/*function addTodoTable(result){
-    // 기존의 toDoTable의 내용을 지운다.
-    // removeTodoTable();
-    var resultTodo = JSON.parse(result);
-    console.log('addTodoTable--------------');
-    console.log(resultTodo);
-    console.log(resultTodo);
-    if(resultTodo.length > 0){
-        var table4Todo = document.getElementById("toDoListsTable");
-        var i=0;
-        for(var obj of resultTodo){
-            var values = Object.values(obj);
-
-            var newRaw = table4Todo.insertRow();
-            newRaw.id = "td-tr-" + obj.toDoCode;
-            var color = newRaw.insertCell(0);
-            var content = newRaw.insertCell(1);
-            var state = newRaw.insertCell(2);
-            var deleteBtn = newRaw.insertCell(3);
-            var editBtn = newRaw.insertCell(4);
-
-            color.innerText = "■";
-            color.id = values[5];
-            deleteBtn.id = values[0];
-            color.classList.add("color");
-            content.classList.add("content");
-            deleteBtn.classList.add("delete");
-            editBtn.classList.add("edit");
-            editBtn.classList.add(i);
-            // TODO: className 추가
-            state.className = "state";
-
-            content.innerText = values[2];
-            state.innerText = values[4];
-            deleteBtn.innerText = "delete";
-            editBtn.innerText = "edit";
-
-            var tester = document.getElementById(values[5]);
-            var colorTodo = "#" + values[5];
-            $(tester).css("color", values[5]);
-            i++;
-        }
-    }
-}*/
-
 function editTodo(result){
     var resultTodo = JSON.parse(result);
 
