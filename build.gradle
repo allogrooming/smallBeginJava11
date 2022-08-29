@@ -5,8 +5,8 @@ plugins {
 }
 
 jar {
-    bootJar.enabled = false
-    enabled=true
+    bootJar.enabled = true
+    enabled=false
 }
 
 group = 'com.project'
