@@ -3,7 +3,6 @@ function loginProcess(){
     var password = $('input[name="password"]').val();
     var loginData = {"memberId" : userId, "password" : password};
 
-    alert(1);
      $.ajax({
              url : "/loginProcess",
              type : "post",
