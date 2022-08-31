@@ -16,5 +16,5 @@ public class JoinServiceImpl implements JoinService {
     @Override
     public void joinProcess(Map<String, Object> params){
         joinMapper.joinProcess(params);
-    };
+    }
 }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Small Begin</title>
 
-<script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 
 <link th:href="@{/css/common.css}" rel="stylesheet" />
@@ -16,7 +16,6 @@
 <script th:src="@{/js/calendarDataShow.js}"></script>
 <script th:src="@{/js/calendar1.js}"></script>
 <script th:src="@{/js/todoCRUD.js}"></script>
-<script th:src="@{/js/infiniteScroll.js}"></script>
 <script th:src="@{/js/common.js}"></script>
 
 </head>
@@ -55,8 +54,11 @@
 
 </body>
 
+<script type="text/javascript"></script>
 <script>
 $(function(){
+
+    alert(1);
 
     attachMain();
     var mainThisMonth = clickDate();

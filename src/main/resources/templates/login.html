@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Small Begin</title>
 
-    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
 
     <!-- navbar 및 전체 css 관련 !-->
@@ -35,11 +35,14 @@
 
 <footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
 
-<script src="/js/iniForm.js"></script>
+<script type="text/javascript"></script>
 <script>
+$(function(){
+    alert(1);
     $("#click").click(function(){
         loginProcess();
     })
+});
 </script>
 
 </body>
