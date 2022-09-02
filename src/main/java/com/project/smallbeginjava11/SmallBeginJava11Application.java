@@ -1,14 +1,19 @@
 package com.project.smallbeginjava11;
 
-import org.mybatis.spring.annotation.MapperScan;
+import com.project.smallbeginjava11.config.DataSourceProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
-@MapperScan(value = "com.project.smallbeginjava11.mapper")
 public class SmallBeginJava11Application {
 
+    @Autowired
+    static DataSourceProperties dataSourceProperties;
+
     public static void main(String[] args) {
+        System.out.println(dataSourceProperties);
         SpringApplication.run(SmallBeginJava11Application.class, args);
     }
 
