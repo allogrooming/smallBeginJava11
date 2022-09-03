@@ -17,7 +17,8 @@
 </head>
 <body>
 <div id="container">
-    <div th:replace="/fragment/navbar.html :: fragment-nav"></div>
+<!--    <div th:replace="/fragment/navbar.html :: fragment-nav"></div>-->
+    <div id="navbar" class="navbar" th:replace="/fragment/navbar.html :: fragment-nav"></div>
     <p id="session" th:text="${session.memberCode}"></p>
     <div id="formCss">
         <form method="post" id="login">
