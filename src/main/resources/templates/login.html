@@ -1,47 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Small Begin</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 
-<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="/js/common.js"></script>
-
-<!-- navbar 및 전체 css 관련 !-->
-<link th:href="@{/css/common.css}" rel="stylesheet" />
-<link th:href="@{/css/navbar.css}" rel="stylesheet" />
-<link th:href="@{/css/footer.css}" rel="stylesheet" />
-<script th:src="@{/js/navbar.js}"></script>
-<script th:src="@{/js/login.js}"></script>
+    <!-- navbar 및 전체 css 관련 !-->
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+    <script th:src="@{/js/navbar.js}"></script>
 
 </head>
 <body>
 <div id="container">
-<div th:replace="/fragment/navbar.html :: fragment-nav"></div>
-    <p id="session" th:text="${session.memberCode}"></p>
-    <div id="formCss">
-        <form method="post" id="login">
-            <span>ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="userId" name="userId" class="form" size="25"><br>
-            <span>Password</span> &nbsp; &nbsp; &nbsp; <input type="password" id="password" name="password" class="form" size="25"><br>
-            <input type="button" id="click" value="submit" class="buttons">
-        </form>
-        <div id="find">
-            <span>Find ID</span> &nbsp;<span>/</span> &nbsp; <span>PW</span>
+    <div id="navbar" class="navbar" th:replace="/fragment/navbar.html :: fragment-nav"></div>
+    <section>
+        <div id="introduce">
+            <p>small begin</p>
+            <img src="/images/smallBeginLogo.png">
+            <img>
+            <p>Our vision</p>
         </div>
-    </div>
 
+    </section>
 </div>
-
-<footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
-
-<script type="text/javascript"></script>
-<script>
-$(function(){
-    $("#click").click(function(){
-        loginProcess();
-    })
-});
-</script>
-
 </body>
 </html>

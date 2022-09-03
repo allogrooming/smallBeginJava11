@@ -29,10 +29,6 @@ public class CalendarController {
             ModelAndView modelAndView = new ModelAndView("calendar1");
             return modelAndView;
         }
-
-
-
-
     }
 
     @Transactional
