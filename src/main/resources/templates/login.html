@@ -18,7 +18,7 @@
 </head>
 <body>
 <div id="container">
-<div th:replace="/fragment/navbar.html :: fragment-nav"></div>
+    <div id="navbar" class="navbar" th:replace="/fragment/navbar.html :: fragment-nav"></div>
     <p id="session" th:text="${session.memberCode}"></p>
     <div id="formCss">
         <form method="post" id="login">
@@ -26,10 +26,10 @@
             <span>Password</span> &nbsp; &nbsp; &nbsp; <input type="password" id="password" name="password" class="form" size="25"><br>
             <input type="button" id="click" value="submit" class="buttons">
         </form>
+    </div>
         <div id="find">
             <span>Find ID</span> &nbsp;<span>/</span> &nbsp; <span>PW</span>
         </div>
-    </div>
 </div>
 </body>
 
