@@ -18,7 +18,7 @@
 <body>
 <div id="container">
 <div th:replace="/fragment/navbar.html :: fragment-nav"></div>
-    <p id="session" th:text="${session.memberCode}"></p>
+<!--    <p id="session" th:text="${session.memberCode}"></p>-->
     <div id="formCss">
         <form method="post" id="login">
             <span>ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="userId" name="userId" class="form" size="25"><br>
@@ -29,19 +29,15 @@
             <span>Find ID</span> &nbsp;<span>/</span> &nbsp; <span>PW</span>
         </div>
     </div>
-
 </div>
-
-<footer th:replace="/fragment/footer.html :: fragment-footer"></footer>
-
+</body>
+<!--<footer th:replace="/fragment/footer.html :: fragment-footer"></footer>-->
 <script type="text/javascript"></script>
 <script>
 $(function(){
     $("#click").click(function(){
         loginProcess();
-    })
+    });
 });
 </script>
-
-</body>
 </html>
