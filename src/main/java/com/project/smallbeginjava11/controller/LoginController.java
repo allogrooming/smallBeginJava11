@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +17,7 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping("/login")
+/*    @GetMapping("/login")
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;
@@ -34,7 +33,7 @@ public class LoginController {
         }
 
         return modelAndView;
-    }
+    }*/
 
     @Transactional
     @RequestMapping(value="/loginProcess", produces="text/html;charset=UTF-8")

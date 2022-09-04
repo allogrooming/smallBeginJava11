@@ -17,9 +17,7 @@
 </head>
 <body>
 <div id="container">
-
     <div th:replace="fragment/navbar.html :: fragment-nav"></div>
-
     <div id="formCss">
         <form method="post" id="joinUs">
             <span>ID</span> &nbsp; &nbsp; &nbsp; <input type="text" id="memberId" name="memberId" class="form" size="25"><br>
@@ -29,16 +27,8 @@
             <input type="button" id="click" value="submit" class="buttons">
         </form>
     </div>
-
 </div>
-
 <footer th:replace="fragment/footer.html :: fragment-footer"></footer>
-<script src="/js/iniForm.js"></script>
-<script>
-    $("#click").click(function(){
-        joinProcess(joinUs);
-    })
-</script>
 </body>
 </html>
 
