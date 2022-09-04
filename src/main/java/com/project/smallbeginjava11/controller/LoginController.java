@@ -18,7 +18,7 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping("/login")
+    @GetMapping("login")
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;
