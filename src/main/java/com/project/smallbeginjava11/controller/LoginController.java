@@ -2,7 +2,14 @@ package com.project.smallbeginjava11.controller;
 
 import com.project.smallbeginjava11.service.LoginService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,7 +33,7 @@ public class LoginController {
         }
 
         return modelAndView;
-    }
+    }*/
 
     @Transactional
     @RequestMapping(value="/loginProcess", produces="text/html;charset=UTF-8")
@@ -47,5 +54,5 @@ public class LoginController {
             session.setAttribute("memberCode", result);
             return "/calendar1";
         }
-    }*/
+    }
 }
