@@ -9,13 +9,14 @@
 
     <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{/css/footer.css}" rel="stylesheet" />
     <script th:src="@{/js/navbar.js}"></script>
     <script th:src="@{/js/login.js}"></script>
     <script th:src="@{/js/common.js}"></script>
 </head>
 <body>
     <div id="container">
-<!--        <div th:replace="fragment/navbar.html :: fragment-nav"></div>-->
+        <div th:replace="fragment/navbar.html :: fragment-nav"></div>
 <!--        <p id="session" th:text="${session.memberCode}"></p>-->
         <div id="formCss">
             <form method="post" id="login">
@@ -27,15 +28,15 @@
         <div id="find">
             <span>Find ID</span> &nbsp;<span>/</span> &nbsp; <span>PW</span>
         </div>
+        <footer th:replace="fragment/footer.html :: fragment-footer"></footer>
     </div>
-<!--    <footer th:replace="fragment/footer.html :: fragment-footer"></footer>-->
 </body>
 <script type="text/javascript"></script>
 <script>
-    $(function(){
-        $("#click").click(function(){
-            loginProcess();
-        });
+$(function(){
+    $("#click").click(function(){
+        loginProcess();
     });
+});
 </script>
 </html>

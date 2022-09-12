@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JoinUs {
+public class Member {
     private int memberCode;
     private String memberId;
     private String password;
