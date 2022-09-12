@@ -20,4 +20,4 @@
             this.classList.toggle('active');
         });
     }); // end DOM ready
-}); // end jQuery
+})(jQuery); // end jQuery
