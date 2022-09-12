@@ -19,6 +19,8 @@ Front : HTML, CSS, Thymeleaf, Vanila JS
 Back : Spring Boot, MySQL(AWS RDS), Ec2(Server)
 Dev Tools : Github, Intellij, Putty, Miro
 
+<br>
+
 ## 2. 기능
 #### 로그인/회원가입 : 세션 사용
 
@@ -26,37 +28,39 @@ Dev Tools : Github, Intellij, Putty, Miro
 
 ⭐⭐이미지 캡쳐 : 회원가입/로그인 gif, todo CRUD gif, 캘린더 작동 gif
 
+<br>
+
 ## 3. 트러블슈팅
 #### (1) Java version issue
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-01-02-Issue.md
 
-<br>
-
 #### (2) Mybatis connection
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-01-07-smallBeginJava11Fourth.md
 
-<br>
-
-(3) ajax 데이터 받아올때 select 태그 공란 필요
+#### (3) ajax 데이터 받아올때 select 태그 공란 필요
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-02-03-ajaxForm.md
 
-(4) 생성자 에러(this.ini)
+#### (4) constructor error (DTO)
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-02-03-ajaxForm.md
 
-(5) whitelabel error page
+#### (5) whitelabel error page
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-02-09-view.md
 
-(6) DB 로직 변경 사항
+#### (6) DB 로직 변경 사항
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-02-11-logicError.md
 
-(7) Spring EI 에러 (타입에러)
+#### (7) Spring EI Error (TypeError)
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-02-14-SpringElError.md
 
-(8) 한글 깨짐 문제
+#### (8) 한글 깨짐 문제
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-02-20-korean.md
 
-(9) Java bean 에러
+#### (9) Java bean 에러
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-03-16-javabean.md
 
-(10) isEmpty()
+#### (10) isEmpty()
 https://github.com/allogrooming/allogrooming.github.io/blob/master/_posts/2022-03-18-calendarProcess.md
+
+<br>
+
+## 4. 개선점
