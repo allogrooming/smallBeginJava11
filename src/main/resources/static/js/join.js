@@ -1,4 +1,6 @@
 function joinProcess(formId){
+     alert(formId);
+     console.log($(formId).serialize());
      $.ajax({
              url : "/joinProcess",
              type : "post",

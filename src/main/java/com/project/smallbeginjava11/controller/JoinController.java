@@ -24,6 +24,7 @@ public class JoinController {
     @PostMapping
     @ResponseBody
     public String joinProcess(@RequestParam Map<String, Object> params){
+        System.out.println("?????????????????????????????");
         joinService.joinProcess(params);
         return "success";
     }
